@@ -1,0 +1,25 @@
+{
+  "name": "cypress-at",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/cypress-AT \u001b[C"
+  },
+  "author": "Jan Zadumiński",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "13.7.1",
+    "cypress-cloud": "^1.10.2",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-xpath": "^2.0.1",
+    "typescript": "5.4.5"
+  },
+  "dependencies": {
+    "moment": "^2.30.1"
+  }
+}
