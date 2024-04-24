@@ -1,5 +1,5 @@
 import { data } from "cypress/types/jquery";
- import * as moment from "moment";
+import * as moment from "moment";
 
 export class DateUtils {
 
@@ -189,11 +189,11 @@ export class DateUtils {
         const currentTime = moment();
         const currentTimePlus3Minutes = currentTime.clone().add(3, 'minutes');
         const currentTimeMinus3Minutes = currentTime.clone().subtract(3, 'minutes');
-    
+
         return startDateMoment.isBetween(currentTimeMinus3Minutes, currentTimePlus3Minutes) &&
-               endDateMoment.isBetween(currentTimeMinus3Minutes, currentTimePlus3Minutes);
+            endDateMoment.isBetween(currentTimeMinus3Minutes, currentTimePlus3Minutes);
     }
-    
+
     public static getCurrentDateWithMinutes(): string {
         const currentDate = moment();
         const newDate = currentDate
@@ -205,6 +205,19 @@ export class DateUtils {
         let currentDate = moment().subtract(minusDays, 'days').add(minutes, 'minutes');
         const newDate = currentDate.format("DD.MM.YYYY HH:mm");
         return newDate;
+    }
+
+    public static getNextDayNumber(): number {
+        const today = moment();
+        const nextDay = today.add(2, 'day');
+        return nextDay.date();
+    }
+
+    public static getFirstThreeLettersOfNextDay(): string {
+        const today = moment();
+        const nextDay = today.add(1, 'day');
+        const nextDayName = nextDay.format('dddd');
+        return nextDayName.charAt(0).toUpperCase() + nextDayName.slice(1).toLowerCase();
     }
 
 }

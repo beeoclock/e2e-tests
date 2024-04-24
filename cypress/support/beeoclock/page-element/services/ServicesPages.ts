@@ -1,12 +1,16 @@
 import { BeardedBrothersPage } from "./bearded-brothers/BeardedBrothersPage";
-import { BookingPage } from "./booking/BookingPage";
-import { BookingNavigationFormPage } from "./booking/navigation/BookingNavigationFormPage";
+import { BookingClientDataPage } from "./booking-client-data/BookingClientDataPage";
+import { BookingClientNavigationFormPage } from "./booking-client-data/navigation/BookingClientNavigationFormPage";
+import { SelectDayPage } from "./booking-day-and-time/select-day/SelectDayPage";
+import { SelectTimePage } from "./booking-day-and-time/select-time/SelectTimePage";
 import { SelectSpecialistPage } from "./select-specialist/SelectSpecialistPage";
 
 export class ServicesPages {
 
     public static BeardedBrothersPage: BeardedBrothersPage = new BeardedBrothersPage();    
     public static SelectSpecialistPage: SelectSpecialistPage = new SelectSpecialistPage();    
-    public static BookingPage: BookingPage = new BookingPage();    
-    public static BookingNavigationFormPage: BookingNavigationFormPage = new BookingNavigationFormPage();    
+    public static BookingClientDataPage: BookingClientDataPage = new BookingClientDataPage();    
+    public static BookingClientNavigationFormPage: BookingClientNavigationFormPage = new BookingClientNavigationFormPage();    
+    public static SelectDayPage: SelectDayPage = new SelectDayPage();    
+    public static SelectTimePage: SelectTimePage = new SelectTimePage();    
 }

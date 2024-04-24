@@ -10,12 +10,16 @@ describe('order service', () => {
       .selectSpecificOrder("Underplanting")
     ServicesPages.SelectSpecialistPage
       .selectSpecificSpecialist('Ivan')
-    ServicesPages.BookingPage
+    ServicesPages.BookingClientDataPage
       .typeFirstName("test")
       .typeEmail('email@testy.pl')
       .typePhoneNumber('5408523333')
       .typeComment('comment comment comment comment comment comment')
-    ServicesPages.BookingNavigationFormPage
+    ServicesPages.BookingClientNavigationFormPage
       .clickChooseDateAndTime()
+    ServicesPages.SelectDayPage
+      .selectNextDay()
+    ServicesPages.SelectTimePage
+      .selectSpecificTime("12:15")
   })
 })
