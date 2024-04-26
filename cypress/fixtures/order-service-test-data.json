@@ -1,12 +1,28 @@
 [
     {
         "case": 1,
-        "selectService": "e2e - strzyżenie",
-        "selectSpecialist": "e2e",
+        "Service": "e2e - strzyżenie",
+        "Specialist": "e2e",
         "firstName": "Grażyna Trzebiatowska-kąs",
         "email": "Grazyna.Trzebiatowska-kąs@testy.pl",
         "phone": "544-255-989",
         "comment": "poprosze o szybko wykonaną usułgę, wyjątkowa okazja rodzinna, z góry dziękuję",
-        "selectTime": "15:30" 
+        "selectTime": "15:30",
+        "price": "40 zł",
+        "serviceTime": "30min",
+        "serviceDescription": "samo strzyżenie bez brody"
+    },
+    {
+        "case": 2,
+        "Service": "Strzyżenie Brody ",
+        "Specialist": "e2e",
+        "firstName": "Marian Kapuściński",
+        "email": "marian.kapuscinski@testy.pl",
+        "phone": "+48 665 442 458",
+        "comment": "",
+        "selectTime": "19:00",
+        "price": "30 $",
+        "serviceTime": "15min",
+        "serviceDescription": "Samo Strzyżenie Brody"
     }
 ]

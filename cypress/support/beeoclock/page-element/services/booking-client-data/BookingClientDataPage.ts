@@ -38,12 +38,14 @@ export class BookingClientDataPage {
     }
 
     public typeComment(comment: string): BookingClientDataPage {
-        BookingClientDataPageElement.CommentInput.getElement()
-            .type(comment).then(() => {
-                BookingClientDataPageElement.CommentInput.getElement().invoke('prop', 'value').then(value => {
-                    expect(value).to.contain(comment)
+        if (comment) {
+            BookingClientDataPageElement.CommentInput.getElement()
+                .type(comment).then(() => {
+                    BookingClientDataPageElement.CommentInput.getElement().invoke('prop', 'value').then(value => {
+                        expect(value).to.contain(comment)
+                    })
                 })
-            })
+        }
         return this;
     }
 

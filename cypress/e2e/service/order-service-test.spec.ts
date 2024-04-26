@@ -12,9 +12,9 @@ describe('order service', () => {
       cy.log('Case: ' + item.case);
 
       ServicesPages.BookingSelectServicePage
-        .selectSpecificOrder(item.selectService)
+        .selectSpecificOrder(item.Service)
       ServicesPages.SelectSpecialistPage
-        .selectSpecificSpecialist(item.selectSpecialist)
+        .selectSpecificSpecialist(item.Specialist)
       ServicesPages.BookingClientDataPage
         .typeFirstName(item.firstName)
         .typeEmail(item.email)
@@ -29,8 +29,21 @@ describe('order service', () => {
       ServicesPages.DataAndTimeNavigationPage
         .clickBookOrder()
       ServicesPages.OrderSummaryPage
-        .verifyOrderSummaryValue("Nazwa firmy", "e2e" )
-        .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300" )
+        .verifyOrderSummaryValue("Nazwa firmy", item.Specialist)
+        .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
+        ///.verifyOrderSummaryValue("Cena", "40 zł")
+        .verifyOrderSummaryValue("Czas trwania", item.serviceTime)
+        .verifyOrderSummaryValue("Komentarz", item.comment)
+      ServicesPages.OrderDetailsPage
+        .verifyDetailsHeader()
+        // .verifyOrderDetails(item.Service, item.price)
+        .verifyOrderDetails("Opis", item.serviceDescription)
+        .verifyOrderDetails("Specjalista", item.Specialist)
+      ServicesPages.OrderSummaryNavigationPage
+        .clickCancelOrderButton()
+        .verifyCancelInformation()
+        .clickBackArrow()
+
     })
   })
 })
