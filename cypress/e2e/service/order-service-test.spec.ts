@@ -11,7 +11,7 @@ describe('order service', () => {
     this.orderServiceCreation.forEach(item => {
       cy.log('Case: ' + item.case);
 
-      ServicesPages.BeardedBrothersPage
+      ServicesPages.BookingSelectServicePage
         .selectSpecificOrder(item.selectService)
       ServicesPages.SelectSpecialistPage
         .selectSpecificSpecialist(item.selectSpecialist)
@@ -28,6 +28,9 @@ describe('order service', () => {
         .selectSpecificTime(item.selectTime)
       ServicesPages.DataAndTimeNavigationPage
         .clickBookOrder()
+      ServicesPages.OrderSummaryPage
+        .verifyOrderSummaryValue("Nazwa firmy", "e2e" )
+        .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300" )
     })
   })
 })
