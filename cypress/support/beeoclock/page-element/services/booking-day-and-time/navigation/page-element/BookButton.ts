@@ -1,6 +1,6 @@
-export class ChooseADateAndTimeBtn {
+export class BookButton {
     public getElement(): any {
-        return cy.contains('button', 'Wybierz datę i godzinę')
+        return cy.get('.py-4').contains('Rezerwuj')
             .should('be.visible')
             .scrollIntoView()
     }

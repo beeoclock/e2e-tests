@@ -48,7 +48,7 @@ export class BookingClientDataPage {
     }
 
     private verifyFirstNameLabel(): BookingClientDataPage {
-        BookingClientDataPageElement.FirstNameInput.getElement().parent().find('label').contains('First name');
+        BookingClientDataPageElement.FirstNameInput.getElement().parent().find('label').contains('Imię');
         return this;
     }
 
@@ -58,7 +58,7 @@ export class BookingClientDataPage {
     }
 
     private verifyPhoneNumberLabel(): BookingClientDataPage {
-        BookingClientDataPageElement.PhoneInput.getElement().parent().find('label').contains('Phone');
+        BookingClientDataPageElement.PhoneInput.getElement().parent().find('label').contains('Telefon');
         return this;
     }
 }
