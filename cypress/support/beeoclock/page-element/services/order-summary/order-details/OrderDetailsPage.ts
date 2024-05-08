@@ -13,4 +13,9 @@ export class OrderDetailsPage {
         cy.get('.py-4 > :nth-child(5)').find('th').should('have.prop', 'outerText').and('include', 'Zamówione usługi')
         return this;
     }
+
+    public verifyOrderMainDetails(tdKey: string, expectedValue: string): OrderDetailsPage {
+        OrderDetailsPageElement.OrderMainDetailsElement.getElement(tdKey).contains(expectedValue)
+        return this;
+    }
 }

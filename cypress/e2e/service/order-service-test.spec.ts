@@ -1,3 +1,4 @@
+
 import { ServicesPages } from "../../support/beeoclock/page-element/services/ServicesPages"
 
 describe('order service', () => {
@@ -31,17 +32,29 @@ describe('order service', () => {
       ServicesPages.OrderSummaryPage
         .verifyOrderSummaryValue("Nazwa firmy", item.Specialist)
         .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
-        ///.verifyOrderSummaryValue("Cena", "40 zł")
+        .verifyPriceValue("Cena", item.price)
         .verifyOrderSummaryValue("Czas trwania", item.serviceTime)
         .verifyOrderSummaryValue("Komentarz", item.comment)
       ServicesPages.OrderDetailsPage
         .verifyDetailsHeader()
-        // .verifyOrderDetails(item.Service, item.price)
+        .verifyOrderMainDetails(item.Service, item.price)
+        .verifyOrderMainDetails(item.Service, item.serviceTime)
         .verifyOrderDetails("Opis", item.serviceDescription)
         .verifyOrderDetails("Specjalista", item.Specialist)
       ServicesPages.OrderSummaryNavigationPage
         .clickCancelOrderButton()
         .verifyCancelInformation()
+      ServicesPages.OrderCancellationPage
+        .verifyCancelledOrderSummaryValue("Nazwa firmy", item.Specialist)
+        .verifyCancelledOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
+        .verifyCancelledPriceValue("Cena", item.price)
+        .verifyCancelledOrderSummaryValue("Czas trwania", item.serviceTime)
+        .verifyCancelledOrderSummaryValue("Komentarz", item.comment)
+        .verifyCancelledOrderMainDetails(item.Service, item.price)
+        .verifyCancelledOrderMainDetails(item.Service,  item.serviceTime)
+        .verifyCancelledOrderDetails("Opis", item.serviceDescription)
+        .verifyCancelledOrderDetails("Specjalista", item.Specialist)
+      ServicesPages.OrderSummaryNavigationPage
         .clickBackArrow()
 
     })

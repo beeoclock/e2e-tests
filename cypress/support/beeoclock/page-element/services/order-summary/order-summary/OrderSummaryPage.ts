@@ -6,6 +6,12 @@ export class OrderSummaryPage {
         OrderSummaryPageElement.OrderSummaryElement.getElement(tdKey).invoke('prop', 'innerText').then(innerText => {
             expect(innerText.trim()).to.contain(expectValue.trim())
         })
-        return this; 
+        return this;
     }
+
+    public verifyPriceValue(tdKey: string, expectValue: string): OrderSummaryPage {
+        OrderSummaryPageElement.OrderSummaryElement.getElement(tdKey).contains(expectValue)
+        return this;
+    }
+
 }
