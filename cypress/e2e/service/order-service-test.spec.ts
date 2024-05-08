@@ -43,8 +43,8 @@ describe('order service', () => {
         .verifyOrderDetails("Specjalista", item.Specialist)
       ServicesPages.OrderSummaryNavigationPage
         .clickCancelOrderButton()
+        ServicesPages.OrderCancellationPage
         .verifyCancelInformation()
-      ServicesPages.OrderCancellationPage
         .verifyCancelledOrderSummaryValue("Nazwa firmy", item.Specialist)
         .verifyCancelledOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
         .verifyCancelledPriceValue("Cena", item.price)
