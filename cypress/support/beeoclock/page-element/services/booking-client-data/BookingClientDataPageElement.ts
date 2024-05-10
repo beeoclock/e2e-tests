@@ -3,7 +3,7 @@ import { EmailInput } from "./page-element/EmailInput";
 import { FirstNameInput } from "./page-element/FirstNameInput";
 import { PhoneInput } from "./page-element/PhoneInput";
 
-export class BookingPageElement {
+export class BookingClientDataPageElement {
 
     public static FirstNameInput: FirstNameInput = new FirstNameInput();
     public static EmailInput: EmailInput = new EmailInput();

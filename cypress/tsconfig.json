@@ -6,4 +6,4 @@
     "types": ["cypress", "node"]
   },
    "include": ["**/*.ts"]
-  }
+}
