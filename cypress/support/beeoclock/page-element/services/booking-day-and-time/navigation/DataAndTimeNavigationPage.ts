@@ -3,13 +3,13 @@ import { DataAndTimeNavigationPageElement } from "./DataAndTimeNavigationPageEle
 
 export class DataAndTimeNavigationPage {
 
-    public clickBookOrder(): DataAndTimeNavigationPage {
-        const bookVisit = 'bookVisit' + DateUtils.getCurrentTime();
-        const apiEntryPoint = Cypress.env('apiBackendEntryPoint');
-        cy.intercept('POST', apiEntryPoint + 'client/e2e/event').as(bookVisit);
+    public clickNextStepButton(): DataAndTimeNavigationPage {
+        // const bookVisit = 'bookVisit' + DateUtils.getCurrentTime();
+        // const apiEntryPoint = Cypress.env('apiBackendEntryPoint');
+        // cy.intercept('POST', apiEntryPoint + 'client/e2e/event').as(bookVisit);
         DataAndTimeNavigationPageElement.BookButton.getElement()
             .click()
-            cy.wait('@' + bookVisit)
+            // cy.wait('@' + bookVisit)
         return this;
     }
 }

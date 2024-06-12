@@ -10,7 +10,7 @@ export class OrderDetailsPage {
     }
 
     public verifyDetailsHeader(): OrderDetailsPage {
-        cy.get('.py-4 > :nth-child(5)').find('th').should('have.prop', 'outerText').and('include', 'Zamówione usługi')
+        cy.get('.flex.w-full > .px-3').should('have.prop', 'outerText').and('include', 'Zamówione usługi')
         return this;
     }
 

@@ -1,17 +1,19 @@
 import { DateUtils } from "../../../../backend/Utils/DateUtils";
 import { BookingNavigationFormPageElement } from "./BookingNavigationFormPageElement";
+import {SaveButton} from "./page-element/SeveButton";
 
 export class BookingClientNavigationFormPage {
 
-    public clickChooseDateAndTime(): BookingClientNavigationFormPage {
-        const alias = 'getTime' + DateUtils.getCurrentTime();
-        cy.intercept('GET', 'https://api.dev.beeoclock.com/client/api/v1/client/e2e/event/busy-slots?*').as(alias);
+    public saveButton(): BookingClientNavigationFormPage {
+        const bookVisit = 'bookVisit' + DateUtils.getCurrentTime();
+        const apiEntryPoint = Cypress.env('apiBackendEntryPoint');
+        cy.intercept('POST', apiEntryPoint + 'client/e2e/order').as(bookVisit);
         /////////////////////https://api.dev.beeoclock.com/client/api/v1/client/e2e/event/busy-slots?
         /////////////////////https://api.dev.beeoclock.com/client/api/v1/client/e2e/event/busy-slots?
         /////////////////////https://api.dev.beeoclock.com/client
-        BookingNavigationFormPageElement.ChooseADateAndTimeBtn.getElement()
+        BookingNavigationFormPageElement.SaveButton.getElement()
             .click()
-        cy.wait('@' + alias, {timeout:10000})
+        cy.wait('@' + bookVisit, {timeout:10000})
         return this;
     }
 }
