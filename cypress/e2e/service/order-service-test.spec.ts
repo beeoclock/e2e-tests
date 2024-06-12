@@ -9,6 +9,7 @@ describe('order service', () => {
   beforeEach(function () {
     cy.fixture('order-service-test-data.json').as('orderServiceCreation');
   });
+
   it('order service form test', function () {
     cy.visit('')
 
@@ -19,8 +20,6 @@ describe('order service', () => {
         .selectSpecificOrder(item.Service)
       ServicesPages.SelectSpecialistPage
         .selectSpecificSpecialist(item.Specialist)
-      // ServicesPages.BookingClientNavigationFormPage
-      //   .clickChooseDateAndTime()
       ServicesPages.SelectDayPage
         .selectNextDay()
       ServicesPages.SelectTimePage
@@ -45,7 +44,7 @@ describe('order service', () => {
       ServicesPages.OrderSummaryPage
         .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
         .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
-        // .verifyOrderSummaryValue("Komentarz", item.comment)
+        // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
       ServicesPages.BookingClientDataPage
           .verifySelectedService(item.Service)
           .verifySelectedServicePrice(item.price)
@@ -61,7 +60,7 @@ describe('order service', () => {
       ServicesPages.OrderSummaryPage
           .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
           .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
-      // .verifyOrderSummaryValue("Komentarz", item.comment)
+      // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
       ServicesPages.BookingClientDataPage
           .verifySelectedService(item.Service)
           .verifySelectedServicePrice(item.price)
