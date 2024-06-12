@@ -18,4 +18,10 @@ export class BookingSelectServicePage {
         detailsTab.should('not.have.class', 'active').and('have.class', 'hover:text-gray-600')
         return this;
     }
+
+    public verifyHrefAddress(): BookingSelectServicePage {
+        cy.get('[href="https://www.google.com/maps/place/Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300"]')
+            .should('be.visible')
+        return this
+    }
 }

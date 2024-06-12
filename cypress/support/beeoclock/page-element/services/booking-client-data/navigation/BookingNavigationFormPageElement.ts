@@ -1,6 +1,6 @@
-import { ChooseADateAndTimeBtn } from "./page-element/ChooseADateAndTimeBtn";
+import {SaveButton} from "./page-element/SeveButton";
 
 export class BookingNavigationFormPageElement {
 
-    public static ChooseADateAndTimeBtn: ChooseADateAndTimeBtn = new ChooseADateAndTimeBtn();
+    public static SaveButton: SaveButton = new SaveButton();
 }

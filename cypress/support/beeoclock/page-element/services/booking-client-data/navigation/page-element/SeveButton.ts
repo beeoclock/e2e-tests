@@ -1,6 +1,6 @@
-export class ChooseADateAndTimeBtn {
+export class SaveButton {
     public getElement(): any {
-        return cy.contains('button', 'Wybierz datę i godzinę')
+        return cy.contains('button', 'Zapisać się')
             .should('be.visible')
             .scrollIntoView()
     }

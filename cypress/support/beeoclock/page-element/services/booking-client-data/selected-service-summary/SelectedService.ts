@@ -1,6 +1,6 @@
-export class BookButton {
+export class SelectedService {
     public getElement(): any {
-        return cy.contains('button', 'Następny krok')
+        return cy.get('.text-md')
             .should('be.visible')
             .scrollIntoView()
     }

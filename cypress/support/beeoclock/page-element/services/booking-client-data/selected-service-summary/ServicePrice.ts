@@ -1,6 +1,6 @@
-export class BookButton {
+export class ServicePrice {
     public getElement(): any {
-        return cy.contains('button', 'Następny krok')
+        return cy.get('.shrink > .flex > :nth-child(1)')
             .should('be.visible')
             .scrollIntoView()
     }
