@@ -1,7 +1,7 @@
 export class ServiceTime {
-    public getElement(): any {
-        return cy.get('.shrink > .flex > :nth-child(2)')
+    public getElement(time: string): any {
+        return cy.get('.shrink > .flex > :nth-child(2)').contains(time)
             .should('be.visible')
-            .scrollIntoView()
+            // .scrollIntoView()
     }
 }

@@ -60,42 +60,60 @@ describe('order service', () => {
 
             cy.log('verify next service')
             ServicesPages.BookingClientDataPage
+                .verifySelectServicesHeader()
                 .verifySelectedService(item.nextService)
                 .verifySelectedServicePrice(item.nextPrice)
-                .verifySelectedServiceTime(item.nextSelectTime)
+                .verifySelectedServiceTime(item.nextServiceTime)
                 .verifyServiceSpecialist(item.nextSpecialist)
 
 
-            // ServicesPages.BookingClientNavigationFormPage
-            //     .saveButton()
-            //
-            // ServicesPages.OrderSummaryPage
-            //     .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
-            //     .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
-            // // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
-            // ServicesPages.BookingClientDataPage
-            //     .verifySelectedService(item.Service)
-            //     .verifySelectedServicePrice(item.price)
-            //     .verifySelectedServiceTime(item.serviceTime)
-            //     .verifyServiceSpecialist(item.Specialist)
-            //
-            // ServicesPages.OrderDetailsPage
-            //     .verifyDetailsHeader()
-            // ServicesPages.OrderSummaryNavigationPage
-            //     .clickCancelOrderButton()
-            // ServicesPages.OrderCancellationPage
-            //     .verifyCancelInformation()
-            // ServicesPages.OrderSummaryPage
-            //     .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
-            //     .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
-            // // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
-            // ServicesPages.BookingClientDataPage
-            //     .verifySelectedService(item.Service)
-            //     .verifySelectedServicePrice(item.price)
-            //     .verifySelectedServiceTime(item.serviceTime)
-            //     .verifyServiceSpecialist(item.Specialist)
-            // ServicesPages.OrderSummaryNavigationPage
-            //     .clickBackArrow()
+            ServicesPages.BookingClientNavigationFormPage
+                .saveButton()
+
+            ServicesPages.OrderSummaryPage
+                .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
+                .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
+            // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
+            ServicesPages.BookingClientDataPage
+                .verifySelectedService(item.Service)
+                .verifySelectedServicePrice(item.price)
+                .verifySelectedServiceTime(item.serviceTime)
+                .verifyServiceSpecialist(item.Specialist)
+
+            cy.log('verify next service')
+            ServicesPages.BookingClientDataPage
+                .verifySelectServicesHeader()
+                .verifySelectedService(item.nextService)
+                .verifySelectedServicePrice(item.nextPrice)
+                .verifySelectedServiceTime(item.nextServiceTime)
+
+
+
+            ServicesPages.OrderDetailsPage
+                .verifyDetailsHeader()
+            ServicesPages.OrderSummaryNavigationPage
+                .clickCancelOrderButton()
+            ServicesPages.OrderCancellationPage
+                .verifyCancelInformation()
+            ServicesPages.OrderSummaryPage
+                .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
+                .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
+            // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
+            ServicesPages.BookingClientDataPage
+                .verifySelectedService(item.Service)
+                .verifySelectedServicePrice(item.price)
+                .verifySelectedServiceTime(item.serviceTime)
+                .verifyServiceSpecialist(item.Specialist)
+
+            cy.log('verify next service')
+            ServicesPages.BookingClientDataPage
+                .verifySelectServicesHeader()
+                .verifySelectedService(item.nextService)
+                .verifySelectedServicePrice(item.nextPrice)
+                .verifySelectedServiceTime(item.nextServiceTime)
+
+            ServicesPages.OrderSummaryNavigationPage
+                .clickBackArrow()
 
         })
     })

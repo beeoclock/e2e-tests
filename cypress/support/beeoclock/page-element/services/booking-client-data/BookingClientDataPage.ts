@@ -76,7 +76,7 @@ export class BookingClientDataPage {
     }
 
     public verifySelectedServicePrice(price: string): BookingClientDataPage {
-        BookingClientDataPageElement.ServicePrice.getElement()
+        BookingClientDataPageElement.ServicePrice.getElement(price)
             .invoke('prop', 'outerText')
             .then((text) => {
                 const normalizedText = text.replace(/\s/g, '');
@@ -87,7 +87,7 @@ export class BookingClientDataPage {
     }
 
     public verifySelectedServiceTime(time: string): BookingClientDataPage {
-        BookingClientDataPageElement.ServiceTime.getElement()
+        BookingClientDataPageElement.ServiceTime.getElement(time)
             .invoke('prop', 'outerText')
             .then((text) => {
                 const normalizedText = text.replace(/\s/g, '');
@@ -99,7 +99,7 @@ export class BookingClientDataPage {
 
 
     public verifyServiceSpecialist(specialist: string): BookingClientDataPage {
-        BookingClientDataPageElement.ServiceSpecialist.getElement()
+        BookingClientDataPageElement.ServiceSpecialist.getElement(specialist)
             .invoke('prop', 'outerText')
             .then((text) => {
                 const normalizedText = text.replace(/\s/g, '');
@@ -117,6 +117,11 @@ export class BookingClientDataPage {
                 const normalizedValue = value.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedValue);
             });
+        return this;
+    }
+
+    public verifySelectServicesHeader(): BookingClientDataPage {
+        cy.contains('div', 'Zamówione usługi').should('be.visible')
         return this;
     }
 }
