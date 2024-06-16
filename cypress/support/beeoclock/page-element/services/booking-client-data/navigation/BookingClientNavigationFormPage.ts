@@ -1,6 +1,8 @@
 import { DateUtils } from "../../../../backend/Utils/DateUtils";
 import { BookingNavigationFormPageElement } from "./BookingNavigationFormPageElement";
 import {SaveButton} from "./page-element/SeveButton";
+import {BookingSelectServicePageElement} from "../../booking-select-service/BookingSelectServicePageElement";
+import {should} from "chai";
 
 export class BookingClientNavigationFormPage {
 
@@ -14,6 +16,13 @@ export class BookingClientNavigationFormPage {
         BookingNavigationFormPageElement.SaveButton.getElement()
             .click()
         cy.wait('@' + bookVisit, {timeout:10000})
+        return this;
+    }
+
+    public clickAddNextService(): BookingClientNavigationFormPage {
+        BookingNavigationFormPageElement.NextServiceLink.getElement()
+            .click();
+        cy.contains('div', 'Rezerwacja').should('be.visible')
         return this;
     }
 }

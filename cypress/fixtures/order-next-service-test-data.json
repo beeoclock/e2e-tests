@@ -1,0 +1,26 @@
+[
+  {
+    "case": 1,
+    "Service": "e2e - strzyżenie",
+    "Specialist": "e2e",
+    "firstName": "Kilan Mbappe",
+    "email": "Kilan.Mbappe@gmail.pl",
+    "phone": "+48778996554",
+    "comment": "Kliją eMbappe!",
+    "selectTime": "15:30",
+    "price": "40 zł",
+    "summaryPrice": "40,00 zł",
+    "serviceTime": "30min",
+    "companyName":  "e2e",
+    "serviceDescription": "samo strzyżenie bez brody dla Pana Mbappe",
+
+    "nextService": "Strzyżenie Brody",
+    "nextSpecialist": "Tomasz",
+    "nextSelectTime": "19:00",
+    "nextPrice": "30 zł",
+    "nextSummaryPrice": "70,00 zł",
+    "nextServiceTime": "15min",
+    "nextCompanyName":  "e2e",
+    "nextServiceDescription": "Samo Strzyżenie Brody"
+  }
+]

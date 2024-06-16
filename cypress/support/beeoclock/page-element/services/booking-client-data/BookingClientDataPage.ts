@@ -65,7 +65,7 @@ export class BookingClientDataPage {
     }
 
     public verifySelectedService(service: string): BookingClientDataPage {
-        BookingClientDataPageElement.SelectedService.getElement()
+        BookingClientDataPageElement.SelectedService.getElement(service)
             .invoke('text')
             .then((text) => {
                 const normalizedText = text.replace(/\s/g, '');

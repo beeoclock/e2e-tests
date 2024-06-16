@@ -10,6 +10,13 @@ export class BookingSelectServicePage {
         return this;
     }
 
+    public selectNextSpecificOrder(order: string): BookingSelectServicePage {
+        BookingSelectServicePageElement.OptionElement.getElement(order)
+            .click()
+        cy.wait(1000)
+        return this;
+    }
+
     private verifyCorrectForm(): BookingSelectServicePage {
         const serviceTab = cy.get('.flex.justify-start').find('.me-2').contains('Usługi')
         serviceTab.should('have.class', 'active').and('not.have.class', 'hover:text-gray-600')

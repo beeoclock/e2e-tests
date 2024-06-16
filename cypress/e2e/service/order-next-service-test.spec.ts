@@ -1,0 +1,102 @@
+import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages"
+
+describe('order service', () => {
+
+    beforeEach(function () {
+        cy.fixture('order-next-service-test-data.json').as('orderNextServiceCreation');
+    });
+
+    it('order service form test', function () {
+        cy.visit('')
+
+        this.orderNextServiceCreation.forEach(item => {
+            cy.log('Case: ' + item.case);
+
+            ServicesPages.BookingSelectServicePage
+                .selectSpecificOrder(item.Service)
+            ServicesPages.SelectSpecialistPage
+                .selectSpecificSpecialist(item.Specialist)
+            ServicesPages.SelectDayPage
+                .selectNextDay()
+            ServicesPages.SelectTimePage
+                .selectSpecificTime(item.selectTime)
+            ServicesPages.DataAndTimeNavigationPage
+                .clickNextStepButton()
+            ServicesPages.BookingClientDataPage
+                .typeFirstName(item.firstName)
+                .typeEmail(item.email)
+                .typePhoneNumber(item.phone)
+                .typeComment(item.comment)
+                .verifySummaryPriceValue(item.summaryPrice)
+
+                .verifySelectedService(item.Service)
+                .verifySelectedServicePrice(item.price)
+                .verifySelectedServiceTime(item.serviceTime)
+                .verifyServiceSpecialist(item.Specialist)
+
+
+            cy.log('select next service');
+            ServicesPages.BookingClientNavigationFormPage
+                .clickAddNextService();
+            ServicesPages.BookingSelectServicePage
+                .selectNextSpecificOrder(item.nextService);
+            ServicesPages.SelectSpecialistPage
+                .selectSpecificSpecialist(item.nextSpecialist);
+            ServicesPages.SelectDayPage
+                .selectNextDay();
+            ServicesPages.SelectTimePage
+                .selectSpecificTime(item.nextSelectTime);
+            ServicesPages.DataAndTimeNavigationPage
+                .clickNextStepButton();
+            ServicesPages.BookingClientDataPage
+                .verifySummaryPriceValue(item.nextSummaryPrice);
+
+            cy.log('verify first service')
+            ServicesPages.BookingClientDataPage
+                .verifySelectedService(item.Service)
+                .verifySelectedServicePrice(item.price)
+                .verifySelectedServiceTime(item.serviceTime)
+                .verifyServiceSpecialist(item.Specialist)
+
+            cy.log('verify next service')
+            ServicesPages.BookingClientDataPage
+                .verifySelectedService(item.nextService)
+                .verifySelectedServicePrice(item.nextPrice)
+                .verifySelectedServiceTime(item.nextSelectTime)
+                .verifyServiceSpecialist(item.nextSpecialist)
+
+
+            // ServicesPages.BookingClientNavigationFormPage
+            //     .saveButton()
+            //
+            // ServicesPages.OrderSummaryPage
+            //     .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
+            //     .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
+            // // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
+            // ServicesPages.BookingClientDataPage
+            //     .verifySelectedService(item.Service)
+            //     .verifySelectedServicePrice(item.price)
+            //     .verifySelectedServiceTime(item.serviceTime)
+            //     .verifyServiceSpecialist(item.Specialist)
+            //
+            // ServicesPages.OrderDetailsPage
+            //     .verifyDetailsHeader()
+            // ServicesPages.OrderSummaryNavigationPage
+            //     .clickCancelOrderButton()
+            // ServicesPages.OrderCancellationPage
+            //     .verifyCancelInformation()
+            // ServicesPages.OrderSummaryPage
+            //     .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
+            //     .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
+            // // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
+            // ServicesPages.BookingClientDataPage
+            //     .verifySelectedService(item.Service)
+            //     .verifySelectedServicePrice(item.price)
+            //     .verifySelectedServiceTime(item.serviceTime)
+            //     .verifyServiceSpecialist(item.Specialist)
+            // ServicesPages.OrderSummaryNavigationPage
+            //     .clickBackArrow()
+
+        })
+    })
+})
