@@ -2,6 +2,8 @@ import {ServicesPages} from "../../support/beeoclock/page-element/services/Servi
 
 describe('order service', () => {
 
+    const address: string = "Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300"
+
     beforeEach(function () {
         cy.fixture('order-next-service-test-data.json').as('orderNextServiceCreation');
     });
@@ -72,7 +74,7 @@ describe('order service', () => {
 
             ServicesPages.OrderSummaryPage
                 .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
-                .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
+                .verifyOrderSummaryValue("Adres", address)
             // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
             ServicesPages.BookingClientDataPage
                 .verifySelectedService(item.Service)
@@ -87,8 +89,6 @@ describe('order service', () => {
                 .verifySelectedServicePrice(item.nextPrice)
                 .verifySelectedServiceTime(item.nextServiceTime)
 
-
-
             ServicesPages.OrderDetailsPage
                 .verifyDetailsHeader()
             ServicesPages.OrderSummaryNavigationPage
@@ -97,7 +97,7 @@ describe('order service', () => {
                 .verifyCancelInformation()
             ServicesPages.OrderSummaryPage
                 .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
-                .verifyOrderSummaryValue("Adres", "Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300")
+                .verifyOrderSummaryValue("Adres", address)
             // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
             ServicesPages.BookingClientDataPage
                 .verifySelectedService(item.Service)

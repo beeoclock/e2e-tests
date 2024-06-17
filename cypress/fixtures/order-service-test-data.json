@@ -2,7 +2,7 @@
     {
         "case": 1,
         "Service": "e2e - strzyżenie",
-        "Specialist": "e2e",
+        "Specialist": "Tomasz",
         "firstName": "Grażyna Trzebiatowska-kąs",
         "email": "Grazyna.Trzebiatowska-kas@gmail.pl",
         "phone": "+48544255989",
@@ -17,7 +17,7 @@
     {
         "case": 2,
         "Service": "Strzyżenie Brody ",
-        "Specialist": "Tomasz",
+        "Specialist": "e2e",
         "firstName": "Marian Kapuściński",
         "email": "marian.kapuscinski@onet.pl",
         "phone": "+48665442458",

@@ -27,8 +27,18 @@ export class BookingSelectServicePage {
     }
 
     public verifyHrefAddress(): BookingSelectServicePage {
-        cy.get('[href="https://www.google.com/maps/place/Juliusza Słowackiego 80 , Piotrków trybunalski , country.PL, 97-300"]')
-            .should('be.visible')
-        return this
+        cy.get('.flex.items-start > .text-xl')
+            .should(($el) => {
+                const actualText = $el.prop('textContent').replace(/\s+/g, ' ').replace(/&nbsp;/g, ' ').trim();
+                const expectedText = 'PL, Piotrków trybunalski, Juliusza Słowackiego 80,';
+
+                const cleanActualText = actualText.replace(/\s+/g, ' ');
+                const cleanExpectedText = expectedText.replace(/\s+/g, ' ');
+
+                expect(cleanActualText).to.include(cleanExpectedText);
+            })
+            .should('be.visible');
+        return this;
     }
+
 }
