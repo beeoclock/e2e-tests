@@ -7,9 +7,10 @@ export class BookingClientDataPage {
     public typeFirstName(firstName: string): BookingClientDataPage {
         this.verifyFirstNameLabel()
         BookingClientDataPageElement.FirstNameInput.getElement()
+            .clear()
             .type(firstName).then(() => {
             BookingClientDataPageElement.FirstNameInput.getElement().invoke('prop', 'value').then(value => {
-                expect(value).to.contain(firstName)
+                expect(value).to.equals(firstName)
             })
         })
         return this;
@@ -18,9 +19,10 @@ export class BookingClientDataPage {
     public typeEmail(email: string): BookingClientDataPage {
         this.verifyEmailLabel()
         BookingClientDataPageElement.EmailInput.getElement()
+            .clear()
             .type(email).then(() => {
             BookingClientDataPageElement.EmailInput.getElement().invoke('prop', 'value').then(value => {
-                expect(value).to.contain(email)
+                expect(value).to.equals(email)
             })
         })
         return this;
@@ -29,9 +31,10 @@ export class BookingClientDataPage {
     public typePhoneNumber(phoneNumber: string): BookingClientDataPage {
         this.verifyPhoneNumberLabel()
         BookingClientDataPageElement.PhoneInput.getElement()
+            .clear()
             .type(phoneNumber).then(() => {
             BookingClientDataPageElement.PhoneInput.getElement().invoke('prop', 'value').then(value => {
-                expect(value).to.contain(phoneNumber)
+                expect(value).to.equals(phoneNumber)
             })
         })
         return this;
@@ -40,9 +43,10 @@ export class BookingClientDataPage {
     public typeComment(comment: string): BookingClientDataPage {
         if (comment) {
             BookingClientDataPageElement.CommentInput.getElement()
+                .clear()
                 .type(comment).then(() => {
                 BookingClientDataPageElement.CommentInput.getElement().invoke('prop', 'value').then(value => {
-                    expect(value).to.contain(comment)
+                    expect(value).to.equals(comment)
                 })
             })
         }

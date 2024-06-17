@@ -1,8 +1,9 @@
 import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages"
+import {CompanyEnum} from "../../support/beeoclock/page-element/services/enum/CompanyEnum";
 
 describe('order service', () => {
 
-    const address: string = "Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300"
+    const address: string = CompanyEnum.COMPANY_ADDRESS
 
     beforeEach(function () {
         cy.fixture('order-service-test-data.json').as('orderServiceCreation');
@@ -42,7 +43,7 @@ describe('order service', () => {
             ServicesPages.OrderSummaryPage
                 .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
                 .verifyOrderSummaryValue("Adres", address)
-            // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
+             .verifyOrderSummaryValue("Komentarz", item.comment)
             ServicesPages.BookingClientDataPage
                 .verifySelectedService(item.Service)
                 .verifySelectedServicePrice(item.price)
@@ -58,7 +59,7 @@ describe('order service', () => {
             ServicesPages.OrderSummaryPage
                 .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
                 .verifyOrderSummaryValue("Adres", address)
-            // .verifyOrderSummaryValue("Komentarz", item.comment)//todo BUG
+            .verifyOrderSummaryValue("Komentarz", item.comment)
             ServicesPages.BookingClientDataPage
                 .verifySelectedService(item.Service)
                 .verifySelectedServicePrice(item.price)
