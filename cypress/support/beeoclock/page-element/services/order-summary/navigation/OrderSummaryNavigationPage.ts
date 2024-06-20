@@ -1,7 +1,4 @@
-import { DateUtils } from "../../../../backend/Utils/DateUtils";
-import { OrderSummaryNavigationPageElement } from "./OrderSummaryNavigationPageElement";
-import {BookingSelectServicePageElement} from "../../booking-select-service/BookingSelectServicePageElement";
-import {BookingSelectServicePage} from "../../booking-select-service/BookingSelectServicePage";
+import {OrderSummaryNavigationPageElement} from "./OrderSummaryNavigationPageElement";
 import {ServicesPages} from "../../ServicesPages";
 
 export class OrderSummaryNavigationPage {

@@ -1,4 +1,4 @@
-import { OrderSummaryPageElement } from "./OrderSummaryPageElement";
+import {OrderSummaryPageElement} from "./OrderSummaryPageElement";
 
 export class OrderSummaryPage {
 
@@ -13,5 +13,4 @@ export class OrderSummaryPage {
         OrderSummaryPageElement.OrderSummaryElement.getElement(tdKey).contains(expectValue)
         return this;
     }
-
 }

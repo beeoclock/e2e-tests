@@ -1,4 +1,4 @@
-import { SelectSpecialistPageElement } from "./SelectSpecialistPageElement";
+import {SelectSpecialistPageElement} from "./SelectSpecialistPageElement";
 
 export class SelectSpecialistPage {
 

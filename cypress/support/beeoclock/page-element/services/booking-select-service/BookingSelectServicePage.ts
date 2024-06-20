@@ -1,4 +1,4 @@
-import { BookingSelectServicePageElement } from "./BookingSelectServicePageElement";
+import {BookingSelectServicePageElement} from "./BookingSelectServicePageElement";
 
 export class BookingSelectServicePage {
 
