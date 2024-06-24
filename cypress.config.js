@@ -12,6 +12,7 @@ module.exports = defineConfig({
     viewportHeight: 1080,
     viewportWidth: 1920,
     defaultCommandTimeout: 10000,
-    experimentalRunAllSpecs: true
+    experimentalRunAllSpecs: true,
+    pageLoadTimeout: 20000
   },
 })
