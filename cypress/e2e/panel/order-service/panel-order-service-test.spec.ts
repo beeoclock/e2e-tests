@@ -28,5 +28,6 @@ describe('panel - order service', () => {
             .clickSelectServiceButton()
             .selectSpecificService('Strzyżenie Brody')
             .verifySelectedService('Strzyżenie Brody', 'Samo Strzyżenie Brody')
+            .selectOrderTime('1 godz, 30 min')
     })
 })

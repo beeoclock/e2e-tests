@@ -29,4 +29,13 @@ export class RightPanelServicesPage {
         return this;
     }
 
+    public selectOrderTime(time: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectTimeArrow.getElement()
+            .click().then(() => {
+                RightPanelServicesPageElement.SelectSpecificTime.getElement(time)
+                    .click()
+        })
+        return this;
+    }
+
 }
