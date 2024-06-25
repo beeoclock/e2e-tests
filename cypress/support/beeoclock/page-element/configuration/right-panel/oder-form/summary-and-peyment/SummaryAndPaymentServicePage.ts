@@ -1,4 +1,5 @@
 import {SummaryAndPaymentServicePageElement} from "./SummaryAndPaymentServicePageElement";
+import {BusinessNoteInputElement} from "./payment/BusinessNoteInputElement";
 
 export class SummaryAndPaymentServicePage {
 
@@ -68,6 +69,21 @@ export class SummaryAndPaymentServicePage {
                 SummaryAndPaymentServicePageElement.SelectPaymentMethodElement.getElement(method)
                     .click()
         })
+        return this;
+    }
+
+    public selectPaymentStatus(status: string): SummaryAndPaymentServicePage {
+        SummaryAndPaymentServicePageElement.PaymentStatusSelector.getElement()
+            .click().then(() => {
+                SummaryAndPaymentServicePageElement.SelectPaymentStatusElement.getElement(status)
+                    .click()
+        })
+        return this;
+    }
+
+    public typeBuisnessNote(businessNote: string): SummaryAndPaymentServicePage {
+        SummaryAndPaymentServicePageElement.BusinessNoteInputElement.getElement()
+            .type(businessNote)
         return this;
     }
 

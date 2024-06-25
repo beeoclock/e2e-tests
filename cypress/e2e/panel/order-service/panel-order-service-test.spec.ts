@@ -47,6 +47,8 @@ describe('panel - order service', () => {
             .verifyOrderSpecialist('Tomasz Zalewski')
             .verifyOrderCustomer('Anonimowy')
             .selectPaymentMethod('Karta')
+            .selectPaymentStatus('W toku')
+            .typeBuisnessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
     })
 
     after('clear storage', () => {

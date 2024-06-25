@@ -1,5 +1,6 @@
 import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages"
 import {CompanyEnum} from "../../support/beeoclock/page-element/services/enum/CompanyEnum";
+import {ServiceEnum} from "../../support/beeoclock/common/enum/ServiceEnum";
 
 describe('order service', () => {
 
@@ -10,7 +11,7 @@ describe('order service', () => {
     });
 
     it('order service form test', function () {
-        cy.visit('')
+        cy.visit(ServiceEnum.PUBLIC_PANEL)
 
         this.orderNextServiceCreation.forEach(item => {
             cy.log('Case: ' + item.case);

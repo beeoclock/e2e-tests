@@ -6,6 +6,9 @@ import {OrderSummarySpecialistElement} from "./summary/OrderSummarySpecialistEle
 import {OrderCustomerSummaryElement} from "./summary/OrderCustomerSummaryElement";
 import {PaymentMethodSelector} from "./payment/PaymentMethodSelector";
 import {SelectPaymentMethodElement} from "./payment/SelectPaymentMethodElement";
+import {PaymentStatusSelector} from "./payment/PaymentStatusSelector";
+import {SelectPaymentStatusElement} from "./payment/SelectPaymentStatusElement";
+import {BusinessNoteInputElement} from "./payment/BusinessNoteInputElement";
 
 export class SummaryAndPaymentServicePageElement {
 
@@ -17,4 +20,7 @@ export class SummaryAndPaymentServicePageElement {
     public static OrderCustomerSummaryElement: OrderCustomerSummaryElement = new OrderCustomerSummaryElement()
     public static PaymentMethodSelector: PaymentMethodSelector = new PaymentMethodSelector()
     public static SelectPaymentMethodElement: SelectPaymentMethodElement = new SelectPaymentMethodElement()
+    public static PaymentStatusSelector: PaymentStatusSelector = new PaymentStatusSelector()
+    public static SelectPaymentStatusElement: SelectPaymentStatusElement = new SelectPaymentStatusElement()
+    public static BusinessNoteInputElement: BusinessNoteInputElement = new BusinessNoteInputElement()
 }

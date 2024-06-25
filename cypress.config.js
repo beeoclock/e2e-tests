@@ -7,12 +7,13 @@ module.exports = defineConfig({
   },
 
   e2e: {
-    baseUrl: 'https://dev.beeoclock.com/pl/e2e',
+    // baseUrl: 'https://panel.dev.beeoclock.com/identity',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
     viewportHeight: 1080,
     viewportWidth: 1920,
     defaultCommandTimeout: 10000,
     experimentalRunAllSpecs: true,
-    pageLoadTimeout: 20000
+    pageLoadTimeout: 20000,
+    chromeWebSecurity: false
   },
 })
