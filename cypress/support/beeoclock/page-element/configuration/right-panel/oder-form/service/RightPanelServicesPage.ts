@@ -32,9 +32,42 @@ export class RightPanelServicesPage {
     public selectOrderTime(time: string): RightPanelServicesPage {
         RightPanelServicesPageElement.SelectTimeArrow.getElement()
             .click().then(() => {
-                RightPanelServicesPageElement.SelectSpecificTime.getElement(time)
-                    .click()
+            RightPanelServicesPageElement.SelectSpecificTime.getElement(time)
+                .click()
         })
+        return this;
+    }
+
+    public selectPriceOfService(price: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.OrderPriceInput.getElement()
+            .clear()
+            .type(price)
+        return this;
+    }
+
+    public selectSpecialist(specialist: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectSpecialist.getElement(specialist)
+            .click()
+        return this;
+    }
+
+    public typeOrderDate(date: string): RightPanelServicesPage {
+        const input = RightPanelServicesPageElement.OrderDateInput.getElement()
+            .click().then(() => {
+                input.type(date, {force: true})
+            })
+        return this;
+    }
+
+    public typePublicNoteInput(publicNote: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.PublicNoteInput.getElement()
+            .type(publicNote)
+        return this;
+    }
+
+    public addButton(): RightPanelServicesPage {
+        RightPanelServicesPageElement.AddButton.getElement()
+            .click()
         return this;
     }
 

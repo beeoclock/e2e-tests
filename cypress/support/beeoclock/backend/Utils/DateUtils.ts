@@ -79,6 +79,30 @@ export class DateUtils {
         return moment(currentDate).format("DD.MM.YYYY");
     }
 
+    public static convertDateToDatetimeInput(dateString, timeString) {
+
+        const [day, month, year] = dateString.split('.');
+        const [hours, minutes] = timeString.split(':');
+        const date = new Date(`${year}-${month}-${day}`);
+
+        date.setHours(parseInt(hours, 10));
+        date.setMinutes(parseInt(minutes, 10));
+        date.setSeconds(0);
+
+        const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}T${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+        return formattedDate;
+    }
+
+    public static convertDatetimeToCustomFormat(datetimeString: string): string {
+        const [datePart, timePart] = datetimeString.split('T');
+        const [hours, minutes] = timePart.split(':');
+
+        const formattedDatetime = `${datePart} ${hours}:${minutes}`;
+
+        return formattedDatetime;
+    }
+
+
     public static getCurrentDatePlusDaysFormatted(days: number): string {
         let currentDate = new Date();
         currentDate.setDate(currentDate.getDate() + days);
