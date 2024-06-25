@@ -12,11 +12,10 @@ describe('panel - order service', () => {
     const datetimeInput = DateUtils.convertDateToDatetimeInput(nextDayData, timeString);
     const dateOrderSummary: string = DateUtils.convertDatetimeToCustomFormat(datetimeInput)
 
-    it('test panel  order service',  function () {
+    it('test panel  order service', function () {
         cy.intercept('GET', '**/*').as('getAll');
-        cy.visit(ServiceEnum.CLIENT_PANEL, { failOnStatusCode: false });
-        cy.wait('@getAll', { timeout: 30000 });
-
+        cy.visit(ServiceEnum.CLIENT_PANEL, {failOnStatusCode: false});
+        cy.wait('@getAll', {timeout: 30000});
 
         PanelLoginPageElement.EmailInput.getElement()
 
@@ -40,7 +39,7 @@ describe('panel - order service', () => {
             .typePublicNoteInput('usuń mnie')
             .addButton()
         RightPanelPages.SummaryAndPaymentServicePage
-            // .verifyOrderPrice('40,00 zł')TODO BUG
+            // .verifyOrderPrice('zł40,00')TODO BUG
             .verifyOrderTime('1 godz, 30 min')
             .verifyOrderDate(dateOrderSummary)
             .verifyOrderService('Strzyżenie Brody')
