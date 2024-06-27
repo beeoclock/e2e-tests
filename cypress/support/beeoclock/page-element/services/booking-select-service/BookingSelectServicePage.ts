@@ -30,7 +30,7 @@ export class BookingSelectServicePage {
         cy.get('.flex.items-start > .text-xl')
             .should(($el) => {
                 const actualText = $el.prop('textContent').replace(/\s+/g, ' ').replace(/&nbsp;/g, ' ').trim();
-                const expectedText = 'PL, Piotrków trybunalski, Juliusza Słowackiego 80,';
+                const expectedText = 'Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300';
 
                 const cleanActualText = actualText.replace(/\s+/g, ' ');
                 const cleanExpectedText = expectedText.replace(/\s+/g, ' ');
