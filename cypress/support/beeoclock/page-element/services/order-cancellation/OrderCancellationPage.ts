@@ -1,4 +1,4 @@
-import { OrderCancellationPageElement } from "./OrderCancellationPageElement";
+import {OrderCancellationPageElement} from "./OrderCancellationPageElement";
 
 export class OrderCancellationPage {
 

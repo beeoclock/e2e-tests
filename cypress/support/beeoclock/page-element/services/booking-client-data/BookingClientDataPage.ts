@@ -101,7 +101,6 @@ export class BookingClientDataPage {
         return this;
     }
 
-
     public verifyServiceSpecialist(specialist: string): BookingClientDataPage {
         BookingClientDataPageElement.ServiceSpecialist.getElement(specialist)
             .invoke('prop', 'outerText')

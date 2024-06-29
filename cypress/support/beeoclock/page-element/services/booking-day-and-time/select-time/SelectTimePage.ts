@@ -1,5 +1,4 @@
-import { should } from "chai";
-import { SelectTimePageElement } from "./SelectTimePageElement";
+import {SelectTimePageElement} from "./SelectTimePageElement";
 
 export class SelectTimePage {
 

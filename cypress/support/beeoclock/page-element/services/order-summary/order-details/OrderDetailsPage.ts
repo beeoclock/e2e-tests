@@ -1,4 +1,4 @@
-import { OrderDetailsPageElement } from "./OrderDetailsPageElement";
+import {OrderDetailsPageElement} from "./OrderDetailsPageElement";
 
 export class OrderDetailsPage {
 
