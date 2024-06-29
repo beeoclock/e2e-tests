@@ -2,7 +2,7 @@ import {ServicesPages} from "../../support/beeoclock/page-element/services/Servi
 import {CompanyEnum} from "../../support/beeoclock/page-element/services/enum/CompanyEnum";
 import {ServiceEnum} from "../../support/beeoclock/common/enum/ServiceEnum";
 
-describe('order service', () => {
+describe('order next service', () => {
 
     const address: string = CompanyEnum.COMPANY_ADDRESS
 
@@ -10,7 +10,7 @@ describe('order service', () => {
         cy.fixture('order-next-service-test-data.json').as('orderNextServiceCreation');
     });
 
-    it('order service form test', function () {
+    it('order next service form test', function () {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
 
         this.orderNextServiceCreation.forEach(item => {
@@ -37,7 +37,6 @@ describe('order service', () => {
                 .verifySelectedServicePrice(item.price)
                 .verifySelectedServiceTime(item.serviceTime)
                 .verifyServiceSpecialist(item.Specialist)
-
 
             cy.log('select next service');
             ServicesPages.BookingClientNavigationFormPage
