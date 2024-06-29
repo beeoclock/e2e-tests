@@ -34,4 +34,10 @@ export class ApiInterceptionHelper {
         cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/order/paged?*').as(getServices);
         return getServices
     }
+
+    public static deleteServices(): string {
+        const deleteServices = 'deleteServices' + DateUtils.getCurrentTime();
+        cy.intercept('DELETE', EntryPointEnum.API_ENTRY_POINT + '/order/*').as(deleteServices);
+        return deleteServices
+    }
 }

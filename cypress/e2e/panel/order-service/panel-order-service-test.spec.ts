@@ -7,6 +7,10 @@ import {RightPanelPages} from "../../../support/beeoclock/page-element/configura
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
+import {
+    OrderActionsEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 
 describe('panel - order service', () => {
     let nextDayData = DateUtils.getCurrentDatePlusDays(0)
@@ -53,8 +57,11 @@ describe('panel - order service', () => {
             .clickSaveButton()
 
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
+        OrderTabPages.OrderActionTable
+            .clickActionButton()
+            .clickSpecificAction(OrderActionsEnum.DELETE)
     })
-
+    
     after('clear storage', () => {
         cy.clearAllLocalStorage()
         cy.clearAllCookies()
