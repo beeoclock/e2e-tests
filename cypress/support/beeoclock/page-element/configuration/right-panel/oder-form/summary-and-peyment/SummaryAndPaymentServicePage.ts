@@ -1,5 +1,6 @@
 import {SummaryAndPaymentServicePageElement} from "./SummaryAndPaymentServicePageElement";
 import {BusinessNoteInputElement} from "./payment/BusinessNoteInputElement";
+import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 
 export class SummaryAndPaymentServicePage {
 
@@ -81,10 +82,19 @@ export class SummaryAndPaymentServicePage {
         return this;
     }
 
-    public typeBuisnessNote(businessNote: string): SummaryAndPaymentServicePage {
+    public typeBusinessNote(businessNote: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.BusinessNoteInputElement.getElement()
             .type(businessNote)
         return this;
     }
 
+    public clickSaveButton(): SummaryAndPaymentServicePage {
+        const createService = ApiInterceptionHelper.createService()
+        const createPayment = ApiInterceptionHelper.createServicePayment()
+        SummaryAndPaymentServicePageElement.SaveButton.getElement()
+            .click()
+        ApiInterceptionHelper.waitFor201Alias(createService)
+        ApiInterceptionHelper.waitFor201Alias(createPayment)
+        return this;
+    }
 }

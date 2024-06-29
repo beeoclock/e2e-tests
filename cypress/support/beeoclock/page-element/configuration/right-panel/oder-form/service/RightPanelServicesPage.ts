@@ -65,7 +65,7 @@ export class RightPanelServicesPage {
         return this;
     }
 
-    public addButton(): RightPanelServicesPage {
+    public clickAddButton(): RightPanelServicesPage {
         RightPanelServicesPageElement.AddButton.getElement()
             .click()
         return this;

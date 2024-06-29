@@ -5,10 +5,12 @@ import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/Clien
 import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
+import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 
 describe('panel - order service', () => {
-    let nextDayData = DateUtils.getCurrentDatePlusDays(1)
-    const timeString = "08:30";
+    let nextDayData = DateUtils.getCurrentDatePlusDays(0)
+    const timeString = DateUtils.getCurrentTimePlusOneHourFormatted()
     const datetimeInput = DateUtils.convertDateToDatetimeInput(nextDayData, timeString);
     const dateOrderSummary: string = DateUtils.convertDatetimeToCustomFormat(datetimeInput)
 
@@ -37,7 +39,7 @@ describe('panel - order service', () => {
             .selectSpecialist('Zalewski')
             .typeOrderDate(datetimeInput)
             .typePublicNoteInput('usuń mnie')
-            .addButton()
+            .clickAddButton()
         RightPanelPages.SummaryAndPaymentServicePage
             // .verifyOrderPrice('zł40,00')TODO BUG
             .verifyOrderTime('1 godz, 30 min')
@@ -47,7 +49,10 @@ describe('panel - order service', () => {
             .verifyOrderCustomer('Anonimowy')
             .selectPaymentMethod('Karta')
             .selectPaymentStatus('W toku')
-            .typeBuisnessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
+            .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
+            .clickSaveButton()
+
+        LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
     })
 
     after('clear storage', () => {

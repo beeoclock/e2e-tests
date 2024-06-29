@@ -9,6 +9,7 @@ import {SelectPaymentMethodElement} from "./payment/SelectPaymentMethodElement";
 import {PaymentStatusSelector} from "./payment/PaymentStatusSelector";
 import {SelectPaymentStatusElement} from "./payment/SelectPaymentStatusElement";
 import {BusinessNoteInputElement} from "./payment/BusinessNoteInputElement";
+import {SaveButton} from "./navigation/SaveButton";
 
 export class SummaryAndPaymentServicePageElement {
 
@@ -23,4 +24,5 @@ export class SummaryAndPaymentServicePageElement {
     public static PaymentStatusSelector: PaymentStatusSelector = new PaymentStatusSelector()
     public static SelectPaymentStatusElement: SelectPaymentStatusElement = new SelectPaymentStatusElement()
     public static BusinessNoteInputElement: BusinessNoteInputElement = new BusinessNoteInputElement()
+    public static SaveButton: SaveButton = new SaveButton()
 }
