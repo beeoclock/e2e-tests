@@ -11,6 +11,10 @@ import {OrderTabPages} from "../../../support/beeoclock/page-element/configurati
 import {
     OrderActionsEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
+import {
+    CalendarTableTimeEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 
 describe('panel - order service', () => {
     let nextDayData = DateUtils.getCurrentDatePlusDays(0)
@@ -56,6 +60,10 @@ describe('panel - order service', () => {
             .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
             .clickSaveButton()
 
+        //TODO this isn't work couse order are behind this table, need to get 'app-event-calendar-with-specialists-widget-component'
+        //
+        // CalendarPages.CalendarTablePage
+        //     .verifyTableElement('Tomasz Zalewski', CalendarTableTimeEnum.Hour_22)
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
         OrderTabPages.OrderActionTable
             .clickActionButton()
