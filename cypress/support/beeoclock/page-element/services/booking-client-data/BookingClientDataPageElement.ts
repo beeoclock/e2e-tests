@@ -8,6 +8,7 @@ import {ServiceDate} from "./selected-service-summary/ServiceDate";
 import {ServiceSpecialist} from "./selected-service-summary/serviceSpecialist";
 import {ServiceTime} from "./selected-service-summary/ServiceTime";
 import {SummaryPriceValue} from "./page-element/SummaryPriceValue";
+import { Agreement0InputElement } from "./agreements/agreement.0.inpu.element";
 
 export class BookingClientDataPageElement {
 
@@ -21,4 +22,6 @@ export class BookingClientDataPageElement {
     public static ServiceSpecialist: ServiceSpecialist = new ServiceSpecialist();
     public static ServiceTime: ServiceTime = new ServiceTime();
     public static SummaryPriceValue: SummaryPriceValue = new SummaryPriceValue();
+    public static Agreement0InputElement: Agreement0InputElement = new Agreement0InputElement();
+
 }

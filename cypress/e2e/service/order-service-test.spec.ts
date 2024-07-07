@@ -31,6 +31,7 @@ describe('order service', () => {
                 .typeEmail(item.email)
                 .typePhoneNumber(item.phone)
                 .typeComment(item.comment)
+                .checkAgreement()
                 .verifySummaryPriceValue(item.summaryPrice)
 
                 .verifySelectedService(item.Service)
