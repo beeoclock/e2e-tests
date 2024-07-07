@@ -22,6 +22,13 @@ describe('panel - order service', () => {
         cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {failOnStatusCode: false});
         cy.wait('@getAll', {timeout: 30000});
+        // Set a localStorage item
+        cy.window().then((win) => {
+            win.localStorage.setItem('language', 'pl');
+        });
+
+        // Reload the page
+        cy.reload();
 
         PanelLoginPageElement.EmailInput.getElement()
 
