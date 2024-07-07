@@ -34,6 +34,7 @@ describe('panel - order service', () => {
         RightPanelPages.RightPanelNavigationPage
             .clickOpenRightPanel()
         RightPanelPages.RightPanelServicesPage
+            .clickAddOrderButton()
             .clickAddServiceButton()
             .clickSelectServiceButton()
             .selectSpecificService('Strzyżenie Brody')
@@ -61,7 +62,7 @@ describe('panel - order service', () => {
             .clickActionButton()
             .clickSpecificAction(OrderActionsEnum.DELETE)
     })
-    
+
     after('clear storage', () => {
         cy.clearAllLocalStorage()
         cy.clearAllCookies()

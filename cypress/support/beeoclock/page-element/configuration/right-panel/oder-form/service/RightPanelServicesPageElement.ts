@@ -1,4 +1,4 @@
-import {AddServiceButton} from "./page-element/AddServiceButton";
+import {AddOrderButton} from "./page-element/AddOrderButton";
 import {SelectServiceButton} from "./page-element/SelectServiceButton";
 import {SelectSpecificServiceCheckbox} from "./page-element/SelectSpecificServiceCheckbox";
 import {SelectedServiceElement} from "./page-element/SelectedServiceElement";
@@ -9,9 +9,11 @@ import {SelectSpecialist} from "./specialist/SelectSpecialist";
 import {OrderDateInput} from "./date/OrderDateInput";
 import {PublicNoteInput} from "./note/PublicNoteInput";
 import {AddButton} from "./navigation/AddButton";
+import { AddServiceButton } from "./page-element/AddServiceButton";
 
 export class RightPanelServicesPageElement {
 
+    public static AddOrderButton: AddOrderButton = new AddOrderButton()
     public static AddServiceButton: AddServiceButton = new AddServiceButton()
     public static SelectServiceButton: SelectServiceButton = new SelectServiceButton()
     public static SelectSpecificServiceCheckbox: SelectSpecificServiceCheckbox = new SelectSpecificServiceCheckbox()
