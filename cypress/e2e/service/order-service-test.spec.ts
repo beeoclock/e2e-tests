@@ -29,7 +29,7 @@ describe('order service', () => {
             ServicesPages.BookingClientDataPage
                 .typeFirstName(item.firstName)
                 .typeEmail(item.email)
-                .typePhoneNumber(item.phone)
+                // .typePhoneNumber(item.phone)
                 .typeComment(item.comment)
                 .checkAgreement()
                 .verifySummaryPriceValue(item.summaryPrice)

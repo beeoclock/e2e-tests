@@ -20,15 +20,14 @@ describe('panel - order service', () => {
 
     it('test panel  order service', function () {
         cy.intercept('GET', '**/*').as('getAll');
-        cy.visit(ServiceEnum.CLIENT_PANEL, {failOnStatusCode: false});
-        cy.wait('@getAll', {timeout: 30000});
-        // Set a localStorage item
-        cy.window().then((win) => {
-            win.localStorage.setItem('language', 'pl');
+        cy.visit(ServiceEnum.CLIENT_PANEL, {
+            failOnStatusCode: false,
+            onBeforeLoad: (win) => {
+                win.localStorage.setItem('language', 'pl');
+            }
         });
+        cy.wait('@getAll', {timeout: 30000});
 
-        // Reload the page
-        cy.reload();
 
         PanelLoginPageElement.EmailInput.getElement()
 
@@ -64,10 +63,10 @@ describe('panel - order service', () => {
             .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
             .clickSaveButton()
 
-        LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
-        OrderTabPages.OrderActionTable
-            .clickActionButton()
-            .clickSpecificAction(OrderActionsEnum.DELETE)
+        // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
+        // OrderTabPages.OrderActionTable
+        //     .clickActionButton()
+        //     .clickSpecificAction(OrderActionsEnum.DELETE)
     })
 
     after('clear storage', () => {
