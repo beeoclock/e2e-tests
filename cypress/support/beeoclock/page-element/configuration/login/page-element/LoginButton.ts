@@ -1,6 +1,6 @@
 export class LoginButton {
     public getElement(): any {
-        return cy.contains('button', 'Zaloguj się')
+        return cy.get('#identity-sign-in-form-primary-button')
             .should('be.visible')
     }
 }

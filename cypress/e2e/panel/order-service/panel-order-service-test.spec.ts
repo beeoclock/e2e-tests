@@ -11,10 +11,15 @@ import {OrderTabPages} from "../../../support/beeoclock/page-element/configurati
 import {
     OrderActionsEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+<<<<<<< HEAD
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {
     CalendarTableTimeEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
+=======
+import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
+import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
+>>>>>>> main
 
 describe('panel - order service', () => {
     let nextDayData = DateUtils.getCurrentDatePlusDays(0)
@@ -24,8 +29,14 @@ describe('panel - order service', () => {
 
     it('test panel  order service', function () {
         cy.intercept('GET', '**/*').as('getAll');
-        cy.visit(ServiceEnum.CLIENT_PANEL, {failOnStatusCode: false});
+        cy.visit(ServiceEnum.CLIENT_PANEL, {
+            failOnStatusCode: false,
+            onBeforeLoad: (win) => {
+                win.localStorage.setItem('language', 'pl');
+            }
+        });
         cy.wait('@getAll', {timeout: 30000});
+
 
         PanelLoginPageElement.EmailInput.getElement()
 
@@ -38,13 +49,14 @@ describe('panel - order service', () => {
         RightPanelPages.RightPanelNavigationPage
             .clickOpenRightPanel()
         RightPanelPages.RightPanelServicesPage
+            .clickAddOrderButton()
             .clickAddServiceButton()
             .clickSelectServiceButton()
-            .selectSpecificService('Strzyżenie Brody')
-            .verifySelectedService('Strzyżenie Brody', 'Samo Strzyżenie Brody')
+            .selectSpecificService(ServiceNameEnum.BREAD_TRIM)
+            .verifySelectedService(ServiceNameEnum.BREAD_TRIM, ServiceNameEnum.BREAD_TRIM_DESCRIPTION)
             .selectOrderTime('1 godz, 30 min')
             .selectPriceOfService('40')
-            .selectSpecialist('Zalewski')
+            .selectSpecialist(SpecialistNameEnum.ZALEWSKI)
             .typeOrderDate(datetimeInput)
             .typePublicNoteInput('usuń mnie')
             .clickAddButton()
@@ -52,14 +64,15 @@ describe('panel - order service', () => {
             // .verifyOrderPrice('zł40,00')TODO BUG
             .verifyOrderTime('1 godz, 30 min')
             .verifyOrderDate(dateOrderSummary)
-            .verifyOrderService('Strzyżenie Brody')
-            .verifyOrderSpecialist('Tomasz Zalewski')
+            .verifyOrderService(ServiceNameEnum.BREAD_TRIM)
+            .verifyOrderSpecialist(SpecialistNameEnum.ZALEWSKI)
             .verifyOrderCustomer('Anonimowy')
             .selectPaymentMethod('Karta')
             .selectPaymentStatus('W toku')
             .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
             .clickSaveButton()
 
+<<<<<<< HEAD
         //TODO this isn't work couse order are behind this table, need to get 'app-event-calendar-with-specialists-widget-component'
         //
         // CalendarPages.CalendarTablePage
@@ -68,8 +81,14 @@ describe('panel - order service', () => {
         OrderTabPages.OrderActionTable
             .clickActionButton()
             .clickSpecificAction(OrderActionsEnum.DELETE)
+=======
+        // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
+        // OrderTabPages.OrderActionTable
+        //     .clickActionButton()
+        //     .clickSpecificAction(OrderActionsEnum.DELETE)
+>>>>>>> main
     })
-    
+
     after('clear storage', () => {
         cy.clearAllLocalStorage()
         cy.clearAllCookies()

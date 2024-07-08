@@ -3,6 +3,12 @@ import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInter
 
 export class RightPanelServicesPage {
 
+    public clickAddOrderButton(): RightPanelServicesPage {
+        RightPanelServicesPageElement.AddOrderButton.getElement()
+            .click()
+        return this
+    }
+
     public clickAddServiceButton(): RightPanelServicesPage {
         RightPanelServicesPageElement.AddServiceButton.getElement()
             .click()

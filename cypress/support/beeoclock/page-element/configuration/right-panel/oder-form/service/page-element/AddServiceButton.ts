@@ -1,6 +1,6 @@
 export class AddServiceButton {
     public getElement(): any {
-        return cy.contains('Dodaj usługę')
+        return cy.get('app-service-order-form-container button')
             .scrollIntoView().should('be.visible')
 
     }

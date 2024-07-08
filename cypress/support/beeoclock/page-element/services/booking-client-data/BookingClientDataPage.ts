@@ -53,6 +53,12 @@ export class BookingClientDataPage {
         return this;
     }
 
+    public checkAgreement(): BookingClientDataPage {
+        BookingClientDataPageElement.Agreement0InputElement.getElement().check({ force: true })
+            .should('be.checked');
+        return this;
+    }
+
     private verifyFirstNameLabel(): BookingClientDataPage {
         BookingClientDataPageElement.FirstNameInput.getElement().parent().find('label').contains('Imię');
         return this;
