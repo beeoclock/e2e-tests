@@ -11,6 +11,8 @@ import {OrderTabPages} from "../../../support/beeoclock/page-element/configurati
 import {
     OrderActionsEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
+import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 
 describe('panel - order service', () => {
     let nextDayData = DateUtils.getCurrentDatePlusDays(0)
@@ -43,11 +45,11 @@ describe('panel - order service', () => {
             .clickAddOrderButton()
             .clickAddServiceButton()
             .clickSelectServiceButton()
-            .selectSpecificService('Strzyżenie Brody')
-            .verifySelectedService('Strzyżenie Brody', 'Samo Strzyżenie Brody')
+            .selectSpecificService(ServiceNameEnum.BREAD_TRIM)
+            .verifySelectedService(ServiceNameEnum.BREAD_TRIM, ServiceNameEnum.BREAD_TRIM_DESCRIPTION)
             .selectOrderTime('1 godz, 30 min')
             .selectPriceOfService('40')
-            .selectSpecialist('Zalewski')
+            .selectSpecialist(SpecialistNameEnum.ZALEWSKI)
             .typeOrderDate(datetimeInput)
             .typePublicNoteInput('usuń mnie')
             .clickAddButton()
@@ -55,8 +57,8 @@ describe('panel - order service', () => {
             // .verifyOrderPrice('zł40,00')TODO BUG
             .verifyOrderTime('1 godz, 30 min')
             .verifyOrderDate(dateOrderSummary)
-            .verifyOrderService('Strzyżenie Brody')
-            .verifyOrderSpecialist('Tomasz Zalewski')
+            .verifyOrderService(ServiceNameEnum.BREAD_TRIM)
+            .verifyOrderSpecialist(SpecialistNameEnum.ZALEWSKI)
             .verifyOrderCustomer('Anonimowy')
             .selectPaymentMethod('Karta')
             .selectPaymentStatus('W toku')
