@@ -11,15 +11,14 @@ import {OrderTabPages} from "../../../support/beeoclock/page-element/configurati
 import {
     OrderActionsEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
-<<<<<<< HEAD
+import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
+import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {
     CalendarTableTimeEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
-=======
-import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
-import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
->>>>>>> main
+
+
 
 describe('panel - order service', () => {
     let nextDayData = DateUtils.getCurrentDatePlusDays(0)
@@ -46,8 +45,9 @@ describe('panel - order service', () => {
 
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists')
 
-        RightPanelPages.RightPanelNavigationPage
-            .clickOpenRightPanel()
+        CalendarPages.CalendarTablePage
+            .clickOnGivenDayPlusOneHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
+            // .clickOpenRightPanel()
         RightPanelPages.RightPanelServicesPage
             .clickAddOrderButton()
             .clickAddServiceButton()
@@ -72,7 +72,7 @@ describe('panel - order service', () => {
             .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
             .clickSaveButton()
 
-<<<<<<< HEAD
+
         //TODO this isn't work couse order are behind this table, need to get 'app-event-calendar-with-specialists-widget-component'
         //
         // CalendarPages.CalendarTablePage
@@ -81,12 +81,11 @@ describe('panel - order service', () => {
         OrderTabPages.OrderActionTable
             .clickActionButton()
             .clickSpecificAction(OrderActionsEnum.DELETE)
-=======
+
         // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
         // OrderTabPages.OrderActionTable
         //     .clickActionButton()
         //     .clickSpecificAction(OrderActionsEnum.DELETE)
->>>>>>> main
     })
 
     after('clear storage', () => {
