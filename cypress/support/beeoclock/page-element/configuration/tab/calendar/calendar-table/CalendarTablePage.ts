@@ -31,7 +31,9 @@ export class CalendarTablePage {
 
     clickOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
-            .click({force: true})
+            .click({force: true}).then(() => {
+                cy.get('whac-a-mole-container').should('be.visible')
+        })
         return this;
     }
 

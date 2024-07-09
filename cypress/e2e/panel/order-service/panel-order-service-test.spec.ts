@@ -26,6 +26,7 @@ describe('panel - order service', () => {
     const datetimeInput = DateUtils.convertDateToDatetimeInput(nextDayData, timeString);
     const dateOrderSummary: string = DateUtils.convertDatetimeToCustomFormat(datetimeInput)
     let dataAssert = nextDayData + '18:00'
+    let dataAssertValue= "18:00 - 19:30    Strzyżenie Brody   📓 usuń mnie"
 
     it('test panel  order service', function () {
         cy.intercept('GET', '**/*').as('getAll');
@@ -57,7 +58,7 @@ describe('panel - order service', () => {
             .verifySelectedService(ServiceNameEnum.BREAD_TRIM, ServiceNameEnum.BREAD_TRIM_DESCRIPTION)
             .selectOrderTime('1 godz, 30 min')
             .selectPriceOfService('40')
-            .selectSpecialist('Zalewski')
+            .selectSpecialist(SpecialistNameEnum.ZALEWSKI_LAST_NAME)
             // .typeOrderDate(datetimeInput)
             .typePublicNoteInput('usuń mnie')
             .clickAddButton()
@@ -74,8 +75,9 @@ describe('panel - order service', () => {
             .clickSaveButton()
 
         CalendarPages.CalendarTablePage
-            .findAndVerifyOrderTableElement('Tomasz', 'Zalewski')
-            .verifyTimeOrderOnTable('Tomasz', 'Zalewski', "18:00 - 19:30    Strzyżenie Brody   📓 usuń mnie")
+            .findAndVerifyOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
+            .verifyTimeOrderOnTable(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME, dataAssertValue)
+            .clickOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
 
         //TODO this isn't work couse order are behind this table, need to get 'app-event-calendar-with-specialists-widget-component'
         //
