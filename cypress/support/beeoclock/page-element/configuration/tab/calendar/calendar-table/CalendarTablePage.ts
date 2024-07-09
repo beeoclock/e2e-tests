@@ -12,4 +12,27 @@ export class CalendarTablePage {
             .click()
         return this;
     }
+
+    findAndVerifyOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
+        CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName).should('exist')
+        return this;
+    }
+
+    verifyTimeOrderOnTable(specialistFirstName: string, specialistLastName: string, value: string): CalendarTablePage {
+        CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
+            .invoke('prop', 'textContent')
+            .then((text) => {
+                const normalizedText = text.replace(/\s/g, '');
+                const normalizedPrice = value.replace(/\s/g, '');
+                expect(normalizedText).to.include(normalizedPrice);
+            });
+        return this;
+    }
+
+    clickOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
+        CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
+            .click({force: true})
+        return this;
+    }
+
 }

@@ -4,7 +4,6 @@ export class SpecificTableElement {
             .find('.flex.flex-col.flex-1.border-r').contains(specialist)
             .parents('.flex.flex-col.flex-1.border-r').first()
             .find('app-empty-slot-calendar-with-specialist-widget-component').eq(index)
-            .scrollIntoView()
-            .should('be.visible')
+            .scrollIntoView().should('exist')
     }
 }

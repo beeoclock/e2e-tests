@@ -83,6 +83,12 @@ export class DateUtils {
         return moment(currentDate).format("DD.MM.YYYY");
     }
 
+    public static getCurrentDateWithGivenFormat(format: string): string {
+        let currentDate = new Date();
+        currentDate.setDate(currentDate.getDate());
+        return moment(currentDate).format(format);
+    }
+
     public static convertDateToDatetimeInput(dateString, timeString) {
 
         const [day, month, year] = dateString.split('.');

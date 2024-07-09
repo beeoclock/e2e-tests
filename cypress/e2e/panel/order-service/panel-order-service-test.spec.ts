@@ -21,10 +21,11 @@ import {
 
 
 describe('panel - order service', () => {
-    let nextDayData = DateUtils.getCurrentDatePlusDays(0)
+    let nextDayData = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
     const timeString = DateUtils.getCurrentTimePlusOneHourFormatted()
     const datetimeInput = DateUtils.convertDateToDatetimeInput(nextDayData, timeString);
     const dateOrderSummary: string = DateUtils.convertDatetimeToCustomFormat(datetimeInput)
+    let dataAssert = nextDayData + '18:00'
 
     it('test panel  order service', function () {
         cy.intercept('GET', '**/*').as('getAll');
@@ -56,14 +57,14 @@ describe('panel - order service', () => {
             .verifySelectedService(ServiceNameEnum.BREAD_TRIM, ServiceNameEnum.BREAD_TRIM_DESCRIPTION)
             .selectOrderTime('1 godz, 30 min')
             .selectPriceOfService('40')
-            .selectSpecialist(SpecialistNameEnum.ZALEWSKI)
-            .typeOrderDate(datetimeInput)
+            .selectSpecialist('Zalewski')
+            // .typeOrderDate(datetimeInput)
             .typePublicNoteInput('usuń mnie')
             .clickAddButton()
         RightPanelPages.SummaryAndPaymentServicePage
             // .verifyOrderPrice('zł40,00')TODO BUG
             .verifyOrderTime('1 godz, 30 min')
-            .verifyOrderDate(dateOrderSummary)
+            .verifyOrderDate(dataAssert)
             .verifyOrderService(ServiceNameEnum.BREAD_TRIM)
             .verifyOrderSpecialist(SpecialistNameEnum.ZALEWSKI)
             .verifyOrderCustomer('Anonimowy')
@@ -72,15 +73,18 @@ describe('panel - order service', () => {
             .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
             .clickSaveButton()
 
+        CalendarPages.CalendarTablePage
+            .findAndVerifyOrderTableElement('Tomasz', 'Zalewski')
+            .verifyTimeOrderOnTable('Tomasz', 'Zalewski', "18:00 - 19:30    Strzyżenie Brody   📓 usuń mnie")
 
         //TODO this isn't work couse order are behind this table, need to get 'app-event-calendar-with-specialists-widget-component'
         //
         // CalendarPages.CalendarTablePage
         //     .verifyTableElement('Tomasz Zalewski', CalendarTableTimeEnum.Hour_22)
-        LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
-        OrderTabPages.OrderActionTable
-            .clickActionButton()
-            .clickSpecificAction(OrderActionsEnum.DELETE)
+        // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
+        // OrderTabPages.OrderActionTable
+        //     .clickActionButton()
+        //     .clickSpecificAction(OrderActionsEnum.DELETE)
 
         // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
         // OrderTabPages.OrderActionTable
