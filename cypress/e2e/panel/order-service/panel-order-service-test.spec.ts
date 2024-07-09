@@ -5,12 +5,6 @@ import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/Clien
 import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
-import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
-import {
-    OrderActionsEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
@@ -19,14 +13,13 @@ import {
 } from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 
 
-
 describe('panel - order service', () => {
     let nextDayData = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
     const timeString = DateUtils.getCurrentTimePlusOneHourFormatted()
     const datetimeInput = DateUtils.convertDateToDatetimeInput(nextDayData, timeString);
     const dateOrderSummary: string = DateUtils.convertDatetimeToCustomFormat(datetimeInput)
     let dataAssert = nextDayData + '18:00'
-    let dataAssertValue= "18:00 - 19:30    Strzyżenie Brody   📓 usuń mnie"
+    let dataAssertValue = "18:00 - 19:30    Strzyżenie Brody   📓 usuń mnie"
 
     it('test panel  order service', function () {
         cy.intercept('GET', '**/*').as('getAll');
@@ -38,18 +31,18 @@ describe('panel - order service', () => {
         });
         cy.wait('@getAll', {timeout: 30000});
 
-
+        cy.log('login')
         PanelLoginPageElement.EmailInput.getElement()
-
         PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN)
         PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD)
         PanelLoginPage.clickLoginButton()
 
+        cy.log('assert login url')
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists')
 
+        cy.log('add order on calendar panel')
         CalendarPages.CalendarTablePage
             .clickOnGivenDayPlusOneHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
-            // .clickOpenRightPanel()
         RightPanelPages.RightPanelServicesPage
             .clickAddOrderButton()
             .clickAddServiceButton()
@@ -59,7 +52,6 @@ describe('panel - order service', () => {
             .selectOrderTime('1 godz, 30 min')
             .selectPriceOfService('40')
             .selectSpecialist(SpecialistNameEnum.ZALEWSKI_LAST_NAME)
-            // .typeOrderDate(datetimeInput)
             .typePublicNoteInput('usuń mnie')
             .clickAddButton()
         RightPanelPages.SummaryAndPaymentServicePage
@@ -74,24 +66,17 @@ describe('panel - order service', () => {
             .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
             .clickSaveButton()
 
+        cy.log('verify its order on table')
         CalendarPages.CalendarTablePage
             .findAndVerifyOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
             .verifyTimeOrderOnTable(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME, dataAssertValue)
+
+        cy.log('click, delete and verify deletion on table')
+        CalendarPages.CalendarTablePage
             .clickOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
 
-        //TODO this isn't work couse order are behind this table, need to get 'app-event-calendar-with-specialists-widget-component'
-        //
-        // CalendarPages.CalendarTablePage
-        //     .verifyTableElement('Tomasz Zalewski', CalendarTableTimeEnum.Hour_22)
-        // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
-        // OrderTabPages.OrderActionTable
-        //     .clickActionButton()
-        //     .clickSpecificAction(OrderActionsEnum.DELETE)
-
-        // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER)
-        // OrderTabPages.OrderActionTable
-        //     .clickActionButton()
-        //     .clickSpecificAction(OrderActionsEnum.DELETE)
+        //TODO
+        cy.log('create next order')
     })
 
     after('clear storage', () => {

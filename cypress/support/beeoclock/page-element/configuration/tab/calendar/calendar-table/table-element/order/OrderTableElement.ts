@@ -1,4 +1,4 @@
- export class OrderTableElement {
+export class OrderTableElement {
     public getElement(specialistFirstName: string, specialistLastName: string): any {
         return cy.get('app-calendar-with-specialists-widget-component')
             .find('app-event-calendar-with-specialists-widget-component')

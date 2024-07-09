@@ -13,12 +13,12 @@ export class CalendarTablePage {
         return this;
     }
 
-    findAndVerifyOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
+    public findAndVerifyOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName).should('exist')
         return this;
     }
 
-    verifyTimeOrderOnTable(specialistFirstName: string, specialistLastName: string, value: string): CalendarTablePage {
+    public verifyTimeOrderOnTable(specialistFirstName: string, specialistLastName: string, value: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
             .invoke('prop', 'textContent')
             .then((text) => {
@@ -29,10 +29,10 @@ export class CalendarTablePage {
         return this;
     }
 
-    clickOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
+    public clickOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
             .click({force: true}).then(() => {
-                cy.get('whac-a-mole-container').should('be.visible')
+            cy.get('whac-a-mole-container').should('be.visible')
         })
         return this;
     }

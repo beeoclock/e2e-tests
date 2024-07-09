@@ -1,5 +1,4 @@
 import {SummaryAndPaymentServicePageElement} from "./SummaryAndPaymentServicePageElement";
-import {BusinessNoteInputElement} from "./payment/BusinessNoteInputElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 
 export class SummaryAndPaymentServicePage {
@@ -67,8 +66,8 @@ export class SummaryAndPaymentServicePage {
     public selectPaymentMethod(method: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.PaymentMethodSelector.getElement()
             .click().then(() => {
-                SummaryAndPaymentServicePageElement.SelectPaymentMethodElement.getElement(method)
-                    .click()
+            SummaryAndPaymentServicePageElement.SelectPaymentMethodElement.getElement(method)
+                .click()
         })
         return this;
     }
@@ -76,8 +75,8 @@ export class SummaryAndPaymentServicePage {
     public selectPaymentStatus(status: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.PaymentStatusSelector.getElement()
             .click().then(() => {
-                SummaryAndPaymentServicePageElement.SelectPaymentStatusElement.getElement(status)
-                    .click()
+            SummaryAndPaymentServicePageElement.SelectPaymentStatusElement.getElement(status)
+                .click()
         })
         return this;
     }
