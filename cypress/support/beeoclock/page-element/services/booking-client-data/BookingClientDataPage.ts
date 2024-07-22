@@ -29,14 +29,16 @@ export class BookingClientDataPage {
     }
 
     public typePhoneNumber(phoneNumber: string): BookingClientDataPage {
-        this.verifyPhoneNumberLabel()
+        this.verifyPhonePrefix("Poland +48")
         BookingClientDataPageElement.PhoneInput.getElement()
             .clear()
             .type(phoneNumber).then(() => {
             BookingClientDataPageElement.PhoneInput.getElement().invoke('prop', 'value').then(value => {
-                expect(value).to.equals(phoneNumber)
-            })
-        })
+                const trimmedValue = value.replace(/\D/g, '');
+                const trimmedPhoneNumber = phoneNumber.replace(/\D/g, '');
+                expect(trimmedValue).to.equals(trimmedPhoneNumber);
+            });
+        });
         return this;
     }
 
@@ -70,7 +72,7 @@ export class BookingClientDataPage {
     }
 
     private verifyPhoneNumberLabel(): BookingClientDataPage {
-        BookingClientDataPageElement.PhoneInput.getElement().parent().find('label').contains('Telefon');
+        BookingClientDataPageElement.PhoneInput.getElement().parents('label').first().contains('Telefon');
         return this;
     }
 
@@ -129,6 +131,11 @@ export class BookingClientDataPage {
         return this;
     }
 
+    public verifyPhonePrefix(prefix: string): BookingClientDataPage {
+        BookingClientDataPageElement.PhonePrefixElement.getElement()
+            .should('have.prop', 'textContent').and('include', prefix)
+        return this;
+    }
     public verifySelectServicesHeader(): BookingClientDataPage {
         cy.contains('div', 'Zamówione usługi').should('be.visible')
         return this;

@@ -1,6 +1,7 @@
 import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages"
 import {CompanyEnum} from "../../support/beeoclock/page-element/services/enum/CompanyEnum";
 import {ServiceEnum} from "../../support/beeoclock/common/enum/ServiceEnum";
+import {BusinessNameEnum} from "../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 
 describe('order next service', () => {
 
@@ -74,7 +75,7 @@ describe('order next service', () => {
                 .saveButton()
 
             ServicesPages.OrderSummaryPage
-                .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
+                .verifyOrderSummaryValue("Nazwa firmy", BusinessNameEnum.HAIRCUT_AND_BARBER)
                 .verifyOrderSummaryValue("Adres", address)
                 .verifyOrderSummaryValue("Komentarz", item.comment)
             ServicesPages.BookingClientDataPage
@@ -97,7 +98,7 @@ describe('order next service', () => {
             ServicesPages.OrderCancellationPage
                 .verifyCancelInformation()
             ServicesPages.OrderSummaryPage
-                .verifyOrderSummaryValue("Nazwa firmy", item.companyName)
+                .verifyOrderSummaryValue("Nazwa firmy", BusinessNameEnum.HAIRCUT_AND_BARBER)
                 .verifyOrderSummaryValue("Adres", address)
                 .verifyOrderSummaryValue("Komentarz", item.comment)
             ServicesPages.BookingClientDataPage

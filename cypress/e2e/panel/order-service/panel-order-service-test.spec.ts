@@ -11,6 +11,7 @@ import {CalendarPages} from "../../../support/beeoclock/page-element/configurati
 import {
     CalendarTableTimeEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
+import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 
 
 describe('panel - order service', () => {
@@ -36,6 +37,7 @@ describe('panel - order service', () => {
         PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN)
         PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD)
         PanelLoginPage.clickLoginButton()
+        PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER)
 
         cy.log('assert login url')
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists')

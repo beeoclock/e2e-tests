@@ -19,4 +19,10 @@ export class PanelLoginPage {
             .click()
         return this;
     }
+
+    public static selectGivenBusiness(business: string): PanelLoginPage {
+        PanelLoginPageElement.SelectBusinessOption.getElement(business)
+            .click()
+        return this;
+    }
 }
