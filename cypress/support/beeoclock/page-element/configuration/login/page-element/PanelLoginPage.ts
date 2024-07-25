@@ -1,4 +1,5 @@
 import {PanelLoginPageElement} from "../PanelLoginPageElement";
+import {ApiInterceptionHelper} from "../../../../common/Interception/ApiInterceptionHelper";
 
 export class PanelLoginPage {
 
@@ -21,8 +22,14 @@ export class PanelLoginPage {
     }
 
     public static selectGivenBusiness(business: string): PanelLoginPage {
+        const getBusinessProfile = ApiInterceptionHelper.getBusinessProfile()
         PanelLoginPageElement.SelectBusinessOption.getElement(business)
             .click()
+        cy.wait('@' + getBusinessProfile).then((interception) => {
+            const authorizationHeader = interception.request.headers['authorization'];
+            const token = (authorizationHeader as string).split(' ')[1];
+            cy.wrap(token).as('token');
+        });
         return this;
     }
 }

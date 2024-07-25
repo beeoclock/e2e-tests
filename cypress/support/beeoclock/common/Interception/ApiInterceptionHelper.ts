@@ -11,6 +11,12 @@ export class ApiInterceptionHelper {
         cy.wait('@' + alias).its('response.statusCode').should('eq', 201);
     }
 
+    public static getBusinessProfile(): string {
+        const getBusinessProfile = 'getBusinessProfile' + DateUtils.getCurrentTime();
+        cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/business-profile').as(getBusinessProfile);
+        return getBusinessProfile
+    }
+
     public static getService(): string {
         const alias = 'getAdditionalFields' + DateUtils.getCurrentTime();
         cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/service/paged?*').as(alias);

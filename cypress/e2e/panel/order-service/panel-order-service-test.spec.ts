@@ -16,9 +16,6 @@ import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuratio
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
 import {
-    OrderActionTable
-} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/OrderActionTable";
-import {
     OrderActionsEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 
