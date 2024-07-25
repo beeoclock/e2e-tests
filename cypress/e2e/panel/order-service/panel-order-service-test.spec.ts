@@ -45,6 +45,9 @@ describe('panel - order service', () => {
         PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD)
         PanelLoginPage.clickLoginButton()
         PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER)
+        // specify('delete orders', function () {
+        //
+        // })TODO add api loop to delete order
 
         cy.log('assert login url')
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists')
