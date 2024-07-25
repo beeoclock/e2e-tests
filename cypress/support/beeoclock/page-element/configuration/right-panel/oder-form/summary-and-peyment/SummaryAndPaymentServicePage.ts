@@ -88,11 +88,15 @@ export class SummaryAndPaymentServicePage {
     }
 
     public clickSaveButton(): SummaryAndPaymentServicePage {
-        const createService = ApiInterceptionHelper.createService()
+        const createOrder = ApiInterceptionHelper.createOrder()
         const createPayment = ApiInterceptionHelper.createServicePayment()
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
-        ApiInterceptionHelper.waitFor201Alias(createService)
+        cy.wait('@' + createOrder).then((interception) => {
+            const responseBody = interception.response.body;
+            const orderId = responseBody._id;
+            cy.wrap(orderId).as('orderId');
+        })
         ApiInterceptionHelper.waitFor201Alias(createPayment)
         return this;
     }

@@ -23,16 +23,16 @@ export class ApiInterceptionHelper {
         return createPayment
     }
 
-    public static createService(): string {
-        const createService = 'createService' + DateUtils.getCurrentTime();
-        cy.intercept('POST', EntryPointEnum.API_ENTRY_POINT + '/order').as(createService);
-        return createService
+    public static createOrder(): string {
+        const createOrder = 'createOrder' + DateUtils.getCurrentTime();
+        cy.intercept('POST', EntryPointEnum.API_ENTRY_POINT + '/order').as(createOrder);
+        return createOrder
     }
 
-    public static getServices(): string {
-        const getServices = 'getService' + DateUtils.getCurrentTime();
-        cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/order/paged?*').as(getServices);
-        return getServices
+    public static getOrder(): string {
+        const getOrder = 'getOrder' + DateUtils.getCurrentTime();
+        cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/order/paged?*').as(getOrder);
+        return getOrder
     }
 
     public static deleteServices(): string {

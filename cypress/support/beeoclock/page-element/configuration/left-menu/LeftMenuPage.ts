@@ -5,7 +5,7 @@ import {TabNameEnum} from "./enum/TabNameEnum";
 export class LeftMenuPage {
 
     public static clickOnGivenTab(tab: string): LeftMenuPage {
-        const getOrder = ApiInterceptionHelper.getServices()
+        const getOrder = ApiInterceptionHelper.getOrder()
         LeftMenuPageElement.TabElement.getElement(tab)
             .click()
         if (tab == TabNameEnum.ORDER) {

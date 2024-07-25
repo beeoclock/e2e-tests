@@ -12,6 +12,15 @@ import {
     CalendarTableTimeEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
+import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
+import {
+    OrderActionTable
+} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/OrderActionTable";
+import {
+    OrderActionsEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 
 
 describe('panel - order service', () => {
@@ -21,6 +30,7 @@ describe('panel - order service', () => {
     const dateOrderSummary: string = DateUtils.convertDatetimeToCustomFormat(datetimeInput)
     let dataAssert = nextDayData + '18:00'
     let dataAssertValue = "18:00 - 19:30    Strzyżenie Brody   📓 usuń mnie"
+    let orderId: string;
 
     it('test panel  order service', function () {
         cy.intercept('GET', '**/*').as('getAll');
@@ -68,21 +78,37 @@ describe('panel - order service', () => {
             .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
             .clickSaveButton()
 
-        cy.log('verify its order on table')
-        CalendarPages.CalendarTablePage
-            .findAndVerifyOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
-            .verifyTimeOrderOnTable(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME, dataAssertValue)
+        cy.get('@orderId').then((orderId) => {
+            cy.log('Order ID is: ' + orderId);
+            let oderID: string = orderId.toString()
 
-        cy.log('click, delete and verify deletion on table')
-        CalendarPages.CalendarTablePage
-            .clickOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
+            cy.log('verify its order on table');
+            CalendarPages.CalendarTablePage
+                .findAndVerifyOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
+                .verifyTimeOrderOnTable(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME, dataAssertValue);
 
-        //TODO
-        cy.log('create next order')
-    })
+            cy.log('click, delete and verify deletion on table');
+            CalendarPages.CalendarTablePage
+                .clickOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME);
+            LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+            OrderTabPages.OrderActionTable
+                .clickActionButton(oderID)
+                .clickSpecificAction(OrderActionsEnum.DELETE)
+                .verifyOrderWithGivenIdNotExist(oderID)
+
+            // // Verify the order deletion
+            // CalendarPages.CalendarTablePage
+            //     .verifyOrderNotPresent(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME);
+
+            cy.log('create next order');
+        });
+
+
+    });
 
     after('clear storage', () => {
-        cy.clearAllLocalStorage()
-        cy.clearAllCookies()
-    })
-})
+        cy.clearAllLocalStorage();
+        cy.clearAllCookies();
+    });
+
+});
