@@ -48,11 +48,15 @@ describe('panel - order service', () => {
         // specify('delete orders', function () {
         //
         // })TODO add api loop to delete order
+        cy.get('@token').then(token => {
+            cy.log('token: ' + token)
+        })
 
         cy.log('assert login url')
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists')
 
         cy.log('add order on calendar panel')
+        cy.log('CASE - 1')
         CalendarPages.CalendarTablePage
             .clickOnGivenDayPlusOneHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
         RightPanelPages.RightPanelServicesPage

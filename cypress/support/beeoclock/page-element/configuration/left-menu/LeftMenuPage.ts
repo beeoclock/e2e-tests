@@ -6,10 +6,15 @@ export class LeftMenuPage {
 
     public static clickOnGivenTab(tab: string): LeftMenuPage {
         const getOrder = ApiInterceptionHelper.getOrder()
+        const getAbsence = ApiInterceptionHelper.getAbsence()
         LeftMenuPageElement.TabElement.getElement(tab)
             .click()
         if (tab == TabNameEnum.ORDER) {
             ApiInterceptionHelper.waitForAlias(getOrder)
+        }
+        if (tab == TabNameEnum.CALENDAR) {
+            ApiInterceptionHelper.waitForAlias(getOrder)
+            ApiInterceptionHelper.waitForAlias(getAbsence)
         }
         return this;
     }
