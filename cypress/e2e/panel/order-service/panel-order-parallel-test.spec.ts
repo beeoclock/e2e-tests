@@ -28,7 +28,7 @@ describe('panel - order service', () => {
         const testCases = [
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2,
-            // TestCaseEnum.CASE_3,
+            TestCaseEnum.CASE_3,
             // TestCaseEnum.CASE_4
         ];
 
