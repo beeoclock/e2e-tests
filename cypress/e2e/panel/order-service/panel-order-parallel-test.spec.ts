@@ -29,7 +29,7 @@ describe('panel - order service', () => {
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2,
             TestCaseEnum.CASE_3,
-            // TestCaseEnum.CASE_4
+            TestCaseEnum.CASE_4
         ];
 
         cy.intercept('GET', '**/*').as('getAll');
