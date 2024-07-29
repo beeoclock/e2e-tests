@@ -4,7 +4,6 @@ import {PanelLoginPage} from "../../../support/beeoclock/page-element/configurat
 import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
 import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
@@ -18,11 +17,6 @@ import {PanelOrderCreationDataProvider} from "../../../fixtures/panel/order/Pane
 
 
 describe('panel - order service', () => {
-    let nextDayData = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
-    const timeString = DateUtils.getCurrentTimePlusOneHourFormatted()
-    const datetimeInput = DateUtils.convertDateToDatetimeInput(nextDayData, timeString);
-    const dateOrderSummary: string = DateUtils.convertDatetimeToCustomFormat(datetimeInput)
-    let orderId: string;
 
     it('test panel order service', function () {
         const testCases = [
@@ -39,7 +33,7 @@ describe('panel - order service', () => {
                 win.localStorage.setItem('language', 'pl');
             }
         });
-        cy.wait('@getAll', { timeout: 30000 });
+        cy.wait('@getAll', {timeout: 30000});
 
         cy.log('login')
         PanelLoginPageElement.EmailInput.getElement()
@@ -56,7 +50,7 @@ describe('panel - order service', () => {
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists')
 
         testCases.forEach(testCase => {
-           const testData = PanelOrderCreationDataProvider.getTestData(testCase);
+            const testData = PanelOrderCreationDataProvider.getTestData(testCase);
 
             cy.log(`add order on calendar panel for ${testCase}`)
             CalendarPages.CalendarTablePage
@@ -73,7 +67,7 @@ describe('panel - order service', () => {
                 .typePublicNoteInput(testData.publicNote)
                 .clickAddButton()
 
-                cy.log('testdata duration')
+            cy.log('testdata duration')
             RightPanelPages.SummaryAndPaymentServicePage
                 .verifyOrderTime(testData.duration)
 

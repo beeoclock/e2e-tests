@@ -15,7 +15,7 @@ import {
 
 export class PanelOrderCreationDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {
-        let Data = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
+        let Data: string = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
 
         switch (caseEnum) {
             case TestCaseEnum.CASE_1:
