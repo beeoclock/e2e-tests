@@ -7,7 +7,7 @@ export class CalendarTablePage {
         return this;
     }
 
-    public clickOnGivenDayPlusOneHour(specialist: string, index: number): CalendarTablePage {
+    public clickOnGivenAndHour(specialist: string, index: number): CalendarTablePage {
         CalendarTablePageElement.SpecificTableElement.getElement(specialist, index)
             .click()
         return this;

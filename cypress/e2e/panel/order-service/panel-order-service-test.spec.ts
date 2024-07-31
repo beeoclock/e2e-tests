@@ -58,7 +58,7 @@ describe('panel - order service', () => {
         cy.log('add order on calendar panel')
         cy.log('CASE - 1')
         CalendarPages.CalendarTablePage
-            .clickOnGivenDayPlusOneHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
+            .clickOnGivenAndHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
         RightPanelPages.RightPanelServicesPage
             .clickAddOrderButton()
             .clickAddServiceButton()

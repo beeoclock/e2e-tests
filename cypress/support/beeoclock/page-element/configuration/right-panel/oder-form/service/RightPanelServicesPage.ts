@@ -29,18 +29,25 @@ export class RightPanelServicesPage {
         return this;
     }
 
-    public verifySelectedService(service: string, serviceDescription?: string): RightPanelServicesPage {
+    public verifySelectedService(service: string): RightPanelServicesPage {
         RightPanelServicesPageElement.SelectedServiceElement.getElement()
-            .should('have.prop', 'innerText').and('include', service + '\n' + serviceDescription)
+            .should('have.prop', 'innerText').and('include', service + '\n' + 'PL')
         return this;
     }
 
-    public selectOrderTime(time: string): RightPanelServicesPage {
-        RightPanelServicesPageElement.SelectTimeArrow.getElement()
+    public selectOrderTime(hour: string, minute: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectTimeButton.getElement()
             .click().then(() => {
-            RightPanelServicesPageElement.SelectSpecificTime.getElement(time)
+            if (hour) {
+                RightPanelServicesPageElement.SelectSpecificHour.getElement(hour)
+                    .click().then((): void => {
+                    RightPanelServicesPageElement.SelectSpecificMinute.getElement(minute)
+                })
+            }
+            RightPanelServicesPageElement.SelectSpecificMinute.getElement(minute)
                 .click()
         })
+        RightPanelServicesPageElement.SubmitButton.getElement().click()
         return this;
     }
 

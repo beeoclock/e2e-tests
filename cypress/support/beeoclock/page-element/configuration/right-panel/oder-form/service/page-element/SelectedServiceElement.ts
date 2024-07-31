@@ -1,6 +1,6 @@
 export class SelectedServiceElement {
     public getElement(): any {
-        return cy.get('.flex-1.flex.flex-col.gap-2')
+        return cy.get('app-item-list-v2-service-form-order-component')
             .scrollIntoView().should('be.visible')
 
     }

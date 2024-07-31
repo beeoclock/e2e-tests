@@ -28,7 +28,7 @@ describe('panel - order service', () => {
 
         cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {
-            failOnStatusCode: false,
+            retryOnStatusCodeFailure: true,
             onBeforeLoad: (win) => {
                 win.localStorage.setItem('language', 'pl');
             }
@@ -54,14 +54,14 @@ describe('panel - order service', () => {
 
             cy.log(`add order on calendar panel for ${testCase}`)
             CalendarPages.CalendarTablePage
-                .clickOnGivenDayPlusOneHour(testData.specialist, testData.time)
+                .clickOnGivenAndHour(testData.specialist, testData.time)
             RightPanelPages.RightPanelServicesPage
                 .clickAddOrderButton()
                 .clickAddServiceButton()
-              // .clickSelectServiceButton()
-            .selectSpecificService(testData.service)
-              .verifySelectedService(testData.service, testData.serviceDescription)
-             .selectOrderTime(testData.duration)
+                // .clickSelectServiceButton()
+                .selectSpecificService(testData.service)
+                .verifySelectedService(testData.service)
+                .selectOrderTime(testData.hour, testData.minute)
             /* .selectPriceOfService(testData.price)
              .selectSpecialist(testData.specialistLastName)
              .typePublicNoteInput(testData.publicNote)
