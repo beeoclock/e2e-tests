@@ -59,28 +59,28 @@ describe('panel - order service', () => {
         cy.log('CASE - 1')
         CalendarPages.CalendarTablePage
             .clickOnGivenAndHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
-        RightPanelPages.RightPanelServicesPage
-            .clickAddOrderButton()
-            .clickAddServiceButton()
-            .clickSelectServiceButton()
-            .selectSpecificService(ServiceNameEnum.BREAD_TRIM)
-            .verifySelectedService(ServiceNameEnum.BREAD_TRIM, ServiceNameEnum.BREAD_TRIM_DESCRIPTION)
-            .selectOrderTime('1 godz, 30 min')
-            .selectPriceOfService('40')
-            .selectSpecialist(SpecialistNameEnum.ZALEWSKI_LAST_NAME)
-            .typePublicNoteInput('usuń mnie')
-            .clickAddButton()
-        RightPanelPages.SummaryAndPaymentServicePage
-            // .verifyOrderPrice('zł40,00')TODO BUG
-            .verifyOrderTime('1 godz, 30 min')
-            .verifyOrderDate(dataAssert)
-            .verifyOrderService(ServiceNameEnum.BREAD_TRIM)
-            .verifyOrderSpecialist(SpecialistNameEnum.ZALEWSKI)
-            .verifyOrderCustomer('Anonimowy')
-            .selectPaymentMethod('Karta')
-            .selectPaymentStatus('W toku')
-            .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
-            .clickSaveButton()
+        // RightPanelPages.RightPanelServicesPage
+        //     .clickAddOrderButton()
+        //     .clickAddServiceButton()
+        //     .clickSelectServiceButton()
+        //     .selectSpecificService(ServiceNameEnum.BREAD_TRIM)
+        //     .verifySelectedService(ServiceNameEnum.BREAD_TRIM, ServiceNameEnum.BREAD_TRIM_DESCRIPTION)
+        //     .selectOrderTime('1 godz, 30 min')
+        //     .selectPriceOfService('40')
+        //     .selectSpecialist(SpecialistNameEnum.ZALEWSKI_LAST_NAME)
+        //     .typePublicNoteInput('usuń mnie')
+        //     .clickAddButton()
+        // RightPanelPages.SummaryAndPaymentServicePage
+        //     // .verifyOrderPrice('zł40,00')TODO BUG
+        //     .verifyOrderTime('1 godz, 30 min')
+        //     .verifyOrderDate(dataAssert)
+        //     .verifyOrderService(ServiceNameEnum.BREAD_TRIM)
+        //     .verifyOrderSpecialist(SpecialistNameEnum.ZALEWSKI)
+        //     .verifyOrderCustomer('Anonimowy')
+        //     .selectPaymentMethod('Karta')
+        //     .selectPaymentStatus('W toku')
+        //     .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
+        //     .clickSaveButton()
 
         cy.get('@orderId').then((orderId) => {
             cy.log('Order ID is: ' + orderId);

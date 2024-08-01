@@ -26,7 +26,7 @@ export class PanelOrderCreationDataProvider {
                     specialistLastName: SpecialistNameEnum.ZALEWSKI_LAST_NAME,
                     specialistFirstName: SpecialistNameEnum.ZALEWSKI_FIRST_NAME,
                     time: CalendarTableTimeEnum.Hour_18,
-                    hour: '01',
+                    hour: 0,
                     minute: '00',
                     duration: '1 godz, 30 min',
                     price: '40',

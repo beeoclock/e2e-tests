@@ -1,5 +1,6 @@
 import {RightPanelServicesPageElement} from "./RightPanelServicesPageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
+import type = Mocha.utils.type;
 
 export class RightPanelServicesPage {
 
@@ -35,21 +36,35 @@ export class RightPanelServicesPage {
         return this;
     }
 
-    public selectOrderTime(hour: string, minute: string): RightPanelServicesPage {
-        RightPanelServicesPageElement.SelectTimeButton.getElement()
-            .click().then(() => {
-            if (hour) {
-                RightPanelServicesPageElement.SelectSpecificHour.getElement(hour)
-                    .click().then((): void => {
-                    RightPanelServicesPageElement.SelectSpecificMinute.getElement(minute)
-                })
-            }
-            RightPanelServicesPageElement.SelectSpecificMinute.getElement(minute)
-                .click()
-        })
-        RightPanelServicesPageElement.SubmitButton.getElement().click()
+    public selectHour(hour: string): RightPanelServicesPage {
+        // Click the time button to open the dropdown
+        RightPanelServicesPageElement.SelectTimeButton.getElement().click();
+        cy.wait(1000); // Wait for the dropdown to appear
+        cy.wait(500);
+
+        // Alias the element
+        cy.log('click on hour == ' + hour )
+        RightPanelServicesPageElement.SelectSpecificHour.getElement(hour).click()
+
         return this;
     }
+
+
+    // public selectOrderTime(hour: number, minute: string): RightPanelServicesPage {
+    //     RightPanelServicesPageElement.SelectTimeButton.getElement()
+    //         .click().then(() => {
+    //         if (hour) {
+    //             RightPanelServicesPageElement.SelectSpecificHour.getElement()
+    //                 .click().then((): void => {
+    //                 RightPanelServicesPageElement.SelectSpecificMinute.getElement(minute)
+    //             })
+    //         }
+    //         RightPanelServicesPageElement.SelectSpecificMinute.getElement(minute)
+    //             .click()
+    //     })
+    //     RightPanelServicesPageElement.SubmitButton.getElement().click()
+    //     return this;
+    // }
 
     public selectPriceOfService(price: string): RightPanelServicesPage {
         RightPanelServicesPageElement.OrderPriceInput.getElement()
