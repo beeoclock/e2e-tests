@@ -14,6 +14,7 @@ module.exports = defineConfig({
     experimentalRunAllSpecs: true,
     pageLoadTimeout: 20000,
     requestTimeout: 10000,
-    chromeWebSecurity: false
+    chromeWebSecurity: false,
+    includeShadowDom: true
   },
 })

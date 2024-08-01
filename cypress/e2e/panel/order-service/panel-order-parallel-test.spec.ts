@@ -112,8 +112,8 @@ describe('panel - order service', () => {
         });
     });
 
-    after('clear storage', () => {
-        cy.clearAllLocalStorage();
-        cy.clearAllCookies();
-    });
+    // after('clear storage', () => {
+    //     cy.clearAllLocalStorage();
+    //     cy.clearAllCookies();
+    // });
 });

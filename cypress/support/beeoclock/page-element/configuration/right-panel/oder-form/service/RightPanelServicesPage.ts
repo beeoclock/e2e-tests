@@ -38,14 +38,15 @@ export class RightPanelServicesPage {
 
     public selectHour(hour: string): RightPanelServicesPage {
         // Click the time button to open the dropdown
+        cy.wait(500);
         RightPanelServicesPageElement.SelectTimeButton.getElement().click();
         cy.wait(1000); // Wait for the dropdown to appear
-        cy.wait(500);
+
 
         // Alias the element
-        cy.log('click on hour == ' + hour )
+        cy.log('click on hour == ' + hour)
         RightPanelServicesPageElement.SelectSpecificHour.getElement(hour).click()
-
+        RightPanelServicesPageElement.SubmitButton.getElement().click()
         return this;
     }
 
