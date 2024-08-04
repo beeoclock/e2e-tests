@@ -8,6 +8,12 @@ import {CalendarPages} from "../../../support/beeoclock/page-element/configurati
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelOrderCreationDataProvider} from "../../../fixtures/panel/order/PanelOrderCreationDataProvider";
+import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import {
+    OrderActionsEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
 
 
 describe('panel - order service', () => {
@@ -52,57 +58,65 @@ describe('panel - order service', () => {
             RightPanelPages.RightPanelServicesPage
                 .clickAddOrderButton()
                 .clickAddServiceButton()
-                // .clickSelectServiceButton()
                 .selectSpecificService(testData.service)
                 .verifySelectedService(testData.service)
-                .selectHour()
-                // .selectOrderTime(testData.hour, testData.minute)
-            /* .selectPriceOfService(testData.price)
-             .selectSpecialist(testData.specialistLastName)
-             .typePublicNoteInput(testData.publicNote)
-             .clickAddButton()
+                .openSelectTime()
+                .selectHour(testData.hour)
+                .selectMinute(testData.minute)
+                .clickSubmitSelectedTime()
+                .selectPriceOfService(testData.price)
+                .selectSpecialist(testData.specialistFirstName)
+            // RightPanelPages.SummaryAndPaymentServicePage
+            //     .verifyOrderService(testData.summary)
+                // .verifyOrderSpecialist(testData.specialist)
+                // .verifyOrderCustomer('Anonimowy')
+                // .selectPaymentMethod(testData.paymentMethod)
+                // .selectPaymentStatus(testData.PaymentStatus)
+                // .typeBusinessNote(testData.businessNote)
+                // .clickSaveButton()
+            // .clickAddButton()
 
-                     cy.log('testdata duration')
-                     RightPanelPages.SummaryAndPaymentServicePage
-                         .verifyOrderTime(testData.duration)
+            // cy.log('testdata duration')
+            // RightPanelPages.SummaryAndPaymentServicePage
+            //     .verifyOrderTime(testData.duration)
+            //
+            // cy.log('testData.dataAssert')
+            // RightPanelPages.SummaryAndPaymentServicePage
+            //     .verifyOrderDate(testData.dataAssert)
+            //
+            // cy.log('testData.service')
+            // RightPanelPages.SummaryAndPaymentServicePage
+            //     .verifyOrderService(testData.service)
+            //     .verifyOrderSpecialist(testData.specialist)
+            //     .verifyOrderCustomer('Anonimowy')
+            //     .selectPaymentMethod(testData.paymentMethod)
+            //     .selectPaymentStatus(testData.PaymentStatus)
+            //     .typeBusinessNote(testData.businessNote)
+            //     .clickSaveButton()
+            //
+            // cy.get('@orderId').then((orderId) => {
+            //     cy.log('Order ID is: ' + orderId);
+            //     let oderID: string = orderId.toString()
+            //
+            //     cy.log('verify its order on table');
+            //     CalendarPages.CalendarTablePage
+            //         .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
+            //         .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
+            //
+            //     cy.log('click, delete and verify deletion on table');
+            //     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+            //     OrderTabPages.OrderActionTable
+            //         .clickActionButton(oderID)
+            //         .clickSpecificAction(OrderActionsEnum.DELETE)
+            //         .verifyOrderWithGivenIdNotExist(oderID)
+            //
+            //     cy.log('create next order');
+            //     LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
 
-                     cy.log('testData.dataAssert')
-                     RightPanelPages.SummaryAndPaymentServicePage
-                         .verifyOrderDate(testData.dataAssert)
 
-                     cy.log('testData.service')
-                     RightPanelPages.SummaryAndPaymentServicePage
-                         .verifyOrderService(testData.service)
-                         .verifyOrderSpecialist(testData.specialist)
-                         .verifyOrderCustomer('Anonimowy')
-                         .selectPaymentMethod(testData.paymentMethod)
-                         .selectPaymentStatus(testData.PaymentStatus)
-                         .typeBusinessNote(testData.businessNote)
-                         .clickSaveButton()
-
-                     cy.get('@orderId').then((orderId) => {
-                         cy.log('Order ID is: ' + orderId);
-                         let oderID: string = orderId.toString()
-
-                         cy.log('verify its order on table');
-                         CalendarPages.CalendarTablePage
-                             .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
-                             .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
-
-                         cy.log('click, delete and verify deletion on table');
-                         LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                         OrderTabPages.OrderActionTable
-                             .clickActionButton(oderID)
-                             .clickSpecificAction(OrderActionsEnum.DELETE)
-                             .verifyOrderWithGivenIdNotExist(oderID)
-
-                         cy.log('create next order');
-                         LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+            // });
 
 
-                     });
-
-                         */
         });
     });
 

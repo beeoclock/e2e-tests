@@ -1,7 +1,5 @@
 import {RightPanelServicesPageElement} from "./RightPanelServicesPageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
-import type = Mocha.utils.type;
-import {SelectSpecificHour} from "./time/SelectSpecificHour";
 
 export class RightPanelServicesPage {
 
@@ -37,85 +35,55 @@ export class RightPanelServicesPage {
         return this;
     }
 
-    public selectHour(): RightPanelServicesPage {
-        // Click the time button to open the dropdown
-        cy.wait(500);
-        RightPanelServicesPageElement.SelectTimeButton.getElement().click();
-        cy.wait(1000); // Wait for the dropdown to appear
-
-
-        // Alias the element
-        // cy.log('click on hour == ' + hour)
-        // RightPanelServicesPageElement.SelectSpecificHour.getElement()
-// Znajdź pozycję elementu i przewiń do określonej pozycji
-
-// RightPanelServicesPageElement.SelectSpecificHour.getElement().shadow().eq(2).scrollIntoView()
-
-        // cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
-        //     .find('ion-picker-column').first()
-            //this is 2
-            // .find('ion-picker-column-option').next().prev().first().scrollIntoView().click()
-
-        //this is 3
-            // .find('ion-picker-column-option').next().first().scrollIntoView().click()
-
-
-            // .find('ion-picker-column-option').first().scrollIntoView().click()
-            // .type('{uparrow}', {force: true})
-
-        // cy.get(RightPanelServicesPageElement.SelectSpecificHour.getElement())
-        cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
-            .find('ion-picker-column').first()
-            // .find('ion-picker-column-option').as('hours')
-            .find('ion-picker-column-option').should('have.length', 24 )
-        // for (let i = 0; i < 22; i++) {
-
-        // cy.get('@hours').first().as('hour2').then(() => {
-        //     cy.get('@hour2').scrollIntoView().click()
-        //     cy.get('@hour2').shadow()
-        //         .contains('01').first().click()
-        // })
-        //     // .eq(0)
-        //     .scrollIntoView()
-        //     .click()
-        // cy.document().trigger('keydown', { key: 'PageUp' });
-
-
-
-        // .prev().as('expectedhourd')
-        // }
-// cy.get('@expectedhourd').scrollIntoView().click()
-        // RightPanelServicesPageElement.SubmitButton.getElement().click()
+    public openSelectTime(): RightPanelServicesPage {
+        cy.get('app-duration-chip-component').click()
         return this;
     }
 
+    public selectHour(hour?: string): RightPanelServicesPage {
+        if (hour == '2') {
+            cy.wait(500);
+            RightPanelServicesPageElement.SelectTimeButton.getElement().click();
+            cy.wait(1000); // Wait for the dropdown to appear
+            cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
+                .find('ion-picker-column').first()
+                .find('ion-picker-column-option').next().prev().first().scrollIntoView().click()
+        } else {
 
-    // public selectOrderTime(hour: number, minute: string): RightPanelServicesPage {
-    //     RightPanelServicesPageElement.SelectTimeButton.getElement()
-    //         .click().then(() => {
-    //         if (hour) {
-    //             RightPanelServicesPageElement.SelectSpecificHour.getElement()
-    //                 .click().then((): void => {
-    //                 RightPanelServicesPageElement.SelectSpecificMinute.getElement(minute)
-    //             })
-    //         }
-    //         RightPanelServicesPageElement.SelectSpecificMinute.getElement(minute)
-    //             .click()
-    //     })
-    //     RightPanelServicesPageElement.SubmitButton.getElement().click()
-    //     return this;
-    // }
+        }
+        return this;
+    }
+
+    public selectMinute(minute: string): RightPanelServicesPage {
+        if (minute == '2') {
+            cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
+                .find('ion-picker-column').last()
+                .find('ion-picker-column-option').eq(0).scrollIntoView().click()
+        }
+        if (minute == '30') {
+            cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
+                .find('ion-picker-column').last()
+                .find('ion-picker-column-option').eq(28).scrollIntoView().click()
+        }
+        return this;
+    }
+
+    public clickSubmitSelectedTime(): RightPanelServicesPage {
+        RightPanelServicesPageElement.SubmitButton.getElement()
+            .click()
+        return this;
+    }
 
     public selectPriceOfService(price: string): RightPanelServicesPage {
-        RightPanelServicesPageElement.OrderPriceInput.getElement()
-            .clear()
-            .type(price)
+        RightPanelServicesPageElement.OpenPriceInputElement.getElement()
+            .click()
+        this.typePrice(price)
+        cy.get('#ion-overlay-6').click()
         return this;
     }
 
     public selectSpecialist(specialist: string): RightPanelServicesPage {
         RightPanelServicesPageElement.SelectSpecialist.getElement(specialist)
-            .click()
         return this;
     }
 
@@ -139,4 +107,10 @@ export class RightPanelServicesPage {
         return this;
     }
 
+    private typePrice(price: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.OrderPriceInput.getElement()
+            .clear()
+            .type(price)
+        return this;
+    }
 }

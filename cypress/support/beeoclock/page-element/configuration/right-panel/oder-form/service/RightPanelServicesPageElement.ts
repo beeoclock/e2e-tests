@@ -12,6 +12,7 @@ import { AddServiceButton } from "./page-element/AddServiceButton";
 import { SelectSpecificHour } from "./time/SelectSpecificHour";
 import {SelectSpecificMinute} from "./time/SelectSpecyficTime";
 import {SubmitButton} from "./time/SubmitButton";
+import {OpenPriceInputElement} from "./finance/OpenPriceInputElement";
 
 export class RightPanelServicesPageElement {
 
@@ -29,4 +30,5 @@ export class RightPanelServicesPageElement {
     public static PublicNoteInput: PublicNoteInput = new PublicNoteInput()
     public static AddButton: AddButton = new AddButton()
     public static SubmitButton: SubmitButton = new SubmitButton()
+    public static OpenPriceInputElement: OpenPriceInputElement = new OpenPriceInputElement()
 }

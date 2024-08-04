@@ -41,6 +41,7 @@ export class SummaryAndPaymentServicePage {
             .invoke('prop', 'outerText')
             .then((text) => {
                 expect(text).to.include(service);
+                //"Strzyżenie Brody\nPL\n⏰ 2024-08-04  15:00\n⏳ 15 min\ne\ne\ne2e\n30,00 zł\n👤 Anonimowy"
             });
         return this;
     }
