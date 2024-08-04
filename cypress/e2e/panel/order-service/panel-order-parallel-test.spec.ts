@@ -6,12 +6,6 @@ import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/con
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
-import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
-import {
-    OrderActionsEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelOrderCreationDataProvider} from "../../../fixtures/panel/order/PanelOrderCreationDataProvider";
 
@@ -61,7 +55,7 @@ describe('panel - order service', () => {
                 // .clickSelectServiceButton()
                 .selectSpecificService(testData.service)
                 .verifySelectedService(testData.service)
-                .selectHour("01")
+                .selectHour()
                 // .selectOrderTime(testData.hour, testData.minute)
             /* .selectPriceOfService(testData.price)
              .selectSpecialist(testData.specialistLastName)

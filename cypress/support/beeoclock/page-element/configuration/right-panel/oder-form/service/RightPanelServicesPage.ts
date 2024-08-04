@@ -1,6 +1,7 @@
 import {RightPanelServicesPageElement} from "./RightPanelServicesPageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import type = Mocha.utils.type;
+import {SelectSpecificHour} from "./time/SelectSpecificHour";
 
 export class RightPanelServicesPage {
 
@@ -36,7 +37,7 @@ export class RightPanelServicesPage {
         return this;
     }
 
-    public selectHour(hour: string): RightPanelServicesPage {
+    public selectHour(): RightPanelServicesPage {
         // Click the time button to open the dropdown
         cy.wait(500);
         RightPanelServicesPageElement.SelectTimeButton.getElement().click();
@@ -44,9 +45,47 @@ export class RightPanelServicesPage {
 
 
         // Alias the element
-        cy.log('click on hour == ' + hour)
-        RightPanelServicesPageElement.SelectSpecificHour.getElement(hour).click()
-        RightPanelServicesPageElement.SubmitButton.getElement().click()
+        // cy.log('click on hour == ' + hour)
+        // RightPanelServicesPageElement.SelectSpecificHour.getElement()
+// Znajdź pozycję elementu i przewiń do określonej pozycji
+
+// RightPanelServicesPageElement.SelectSpecificHour.getElement().shadow().eq(2).scrollIntoView()
+
+        // cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
+        //     .find('ion-picker-column').first()
+            //this is 2
+            // .find('ion-picker-column-option').next().prev().first().scrollIntoView().click()
+
+        //this is 3
+            // .find('ion-picker-column-option').next().first().scrollIntoView().click()
+
+
+            // .find('ion-picker-column-option').first().scrollIntoView().click()
+            // .type('{uparrow}', {force: true})
+
+        // cy.get(RightPanelServicesPageElement.SelectSpecificHour.getElement())
+        cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
+            .find('ion-picker-column').first()
+            // .find('ion-picker-column-option').as('hours')
+            .find('ion-picker-column-option').should('have.length', 24 )
+        // for (let i = 0; i < 22; i++) {
+
+        // cy.get('@hours').first().as('hour2').then(() => {
+        //     cy.get('@hour2').scrollIntoView().click()
+        //     cy.get('@hour2').shadow()
+        //         .contains('01').first().click()
+        // })
+        //     // .eq(0)
+        //     .scrollIntoView()
+        //     .click()
+        // cy.document().trigger('keydown', { key: 'PageUp' });
+
+
+
+        // .prev().as('expectedhourd')
+        // }
+// cy.get('@expectedhourd').scrollIntoView().click()
+        // RightPanelServicesPageElement.SubmitButton.getElement().click()
         return this;
     }
 
