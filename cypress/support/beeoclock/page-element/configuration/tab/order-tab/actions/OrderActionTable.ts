@@ -13,7 +13,7 @@ export class OrderActionTable {
     public clickSpecificAction(action: string): OrderActionTable {
         const getOrder = ApiInterceptionHelper.getOrder()
         const deleteAction = ApiInterceptionHelper.deleteServices()
-        OrderActionTableElement.OrderGivenActionButton.getElement(action)
+        OrderActionTableElement.OrderGivenActionButton.getElement(action).scrollIntoView()
             .click()
         if (action == OrderActionsEnum.DELETE) {
             ApiInterceptionHelper.waitForAlias(deleteAction)

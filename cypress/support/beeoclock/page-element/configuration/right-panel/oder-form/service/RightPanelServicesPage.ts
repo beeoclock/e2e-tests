@@ -36,27 +36,24 @@ export class RightPanelServicesPage {
     }
 
     public openSelectTime(): RightPanelServicesPage {
-        cy.get('app-duration-chip-component').click()
+        cy.get('app-duration-chip-component').scrollIntoView().should('be.visible').click()
+        cy.wait(1000)
         return this;
     }
 
     public selectHour(hour?: string): RightPanelServicesPage {
         if (hour == '2') {
-            cy.wait(500);
-            RightPanelServicesPageElement.SelectTimeButton.getElement().click();
-            cy.wait(1000); // Wait for the dropdown to appear
-            cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
-                .find('ion-picker-column').first()
-                .find('ion-picker-column-option').next().prev().first().scrollIntoView().click()
-        } else {
-
-        }
+            cy.get('.ion-delegate-host > .ng-untouched')
+                .find('ion-picker-column').last().prev()
+                .find('ion-picker-column-option').eq(0).scrollIntoView().click()
+            cy.wait(1000)
+        } else {}
         return this;
     }
 
-    public selectMinute(minute: string): RightPanelServicesPage {
+    public selectMinute(minute?: string): RightPanelServicesPage {
         if (minute == '2') {
-            cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
+            cy.get('.ion-delegate-host > .ng-untouched')
                 .find('ion-picker-column').last()
                 .find('ion-picker-column-option').eq(0).scrollIntoView().click()
         }
@@ -64,11 +61,13 @@ export class RightPanelServicesPage {
             cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
                 .find('ion-picker-column').last()
                 .find('ion-picker-column-option').eq(28).scrollIntoView().click()
-        }
+            // cy.wait(1000)
+        } else {}
         return this;
     }
 
     public clickSubmitSelectedTime(): RightPanelServicesPage {
+        cy.wait(1500)
         RightPanelServicesPageElement.SubmitButton.getElement()
             .click()
         return this;
@@ -78,7 +77,7 @@ export class RightPanelServicesPage {
         RightPanelServicesPageElement.OpenPriceInputElement.getElement()
             .click()
         this.typePrice(price)
-        cy.get('#ion-overlay-6').click()
+        cy.get('[id^="ion-overlay-"]').last().click()
         return this;
     }
 

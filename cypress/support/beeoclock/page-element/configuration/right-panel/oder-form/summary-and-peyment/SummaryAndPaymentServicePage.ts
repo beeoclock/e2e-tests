@@ -40,15 +40,16 @@ export class SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummarySelectedServiceElement.getElement()
             .invoke('prop', 'outerText')
             .then((text) => {
-                expect(text).to.include(service);
-                //"Strzyżenie Brody\nPL\n⏰ 2024-08-04  15:00\n⏳ 15 min\ne\ne\ne2e\n30,00 zł\n👤 Anonimowy"
+                const cleanedText = text.replace(/\s+/g, ' ').trim();
+                const cleanedService = service.replace(/\s+/g, ' ').trim();
+                expect(cleanedText).to.include(cleanedService);
             });
         return this;
     }
 
     public verifyOrderSpecialist(specialist: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummarySpecialistElement.getElement()
-            .invoke('prop', 'outerText')
+            .invoke('prop', 'textContent')
             .then((text) => {
                 expect(text).to.include(specialist);
             });
@@ -57,7 +58,7 @@ export class SummaryAndPaymentServicePage {
 
     public verifyOrderCustomer(customer: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderCustomerSummaryElement.getElement()
-            .invoke('prop', 'outerText')
+            .invoke('prop', 'textContent')
             .then((text) => {
                 expect(text).to.include(customer);
             });
