@@ -88,7 +88,7 @@ export class PanelOrderCreationDataProvider {
                     hour: '2',
                     minute: '2',
                     price: '475',
-                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + " PL ⏰ 2024-08-05 15:00 ⏳ 2 godz, 2 min e e e2e 475,00 zł 👤 Anonimowy",
+                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + " PL ⏰ " + Data + " 15:00 ⏳ 2 godz, 2 min e e e2e 475,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CASH,
                     PaymentStatus: PaymentStatusEnum.REGISTERED,
                     dataAssert: Data + '15:00',

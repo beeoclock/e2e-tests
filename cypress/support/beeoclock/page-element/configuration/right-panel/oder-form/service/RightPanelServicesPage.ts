@@ -36,8 +36,10 @@ export class RightPanelServicesPage {
     }
 
     public openSelectTime(): RightPanelServicesPage {
-        cy.get('app-duration-chip-component').scrollIntoView().should('be.visible').click()
-        cy.wait(1000)
+        cy.wait(500)
+        cy.get('app-duration-chip-component').scrollIntoView().should('be.visible')
+                .click()
+        cy.wait(500)
         return this;
     }
 
