@@ -1,5 +1,6 @@
 import {RightPanelServicesPageElement} from "./RightPanelServicesPageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
+import {CustomerTypeEnum} from "./enum/CustomerTypeEnum";
 
 export class RightPanelServicesPage {
 
@@ -112,6 +113,28 @@ export class RightPanelServicesPage {
         RightPanelServicesPageElement.OrderPriceInput.getElement()
             .clear()
             .type(price)
+        return this;
+    }
+
+    //CUSTOMER
+
+    public clickOpenCustomerPopover(): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectCustomerOption.getElement()
+            .click()
+        return this;
+    }
+
+    public selectSpecificCustomerType(type: string): RightPanelServicesPage {
+        if(type == CustomerTypeEnum.NEW) {
+            RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 1).as('button')
+        } else if (type == CustomerTypeEnum.CLIENT ) {
+            RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 0).as('button')
+        } else if (type == CustomerTypeEnum.GUEST) {
+            RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 2).as('button')
+        }else if (type == CustomerTypeEnum.ANONYMOUS) {
+            RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 3).as('button')
+        }
+            cy.get('@button').click({force: true})
         return this;
     }
 }

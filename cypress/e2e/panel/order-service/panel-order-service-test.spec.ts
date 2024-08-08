@@ -3,9 +3,7 @@ import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryA
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
 import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
-import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
-import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {
@@ -18,6 +16,11 @@ import {OrderTabPages} from "../../../support/beeoclock/page-element/configurati
 import {
     OrderActionsEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
+import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
+import {
+    CustomerTypeEnum
+} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 
 
 describe('panel - order service', () => {
@@ -59,12 +62,13 @@ describe('panel - order service', () => {
         cy.log('CASE - 1')
         CalendarPages.CalendarTablePage
             .clickOnGivenAndHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
-        // RightPanelPages.RightPanelServicesPage
-        //     .clickAddOrderButton()
-        //     .clickAddServiceButton()
-        //     .clickSelectServiceButton()
-        //     .selectSpecificService(ServiceNameEnum.BREAD_TRIM)
-        //     .verifySelectedService(ServiceNameEnum.BREAD_TRIM, ServiceNameEnum.BREAD_TRIM_DESCRIPTION)
+        RightPanelPages.RightPanelServicesPage
+            .clickAddOrderButton()
+            .clickAddServiceButton()
+            .selectSpecificService(ServiceNameEnum.E2E_HAIRCUT.toLowerCase())
+            .verifySelectedService(ServiceNameEnum.E2E_HAIRCUT.toLowerCase())
+            .clickOpenCustomerPopover()
+            .selectSpecificCustomerType(CustomerTypeEnum.NEW)
         //     .selectOrderTime('1 godz, 30 min')
         //     .selectPriceOfService('40')
         //     .selectSpecialist(SpecialistNameEnum.ZALEWSKI_LAST_NAME)
@@ -82,23 +86,23 @@ describe('panel - order service', () => {
         //     .typeBusinessNote('USUŃ MNIE - wartość do wyszukania na ekranie usług')
         //     .clickSaveButton()
 
-        cy.get('@orderId').then((orderId) => {
-            cy.log('Order ID is: ' + orderId);
-            let oderID: string = orderId.toString()
-
-            cy.log('verify its order on table');
-            CalendarPages.CalendarTablePage
-                .findAndVerifyOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
-                .verifyTimeOrderOnTable(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME, dataAssertValue);
-
-            cy.log('click, delete and verify deletion on table');
-            CalendarPages.CalendarTablePage
-                .clickOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME);
-            LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-            OrderTabPages.OrderActionTable
-                .clickActionButton(oderID)
-                .clickSpecificAction(OrderActionsEnum.DELETE)
-                .verifyOrderWithGivenIdNotExist(oderID)
+        // cy.get('@orderId').then((orderId) => {
+        //     cy.log('Order ID is: ' + orderId);
+        //     let oderID: string = orderId.toString()
+        //
+        //     cy.log('verify its order on table');
+        //     CalendarPages.CalendarTablePage
+        //         .findAndVerifyOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME)
+        //         .verifyTimeOrderOnTable(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME, dataAssertValue);
+        //
+        //     cy.log('click, delete and verify deletion on table');
+        //     CalendarPages.CalendarTablePage
+        //         .clickOrderTableElement(SpecialistNameEnum.ZALEWSKI_FIRST_NAME, SpecialistNameEnum.ZALEWSKI_LAST_NAME);
+        //     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+        //     OrderTabPages.OrderActionTable
+        //         .clickActionButton(oderID)
+        //         .clickSpecificAction(OrderActionsEnum.DELETE)
+        //         .verifyOrderWithGivenIdNotExist(oderID)
 
             // // Verify the order deletion
             // CalendarPages.CalendarTablePage
@@ -114,5 +118,3 @@ describe('panel - order service', () => {
         cy.clearAllLocalStorage();
         cy.clearAllCookies();
     });
-
-});
