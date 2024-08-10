@@ -4,5 +4,7 @@ export interface IOrderQueries {
     orderBy: string,
     orderDir: string,
     page: number,
-    pageSize: string,
+    pageSize: number,
+    start?: string
+    end?: string
 }

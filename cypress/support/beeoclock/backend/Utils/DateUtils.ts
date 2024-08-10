@@ -1,5 +1,6 @@
-import { data } from "cypress/types/jquery";
+
 import * as moment from "moment";
+import "moment-timezone/index";
 
 export class DateUtils {
 
@@ -252,6 +253,14 @@ export class DateUtils {
         const nextDay = today.add(1, 'day');
         const nextDayName = nextDay.format('dddd');
         return nextDayName.charAt(0).toUpperCase() + nextDayName.slice(1).toLowerCase();
+    }
+
+    public static getStartOfTodayUTC(): string {
+        return moment.tz('Europe/Warsaw').startOf('day').toISOString();
+    }
+
+    public static getEndOfTodayUTC(): string {
+        return moment.tz('Europe/Warsaw').endOf('day').toISOString();
     }
 
 }
