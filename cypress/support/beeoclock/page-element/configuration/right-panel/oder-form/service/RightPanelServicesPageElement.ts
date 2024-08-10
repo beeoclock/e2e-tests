@@ -15,6 +15,11 @@ import {SubmitButton} from "./time/SubmitButton";
 import {OpenPriceInputElement} from "./finance/OpenPriceInputElement";
 import {SelectCustomerOption} from "./customer/SelectCustomerOption";
 import {SelectSpecificCustomerOption} from "./customer/SelectSpecificCustomerOption";
+import {NameInput} from "./customer/new-customer/NameInput";
+import {LastNameInput} from "./customer/new-customer/LastNameInput";
+import {EmailInput} from "./customer/new-customer/EmailInput";
+import {PhoneInput} from "./customer/new-customer/PhoneInput";
+import {ConfirmButton} from "./customer/new-customer/ConfirmButton";
 
 export class RightPanelServicesPageElement {
 
@@ -34,6 +39,14 @@ export class RightPanelServicesPageElement {
     public static SubmitButton: SubmitButton = new SubmitButton()
     public static OpenPriceInputElement: OpenPriceInputElement = new OpenPriceInputElement()
 
+    //customer common option
     public static SelectCustomerOption: SelectCustomerOption = new SelectCustomerOption()
     public static SelectSpecificCustomerOption: SelectSpecificCustomerOption = new SelectSpecificCustomerOption()
+
+    //customer element
+    public static NameInput: NameInput = new NameInput()
+    public static LastNameInput: LastNameInput = new LastNameInput()
+    public static EmailInput: EmailInput = new EmailInput()
+    public static PhoneInput: PhoneInput = new PhoneInput()
+    public static ConfirmButton: ConfirmButton = new ConfirmButton()
 }

@@ -13,6 +13,7 @@ export class RightPanelServicesPage {
     public clickAddServiceButton(): RightPanelServicesPage {
         RightPanelServicesPageElement.AddServiceButton.getElement()
             .click()
+        cy.wait(2000)
         return this
     }
 
@@ -39,7 +40,7 @@ export class RightPanelServicesPage {
     public openSelectTime(): RightPanelServicesPage {
         cy.wait(500)
         cy.get('app-duration-chip-component').scrollIntoView().should('be.visible')
-                .click()
+            .click()
         cy.wait(500)
         return this;
     }
@@ -50,7 +51,8 @@ export class RightPanelServicesPage {
                 .find('ion-picker-column').last().prev()
                 .find('ion-picker-column-option').eq(0).scrollIntoView().click()
             cy.wait(1000)
-        } else {}
+        } else {
+        }
         return this;
     }
 
@@ -65,7 +67,8 @@ export class RightPanelServicesPage {
                 .find('ion-picker-column').last()
                 .find('ion-picker-column-option').eq(28).scrollIntoView().click()
             // cy.wait(1000)
-        } else {}
+        } else {
+        }
         return this;
     }
 
@@ -120,21 +123,30 @@ export class RightPanelServicesPage {
 
     public clickOpenCustomerPopover(): RightPanelServicesPage {
         RightPanelServicesPageElement.SelectCustomerOption.getElement()
-            .click()
+            .click().then(() => {
+            cy.get('.ion-padding').should('be.visible').then((visible) => {
+                if (!visible) {
+                    RightPanelServicesPageElement.SelectCustomerOption.getElement().click();
+                }
+            });
+        });
         return this;
     }
 
+
     public selectSpecificCustomerType(type: string): RightPanelServicesPage {
-        if(type == CustomerTypeEnum.NEW) {
+        if (type == CustomerTypeEnum.NEW) {
             RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 1).as('button')
-        } else if (type == CustomerTypeEnum.CLIENT ) {
+        } else if (type == CustomerTypeEnum.CLIENT) {
             RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 0).as('button')
         } else if (type == CustomerTypeEnum.GUEST) {
             RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 2).as('button')
-        }else if (type == CustomerTypeEnum.ANONYMOUS) {
+        } else if (type == CustomerTypeEnum.ANONYMOUS) {
             RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 3).as('button')
         }
-            cy.get('@button').click({force: true})
+        cy.get('@button').should('exist')
+        cy.get('@button').click({force: true})
+        cy.wait(1000)
         return this;
     }
 }
