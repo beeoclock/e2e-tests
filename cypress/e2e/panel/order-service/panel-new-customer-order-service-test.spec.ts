@@ -7,19 +7,16 @@ import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {
-    CustomerTypeEnum
-} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
+import { CustomerTypeEnum } from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
-import {
-    PanelOrderVariousOptionDataProvider
-} from "../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
+import { PanelOrderVariousOptionDataProvider } from "../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
 import {
     OrderActionsEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 
 describe('panel new customer order service', () => {
 
@@ -46,6 +43,10 @@ describe('panel new customer order service', () => {
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
+
+            OrderApi.getOrderId().then(orderIds => {
+                OrderApi.deleteOrders(orderIds);
+            });
         });
 
         cy.log('assert login url');
@@ -91,7 +92,6 @@ describe('panel new customer order service', () => {
                 cy.log('verify its order on table');
                 CalendarPages.CalendarTablePage
                     .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
-
                     .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
                 cy.log('click, delete and verify deletion on table');

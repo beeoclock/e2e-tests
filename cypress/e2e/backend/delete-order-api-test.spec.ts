@@ -1,4 +1,3 @@
-import {TestCaseEnum} from "../../fixtures/enum/TestCaseEnum";
 import {ServiceEnum} from "../../support/beeoclock/common/enum/ServiceEnum";
 import {PanelLoginPageElement} from "../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {PanelLoginPage} from "../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
@@ -10,10 +9,6 @@ import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
 describe('panel new customer order service', () => {
 
     it('test panel new customer order service', function () {
-        const testCases = [
-            TestCaseEnum.CASE_1,
-        ];
-
         cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {
             failOnStatusCode: false,
@@ -21,7 +16,7 @@ describe('panel new customer order service', () => {
                 win.localStorage.setItem('language', 'pl');
             }
         });
-        cy.wait('@getAll', {timeout: 30000});
+        cy.wait('@getAll', { timeout: 30000 });
 
         cy.log('login');
         PanelLoginPageElement.EmailInput.getElement();
@@ -32,10 +27,10 @@ describe('panel new customer order service', () => {
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
-            cy.log('START: ' + DateUtils.getStartOfTodayUTC())
-            cy.log('END: ' + DateUtils.getEndOfTodayUTC())
 
-            OrderApi.getOrderId()
+            OrderApi.getOrderId().then(orderIds => {
+                OrderApi.deleteOrders(orderIds);
+            });
         });
-    })
-})
+    });
+});
