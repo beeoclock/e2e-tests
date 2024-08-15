@@ -4,7 +4,6 @@ import {PanelLoginPage} from "../../support/beeoclock/page-element/configuration
 import {ClientPropertiesEnum} from "../../support/beeoclock/common/enum/ClientPropertiesEnum";
 import {BusinessNameEnum} from "../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {OrderApi} from "../../support/beeoclock/backend/panel/order/OrderApi";
-import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
 
 describe('panel new customer order service', () => {
 
@@ -16,7 +15,7 @@ describe('panel new customer order service', () => {
                 win.localStorage.setItem('language', 'pl');
             }
         });
-        cy.wait('@getAll', { timeout: 30000 });
+        cy.wait('@getAll', {timeout: 30000});
 
         cy.log('login');
         PanelLoginPageElement.EmailInput.getElement();
@@ -27,7 +26,8 @@ describe('panel new customer order service', () => {
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
-
+//TODO
+//             add order queries in order to assert correct order deletion
             OrderApi.getOrderId().then(orderIds => {
                 OrderApi.deleteOrders(orderIds);
             });
