@@ -35,7 +35,7 @@ export class OrderApi {
         return cy.get<string>('@token').then(tokenId => {
             return cy.request({
                 method: 'DELETE',
-                url: BackendCommonEnum.ENTRY_POINT + 'service/' + id,
+                url: BackendCommonEnum.ENTRY_POINT + 'order/' + id,
                 headers: {
                     'X-Business-Tenant-Id': '662a4637a4b376d20c065b1d'
                 },
