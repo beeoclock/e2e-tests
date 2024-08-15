@@ -44,9 +44,8 @@ describe('panel new customer order service', () => {
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
 
-            OrderApi.getOrderId().then(orderIds => {
-                OrderApi.deleteOrders(orderIds);
-            });
+            cy.log('delete orders before test')
+            OrderApi.deleteAllCurrentOrders()
         });
 
         cy.log('assert login url');

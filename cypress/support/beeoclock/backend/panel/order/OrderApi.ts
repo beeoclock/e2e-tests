@@ -58,4 +58,10 @@ export class OrderApi {
             OrderApi.deleteOrderWithGivenId(orderId);
         });
     }
+
+    public static deleteAllCurrentOrders(): void {
+        OrderApi.getOrderId().then(orderIds => {
+            OrderApi.deleteOrders(orderIds);
+        });
+    }
 }

@@ -14,6 +14,7 @@ import {
     OrderActionsEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
+import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 
 
 describe('panel - order service', () => {
@@ -44,6 +45,9 @@ describe('panel - order service', () => {
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token)
+
+            cy.log('delete orders before test')
+            OrderApi.deleteAllCurrentOrders()
         })
 
         cy.log('assert login url')
