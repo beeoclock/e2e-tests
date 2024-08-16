@@ -2,6 +2,7 @@ import {RightPanelNavigationPage} from "./navigation/RightPanelNavigationPage";
 import {RightPanelServicesPage} from "./oder-form/service/RightPanelServicesPage";
 import {SummaryAndPaymentServicePage} from "./oder-form/summary-and-peyment/SummaryAndPaymentServicePage";
 import {CustomerPage} from "./oder-form/service/customer/CustomerPage";
+import {BreakScienceGivenTimePage} from "./break/navigation/BreakScienceGivenTimePage";
 
 export class RightPanelPages {
 
@@ -9,4 +10,5 @@ export class RightPanelPages {
     public static RightPanelServicesPage: RightPanelServicesPage = new RightPanelServicesPage()
     public static SummaryAndPaymentServicePage: SummaryAndPaymentServicePage = new SummaryAndPaymentServicePage()
     public static CustomerPage: CustomerPage = new CustomerPage()
+    public static BreakScienceGivenTimePage: BreakScienceGivenTimePage = new BreakScienceGivenTimePage()
 }

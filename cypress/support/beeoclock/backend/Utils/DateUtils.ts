@@ -132,6 +132,12 @@ export class DateUtils {
         return newDate.format("YYYY-MM-DD");
     }
 
+    public static getCurrentDatePlusGivenDay(days: number): string {
+        const currentDate = moment();
+        const newDate = currentDate.add(days, 'days');
+        return newDate.format("YYYY-MM-DD");
+    }
+
     public static getCurrentDate(): string {
         const currentDate = moment();
         const newDate = currentDate
@@ -261,6 +267,15 @@ export class DateUtils {
 
     public static getEndOfTodayUTC(): string {
         return moment.tz('Europe/Warsaw').endOf('day').toISOString();
+    }
+
+    //
+    public static getStartOfTomorrowUTC(): string {
+        return moment.tz('Europe/Warsaw').add(1, 'days').startOf('day').toISOString();
+    }
+
+    public static getEndOfTomorrowUTC(): string {
+        return moment.tz('Europe/Warsaw').add(1, 'days').endOf('day').toISOString();
     }
 
 }
