@@ -26,11 +26,8 @@ describe('panel new customer order service', () => {
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
-//TODO
-//             add order queries in order to assert correct order deletion
-            OrderApi.getOrderId().then(orderIds => {
-                OrderApi.deleteOrders(orderIds);
-            });
+
+          OrderApi.deleteAllCurrentOrdersWithAssertion()
         });
     });
 });

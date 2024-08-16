@@ -12,7 +12,7 @@ export class OrderApi {
                 method: 'GET',
                 url: url,
                 headers: {
-                    'X-Business-Tenant-Id': '662a4637a4b376d20c065b1d'
+                    'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
                 },
                 auth: {
                     bearer: tokenId
@@ -37,7 +37,7 @@ export class OrderApi {
                 method: 'DELETE',
                 url: BackendCommonEnum.ENTRY_POINT + 'order/' + id,
                 headers: {
-                    'X-Business-Tenant-Id': '662a4637a4b376d20c065b1d'
+                    'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
                 },
                 auth: {
                     bearer: tokenId
@@ -59,9 +59,48 @@ export class OrderApi {
         });
     }
 
+    public static deleteOrdersWithAssert(orderIds: string[]): any {
+        if (orderIds.length === 0) {
+            cy.log('No orders to delete');
+            return;
+        }
+
+        orderIds.forEach(orderId => {
+            this.deleteOrderWithGivenId(orderId);
+            this.assertSuccessfulDeletion(orderId)
+        });
+    }
+
+    public static assertSuccessfulDeletion(orderId: string): any {
+        return cy.get<string>('@token').then(tokenId => {
+            const url = BackendCommonEnum.ENTRY_POINT + 'order/' + orderId;
+            return cy.request({
+                method: 'GET',
+                url: url,
+                headers: {
+                    'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                },
+                auth: {
+                    bearer: tokenId
+                }
+            }).then(response => {
+                expect(response.status).to.equal(200);
+                const orderStatus = response.body.status;
+                cy.log("Order Status: " + orderStatus);
+                expect(orderStatus).to.equal('deleted');
+            });
+        });
+    }
+
     public static deleteAllCurrentOrders(): void {
         OrderApi.getOrderId().then(orderIds => {
             OrderApi.deleteOrders(orderIds);
+        });
+    }
+
+    public static deleteAllCurrentOrdersWithAssertion(): void {
+        OrderApi.getOrderId().then(orderIds => {
+            OrderApi.deleteOrdersWithAssert(orderIds);
         });
     }
 }
