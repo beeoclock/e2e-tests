@@ -5,7 +5,7 @@ import {ClientPropertiesEnum} from "../../support/beeoclock/common/enum/ClientPr
 import {BusinessNameEnum} from "../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {OrderApi} from "../../support/beeoclock/backend/panel/order/OrderApi";
 
-describe('panel new customer order service', () => {
+describe('panel new customer order service', (): void => {
 
     it('test panel new customer order service', function () {
         cy.intercept('GET', '**/*').as('getAll');
