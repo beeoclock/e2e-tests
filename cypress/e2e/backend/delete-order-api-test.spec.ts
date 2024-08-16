@@ -27,6 +27,7 @@ describe('panel new customer order service', () => {
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
 
+            cy.log('delete orders with assertion that its status equal deleted')
           OrderApi.deleteAllCurrentOrdersWithAssertion()
         });
     });

@@ -96,16 +96,7 @@ describe('panel - order service', () => {
 
                 cy.log('create next order');
                 LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
-
-
             });
-
-
         });
     });
-
-    // after('clear storage', () => {
-    //     cy.clearAllLocalStorage();
-    //     cy.clearAllCookies();
-    // });
 });
