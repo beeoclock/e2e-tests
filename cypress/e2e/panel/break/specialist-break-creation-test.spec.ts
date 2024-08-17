@@ -1,20 +1,16 @@
-import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
 import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
-import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryAssertion";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {
     CalendarTableTimeEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
-import {
-    BreakScienceGivenTimePage
-} from "../../../support/beeoclock/page-element/configuration/right-panel/break/navigation/BreakScienceGivenTimePage";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
+import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 
 describe('panel new customer order service', () => {
 
@@ -49,12 +45,16 @@ describe('panel new customer order service', () => {
             .clickNextDayArrow()
             .verifyNextDayDate();
         CalendarPages.CalendarTablePage
-            .clickOnGivenAndHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_12)
+            .clickOnGivenAndHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_12);
         RightPanelPages.BreakScienceGivenTimePage
-            .verifySelectedNextDayTimeLabel(CalendarTableTimeEnum.Hour_12)
+            .verifySelectedNextDayTimeLabel(CalendarTableTimeEnum.Hour_12.toString())
             .clickBreakRange('30')
-
-        // .selectSpecificService(testData.service)
-        // .verifySelectedService(testData.service)
+        RightPanelPages.AbsencePage
+            .verifyAbsenceFromDate(DateUtils.formatDateDaysAhead(1))
+            .verifyAbsenceFromTime(CalendarTableTimeEnum.Hour_12.toString())
+            .verifyAbsenceToDate(DateUtils.formatDateDaysAhead(1))
+            .verifyAbsenceToTime(CalendarTableTimeEnum.Hour_12.toString() + ':30')
+            .typeAbsenceNote('Jutrzejszy obiad Tomka')
+            .clickSaveButton()
     })
 });

@@ -47,6 +47,12 @@ export class ApiInterceptionHelper {
         return getAbsence
     }
 
+    public static createAbsence(): string {
+        const createAbsence = 'createAbsence' + DateUtils.getCurrentTime();
+        cy.intercept('POST', EntryPointEnum.API_ENTRY_POINT + '/absence').as(createAbsence);
+        return createAbsence
+    }
+
     public static deleteServices(): string {
         const deleteServices = 'deleteServices' + DateUtils.getCurrentTime();
         cy.intercept('DELETE', EntryPointEnum.API_ENTRY_POINT + '/order/*').as(deleteServices);

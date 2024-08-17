@@ -278,4 +278,18 @@ export class DateUtils {
         return moment.tz('Europe/Warsaw').add(1, 'days').endOf('day').toISOString();
     }
 
+    public static formatDateDaysAhead(daysAhead: number): string {
+        const months: string[] = ["sty", "lut", "mar", "kwi", "maj", "cze", "lip", "sie", "wrz", "paź", "lis", "gru"];
+
+        const today: Date = new Date();
+
+        const futureDate: Date = new Date(today);
+        futureDate.setDate(today.getDate() + daysAhead);
+
+        const day: number = futureDate.getDate();
+        const monthName: string = months[futureDate.getMonth()];
+        const year: number = futureDate.getFullYear();
+
+        return `${day} ${monthName} ${year}`;
+    }
 }

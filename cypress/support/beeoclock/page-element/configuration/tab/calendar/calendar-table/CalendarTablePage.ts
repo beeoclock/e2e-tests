@@ -37,4 +37,11 @@ export class CalendarTablePage {
         return this;
     }
 
+    public assertAbsenceOnTable(value: string): CalendarTablePage {
+        CalendarTablePageElement.AbsenceTableElement.getElement()
+            .invoke('prop', 'outerText').then(outerText => {
+                expect(outerText).to.include(value)
+        })
+        return this;
+    }
 }
