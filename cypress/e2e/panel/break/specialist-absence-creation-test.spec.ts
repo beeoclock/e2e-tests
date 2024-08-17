@@ -5,12 +5,7 @@ import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/Clien
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryAssertion";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
-import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {
-    CalendarTableTimeEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {AbsencePages} from "../../../support/beeoclock/page-element/configuration/tab/absence/AbsencePages";
@@ -18,9 +13,6 @@ import {
     AbsenceActionEnum
 } from "../../../support/beeoclock/page-element/configuration/tab/absence/absence-action/enum/AbsenceActionEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
-import {
-    PanelOrderVariousOptionDataProvider
-} from "../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
 import {PanelAbsenceCreationDataProvider} from "../../../fixtures/panel/absence/PanelAbsenceCreationDataProvider";
 
 describe('specialist absence creation test', () => {
@@ -30,7 +22,6 @@ describe('specialist absence creation test', () => {
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2
         ];
-
 
         cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {
