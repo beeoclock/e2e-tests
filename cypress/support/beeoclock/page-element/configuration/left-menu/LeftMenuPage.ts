@@ -15,7 +15,17 @@ export class LeftMenuPage {
         if (tab == TabNameEnum.CALENDAR) {
             ApiInterceptionHelper.waitForAlias(getOrder)
             ApiInterceptionHelper.waitForAlias(getAbsence)
+        } if (tab == TabNameEnum.ABSENCE) {
+            ApiInterceptionHelper.waitForAlias(getAbsence)
         }
+        return this;
+    }
+
+    private static clickAbsenceTab(): LeftMenuPage {
+        const getAbsence = ApiInterceptionHelper.getAbsence()
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.ABSENCE)
+            .click()
+        ApiInterceptionHelper.waitForAlias(getAbsence)
         return this;
     }
 }
