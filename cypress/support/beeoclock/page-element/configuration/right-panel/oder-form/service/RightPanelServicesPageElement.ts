@@ -20,6 +20,8 @@ import {LastNameInput} from "./customer/new-customer/LastNameInput";
 import {EmailInput} from "./customer/new-customer/EmailInput";
 import {PhoneInput} from "./customer/new-customer/PhoneInput";
 import {ConfirmButton} from "./customer/new-customer/ConfirmButton";
+import {ExistingCustomerInput} from "./customer/existing-customer/ExistingCustomerInput";
+import {CustomerOption} from "./customer/existing-customer/CustomerOption";
 
 export class RightPanelServicesPageElement {
 
@@ -43,10 +45,14 @@ export class RightPanelServicesPageElement {
     public static SelectCustomerOption: SelectCustomerOption = new SelectCustomerOption()
     public static SelectSpecificCustomerOption: SelectSpecificCustomerOption = new SelectSpecificCustomerOption()
 
-    //customer element
+    //new customer element
     public static NameInput: NameInput = new NameInput()
     public static LastNameInput: LastNameInput = new LastNameInput()
     public static EmailInput: EmailInput = new EmailInput()
     public static PhoneInput: PhoneInput = new PhoneInput()
     public static ConfirmButton: ConfirmButton = new ConfirmButton()
+
+    //existing customer
+    public static ExistingCustomerInput: ExistingCustomerInput = new ExistingCustomerInput()
+    public static CustomerOption: CustomerOption = new CustomerOption()
 }

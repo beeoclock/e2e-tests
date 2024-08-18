@@ -17,6 +17,7 @@ import {data} from "cypress/types/jquery";
 export class PanelOrderVariousOptionDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {
         let Data: string = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
+        let nextDayData: string = DateUtils.getCurrentDatePlusGivenDay(1)
 
         switch (caseEnum) {
             case TestCaseEnum.CASE_1:
@@ -39,66 +40,23 @@ export class PanelOrderVariousOptionDataProvider {
                     dataAssert: Data + '18:00',
                     publicNote: 'usuń mnie',
                     businessNote: 'USUŃ MNIE - wartość do wyszukania na ekranie usług',
-                    assertTime: '18:00 - 18:30  Piotr Kowalczyk' + ServiceNameEnum.E2E_HAIRCUT.toLowerCase()
-                    //18:00-18:30PiotrKowalczyke2e-strzyżenie
+                    assertTime: '18:00 - 18:30  Piotr Kowalczyk' + ServiceNameEnum.E2E_HAIRCUT.toLowerCase(),
+
+                    // next case
+                    nextSpecialist: SpecialistNameEnum.E2E_E2E,
+                    nextService: ServiceNameEnum.BREAD_TRIM,
+                    nextServiceDescription: ServiceNameEnum.BREAD_TRIM_DESCRIPTION,
+                    nextSpecialistLastName: SpecialistNameEnum.E2E_SINGLE_NAME.toLowerCase(),
+                    nextDuration: '15',
+                    nextPrice: '80',
+                    newFirstName: 'Piotr',
+                    newLastName: 'Kowalczyk',
+                    nextSummary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + nextDayData + "   18:00\n⏳" +  " 15 min" + "\ne\ne\n" + SpecialistNameEnum.E2E_SINGLE_NAME + "\n" + '80,00 zł 👤 Piotr 📇',
+                    nextPaymentMethod: PaymentOptionEnum.CASH,
+                    nextPaymentStatus: PaymentStatusEnum.SUCCESS,
+                    nextDataAssert: nextDayData + '18:00',
+                    nextAssertTime: '18:00 - 18:15  Piotr Kowalczyk' + ServiceNameEnum.BREAD_TRIM
                 };
-            // case TestCaseEnum.CASE_2:
-            //     return {
-            //         specialist: SpecialistNameEnum.ZALEWSKI,
-            //         service: ServiceNameEnum.E2E_HAIRCUT.toLowerCase(),
-            //         serviceDescription: ServiceNameEnum.E2E_HAIRCUT_DESCRIPTION,
-            //         specialistLastName: SpecialistNameEnum.ZALEWSKI_LAST_NAME,
-            //         specialistFirstName: SpecialistNameEnum.ZALEWSKI_FIRST_NAME,
-            //         time: CalendarTableTimeEnum.Hour_07,
-            //         hour: null,
-            //         minute: '2',
-            //         price: '50',
-            //         summary:  ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + "\nPL\n⏰ " + Data + " 07:00\n ⏳ 2 min T Z Tomasz 50,00 zł 👤 Anonimowy",
-            //         paymentMethod: PaymentOptionEnum.CASH,
-            //         PaymentStatus: PaymentStatusEnum.SUCCESS,
-            //         dataAssert: Data + '07:00',
-            //         publicNote: 'test note',
-            //         businessNote: 'TEST - do usunięcia',
-            //         assertTime: '07:00-07:02 e2e-strzyżenie'
-            //     };
-            // case TestCaseEnum.CASE_3:
-            //     return {
-            //         specialist: SpecialistNameEnum.E2E_E2E,
-            //         service: ServiceNameEnum.BREAD_TRIM,
-            //         serviceDescription: ServiceNameEnum.BREAD_TRIM_DESCRIPTION,
-            //         specialistLastName: SpecialistNameEnum.E2E_SINGLE_NAME,
-            //         specialistFirstName: SpecialistNameEnum.E2E_SINGLE_NAME,
-            //         time: CalendarTableTimeEnum.Hour_12,
-            //         hour: null,
-            //         minute: null,
-            //         price: '150',
-            //         summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + "   12:00\n⏳" +  " 15 min" + " e e e2e 150,00 zł 👤 Anonimowy",
-            //         paymentMethod: PaymentOptionEnum.CARD,
-            //         PaymentStatus: PaymentStatusEnum.REJECTION,
-            //         dataAssert: Data + '12:00',
-            //         publicNote: 'sample note AAAAAAAAAAAA',
-            //         businessNote: 'SAMPLE - do usunięcia',
-            //         assertTime: '12:00 - 12:15   Strzyżenie Brody'
-            //     };
-            // case TestCaseEnum.CASE_4:
-            //     return {
-            //         specialist: SpecialistNameEnum.E2E_E2E,
-            //         service: ServiceNameEnum.E2E_HAIRCUT.toLowerCase(),
-            //         serviceDescription: ServiceNameEnum.E2E_HAIRCUT_DESCRIPTION,
-            //         specialistLastName: SpecialistNameEnum.E2E_SINGLE_NAME,
-            //         specialistFirstName: SpecialistNameEnum.E2E_SINGLE_NAME,
-            //         time: CalendarTableTimeEnum.Hour_15,
-            //         hour: '2',
-            //         minute: '2',
-            //         price: '475',
-            //         summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + " PL ⏰ " + Data + " 15:00 ⏳ 2 godz, 2 min e e e2e 475,00 zł 👤 Anonimowy",
-            //         paymentMethod: PaymentOptionEnum.CASH,
-            //         PaymentStatus: PaymentStatusEnum.REGISTERED,
-            //         dataAssert: Data + '15:00',
-            //         publicNote: 'coloring note',
-            //         businessNote: 'COLORING - do usunięcia',
-            //         assertTime: '15:00 - 17:02    e2e-strzyżenie'
-            //     };
             default:
                 throw new Error("Invalid test case");
         }

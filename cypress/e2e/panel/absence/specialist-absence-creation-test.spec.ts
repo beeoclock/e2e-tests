@@ -17,6 +17,12 @@ import {PanelAbsenceCreationDataProvider} from "../../../fixtures/panel/absence/
 
 describe('specialist absence creation test', () => {
 
+    before('clear environment', () => {
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
+        cy.clearAllCookies()
+    })
+
     it('test panel absence creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
@@ -47,8 +53,11 @@ describe('specialist absence creation test', () => {
         cy.log('assert login url');
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
 
+        cy.log('currentDate')
         CalendarPages.CalendarNavigationPage
             .verifyCurrenDate()
+        cy.log('next date')
+        CalendarPages.CalendarNavigationPage
             .clickNextDayArrow()
             .verifyNextDayDate();
 

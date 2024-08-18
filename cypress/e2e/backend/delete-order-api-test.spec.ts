@@ -5,9 +5,15 @@ import {ClientPropertiesEnum} from "../../support/beeoclock/common/enum/ClientPr
 import {BusinessNameEnum} from "../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {OrderApi} from "../../support/beeoclock/backend/panel/order/OrderApi";
 
-describe('panel new customer order service', (): void => {
+describe("delete all order's by api", (): void => {
 
-    it('test panel new customer order service', function () {
+    before('clear environment', () => {
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
+        cy.clearAllCookies()
+    })
+
+    it('should delete all order by api', function () {
         cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {
             failOnStatusCode: false,

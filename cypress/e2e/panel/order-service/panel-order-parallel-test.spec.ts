@@ -19,6 +19,13 @@ import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi"
 
 describe('panel - order service', () => {
 
+    before('clear environment', () => {
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
+        cy.clearAllCookies()
+    })
+
+
     it('test panel order service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,

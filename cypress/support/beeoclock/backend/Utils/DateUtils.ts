@@ -1,4 +1,3 @@
-
 import * as moment from "moment";
 import "moment-timezone/index";
 
@@ -271,11 +270,12 @@ export class DateUtils {
 
     //
     public static getStartOfTomorrowUTC(): string {
-        return moment.tz('Europe/Warsaw').add(1, 'days').startOf('day').toISOString();
+        const date = this.getCurrentDateFormatted()
+        return date + 'T22:00:00.000Z'
     }
 
     public static getEndOfTomorrowUTC(): string {
-        return moment.tz('Europe/Warsaw').add(1, 'days').endOf('day').toISOString();
+        return moment.utc().tz('Europe/Warsaw').add(1, 'days').endOf('day').toISOString();
     }
 
     public static formatDateDaysAhead(daysAhead: number): string {

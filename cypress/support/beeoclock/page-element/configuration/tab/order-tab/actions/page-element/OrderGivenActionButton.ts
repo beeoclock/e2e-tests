@@ -3,6 +3,7 @@ export class OrderGivenActionButton {
         return cy.get('.z-10.bg-white.divide-y')
             .find('li')
             .contains(action)
-            // .scrollIntoView().should('be.visible')
+            .scrollIntoView()
+            .should('exist')
     }
 }

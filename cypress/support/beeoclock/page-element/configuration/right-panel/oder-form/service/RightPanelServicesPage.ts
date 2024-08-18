@@ -122,6 +122,7 @@ export class RightPanelServicesPage {
     //CUSTOMER
 
     public clickOpenCustomerPopover(): RightPanelServicesPage {
+        cy.wait(500)
         RightPanelServicesPageElement.SelectCustomerOption.getElement()
             .click().then(() => {
             cy.get('.ion-padding').should('be.visible').then((visible) => {
@@ -132,7 +133,6 @@ export class RightPanelServicesPage {
         });
         return this;
     }
-
 
     public selectSpecificCustomerType(type: string): RightPanelServicesPage {
         if (type == CustomerTypeEnum.NEW) {
