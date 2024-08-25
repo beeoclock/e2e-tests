@@ -34,14 +34,13 @@ describe('panel - order service', () => {
             TestCaseEnum.CASE_4
         ];
 
-        cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {
             retryOnStatusCodeFailure: true,
+            retryOnNetworkFailure: true,
             onBeforeLoad: (win) => {
                 win.localStorage.setItem('language', 'pl');
             }
         });
-        cy.wait('@getAll', {timeout: 30000});
 
         cy.log('login')
         PanelLoginPageElement.EmailInput.getElement()

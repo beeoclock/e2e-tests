@@ -4,9 +4,9 @@ import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInter
 
 export class OrderActionTable {
 
-    public clickActionButton(orderId: string): OrderActionTable {
+    public clickActionButton(noteNumber: string): OrderActionTable {
         cy.wait(500)
-        OrderActionTableElement.OrderActionButton.getElement(orderId)
+        OrderActionTableElement.OrderActionButton.getElement(noteNumber)
             .click();
         return this;
     }

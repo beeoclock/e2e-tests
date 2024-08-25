@@ -29,7 +29,6 @@ describe('specialist absence creation test', () => {
             TestCaseEnum.CASE_2
         ];
 
-        cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {
             failOnStatusCode: false,
             onBeforeLoad: (win) => {
@@ -37,7 +36,6 @@ describe('specialist absence creation test', () => {
             }
         });
         cy.reload()
-        cy.wait('@getAll', {timeout: 30000});
 
         cy.log('login');
         PanelLoginPageElement.EmailInput.getElement();

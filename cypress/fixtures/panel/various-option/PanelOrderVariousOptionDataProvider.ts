@@ -12,16 +12,19 @@ import {
     PaymentOptionEnum
 } from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/summary-and-peyment/enum/PaymentOptionEnum";
 import {data} from "cypress/types/jquery";
+import { faker } from "@faker-js/faker";
 
 
 export class PanelOrderVariousOptionDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {
         let Data: string = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
         let nextDayData: string = DateUtils.getCurrentDatePlusGivenDay(1)
+        const controlNumber: string = faker.finance.pin(5);
 
         switch (caseEnum) {
             case TestCaseEnum.CASE_1:
                 return {
+                    controlNumber: controlNumber,
                     specialist: SpecialistNameEnum.ZALEWSKI,
                     service: ServiceNameEnum.E2E_HAIRCUT.toLowerCase(),
                     serviceDescription: ServiceNameEnum.E2E_HAIRCUT_DESCRIPTION,
@@ -39,7 +42,7 @@ export class PanelOrderVariousOptionDataProvider {
                     PaymentStatus: PaymentStatusEnum.IN_PROGRESS,
                     dataAssert: Data + '18:00',
                     publicNote: 'usuń mnie',
-                    businessNote: 'USUŃ MNIE - wartość do wyszukania na ekranie usług',
+                    businessNote: `USUŃ MNIE - notatka nr: ${controlNumber}` ,
                     assertTime: '18:00 - 18:30  Piotr Kowalczyk' + ServiceNameEnum.E2E_HAIRCUT.toLowerCase(),
 
                     // next case

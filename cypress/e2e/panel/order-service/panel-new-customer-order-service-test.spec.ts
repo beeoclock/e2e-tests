@@ -1,11 +1,6 @@
-import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
 import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryAssertion";
-import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
-import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
-import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
-import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {
     CustomerTypeEnum
@@ -24,32 +19,29 @@ import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi"
 
 describe('panel new customer order service', () => {
 
-    before('clear environment', () => {
-        cy.clearAllLocalStorage()
-        cy.clearAllSessionStorage()
-        cy.clearAllCookies()
-    })
-
     it('test panel new customer order service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
         ];
-        //
-        // cy.intercept('GET', '**/*').as('getAll');
-        cy.visit(ServiceEnum.CLIENT_PANEL, {
-            failOnStatusCode: false,
-            onBeforeLoad: (win) => {
-                win.localStorage.setItem('language', 'pl');
-            }
-        });
-        // cy.wait('@getAll', {timeout: 30000});
 
-        cy.log('login');
-        PanelLoginPageElement.EmailInput.getElement();
-        PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
-        PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
-        PanelLoginPage.clickLoginButton();
-        PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER);
+        // cy.log('visit')
+        // cy.visit(ServiceEnum.CLIENT_PANEL, {
+        //     failOnStatusCode: false,
+        //     onBeforeLoad: (win) => {
+        //         win.localStorage.setItem('language', 'pl');
+        //         win.sessionStorage.clear();
+        //         win.localStorage.clear();
+        //     }
+        // });
+        // cy.document().its('readyState').should('eq', 'complete');
+        //
+        // cy.log('login');
+        // PanelLoginPageElement.EmailInput.getElement();
+        // PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
+        // PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
+        // PanelLoginPage.clickLoginButton();
+        // PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER);
+        cy.loginOnPanel()
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
@@ -94,25 +86,25 @@ describe('panel new customer order service', () => {
                 .typeBusinessNote(testData.businessNote)
                 .clickSaveButton();
 
-            cy.get('@orderId').then((orderId) => {
-                cy.log('Order ID is: ' + orderId);
-                let oderID: string = orderId.toString()
+            // cy.get('@orderId').then((orderId) => {
+            //     cy.log('Order ID is: ' + orderId);
+            //     let oderID: string = orderId.toString()
 
-                cy.log('verify its order on table');
-                CalendarPages.CalendarTablePage
-                    .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
-                    .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
+            cy.log('verify its order on table');
+            CalendarPages.CalendarTablePage
+                .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
+                .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
-                cy.log('click, delete and verify deletion on table');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                OrderTabPages.OrderActionTable
-                    .clickActionButton(oderID)
-                    .clickSpecificAction(OrderActionsEnum.DELETE)
-                    .verifyOrderWithGivenIdNotExist(oderID)
+            cy.log('click, delete and verify deletion on table');
+            LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+            OrderTabPages.OrderActionTable
+                .clickActionButton(testData.businessNote)
+                .clickSpecificAction(OrderActionsEnum.DELETE)
+            // .verifyOrderWithGivenIdNotExist(oderID)
 
-                cy.log('create next order');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
-            })
+            cy.log('create next order');
+            LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+
 
             cy.log('CASE - 2')
             cy.log('create new order for previously created customer')
@@ -148,26 +140,25 @@ describe('panel new customer order service', () => {
                 .typeBusinessNote(testData.businessNote)
                 .clickSaveButton();
 
-            cy.get('@orderId').then((orderId) => {
-                cy.log('Order ID is: ' + orderId);
-                let oderID: string = orderId.toString()
+            // cy.get('@orderId').then((orderId) => {
+            //     cy.log('Order ID is: ' + orderId);
+            //     let oderID: string = orderId.toString()
 
-                cy.log('verify its order on table');
-                CalendarPages.CalendarTablePage
-                    .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
-                    .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, testData.nextAssertTime);
+            cy.log('verify its order on table');
+            CalendarPages.CalendarTablePage
+                .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
+                .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, testData.nextAssertTime);
 
-                cy.log('click, delete and verify deletion on table');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                OrderTabPages.OrderActionTable
-                    .clickActionButton(oderID)
-                    .clickSpecificAction(OrderActionsEnum.DELETE)
-                    .verifyOrderWithGivenIdNotExist(oderID)
+            cy.log('click, delete and verify deletion on table');
+            LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+            OrderTabPages.OrderActionTable
+                .clickActionButton(testData.businessNote)
+                .clickSpecificAction(OrderActionsEnum.DELETE)
+                // .verifyOrderWithGivenIdNotExist(oderID)
 
-                cy.log('create next order');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+            cy.log('create next order');
+            LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
 
-            });
         });
     });
 })

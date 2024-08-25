@@ -17,14 +17,16 @@ declare global {
 }
 
 Cypress.Commands.add('loginOnPanel', () => {
-    cy.intercept('GET', '**/*').as('getAll');
+    cy.log('visit')
     cy.visit(ServiceEnum.CLIENT_PANEL, {
         failOnStatusCode: false,
         onBeforeLoad: (win) => {
+            win.sessionStorage.clear();
+            win.localStorage.clear();
             win.localStorage.setItem('language', 'pl');
         }
     });
-    cy.wait('@getAll', {timeout: 30000});
+    cy.document().its('readyState').should('eq', 'complete');
 
     cy.log('login');
     PanelLoginPageElement.EmailInput.getElement();
@@ -32,5 +34,4 @@ Cypress.Commands.add('loginOnPanel', () => {
     PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
     PanelLoginPage.clickLoginButton();
     PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER);
-
 });

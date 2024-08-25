@@ -1,5 +1,7 @@
 import {DateUtils} from "../../Utils/DateUtils";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
+import {CommonElementPage} from "../../../page-element/common/common-element/CommonElementPage";
+import {TabNameEnum} from "../../../page-element/configuration/left-menu/enum/TabNameEnum";
 
 export class OrderApi {
 
@@ -95,7 +97,9 @@ export class OrderApi {
     public static deleteAllCurrentOrders(): void {
         OrderApi.getOrderId().then(orderIds => {
             OrderApi.deleteOrders(orderIds);
-        });
+        }).then(() => {
+            CommonElementPage.reloadOnCalendar()
+        })
     }
 
     public static deleteAllCurrentOrdersWithAssertion(): void {
