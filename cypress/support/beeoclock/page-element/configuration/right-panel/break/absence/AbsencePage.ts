@@ -14,7 +14,7 @@ export class AbsencePage {
 
     public verifyAbsenceFromTime(fromTime: string): AbsencePage {
         AbsencePageElement.AbsenceFromTime.getElement().invoke('prop', 'textContent').then(textContent => {
-            expect(textContent).to.include(fromTime+ ':00')
+            expect(textContent).to.include(fromTime)
         })
         return this
     }

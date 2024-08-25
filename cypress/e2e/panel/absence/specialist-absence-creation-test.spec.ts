@@ -36,7 +36,7 @@ describe('specialist absence creation test', () => {
                 win.localStorage.setItem('language', 'pl');
             }
         });
-
+        cy.reload()
         cy.wait('@getAll', {timeout: 30000});
 
         cy.log('login');

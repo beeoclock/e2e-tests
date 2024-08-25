@@ -34,15 +34,15 @@ describe('panel new customer order service', () => {
         const testCases = [
             TestCaseEnum.CASE_1,
         ];
-
-        cy.intercept('GET', '**/*').as('getAll');
+        //
+        // cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {
             failOnStatusCode: false,
             onBeforeLoad: (win) => {
                 win.localStorage.setItem('language', 'pl');
             }
         });
-        cy.wait('@getAll', {timeout: 30000});
+        // cy.wait('@getAll', {timeout: 30000});
 
         cy.log('login');
         PanelLoginPageElement.EmailInput.getElement();
