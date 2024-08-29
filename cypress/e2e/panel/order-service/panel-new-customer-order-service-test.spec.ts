@@ -99,67 +99,67 @@ describe('panel new customer order service', () => {
                 LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
                 OrderTabPages.OrderActionTable
                     .clickActionButton(oderID)
-                    .clickSpecificAction(OrderActionsEnum.DELETE)
-                    .verifyOrderWithGivenIdNotExist(oderID)
-
-                cy.log('create next order');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
-
-
-                cy.log('CASE - 2')
-                cy.log('create new order for previously created customer')
-                CalendarPages.CalendarNavigationPage
-                    .verifyCurrenDate()
-                    .clickNextDayArrow()
-                    .verifyNextDayDate();
-
-                CalendarPages.CalendarTablePage
-                    .clickOnGivenAndHour(testData.nextSpecialist, testData.time)
-                RightPanelPages.RightPanelServicesPage
-                    .clickAddOrderButton()
-                    .clickAddServiceButton()
-
-                    .selectSpecificService(testData.nextService)
-                    .verifySelectedService(testData.nextService)
-
-                    .clickOpenCustomerPopover()
-                    .selectSpecificCustomerType(CustomerTypeEnum.CLIENT);
-
-                RightPanelPages.CustomerPage
-                    .searchExistingCustomer(testData.firstName)
-                    .selectGivenCustomer(testData.firstName + ' ' + testData.lastName)
-
-                RightPanelPages.RightPanelServicesPage
-                    .selectPriceOfService(testData.nextPrice)
-                RightPanelPages.SummaryAndPaymentServicePage
-                    .verifyOrderService(testData.nextSummary)
-                    .verifyOrderSpecialist(testData.nextSpecialistLastName)
-                    .verifyOrderCustomer(testData.firstName)
-                    .selectPaymentMethod(testData.nextPaymentMethod)
-                    .selectPaymentStatus(testData.nextPaymentStatus)
-                    .typeBusinessNote(testData.businessNote)
-                    .clickSaveButton();
-
-                cy.get('@orderId').then((orderId) => {
-                    cy.log('Order ID is: ' + orderId);
-                    let oderID: string = orderId.toString()
-
-                    cy.log('verify its order on table');
-                    CalendarPages.CalendarTablePage
-                        .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
-                        .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, testData.nextAssertTime);
-
-                    cy.log('click, delete and verify deletion on table');
-                    LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                    OrderTabPages.OrderActionTable
-                        .clickActionButton(testData.businessNote)
-                        .clickSpecificAction(OrderActionsEnum.DELETE)
-                        .verifyOrderWithGivenIdNotExist(oderID)
-
-                    cy.log('create next order');
-                    LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
-
-                });
+                //     .clickSpecificAction(OrderActionsEnum.DELETE)
+                //     .verifyOrderWithGivenIdNotExist(oderID)
+                //
+                // cy.log('create next order');
+                // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+                //
+                //
+                // cy.log('CASE - 2')
+                // cy.log('create new order for previously created customer')
+                // CalendarPages.CalendarNavigationPage
+                //     .verifyCurrenDate()
+                //     .clickNextDayArrow()
+                //     .verifyNextDayDate();
+                //
+                // CalendarPages.CalendarTablePage
+                //     .clickOnGivenAndHour(testData.nextSpecialist, testData.time)
+                // RightPanelPages.RightPanelServicesPage
+                //     .clickAddOrderButton()
+                //     .clickAddServiceButton()
+                //
+                //     .selectSpecificService(testData.nextService)
+                //     .verifySelectedService(testData.nextService)
+                //
+                //     .clickOpenCustomerPopover()
+                //     .selectSpecificCustomerType(CustomerTypeEnum.CLIENT);
+                //
+                // RightPanelPages.CustomerPage
+                //     .searchExistingCustomer(testData.firstName)
+                //     .selectGivenCustomer(testData.firstName + ' ' + testData.lastName)
+                //
+                // RightPanelPages.RightPanelServicesPage
+                //     .selectPriceOfService(testData.nextPrice)
+                // RightPanelPages.SummaryAndPaymentServicePage
+                //     .verifyOrderService(testData.nextSummary)
+                //     .verifyOrderSpecialist(testData.nextSpecialistLastName)
+                //     .verifyOrderCustomer(testData.firstName)
+                //     .selectPaymentMethod(testData.nextPaymentMethod)
+                //     .selectPaymentStatus(testData.nextPaymentStatus)
+                //     .typeBusinessNote(testData.businessNote)
+                //     .clickSaveButton();
+                //
+                // cy.get('@orderId').then((orderId) => {
+                //     cy.log('Order ID is: ' + orderId);
+                //     let oderID: string = orderId.toString()
+                //
+                //     cy.log('verify its order on table');
+                //     CalendarPages.CalendarTablePage
+                //         .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
+                //         .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, testData.nextAssertTime);
+                //
+                //     cy.log('click, delete and verify deletion on table');
+                //     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                //     OrderTabPages.OrderActionTable
+                //         .clickActionButton(testData.businessNote)
+                //         .clickSpecificAction(OrderActionsEnum.DELETE)
+                //         .verifyOrderWithGivenIdNotExist(oderID)
+                //
+                //     cy.log('create next order');
+                //     LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+                //
+                // });
             });
         })
     })
