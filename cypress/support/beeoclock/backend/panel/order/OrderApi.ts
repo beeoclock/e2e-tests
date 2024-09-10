@@ -51,7 +51,7 @@ export class OrderApi {
     }
 
     public static deleteOrders(orderIds: string[]): any {
-        if (orderIds.length === 0) {
+        if (0 === orderIds.length) {
             cy.log('No orders to delete');
             return;
         }

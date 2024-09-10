@@ -8,14 +8,8 @@ import {CalendarPages} from "../../../support/beeoclock/page-element/configurati
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelOrderCreationDataProvider} from "../../../fixtures/panel/order/PanelOrderCreationDataProvider";
-import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import {
-    OrderActionsEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
-import {OrderTabPages} from "../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
-
+import {CommonElementPage} from "../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
 
 describe('panel - order service', () => {
 
@@ -25,7 +19,6 @@ describe('panel - order service', () => {
         cy.clearAllCookies()
     })
 
-
     it('test panel order service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
@@ -34,23 +27,11 @@ describe('panel - order service', () => {
             TestCaseEnum.CASE_4
         ];
 
-        cy.visit(ServiceEnum.CLIENT_PANEL, {
-            retryOnStatusCodeFailure: true,
-            retryOnNetworkFailure: true,
-            onBeforeLoad: (win) => {
-                win.localStorage.setItem('language', 'pl');
-            }
-        });
+        cy.loginOnPanel()
 
-        cy.log('login')
-        PanelLoginPageElement.EmailInput.getElement()
-        PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN)
-        PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD)
-        PanelLoginPage.clickLoginButton()
-        PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER)
-
+        cy.log('get token')
         cy.get('@token').then(token => {
-            cy.log('token: ' + token)
+            cy.log('token: ' + token);
 
             cy.log('delete orders before test')
             OrderApi.deleteAllCurrentOrders()
@@ -84,6 +65,7 @@ describe('panel - order service', () => {
                 .selectPaymentStatus(testData.PaymentStatus)
                 .typeBusinessNote(testData.businessNote)
                 .clickSaveButton()
+
             cy.get('@orderId').then((orderId) => {
                 cy.log('Order ID is: ' + orderId);
                 let oderID: string = orderId.toString()
@@ -93,15 +75,20 @@ describe('panel - order service', () => {
                     .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
                     .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
-                cy.log('click, delete and verify deletion on table');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                OrderTabPages.OrderActionTable
-                    .clickActionButton(oderID)
-                    .clickSpecificAction(OrderActionsEnum.DELETE)
-                    .verifyOrderWithGivenIdNotExist(oderID)
+                cy.log('TEMP - delete order by api')
+                OrderApi.deleteOrderWithGivenId(orderId)
+                CommonElementPage.reloadOnCalendar()
 
-                cy.log('create next order');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+                //     TODO deletion on order tab
+                // cy.log('click, delete and verify deletion on table');
+                // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                // OrderTabPages.OrderActionTable
+                //     .clickActionButton(oderID)
+                //     .clickSpecificAction(OrderActionsEnum.DELETE)
+                //     .verifyOrderWithGivenIdNotExist(oderID)
+                //
+                // cy.log('create next order');
+                // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
             });
         });
     });

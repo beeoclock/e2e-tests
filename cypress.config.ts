@@ -15,6 +15,7 @@ module.exports = defineConfig({
     pageLoadTimeout: 20000,
     requestTimeout: 10000,
     chromeWebSecurity: false,
-    includeShadowDom: true
+    includeShadowDom: true,
+    watchForFileChanges: false
   },
 })
