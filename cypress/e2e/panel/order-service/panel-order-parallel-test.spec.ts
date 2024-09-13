@@ -76,7 +76,7 @@ describe('panel - order service', () => {
                     .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
                 cy.log('TEMP - delete order by api')
-                OrderApi.deleteOrderWithGivenId(orderId)
+                OrderApi.deleteOrderWithGivenId(oderID)
                 CommonElementPage.reloadOnCalendar()
 
                 //     TODO deletion on order tab

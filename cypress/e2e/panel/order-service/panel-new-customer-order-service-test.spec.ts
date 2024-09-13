@@ -6,6 +6,10 @@ import {CustomerTypeEnum} from "../../../support/beeoclock/page-element/configur
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelOrderVariousOptionDataProvider} from "../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
+import { OrderTabPages } from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
+import { TabNameEnum } from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import { OrderActionsEnum } from "support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 
 describe('panel new customer order service', () => {
 
@@ -69,8 +73,8 @@ describe('panel new customer order service', () => {
                         .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
                     cy.log('TEMP - delete order by api')
-                    OrderApi.deleteOrderWithGivenId(orderId)
-                })
+                    OrderApi.deleteOrderWithGivenId(oderID)
+
                 //     TODO deletion on order tab
                 // cy.log('click, delete and verify deletion on table');
                 // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
@@ -78,7 +82,9 @@ describe('panel new customer order service', () => {
                 //     .clickActionButton(oderID)
                 //     .clickSpecificAction(OrderActionsEnum.DELETE)
                 //     .verifyOrderWithGivenIdNotExist(oderID)
-                //
+                })
+
+
                 // cy.log('create next order');
                 // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
                 //
@@ -127,7 +133,7 @@ describe('panel new customer order service', () => {
                         .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, testData.nextAssertTime);
 
                     cy.log('TEMP - delete order by api')
-                    OrderApi.deleteOrderWithGivenId(orderId)
+                    OrderApi.deleteOrderWithGivenId(oderID)
                     //     TODO deletion on order tab
                     //     cy.log('click, delete and verify deletion on table');
                     //     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);

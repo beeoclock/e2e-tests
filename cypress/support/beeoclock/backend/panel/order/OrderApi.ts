@@ -5,10 +5,10 @@ import {TabNameEnum} from "../../../page-element/configuration/left-menu/enum/Ta
 
 export class OrderApi {
 
-    public static getOrderId(): any {
+    public static getOrderIds(): any {
         return cy.get<string>('@token').then(tokenId => {
             const start = DateUtils.getStartOfTodayUTC();
-            const end = DateUtils.getEndOfTodayUTC();
+            const end = DateUtils.getEndOfTomorrowUTC();
             const url = `https://api.dev.beeoclock.com/panel/api/v1/order/paged?start=${start}&end=${end}&page=1&pageSize=10&orderBy=updatedAt&orderDir=desc`;
             return cy.request({
                 method: 'GET',
@@ -95,7 +95,7 @@ export class OrderApi {
     }
 
     public static deleteAllCurrentOrders(): void {
-        OrderApi.getOrderId().then(orderIds => {
+        OrderApi.getOrderIds().then(orderIds => {
             OrderApi.deleteOrders(orderIds);
         }).then(() => {
             CommonElementPage.reloadOnCalendar()
@@ -103,7 +103,7 @@ export class OrderApi {
     }
 
     public static deleteAllCurrentOrdersWithAssertion(): void {
-        OrderApi.getOrderId().then(orderIds => {
+        OrderApi.getOrderIds().then(orderIds => {
             OrderApi.deleteOrdersWithAssert(orderIds);
         });
     }
