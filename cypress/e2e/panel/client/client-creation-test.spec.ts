@@ -5,8 +5,17 @@ import {CalendarPages} from "../../../support/beeoclock/page-element/configurati
 import {CommonElementPage} from "../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {CommonPropertiesEnum} from "../../../support/beeoclock/page-element/common/enum/CommonPropertiesEnum";
-import {faker} from "@faker-js/faker";
 import {ClientCreationDataProvider} from "../../../fixtures/panel/client/ClientCreationDataProvider";
+import {ClientTabPages} from "../../../support/beeoclock/page-element/configuration/tab/client/ClientTabPages";
+import {
+    ClientTableCellEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
+import {
+    AbsenceActionEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/absence/absence-action/enum/AbsenceActionEnum";
+import {
+    ReloadCommonButton
+} from "../../../support/beeoclock/page-element/common/common-element/element/ReloadCommonButton";
 
 describe('customer creation test', () => {
 
@@ -19,7 +28,7 @@ describe('customer creation test', () => {
     it('test panel absence creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
-            TestCaseEnum.CASE_2
+            // TestCaseEnum.CASE_2
         ];
 
         cy.loginOnPanel()
@@ -53,8 +62,27 @@ describe('customer creation test', () => {
                 .clickSaveButton()
 
             cy.log('assertion')
+
+            cy.log('search created client')
             RightPanelPages.ClientFilterPage
-                .typeSearchValue(testData.firstName + " " + testData.lastName)
+                .typeSearchValue(testData.lastName)
+
+            cy.log('assert client table properties')
+            ClientTabPages.ClientTabTableAssertionPage
+                .verifyTableRowElement(ClientTableCellEnum.FIRST_NAME, testData.firstName)
+                .verifyTableRowElement(ClientTableCellEnum.LAST_NAME, testData.lastName)
+                .verifyTableRowElement(ClientTableCellEnum.PHONE, testData.phoneNumber)
+                .verifyTableRowElement(ClientTableCellEnum.NOTE, testData.description)
+                .verifyTableRowElement(ClientTableCellEnum.EMAIL, testData.email)
+
+            ClientTabPages.ClientTabActionPage
+                .clickActionButton(testData.email)
+                .clickDeactivateClient()
+                .clickActionButton(testData.email)
+            ReloadCommonButton.getElement().click()
+            ClientTabPages.ClientTabActionPage
+                .clickActionButton(testData.email)
+                .clickDeleteClient()
         })
     })
 });

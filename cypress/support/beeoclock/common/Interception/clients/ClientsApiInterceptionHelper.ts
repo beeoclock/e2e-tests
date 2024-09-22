@@ -15,4 +15,16 @@ export class ClientsApiInterceptionHelper {
         return createCustomer
     }
 
+    public static deactivateCustomer(): string {
+        const deactivateCustomer = 'deactivateCustomer' + DateUtils.getCurrentTime();
+        cy.intercept('PATCH', EntryPointEnum.API_ENTRY_POINT + '/customer/*/archive').as(deactivateCustomer);
+        return deactivateCustomer
+    }
+
+    public static deleteCustomer(): string {
+        const deleteCustomer = 'deleteCustomer' + DateUtils.getCurrentTime();
+        cy.intercept('DELETE', EntryPointEnum.API_ENTRY_POINT + '/customer/*').as(deleteCustomer);
+        return deleteCustomer
+    }
+
 }

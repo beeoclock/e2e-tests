@@ -37,6 +37,9 @@ export class ClientFormPage {
             .click().then(() => {
             ApiInterceptionHelper.waitFor201Alias(createCustomer)
             //TODO add snackbar assertions
+            //     cy.get('.toast-message').should('have.value', 'Klient został utworzony.')
+                cy.get('.toast-container').find('button').click()
+            cy.wait(1000)
         })
         return this;
     }

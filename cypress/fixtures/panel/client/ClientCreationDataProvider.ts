@@ -10,7 +10,7 @@ export class ClientCreationDataProvider {
                     firstName: faker.name.firstName("male"),
                     lastName: faker.name.lastName(),
                     email: faker.internet.email(),
-                    phoneNumber: faker.phone.number(),
+                    phoneNumber: faker.finance.account(9),
                     description: 'opis nr: ' + faker.finance.account(15)
                 };
             case TestCaseEnum.CASE_2:
