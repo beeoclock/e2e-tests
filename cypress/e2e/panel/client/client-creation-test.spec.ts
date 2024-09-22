@@ -5,7 +5,8 @@ import {CalendarPages} from "../../../support/beeoclock/page-element/configurati
 import {CommonElementPage} from "../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {CommonPropertiesEnum} from "../../../support/beeoclock/page-element/common/enum/CommonPropertiesEnum";
-import {faker, fakerAR} from "@faker-js/faker";
+import {faker} from "@faker-js/faker";
+import {ClientCreationDataProvider} from "../../../fixtures/panel/client/ClientCreationDataProvider";
 
 describe('customer creation test', () => {
 
@@ -35,10 +36,24 @@ describe('customer creation test', () => {
             .verifyCurrenDate()
 
         LeftMenuPage.clickClientTab();
-        CommonElementPage.clickAddResourceButton()
 
-        RightPanelPages.ClientFormPage
-            .typeGivenCustomerInput(CommonPropertiesEnum.FIRST_NAME, faker.name.firstName())
+        testCases.forEach(testCase => {
+            const testData = ClientCreationDataProvider.getTestData(testCase);
 
+            cy.log('add button')
+            CommonElementPage.clickAddResourceButton()
+
+            cy.log('creation')
+            RightPanelPages.ClientFormPage
+                .typeGivenCustomerInput(CommonPropertiesEnum.FIRST_NAME, testData.firstName)
+                .typeGivenCustomerInput(CommonPropertiesEnum.LAST_NAME, testData.lastName)
+                .typeGivenCustomerInput(CommonPropertiesEnum.EMAIL, testData.email)
+                .typeGivenCustomerInput(CommonPropertiesEnum.PHONE, testData.phoneNumber)
+                .typeClientDescription(testData.description)
+                .clickSaveButton()
+
+            cy.log('assertion')
+
+        })
     })
 });
