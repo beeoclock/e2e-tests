@@ -1,6 +1,7 @@
 import {LeftMenuPageElement} from "./LeftMenuPageElement";
 import {ApiInterceptionHelper} from "../../../common/Interception/ApiInterceptionHelper";
 import {TabNameEnum} from "./enum/TabNameEnum";
+import {ClientsApiInterceptionHelper} from "../../../common/Interception/clients/ClientsApiInterceptionHelper";
 
 export class LeftMenuPage {
 
@@ -15,8 +16,12 @@ export class LeftMenuPage {
         if (tab == TabNameEnum.CALENDAR) {
             ApiInterceptionHelper.waitForAlias(getOrder)
             ApiInterceptionHelper.waitForAlias(getAbsence)
-        } if (tab == TabNameEnum.ABSENCE) {
+        }
+        if (tab == TabNameEnum.ABSENCE) {
             ApiInterceptionHelper.waitForAlias(getAbsence)
+        }
+        if (tab == TabNameEnum.CLIENTS) {
+            this.clickClientTab()
         }
         return this;
     }
@@ -26,6 +31,16 @@ export class LeftMenuPage {
         LeftMenuPageElement.TabElement.getElement(TabNameEnum.ABSENCE)
             .click()
         ApiInterceptionHelper.waitForAlias(getAbsence)
+        return this;
+    }
+
+    public static clickClientTab(): LeftMenuPage {
+        const getCustomers = ClientsApiInterceptionHelper.getCustomers()
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.CLIENTS)
+            .click()
+        ApiInterceptionHelper.waitForQueryAliasWithAssert(getCustomers)
+        cy.get('customer-desktop-layout-list-component').should('be.visible')
+        cy.get('customer-table-list-component').should('be.visible')
         return this;
     }
 }

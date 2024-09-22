@@ -28,7 +28,7 @@ describe("delete all order's by api", (): void => {
         PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
         PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
         PanelLoginPage.clickLoginButton();
-        PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER);
+        PanelLoginPage.selectGivenBusinessAndStoreToken(BusinessNameEnum.HAIRCUT_AND_BARBER);
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token);

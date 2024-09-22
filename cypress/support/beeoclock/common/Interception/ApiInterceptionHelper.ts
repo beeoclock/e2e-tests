@@ -11,6 +11,16 @@ export class ApiInterceptionHelper {
         cy.wait('@' + alias).its('response.statusCode').should('eq', 201);
     }
 
+    public static waitForQueryAliasWithAssert(alias: string): void {
+        cy.wait('@' + alias).then((interception) => {
+            const requestUrl: URL = new URL(interception.request.url);
+            expect(requestUrl.searchParams.get('orderBy')).to.equal('createdAt');
+            expect(requestUrl.searchParams.get('orderDir')).to.equal('desc');
+            expect(requestUrl.searchParams.get('page')).to.equal('1');
+            expect(requestUrl.searchParams.get('pageSize')).to.equal('20');
+        })
+    }
+
     public static getBusinessProfile(): string {
         const getBusinessProfile = 'getBusinessProfile' + DateUtils.getCurrentTime();
         cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/business-profile').as(getBusinessProfile);

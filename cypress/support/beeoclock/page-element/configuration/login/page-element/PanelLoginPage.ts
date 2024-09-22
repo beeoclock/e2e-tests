@@ -21,7 +21,7 @@ export class PanelLoginPage {
         return this;
     }
 
-    public static selectGivenBusiness(business: string): PanelLoginPage {
+    public static selectGivenBusinessAndStoreToken(business: string): PanelLoginPage {
         const getBusinessProfile = ApiInterceptionHelper.getBusinessProfile()
         PanelLoginPageElement.SelectBusinessOption.getElement(business)
             .click()

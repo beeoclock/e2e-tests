@@ -1,7 +1,6 @@
 import {CalendarReloadButton} from "./element/CalendarReloadButton";
 import {SaveButton} from "./element/SaveButton";
-import {ApiInterceptionHelper} from "../../../common/Interception/ApiInterceptionHelper";
-import {TabNameEnum} from "../../configuration/left-menu/enum/TabNameEnum";
+import {BlueAddResource} from "./element/BlueAddResource";
 
 export class CommonElementPage {
 
@@ -16,6 +15,11 @@ export class CommonElementPage {
         CalendarReloadButton.getElement()
             .click()
         // ApiInterceptionHelper.waitForAlias(getOrder)
+        return this
+    }
+
+    public static clickAddResourceButton(): CommonElementPage {
+        BlueAddResource.getElement().click()
         return this
     }
 }

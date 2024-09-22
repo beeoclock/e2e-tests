@@ -4,6 +4,7 @@ import {SummaryAndPaymentServicePage} from "./oder-form/summary-and-peyment/Summ
 import {CustomerPage} from "./oder-form/service/customer/CustomerPage";
 import {BreakScienceGivenTimePage} from "./break/navigation/BreakScienceGivenTimePage";
 import {AbsencePage} from "./break/absence/AbsencePage";
+import {ClientFormPage} from "./client-form/ClientFormPage";
 
 export class RightPanelPages {
 
@@ -13,4 +14,5 @@ export class RightPanelPages {
     public static CustomerPage: CustomerPage = new CustomerPage()
     public static BreakScienceGivenTimePage: BreakScienceGivenTimePage = new BreakScienceGivenTimePage()
     public static AbsencePage: AbsencePage = new AbsencePage()
+    public static ClientFormPage: ClientFormPage = new ClientFormPage()
 }

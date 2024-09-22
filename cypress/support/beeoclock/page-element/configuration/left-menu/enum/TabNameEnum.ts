@@ -3,5 +3,5 @@ export enum TabNameEnum {
     CLIENTS = 'Klienci',
     ORDER = 'Zamówienia',
     SERVICE = 'Usługi',
-    ABSENCE = 'Nieobecność'
+    ABSENCE = 'Nieobecność',
 }
