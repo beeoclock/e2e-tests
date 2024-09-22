@@ -53,7 +53,8 @@ describe('customer creation test', () => {
                 .clickSaveButton()
 
             cy.log('assertion')
-
+            RightPanelPages.ClientFilterPage
+                .typeSearchValue(testData.firstName + " " + testData.lastName)
         })
     })
 });
