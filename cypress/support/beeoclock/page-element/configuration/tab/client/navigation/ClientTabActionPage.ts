@@ -34,7 +34,10 @@ export class ClientTabActionPage {
                 .click()
         }).then(() => {
             ApiInterceptionHelper.waitForAlias(deletion)
+            cy.wait(1000)
         })
         return this
     }
+
+
 }

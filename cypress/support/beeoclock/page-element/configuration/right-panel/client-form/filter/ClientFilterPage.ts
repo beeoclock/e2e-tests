@@ -7,6 +7,7 @@ export class ClientFilterPage {
     public typeSearchValue(value: string): ClientFilterPage {
         const getCustomer = CustomerApiInterceptionHelper.getCustomer(value)
         SearchInput.getElement()
+            .clear()
             .type(value).then(() => {
             ApiInterceptionHelper.waitForAlias(getCustomer)
         })

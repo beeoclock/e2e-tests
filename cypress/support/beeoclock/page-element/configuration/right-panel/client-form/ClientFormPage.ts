@@ -8,16 +8,20 @@ import {ApiInterceptionHelper} from "../../../../common/Interception/ApiIntercep
 export class ClientFormPage {
 
     public typeGivenCustomerInput(label: CommonPropertiesEnum, value: string): ClientFormPage {
-        CustomerInput.getElement(label).type(value).then(() => {
-            this.verifyGivenCustomerInput(label, value)
-        })
+        if(value) {
+            CustomerInput.getElement(label).type(value).then(() => {
+                this.verifyGivenCustomerInput(label, value)
+            })
+        }
         return this
     }
 
     public typeClientDescription(description: string): ClientFormPage {
-        ClientDescriptionInput.getElement().type(description).then(() => {
-            this.verifyClientDescription(description)
-        })
+        if (description) {
+            ClientDescriptionInput.getElement().type(description).then(() => {
+                this.verifyClientDescription(description)
+            })
+        }
         return this;
     }
 

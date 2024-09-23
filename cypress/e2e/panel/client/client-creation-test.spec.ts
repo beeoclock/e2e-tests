@@ -7,15 +7,8 @@ import {RightPanelPages} from "../../../support/beeoclock/page-element/configura
 import {CommonPropertiesEnum} from "../../../support/beeoclock/page-element/common/enum/CommonPropertiesEnum";
 import {ClientCreationDataProvider} from "../../../fixtures/panel/client/ClientCreationDataProvider";
 import {ClientTabPages} from "../../../support/beeoclock/page-element/configuration/tab/client/ClientTabPages";
-import {
-    ClientTableCellEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
-import {
-    AbsenceActionEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/absence/absence-action/enum/AbsenceActionEnum";
-import {
-    ReloadCommonButton
-} from "../../../support/beeoclock/page-element/common/common-element/element/ReloadCommonButton";
+import {ClientTableCellEnum} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
+import {ReloadCommonButton} from "../../../support/beeoclock/page-element/common/common-element/element/ReloadCommonButton";
 
 describe('customer creation test', () => {
 
@@ -23,12 +16,15 @@ describe('customer creation test', () => {
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage()
         cy.clearAllCookies()
+        cy.reload()
     })
 
     it('test panel absence creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
-            // TestCaseEnum.CASE_2
+            TestCaseEnum.CASE_2,
+            TestCaseEnum.CASE_3,
+            TestCaseEnum.CASE_4
         ];
 
         cy.loginOnPanel()
@@ -46,8 +42,11 @@ describe('customer creation test', () => {
 
         LeftMenuPage.clickClientTab();
 
+
+
         testCases.forEach(testCase => {
             const testData = ClientCreationDataProvider.getTestData(testCase);
+            cy.log('case: ' + testCase)
 
             cy.log('add button')
             CommonElementPage.clickAddResourceButton()
@@ -76,12 +75,12 @@ describe('customer creation test', () => {
                 .verifyTableRowElement(ClientTableCellEnum.EMAIL, testData.email)
 
             ClientTabPages.ClientTabActionPage
-                .clickActionButton(testData.email)
+                .clickActionButton(testData.email)//roll up
                 .clickDeactivateClient()
-                .clickActionButton(testData.email)
+                .clickActionButton(testData.email)//roll down
             ReloadCommonButton.getElement().click()
             ClientTabPages.ClientTabActionPage
-                .clickActionButton(testData.email)
+                .clickActionButton(testData.email)//roll up
                 .clickDeleteClient()
         })
     })
