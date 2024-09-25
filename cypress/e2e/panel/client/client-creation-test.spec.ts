@@ -42,14 +42,12 @@ describe('customer creation test', () => {
 
         LeftMenuPage.clickClientTab();
 
-
+        cy.log('add button')
+        CommonElementPage.clickAddResourceButton()
 
         testCases.forEach(testCase => {
             const testData = ClientCreationDataProvider.getTestData(testCase);
             cy.log('case: ' + testCase)
-
-            cy.log('add button')
-            CommonElementPage.clickAddResourceButton()
 
             cy.log('creation')
             RightPanelPages.ClientFormPage
@@ -75,13 +73,15 @@ describe('customer creation test', () => {
                 .verifyTableRowElement(ClientTableCellEnum.EMAIL, testData.email)
 
             ClientTabPages.ClientTabActionPage
-                .clickActionButton(testData.email)//roll up
+                .clickActionButton(testData.lastName)//roll up
                 .clickDeactivateClient()
-                .clickActionButton(testData.email)//roll down
+                .clickActionButton(testData.lastName)//roll down
             ReloadCommonButton.getElement().click()
             ClientTabPages.ClientTabActionPage
-                .clickActionButton(testData.email)//roll up
+                .clickActionButton(testData.lastName)//roll up
                 .clickDeleteClient()
+            ClientTabPages.ClientTabTableAssertionPage
+                .clickAddOnNotFoundComponent()
         })
     })
 });
