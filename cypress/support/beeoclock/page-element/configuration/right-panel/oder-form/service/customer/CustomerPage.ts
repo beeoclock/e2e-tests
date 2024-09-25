@@ -33,7 +33,7 @@ export class CustomerPage {
 
     public clickConfirmButton(): CustomerPage {
         RightPanelServicesPageElement.ConfirmButton.getElement()
-            .click()
+            .click({force: true})
         return this;
     }
 

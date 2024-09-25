@@ -83,7 +83,7 @@ export class RightPanelServicesPage {
         RightPanelServicesPageElement.OpenPriceInputElement.getElement()
             .click()
         this.typePrice(price)
-        cy.get('[id^="ion-overlay-"]').last().click()
+        cy.contains('button', 'Potwierdź').click()
         return this;
     }
 

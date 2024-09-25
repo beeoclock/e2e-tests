@@ -2,14 +2,14 @@ import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryA
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {CustomerTypeEnum} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
+import {
+    CustomerTypeEnum
+} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
-import {PanelOrderVariousOptionDataProvider} from "../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
+import {
+    PanelOrderVariousOptionDataProvider
+} from "../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
-import { OrderTabPages } from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
-import { TabNameEnum } from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import { OrderActionsEnum } from "support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
-import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 
 describe('panel new customer order service', () => {
 
@@ -75,13 +75,13 @@ describe('panel new customer order service', () => {
                     cy.log('TEMP - delete order by api')
                     OrderApi.deleteOrderWithGivenId(oderID)
 
-                //     TODO deletion on order tab
-                // cy.log('click, delete and verify deletion on table');
-                // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                // OrderTabPages.OrderActionTable
-                //     .clickActionButton(oderID)
-                //     .clickSpecificAction(OrderActionsEnum.DELETE)
-                //     .verifyOrderWithGivenIdNotExist(oderID)
+                    //     TODO deletion on order tab
+                    // cy.log('click, delete and verify deletion on table');
+                    // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                    // OrderTabPages.OrderActionTable
+                    //     .clickActionButton(oderID)
+                    //     .clickSpecificAction(OrderActionsEnum.DELETE)
+                    //     .verifyOrderWithGivenIdNotExist(oderID)
                 })
 
 
@@ -109,7 +109,13 @@ describe('panel new customer order service', () => {
 
                 RightPanelPages.CustomerPage
                     .searchExistingCustomer(testData.firstName)
+
+                cy.log('selectGivenCustomer')
+                RightPanelPages.CustomerPage
                     .selectGivenCustomer(testData.firstName + ' ' + testData.lastName)
+
+                cy.log('clickConfirmButton')
+                RightPanelPages.CustomerPage
                     .clickConfirmButton();
 
                 RightPanelPages.RightPanelServicesPage

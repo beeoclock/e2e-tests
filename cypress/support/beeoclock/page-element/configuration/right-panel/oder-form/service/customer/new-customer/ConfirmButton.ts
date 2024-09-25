@@ -1,6 +1,6 @@
 export class ConfirmButton {
     public getElement(): any {
-        return cy.contains('button', 'Gotowe')
+        return cy.get('.gap-3').contains('button', 'Gotowe')
             .should('exist')
 
     }
