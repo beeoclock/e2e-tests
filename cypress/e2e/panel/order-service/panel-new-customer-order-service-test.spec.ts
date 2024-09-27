@@ -1,17 +1,19 @@
-import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryAssertion";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {
-    CustomerTypeEnum
-} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
+import {CustomerTypeEnum} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
-import {
-    PanelOrderVariousOptionDataProvider
-} from "../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
+import {PanelOrderVariousOptionDataProvider} from "../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
+import {ModuleAssertionPage} from "../../../support/beeoclock/common/assertion/ModuleAssertionPage";
 
 describe('panel new customer order service', () => {
+
+    before('clear environment', () => {
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
+        cy.clearAllCookies()
+    })
 
     it('test panel new customer order service', function () {
         const testCases = [
@@ -27,8 +29,8 @@ describe('panel new customer order service', () => {
             cy.log('delete orders before test')
             OrderApi.deleteAllCurrentOrders()
 
-            cy.log('assert login url');
-            QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
+            cy.log('verify calendar tab component');
+            ModuleAssertionPage.verifyCalendarTabModule()
 
             testCases.forEach(testCase => {
                 const testData = PanelOrderVariousOptionDataProvider.getTestData(testCase);

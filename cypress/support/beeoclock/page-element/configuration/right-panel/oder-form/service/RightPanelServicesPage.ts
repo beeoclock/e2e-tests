@@ -63,7 +63,7 @@ export class RightPanelServicesPage {
                 .find('ion-picker-column-option').eq(0).scrollIntoView().click()
         }
         if (minute == '30') {
-            cy.get('#ion-overlay-4 > .ion-delegate-host > .ng-untouched')
+            cy.get('.ion-delegate-host > .ng-untouched')
                 .find('ion-picker-column').last()
                 .find('ion-picker-column-option').eq(28).scrollIntoView().click()
             // cy.wait(1000)

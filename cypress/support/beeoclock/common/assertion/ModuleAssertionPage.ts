@@ -1,0 +1,15 @@
+import {QueryAssertion} from "./QueryAssertion";
+
+export class ModuleAssertionPage {
+
+    public static verifyCalendarTabModule(): ModuleAssertionPage {
+        QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
+        cy.get('app-event-calendar-with-specialists-page').should('be.visible')
+        cy.get('app-calendar-with-specialists-widget-component').should('be.visible')
+        cy.get('event-date-control-calendar-with-specialists-component').should('be.visible')
+        cy.get('utility-auto-refresh-component').should('be.visible')
+        cy.get('#calendar-with-specialists-filter-order-service-status').should('be.visible')
+        cy.get('settings-component').should('be.visible')
+        return this
+    }
+}

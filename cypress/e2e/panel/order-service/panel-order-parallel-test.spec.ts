@@ -1,15 +1,11 @@
-import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
 import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryAssertion";
-import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
-import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
-import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
-import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelOrderCreationDataProvider} from "../../../fixtures/panel/order/PanelOrderCreationDataProvider";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {CommonElementPage} from "../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
+import {ModuleAssertionPage} from "../../../support/beeoclock/common/assertion/ModuleAssertionPage";
 
 describe('panel - order service', () => {
 
@@ -37,8 +33,8 @@ describe('panel - order service', () => {
             OrderApi.deleteAllCurrentOrders()
         })
 
-        cy.log('assert login url')
-        QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists')
+        cy.log('verify calendar tab component');
+        ModuleAssertionPage.verifyCalendarTabModule()
 
         testCases.forEach(testCase => {
             const testData = PanelOrderCreationDataProvider.getTestData(testCase);
