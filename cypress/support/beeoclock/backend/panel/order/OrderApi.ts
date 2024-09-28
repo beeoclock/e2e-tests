@@ -7,9 +7,37 @@ export class OrderApi {
 
     public static getOrderIds(): any {
         return cy.get<string>('@token').then(tokenId => {
-            const start = DateUtils.getStartOfTodayUTC();
+            const start = DateUtils.getStartOfPreviousDays(100);
             const end = DateUtils.getEndOfTomorrowUTC();
-            const url = `https://api.dev.beeoclock.com/panel/api/v1/order/paged?start=${start}&end=${end}&page=1&pageSize=10&orderBy=updatedAt&orderDir=desc`;
+            const url = `https://api.dev.beeoclock.com/panel/api/v1/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedAt&orderDir=desc`;
+            return cy.request({
+                method: 'GET',
+                url: url,
+                headers: {
+                    'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                },
+                auth: {
+                    bearer: tokenId
+                }
+            }).then(response => {
+                expect(response.status).to.equal(200);
+                if (Array.isArray(response.body.items) && response.body.items.length > 0) {
+                    const orderIds = response.body.items.map((order: any) => order._id);
+                    cy.log('Order IDs:', orderIds.join(', '));
+                    return cy.wrap(orderIds);
+                } else {
+                    cy.log('No orders found');
+                    return cy.wrap([]);
+                }
+            });
+        });
+    }
+
+    public static getAllOrderIds(): any {
+        return cy.get<string>('@token').then(tokenId => {
+            const start = DateUtils.getStartOfPreviousDays(100);
+            const end = DateUtils.getEndOfTomorrowUTC();
+            const url = 'https://api.dev.beeoclock.com/panel/api/v1/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
             return cy.request({
                 method: 'GET',
                 url: url,
@@ -96,6 +124,14 @@ export class OrderApi {
 
     public static deleteAllCurrentOrders(): void {
         OrderApi.getOrderIds().then(orderIds => {
+            OrderApi.deleteOrders(orderIds);
+        }).then(() => {
+            CommonElementPage.reloadOnCalendar()
+        })
+    }
+
+    public static deleteAllOrders(): void {
+        OrderApi.getAllOrderIds().then(orderIds => {
             OrderApi.deleteOrders(orderIds);
         }).then(() => {
             CommonElementPage.reloadOnCalendar()

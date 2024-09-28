@@ -264,6 +264,13 @@ export class DateUtils {
         return moment.tz('Europe/Warsaw').startOf('day').toISOString();
     }
 
+    public static getStartOfPreviousDays(days: number) {
+        return moment.tz('Europe/Warsaw')
+            .subtract(days, 'days')
+            .startOf('day')
+            .toISOString();
+    }
+
     public static getEndOfTodayUTC(): string {
         return moment.tz('Europe/Warsaw').endOf('day').toISOString();
     }

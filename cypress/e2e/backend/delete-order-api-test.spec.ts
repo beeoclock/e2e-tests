@@ -34,7 +34,7 @@ describe("delete all order's by api", (): void => {
             cy.log('token: ' + token);
 
             cy.log('delete orders with assertion that its status equal deleted')
-          OrderApi.deleteAllCurrentOrdersWithAssertion()
+          OrderApi.deleteAllOrders()
         });
     });
 });

@@ -7,4 +7,10 @@ export class RightPanelNavigationPage {
             .click()
         return this;
     }
+
+    public clickCloseRightPanel(): RightPanelNavigationPage {
+        RightPanelNavigationPageElement.CloseRightPanelButton.getElement()
+            .click()
+        return this
+    }
 }

@@ -5,14 +5,13 @@ import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInter
 export class OrderActionTable {
 
     public clickActionButton(noteNumber: string): OrderActionTable {
-        cy.wait(3000)
         OrderActionTableElement.OrderActionButton.getElement(noteNumber)
             .click();
         return this;
     }
 
     public clickSpecificAction(action: string): OrderActionTable {
-        cy.wait(700)
+        cy.wait(200)
         const getOrder = ApiInterceptionHelper.getOrder()
         const deleteAction = ApiInterceptionHelper.deleteServices()
         OrderActionTableElement.OrderGivenActionButton.getElement(action).scrollIntoView()
@@ -25,9 +24,7 @@ export class OrderActionTable {
     }
 
     public verifyOrderWithGivenIdNotExist(orderId: string): OrderActionTable {
-        cy.get('order-list-of-card-collection-by-date-component')
-            .find('app-card-item-order-component').contains(orderId)
-            .should('not.exist')
+        cy.get('#table-row-' + orderId).should('not.exist')
         return this;
     }
 }

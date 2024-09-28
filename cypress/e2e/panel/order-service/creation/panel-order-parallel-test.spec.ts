@@ -1,11 +1,13 @@
-import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryAssertion";
-import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
-import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
-import {PanelOrderCreationDataProvider} from "../../../fixtures/panel/order/PanelOrderCreationDataProvider";
-import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
-import {CommonElementPage} from "../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
-import {ModuleAssertionPage} from "../../../support/beeoclock/common/assertion/ModuleAssertionPage";
+import {RightPanelPages} from "../../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
+import {CalendarPages} from "../../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
+import {TestCaseEnum} from "../../../../fixtures/enum/TestCaseEnum";
+import {PanelOrderCreationDataProvider} from "../../../../fixtures/panel/order/PanelOrderCreationDataProvider";
+import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
+import {ModuleAssertionPage} from "../../../../support/beeoclock/common/assertion/ModuleAssertionPage";
+import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import {OrderActionsEnum} from "support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
 
 describe('panel - order service', () => {
 
@@ -30,7 +32,7 @@ describe('panel - order service', () => {
             cy.log('token: ' + token);
 
             cy.log('delete orders before test')
-            OrderApi.deleteAllCurrentOrders()
+            OrderApi.deleteAllOrders()
         })
 
         cy.log('verify calendar tab component');
@@ -71,20 +73,19 @@ describe('panel - order service', () => {
                     .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
                     .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
-                cy.log('TEMP - delete order by api')
-                OrderApi.deleteOrderWithGivenId(oderID)
-                CommonElementPage.reloadOnCalendar()
+                // cy.log('TEMP - delete order by api')
+                // OrderApi.deleteOrderWithGivenId(oderID)
+                // CommonElementPage.reloadOnCalendar()
 
-                //     TODO deletion on order tab
-                // cy.log('click, delete and verify deletion on table');
-                // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                // OrderTabPages.OrderActionTable
-                //     .clickActionButton(oderID)
-                //     .clickSpecificAction(OrderActionsEnum.DELETE)
-                //     .verifyOrderWithGivenIdNotExist(oderID)
-                //
-                // cy.log('create next order');
-                // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+                cy.log('click, delete and verify deletion on table');
+                LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                OrderTabPages.OrderActionTable
+                    .clickActionButton(oderID)
+                    .clickSpecificAction(OrderActionsEnum.DELETE)
+                    .verifyOrderWithGivenIdNotExist(oderID)
+
+                cy.log('create next order');
+                LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
             });
         });
     });

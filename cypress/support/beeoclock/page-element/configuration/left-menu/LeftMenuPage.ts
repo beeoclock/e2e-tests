@@ -12,6 +12,7 @@ export class LeftMenuPage {
             .click()
         if (tab == TabNameEnum.ORDER) {
             ApiInterceptionHelper.waitForAlias(getOrder)
+            cy.get('app-list-order-page').should('be.visible')
         }
         if (tab == TabNameEnum.CALENDAR) {
             ApiInterceptionHelper.waitForAlias(getOrder)

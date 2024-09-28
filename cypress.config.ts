@@ -12,6 +12,7 @@ module.exports = defineConfig({
     viewportWidth: 1920,
     defaultCommandTimeout: 10000,
     experimentalRunAllSpecs: true,
+    numTestsKeptInMemory: 1,
     pageLoadTimeout: 20000,
     requestTimeout: 10000,
     chromeWebSecurity: false,
