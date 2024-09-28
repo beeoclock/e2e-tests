@@ -73,10 +73,6 @@ describe('panel - order service', () => {
                     .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
                     .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
-                // cy.log('TEMP - delete order by api')
-                // OrderApi.deleteOrderWithGivenId(oderID)
-                // CommonElementPage.reloadOnCalendar()
-
                 cy.log('click, delete and verify deletion on table');
                 LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
                 OrderTabPages.OrderActionTable

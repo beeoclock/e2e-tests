@@ -12,7 +12,6 @@ import {
 import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages"
 import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages"
 
-
 describe('panel new customer order service', () => {
 
     before('clear environment', () => {
@@ -84,10 +83,6 @@ describe('panel new customer order service', () => {
                         .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
                         .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
-                    // cy.log('TEMP - delete order by api')
-                    // OrderApi.deleteOrderWithGivenId(oderID)
-
-
                     cy.log('get order table module');
                     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
 
@@ -112,9 +107,10 @@ describe('panel new customer order service', () => {
                         .verifySelectCustomer(orderID, '👤 Isabel 📇')
 
                     cy.log('order price edition')
-
-
-
+                    OrderTabPages.OrderEditionFormPage
+                        .clickOrderPriceComponent(orderID)
+                    RightPanelPages.RightPanelServicesPage
+                        .typePrice('500')
                 })
             })
         })

@@ -1,15 +1,21 @@
 import {SpecialistNameEnum} from "../../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarPages} from "../../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {RightPanelPages} from "../../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {CustomerTypeEnum} from "../../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
+import {
+    CustomerTypeEnum
+} from "../../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {TestCaseEnum} from "../../../../fixtures/enum/TestCaseEnum";
-import {PanelOrderVariousOptionDataProvider} from "../../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
+import {
+    PanelOrderVariousOptionDataProvider
+} from "../../../../fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
 import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
 import {ModuleAssertionPage} from "../../../../support/beeoclock/common/assertion/ModuleAssertionPage";
-import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import { TabNameEnum } from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import { OrderActionsEnum } from "support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
-import { OrderTabPages } from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
+import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import {
+    OrderActionsEnum
+} from "support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
+import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
 
 describe('panel new customer order service', () => {
 
@@ -90,11 +96,10 @@ describe('panel new customer order service', () => {
                         .verifyOrderWithGivenIdNotExist(oderID)
                 })
 
-
-                // cy.log('create next order');
-                // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
-                //
                 cy.log('CASE - 2')
+                cy.log('create next order');
+                LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+
                 cy.log('create new order for previously created customer')
                 CalendarPages.CalendarNavigationPage
                     .verifyCurrenDate()
@@ -134,24 +139,22 @@ describe('panel new customer order service', () => {
 
                 cy.get('@orderId').then((orderId) => {
                     cy.log('Order ID is: ' + orderId);
-                    let oderID: string = orderId.toString()
+                    let orderID: string = orderId.toString()
 
                     cy.log('verify its order on table');
                     CalendarPages.CalendarTablePage
                         .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
                         .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, testData.nextAssertTime);
 
-                    // cy.log('TEMP - delete order by api')
-                    // OrderApi.deleteOrderWithGivenId(oderID)
-                        cy.log('click, delete and verify deletion on table');
-                        LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                        OrderTabPages.OrderActionTable
-                            .clickActionButton(testData.businessNote)
-                            .clickSpecificAction(OrderActionsEnum.DELETE)
-                            .verifyOrderWithGivenIdNotExist(oderID)
+                    cy.log('click, delete and verify deletion on table');
+                    LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                    OrderTabPages.OrderActionTable
+                        .clickActionButton(orderID)
+                        .clickSpecificAction(OrderActionsEnum.DELETE)
+                        .verifyOrderWithGivenIdNotExist(orderID)
 
-                        cy.log('create next order');
-                        LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+                    cy.log('create next order');
+                    LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
                 });
             });
         })

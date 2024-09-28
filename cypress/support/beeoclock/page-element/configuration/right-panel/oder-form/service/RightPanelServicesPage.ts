@@ -66,9 +66,7 @@ export class RightPanelServicesPage {
             cy.get('.ion-delegate-host > .ng-untouched')
                 .find('ion-picker-column').last()
                 .find('ion-picker-column-option').eq(28).scrollIntoView().click()
-            // cy.wait(1000)
-        } else {
-        }
+        } else {}
         return this;
     }
 
@@ -83,7 +81,6 @@ export class RightPanelServicesPage {
         RightPanelServicesPageElement.OpenPriceInputElement.getElement()
             .click()
         this.typePrice(price)
-        cy.contains('button', 'Potwierdź').click()
         return this;
     }
 
@@ -112,15 +109,16 @@ export class RightPanelServicesPage {
         return this;
     }
 
-    private typePrice(price: string): RightPanelServicesPage {
+    public typePrice(price: string): RightPanelServicesPage {
         RightPanelServicesPageElement.OrderPriceInput.getElement()
             .clear()
-            .type(price)
+            .type(price).then(() => {
+            cy.contains('button', 'Potwierdź').click()
+        })
         return this;
     }
 
     //CUSTOMER
-
     public clickOpenCustomerPopover(): RightPanelServicesPage {
         cy.wait(500)
         RightPanelServicesPageElement.SelectCustomerOption.getElement()

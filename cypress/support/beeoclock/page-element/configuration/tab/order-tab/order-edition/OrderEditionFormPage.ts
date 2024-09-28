@@ -39,4 +39,12 @@ export class OrderEditionFormPage {
             .should('have.prop', 'innerText').and('include', customer)
         return this
     }
+
+    //price
+    public clickOrderPriceComponent(orderId: string): OrderEditionFormPage {
+        OrderEditionFormPageElement.OrderPriceComponent.getElement(orderId)
+            .click()
+        return this
+    }
+
 }
