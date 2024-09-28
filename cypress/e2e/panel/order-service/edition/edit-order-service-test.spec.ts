@@ -6,10 +6,11 @@ import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/Spe
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage"
 import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum"
 import {RightPanelPages} from "support/beeoclock/page-element/configuration/right-panel/RightPanelPages"
-import {CustomerTypeEnum} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
+import {
+    CustomerTypeEnum
+} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
 import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages"
 import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages"
-import {OrderActionsEnum} from "support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum"
 
 
 describe('panel new customer order service', () => {
@@ -76,7 +77,7 @@ describe('panel new customer order service', () => {
 
                 cy.get('@orderId').then((orderId) => {
                     cy.log('Order ID is: ' + orderId);
-                    let oderID: string = orderId.toString()
+                    let orderID: string = orderId.toString()
 
                     cy.log('verify its order on table');
                     CalendarPages.CalendarTablePage
@@ -87,20 +88,34 @@ describe('panel new customer order service', () => {
                     // OrderApi.deleteOrderWithGivenId(oderID)
 
 
-                    cy.log('click, delete and verify deletion on table');
+                    cy.log('get order table module');
                     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                    cy.reload()
-                    cy.wait(5000)
-                    OrderTabPages.OrderActionTable
-                        .clickActionButton(oderID)
-                        .clickSpecificAction(OrderActionsEnum.DELETE)
-                        .verifyOrderWithGivenIdNotExist(oderID)
+
+                    cy.log('edit specialist')
+                    OrderTabPages.OrderEditionFormPage
+                        .verifyOrderSpecialist(orderID, SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+                        .clickSpecialistButton(orderID)
+                        .clickSelectSpecialist(SpecialistNameEnum.E2E_SINGLE_NAME)
+                        .verifyOrderSpecialist(orderID, SpecialistNameEnum.E2E_SINGLE_NAME)
+
+                    cy.log('edit customer')
+                    OrderTabPages.OrderEditionFormPage
+                        .clickCustomerButton(orderID)
+                    RightPanelPages.RightPanelServicesPage
+                        .selectSpecificCustomerType(CustomerTypeEnum.CLIENT)
+                    RightPanelPages.CustomerPage
+                        .searchExistingCustomer('Braun-rowe')
+                    RightPanelPages.CustomerPage
+                        .selectGivenCustomer('Isabel' + ' ' + 'Braun-Rowe')
+                        .clickConfirmButton();
+                    OrderTabPages.OrderEditionFormPage
+                        .verifySelectCustomer(orderID, '👤 Isabel 📇')
+
+                    cy.log('order price edition')
+
+
+
                 })
-
-
-// cy.log('create next order');
-// LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
-//
             })
         })
     })

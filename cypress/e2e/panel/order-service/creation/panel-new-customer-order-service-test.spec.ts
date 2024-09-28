@@ -78,17 +78,16 @@ describe('panel new customer order service', () => {
                         .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
                         .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
-                    cy.log('TEMP - delete order by api')
-                    OrderApi.deleteOrderWithGivenId(oderID)
+                    // cy.log('TEMP - delete order by api')
+                    // OrderApi.deleteOrderWithGivenId(oderID)
 
-                    //     TODO deletion on order tab
-                    // cy.log('click, delete and verify deletion on table');
-                    // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                    // cy.reload()
-                    // OrderTabPages.OrderActionTable
-                    //     .clickActionButton(oderID)
-                    //     .clickSpecificAction(OrderActionsEnum.DELETE)
-                    //     .verifyOrderWithGivenIdNotExist(oderID)
+                    cy.log('click, delete and verify deletion on table');
+                    LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                    cy.reload()
+                    OrderTabPages.OrderActionTable
+                        .clickActionButton(oderID)
+                        .clickSpecificAction(OrderActionsEnum.DELETE)
+                        .verifyOrderWithGivenIdNotExist(oderID)
                 })
 
 
@@ -120,9 +119,6 @@ describe('panel new customer order service', () => {
                 cy.log('selectGivenCustomer')
                 RightPanelPages.CustomerPage
                     .selectGivenCustomer(testData.firstName + ' ' + testData.lastName)
-
-                cy.log('clickConfirmButton')
-                RightPanelPages.CustomerPage
                     .clickConfirmButton();
 
                 RightPanelPages.RightPanelServicesPage
@@ -147,7 +143,6 @@ describe('panel new customer order service', () => {
 
                     // cy.log('TEMP - delete order by api')
                     // OrderApi.deleteOrderWithGivenId(oderID)
-                    //     TODO deletion on order tab
                         cy.log('click, delete and verify deletion on table');
                         LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
                         OrderTabPages.OrderActionTable
