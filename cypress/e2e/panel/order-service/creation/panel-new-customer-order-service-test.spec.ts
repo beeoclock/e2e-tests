@@ -89,7 +89,6 @@ describe('panel new customer order service', () => {
 
                     cy.log('click, delete and verify deletion on table');
                     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                    cy.reload()
                     OrderTabPages.OrderActionTable
                         .clickActionButton(oderID)
                         .clickSpecificAction(OrderActionsEnum.DELETE)
