@@ -99,9 +99,9 @@ describe('panel new customer order service', () => {
                     RightPanelPages.RightPanelServicesPage
                         .selectSpecificCustomerType(CustomerTypeEnum.CLIENT)
                     RightPanelPages.CustomerPage
-                        .searchExistingCustomer('Braun-rowe')
+                        .searchExistingCustomer('Kowalczyk-Miedzierska')
                     RightPanelPages.CustomerPage
-                        .selectGivenCustomer('Isabel' + ' ' + 'Braun-Rowe')
+                        .selectGivenCustomer('Nikola' + ' ' + 'Kowalczyk-Miedzierska')
                         .clickConfirmButton();
                     OrderTabPages.OrderEditionFormPage
                         .verifySelectCustomer(orderID, '👤 Isabel 📇')

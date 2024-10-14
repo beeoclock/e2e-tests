@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cypress:open": "npx cypress open"
+    "cypress:open": "npx cypress open",
+    "cypress-panel:run": "npx cypress run --spec cypress/e2e/panel --browser edge",
+    "cypress-service:run": "npx cypress run --spec cypress/e2e/service --browser edge"
   },
   "author": "Jan Zadumiński",
   "license": "ISC",
