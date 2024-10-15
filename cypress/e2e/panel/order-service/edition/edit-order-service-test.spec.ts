@@ -99,12 +99,12 @@ describe('panel new customer order service', () => {
                     RightPanelPages.RightPanelServicesPage
                         .selectSpecificCustomerType(CustomerTypeEnum.CLIENT)
                     RightPanelPages.CustomerPage
-                        .searchExistingCustomer('Kowalczyk-Miedzierska')
+                        .searchExistingCustomer(`D'Amore-Simonis`)
                     RightPanelPages.CustomerPage
-                        .selectGivenCustomer('Nikola' + ' ' + 'Kowalczyk-Miedzierska')
+                        .selectGivenCustomer('Martha' + ' ' + `D'Amore-Simonis`)
                         .clickConfirmButton();
                     OrderTabPages.OrderEditionFormPage
-                        .verifySelectCustomer(orderID, '👤 Isabel 📇')
+                        .verifySelectCustomer(orderID, '👤 Martha 📇')
 
                     cy.log('order price edition')
                     OrderTabPages.OrderEditionFormPage
