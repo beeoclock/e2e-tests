@@ -9,7 +9,7 @@ export class ClientCreationDataProvider {
                 return {
                     case: TestCaseEnum.CASE_1,
                     firstName: faker.name.firstName("male"),
-                    lastName: faker.name.lastName(),
+                    lastName: "C" + faker.name.lastName(),
                     email: faker.internet.email(),
                     phoneNumber: faker.finance.account(9),
                     description: 'opis nr: ' + faker.finance.account(15)
@@ -28,7 +28,7 @@ export class ClientCreationDataProvider {
                 return {
                     case: TestCaseEnum.CASE_3,
                     firstName: faker.name.firstName("female"),
-                    lastName: faker.name.lastName(),
+                    lastName: "Y" + faker.name.lastName(),
                     email: faker.internet.email(),
                     phoneNumber: null,
                     description: null
@@ -37,7 +37,7 @@ export class ClientCreationDataProvider {
                 return {
                     case: TestCaseEnum.CASE_4,
                     firstName: faker.name.firstName("female"),
-                    lastName: faker.name.lastName(),
+                    lastName: "B" + faker.name.lastName(),
                     email: null,
                     phoneNumber: faker.finance.account(9),
                     description: null

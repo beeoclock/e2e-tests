@@ -54,7 +54,7 @@ describe('customer creation test', () => {
                 .typeGivenCustomerInput(CommonPropertiesEnum.FIRST_NAME, testData.firstName)
                 .typeGivenCustomerInput(CommonPropertiesEnum.LAST_NAME, testData.lastName)
                 .typeGivenCustomerInput(CommonPropertiesEnum.EMAIL, testData.email)
-                .typeGivenCustomerInput(CommonPropertiesEnum.PHONE, testData.phoneNumber)
+                .typeGivenCustomerPhone(testData.phoneNumber)
                 .typeClientDescription(testData.description)
                 .clickSaveButton()
 

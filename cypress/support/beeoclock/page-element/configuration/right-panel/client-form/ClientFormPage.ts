@@ -4,6 +4,7 @@ import {ClientDescriptionInput} from "./page-element/ClientDescriptionInput";
 import {SaveButton} from "../../../common/common-element/element/SaveButton";
 import {ClientsApiInterceptionHelper} from "../../../../common/Interception/clients/ClientsApiInterceptionHelper";
 import {ApiInterceptionHelper} from "../../../../common/Interception/ApiInterceptionHelper";
+import {ClientPhoneInput} from "./page-element/ClientPhoneInput";
 
 export class ClientFormPage {
 
@@ -12,6 +13,13 @@ export class ClientFormPage {
             CustomerInput.getElement(label).type(value).then(() => {
                 this.verifyGivenCustomerInput(label, value)
             })
+        }
+        return this
+    }
+
+    public typeGivenCustomerPhone(value: string): ClientFormPage {
+        if(value) {
+         ClientPhoneInput.getInput().type(value)
         }
         return this
     }
