@@ -23,7 +23,8 @@ export class ApiInterceptionHelper {
 
     public static getBusinessProfile(): string {
         const getBusinessProfile = 'getBusinessProfile' + DateUtils.getCurrentTime();
-        cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/business-profile').as(getBusinessProfile);
+        cy.intercept('GET', 'https://api.dev.beeoclock.com/panel/api/v1/business-profile').as(getBusinessProfile);
+        cy.intercept('GET', 'https://api.beeoclock.com/panel/api/v1/business-profile').as(getBusinessProfile);
         return getBusinessProfile
     }
 
