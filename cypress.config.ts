@@ -3,7 +3,7 @@ import { defineConfig } from 'cypress'
 module.exports = defineConfig({
   projectId: 'cypress-beeclock-at',
   env: {
-      apiBackendEntryPoint: 'https://api.dev.beeoclock.com/client/api/v1/',
+      apiBackendEntryPoint: 'https://api-dev.beeoclock.com/client/api/v1/',
   },
 
   e2e: {

@@ -66,7 +66,7 @@ export class OrderApi {
         return cy.get<string>('@token').then(tokenId => {
             return cy.request({
                 method: 'DELETE',
-                url: BackendCommonEnum.ENTRY_POINT + 'order/' + id,
+                url: EntryPointEnum.API_ENTRY_POINT + '/order/' + id,
                 headers: {
                     'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
                 },
@@ -104,7 +104,7 @@ export class OrderApi {
 
     public static assertSuccessfulDeletion(orderId: string): any {
         return cy.get<string>('@token').then(tokenId => {
-            const url = BackendCommonEnum.ENTRY_POINT + 'order/' + orderId;
+            const url = EntryPointEnum.API_ENTRY_POINT + '/order/' + orderId;
             return cy.request({
                 method: 'GET',
                 url: url,
