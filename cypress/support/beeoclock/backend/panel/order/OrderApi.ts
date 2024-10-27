@@ -2,6 +2,7 @@ import {DateUtils} from "../../Utils/DateUtils";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {CommonElementPage} from "../../../page-element/common/common-element/CommonElementPage";
 import {TabNameEnum} from "../../../page-element/configuration/left-menu/enum/TabNameEnum";
+import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 
 export class OrderApi {
 
@@ -9,7 +10,7 @@ export class OrderApi {
         return cy.get<string>('@token').then(tokenId => {
             const start = DateUtils.getStartOfPreviousDays(100);
             const end = DateUtils.getEndOfTomorrowUTC();
-            const url = `https://api.dev.beeoclock.com/panel/api/v1/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedAt&orderDir=desc`;
+            const url = EntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedAt&orderDir=desc`;
             return cy.request({
                 method: 'GET',
                 url: url,
@@ -37,7 +38,7 @@ export class OrderApi {
         return cy.get<string>('@token').then(tokenId => {
             const start = DateUtils.getStartOfPreviousDays(100);
             const end = DateUtils.getEndOfTomorrowUTC();
-            const url = 'https://api.dev.beeoclock.com/panel/api/v1/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
+            const url = EntryPointEnum.API_ENTRY_POINT + '/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
             return cy.request({
                 method: 'GET',
                 url: url,

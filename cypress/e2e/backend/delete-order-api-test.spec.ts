@@ -14,14 +14,12 @@ describe("delete all order's by api", (): void => {
     })
 
     it('should delete all order by api', function () {
-        cy.intercept('GET', '**/*').as('getAll');
         cy.visit(ServiceEnum.CLIENT_PANEL, {
             failOnStatusCode: false,
             onBeforeLoad: (win) => {
                 win.localStorage.setItem('language', 'pl');
             }
         });
-        cy.wait('@getAll', {timeout: 30000});
 
         cy.log('login');
         PanelLoginPageElement.EmailInput.getElement();
