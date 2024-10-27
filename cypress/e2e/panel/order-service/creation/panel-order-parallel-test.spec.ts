@@ -44,8 +44,17 @@ describe('panel - order service', () => {
             cy.log(`add order on calendar panel for ${testCase}`)
             CalendarPages.CalendarTablePage
                 .clickOnGivenAndHour(testData.specialist, testData.time)
+
+            cy.log('add order')
             RightPanelPages.RightPanelServicesPage
                 .clickAddOrderButton()
+
+            cy.log('add service')
+            RightPanelPages.RightPanelServicesPage
+                .clickAddServiceButton()
+
+            cy.log('add service')
+            RightPanelPages.RightPanelServicesPage
                 .clickAddServiceButton()
                 .selectSpecificService(testData.service)
                 .verifySelectedService(testData.service)

@@ -1,7 +1,6 @@
 export class AddServiceButton {
     public getElement(): any {
-        return cy.get('app-list-service-form-order-component')
-            .find('button').first()
+        return cy.get('.h-12 > .w-8 > .bi')
             .scrollIntoView().should('be.visible')
     }
 }
