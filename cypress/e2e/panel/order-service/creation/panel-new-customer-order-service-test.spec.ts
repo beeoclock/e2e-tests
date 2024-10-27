@@ -63,6 +63,9 @@ describe('panel new customer order service', () => {
                     .typeBusinessNote(testData.businessNote)
                     .clickSaveButton();
 
+                RightPanelPages.RightPanelNavigationPage
+                    .clickCloseRightPanel()
+
                 cy.get('@orderId').then((orderId) => {
                     cy.log('Order ID is: ' + orderId);
                     let oderID: string = orderId.toString()

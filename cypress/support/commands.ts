@@ -5,6 +5,7 @@ import {PanelLoginPageElement} from "./beeoclock/page-element/configuration/logi
 import {PanelLoginPage} from "./beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {ClientPropertiesEnum} from "./beeoclock/common/enum/ClientPropertiesEnum";
 import {BusinessNameEnum} from "./beeoclock/page-element/common/enum/BusinessNameEnum";
+import {ApiInterceptionHelper} from "./beeoclock/common/Interception/ApiInterceptionHelper";
 
 declare global {
     namespace Cypress {
@@ -12,6 +13,7 @@ declare global {
 
             loginOnPanel(): void;
 
+            loginOnPublicPage(): void;
         }
     }
 }
@@ -35,3 +37,18 @@ Cypress.Commands.add('loginOnPanel', () => {
     PanelLoginPage.clickLoginButton();
     PanelLoginPage.selectGivenBusinessAndStoreToken(BusinessNameEnum.HAIRCUT_AND_BARBER);
 });
+
+Cypress.Commands.add('loginOnPublicPage', () => {
+    cy.log('visit')
+    const getService = ApiInterceptionHelper.getService()
+    cy.visit(ServiceEnum.PUBLIC_PANEL).then(() => {
+        // cy.wait('@' + getService).then((interception) => {
+        //     const authorizationHeader = interception.request.headers['authorization'];
+        //     const token = (authorizationHeader as string).split(' ')[1];
+        //     cy.wrap(token).as('token');
+        // })
+    })
+
+});
+
+

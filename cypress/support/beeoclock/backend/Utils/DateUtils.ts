@@ -278,7 +278,7 @@ export class DateUtils {
     //
     public static getStartOfTomorrowUTC(): string {
         const date = this.getCurrentDateFormatted()
-        return date + 'T22:00:00.000Z'
+        return date + 'T23:00:00.000Z'
     }
 
     public static getEndOfTomorrowUTC(): string {
