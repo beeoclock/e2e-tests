@@ -3,7 +3,7 @@ import {OrderCancellationPageElement} from "./OrderCancellationPageElement";
 export class OrderCancellationPage {
 
     public verifyCancelInformation(): OrderCancellationPage {
-        cy.get('.mb-4').find('div').should('contain', "Wydarzenie zostało odwołane")
+        cy.get('.mb-4').find('div').should('contain', "Wydarzenie zostało anulowane")
         cy.get('.text-base.font-normal').should('contain', "Wydarzenie zostało pomyślnie anulowane na prośbę użytkownika")
         return this;
     }
