@@ -18,10 +18,10 @@ export class BookingSelectServicePage {
     }
 
     private verifyCorrectForm(): BookingSelectServicePage {
-        const serviceTab = cy.get('.flex.justify-start').find('.me-2').contains('Usługi')
+        const serviceTab = cy.get('.flex.justify-start').find('.me-2').first()
         serviceTab.should('have.class', 'active').and('not.have.class', 'hover:text-gray-600')
 
-        const detailsTab = cy.get('.flex.justify-start').find('.me-2').contains('Szczegóły')
+        const detailsTab = cy.get('.flex.justify-start').find('.me-2').last()
         detailsTab.should('not.have.class', 'active').and('have.class', 'hover:text-gray-600')
         return this;
     }
