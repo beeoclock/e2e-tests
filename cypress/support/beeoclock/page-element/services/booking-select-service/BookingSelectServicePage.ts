@@ -1,12 +1,23 @@
 import {BookingSelectServicePageElement} from "./BookingSelectServicePageElement";
 
 export class BookingSelectServicePage {
+    private selectComponent = BookingSelectServicePageElement.OptionElement
 
-    public selectSpecificOrder(order: string): BookingSelectServicePage {
+    public selectSpecificOrder(order: string, count?: string): BookingSelectServicePage {
         this.verifyCorrectForm()
-        BookingSelectServicePageElement.OptionElement.getElement(order)
+        this.selectComponent.getAddButton(order)
+            .click().then(() => {
+            this.selectComponent.getMinusButton(order)
+            if (count) {
+                this.selectComponent.getElement(order).should('have.prop', 'innerText').and('include', count)
+            }
+        })
+        return this;
+    }
+
+    public clickSelectSpecialistAndOrder(): BookingSelectServicePage {
+        cy.get('service-list').contains('Select specialist and date')
             .click()
-        cy.wait(1000)
         return this;
     }
 

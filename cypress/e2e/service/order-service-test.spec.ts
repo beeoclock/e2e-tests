@@ -19,6 +19,7 @@ describe('order service', () => {
 
             ServicesPages.BookingSelectServicePage
                 .selectSpecificOrder(item.Service)
+                .clickSelectSpecialistAndOrder()
             ServicesPages.SelectSpecialistPage
                 .selectSpecificSpecialist(item.Specialist)
             ServicesPages.SelectDayPage

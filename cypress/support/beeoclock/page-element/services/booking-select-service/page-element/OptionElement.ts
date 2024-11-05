@@ -1,6 +1,21 @@
 export class OptionElement {
+
     public getElement(order: string): any {
-        return cy.get('.flex.gap-4').contains(order).should('be.visible')
+        return cy.get('select-service-multiple').contains(order).parents('select-service-multiple').first()
+            .find('.flex.gap-4.items-center')
+            .should('be.visible')
+            .scrollIntoView()
+    }
+
+    public getAddButton(order: string): any {
+        return this.getElement(order).find('.bi-plus-lg')
+            .should('be.visible')
+            .scrollIntoView()
+    }
+
+    public getMinusButton(order: string): any {
+        return this.getElement(order).find('.bi-dash-lg')
+            .should('be.visible')
             .scrollIntoView()
     }
 }
