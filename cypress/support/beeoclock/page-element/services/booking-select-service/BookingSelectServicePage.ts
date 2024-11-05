@@ -16,7 +16,7 @@ export class BookingSelectServicePage {
     }
 
     public clickSelectSpecialistAndOrder(): BookingSelectServicePage {
-        cy.get('service-list').contains('Select specialist and date')//TODO fix
+        cy.get('service-list').contains('Wybierz specjalistę i datę')
             .click()
         return this;
     }

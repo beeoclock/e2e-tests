@@ -18,6 +18,7 @@ describe('order next service', () => {
 
             ServicesPages.BookingSelectServicePage
                 .selectSpecificOrder(item.Service)
+                .clickSelectSpecialistAndOrder()
             ServicesPages.SelectSpecialistPage
                 .selectSpecificSpecialist(item.Specialist)
             ServicesPages.SelectDayPage
@@ -43,7 +44,8 @@ describe('order next service', () => {
             ServicesPages.BookingClientNavigationFormPage
                 .clickAddNextService();
             ServicesPages.BookingSelectServicePage
-                .selectNextSpecificOrder(item.nextService);
+                .selectNextSpecificOrder(item.nextService)
+                .clickSelectSpecialistAndOrder()
             ServicesPages.SelectSpecialistPage
                 .selectSpecificSpecialist(item.nextSpecialist);
             ServicesPages.SelectDayPage
