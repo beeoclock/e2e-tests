@@ -52,6 +52,7 @@ describe('order next service', () => {
             ServicesPages.SelectDayPage
                 .selectNextDay();
             ServicesPages.SelectTimePage
+                .verifyGivenSlotNotExist(item.selectTime)
                 .selectSpecificTime(item.nextSelectTime);
             ServicesPages.DataAndTimeNavigationPage
                 .clickNextStepButton();

@@ -13,4 +13,9 @@ export class SelectTimePage {
             .should('have.class', 'bg-yellow-400').and('not.have.class', 'bg-gray-800')
         return this;
     }
+
+    public verifyGivenSlotNotExist(time: string): SelectTimePage {
+        SelectTimePageElement.SelectSpecificTime.getNotExistingElement(time)
+        return this
+    }
 }
