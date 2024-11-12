@@ -9,6 +9,7 @@ export class ClientFilterPage {
         SearchInput.getElement()
             .clear()
             .type(value).then(() => {
+                SearchInput.getSearchButton().click()
             ApiInterceptionHelper.waitForAlias(getCustomer)
         })
         return this
