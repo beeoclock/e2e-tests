@@ -9,7 +9,12 @@ describe("Test name", () => {
     })
 
     it('test body', function () {
-        cy.visit('https://beeoclock.com/pl/barbershop_brooklyn')
 
-    })
-})
+        cy.visit('path/to/your/index.html');
+
+        cy.document().then((doc) => {
+            const langAttribute = doc.documentElement.getAttribute('lang');
+            expect(langAttribute).to.equal('en-US');
+        });
+    });
+});
