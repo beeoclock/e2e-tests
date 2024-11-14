@@ -1,9 +1,8 @@
 import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages";
-import {ApiInterceptionHelper} from "../../support/beeoclock/common/Interception/ApiInterceptionHelper";
 import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
 import {faker} from "@faker-js/faker";
 
-describe("Redirect domain test", () => {
+describe("Client app health check test", () => {
     const danishAddress = 'https://beeoclock.com/da/barbershop_brooklyn'
     const englishAddress = 'https://beeoclock.com/en/barbershop_brooklyn'
     const taiwanAddress = 'https://beeoclock.com/tw/barbershop_brooklyn'
@@ -54,16 +53,7 @@ describe("Redirect domain test", () => {
             const langAttribute = doc.documentElement.getAttribute('lang');
             expect(langAttribute).to.equal('en-US');
         });
-
-        // ServicesPages.BookingSelectServicePage
-        //     .verifyCorrectForm()
-        //     .verifyGivenHrefAddress('Sankt Mathias Gade, 72, Viborg, Denmark, 8800')
-        // assertLogo()
-        // assertBusinessName()
-        // assertUrl(englishAddress)
-        // assertDetailsTab(englishTabName)
     });
-
 
     function assertLogo() {
         cy.get('img').should('have.attr', 'src', 'https://storage.googleapis.com/bee-o-clock.appspot.com/media/65e6179d5b1828e7e9a05c53/profile/gallery/6606ed352ffe20d94e1baffd/original.jpeg?updatedAt=2024-03-29T16:32:53.856Z');
@@ -85,7 +75,6 @@ describe("Redirect domain test", () => {
     function assertApiResponse() {
         const getGivenClient = 'getGivenClient' + DateUtils.getCurrentTime() + faker.finance.creditCardCVV()
         cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn').as(getGivenClient);
-        ApiInterceptionHelper.waitForAlias(getGivenClient)
+        cy.wait(`@${getGivenClient}`);
     }
-
 });
