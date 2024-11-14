@@ -1,5 +1,6 @@
 import {DateUtils} from "../../backend/Utils/DateUtils";
 import {EntryPointEnum} from "./EntryPointEnum";
+import {faker} from "@faker-js/faker";
 
 export class ApiInterceptionHelper {
 
@@ -32,6 +33,12 @@ export class ApiInterceptionHelper {
         const alias = 'getService' + DateUtils.getCurrentTime();
         cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/service/paged?*').as(alias);
         return alias
+    }
+
+    public static getGivenClient(clientName: string): string {
+        const getGivenClient = 'getGivenClient' + DateUtils.getCurrentTime() + faker.commerce.isbn(10);
+        cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/client/' + clientName).as(getGivenClient);
+        return getGivenClient
     }
 
     public static createServicePayment(): string {

@@ -28,7 +28,7 @@ export class BookingSelectServicePage {
         return this;
     }
 
-    private verifyCorrectForm(): BookingSelectServicePage {
+    public verifyCorrectForm(): BookingSelectServicePage {
         const serviceTab = cy.get('.flex.justify-start').find('.me-2').first()
         serviceTab.should('have.class', 'active').and('not.have.class', 'hover:text-gray-600')
 
@@ -52,4 +52,18 @@ export class BookingSelectServicePage {
         return this;
     }
 
+    public verifyGivenHrefAddress(address: string): BookingSelectServicePage {
+        cy.get('.flex.items-start > .text-xl')
+            .should(($el) => {
+                const actualText = $el.prop('textContent').replace(/\s+/g, ' ').replace(/&nbsp;/g, ' ').trim();
+                const expectedText = address;
+
+                const cleanActualText = actualText.replace(/\s+/g, ' ');
+                const cleanExpectedText = expectedText.replace(/\s+/g, ' ');
+
+                expect(cleanActualText).to.include(cleanExpectedText);
+            })
+            .should('be.visible');
+        return this;
+    }
 }
