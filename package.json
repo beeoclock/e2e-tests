@@ -6,8 +6,10 @@
   "scripts": {
     "cypress:open": "npx cypress open",
     "cypress-panel:run": "npx cypress run --spec cypress/e2e/panel --browser edge",
-    "cypress-service:run": "npx cypress run --spec cypress/e2e/service --browser edge"
+    "cypress-service:run": "npx cypress run --spec cypress/e2e/service --browser edge",
+    "client-app-health-check": "npx cypress run --spec cypress/e2e/service/client-app-health-check-test-spec.ts"
   },
+
   "author": "Jan Zadumiński",
   "license": "ISC",
   "devDependencies": {
@@ -15,11 +17,11 @@
     "cypress-cloud": "1.10.2",
     "cypress-file-upload": "5.0.8",
     "cypress-xpath": "2.0.1",
-    "moment-timezone": "^0.5.45",
+    "moment-timezone": "0.5.45",
     "typescript": "5.4.5"
   },
   "dependencies": {
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "8.4.1",
     "moment": "2.30.1"
   }
 }
