@@ -22,6 +22,7 @@ import {PhoneInput} from "./customer/new-customer/PhoneInput";
 import {ConfirmButton} from "./customer/new-customer/ConfirmButton";
 import {ExistingCustomerInput} from "./customer/existing-customer/ExistingCustomerInput";
 import {CustomerOption} from "./customer/existing-customer/CustomerOption";
+import {NextButton} from "./navigation/NextButton";
 
 export class RightPanelServicesPageElement {
 
@@ -40,6 +41,7 @@ export class RightPanelServicesPageElement {
     public static AddButton: AddButton = new AddButton()
     public static SubmitButton: SubmitButton = new SubmitButton()
     public static OpenPriceInputElement: OpenPriceInputElement = new OpenPriceInputElement()
+    public static NextButton: NextButton = new NextButton()
 
     //customer common option
     public static SelectCustomerOption: SelectCustomerOption = new SelectCustomerOption()

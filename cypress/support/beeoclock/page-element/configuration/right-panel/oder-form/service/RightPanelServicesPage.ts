@@ -26,16 +26,36 @@ export class RightPanelServicesPage {
     }
 
     public selectSpecificService(service: string): RightPanelServicesPage {
-        RightPanelServicesPageElement.SelectSpecificServiceCheckbox.getElement(service)
+        RightPanelServicesPageElement.SelectSpecificServiceCheckbox.getPlusButton(service)
             .click()
         return this;
     }
 
-    public verifySelectedService(service: string): RightPanelServicesPage {
-        RightPanelServicesPageElement.SelectedServiceElement.getElement()
-            .should('have.prop', 'innerText').and('include', service + '\n' + 'PL')
+    public verifySelectedService(amount: string, price: string, duration: string): RightPanelServicesPage {
+        this.verifyAmountOfTotalService(amount)
+        this.verifyTotalPrice(price)
+        this.verifyTotalDuration(duration)
         return this;
     }
+
+    private verifyAmountOfTotalService(amount: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectedServiceElement.getAmountOfSelectedService()
+            .should('have.prop', 'outerText').and('include', amount)
+        return this
+    }
+
+    private verifyTotalPrice(price: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectedServiceElement.getTotalPrice()
+            .should('have.prop', 'textContent').and('include', price)
+        return this
+    }
+
+    private verifyTotalDuration(duration: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectedServiceElement.getTotalDuration()
+            .should('have.prop', 'textContent').and('include', duration)
+        return this
+    }
+
 
     public openSelectTime(): RightPanelServicesPage {
         cy.wait(500)
@@ -146,5 +166,11 @@ export class RightPanelServicesPage {
         cy.get('@button').click({force: true})
         cy.wait(1000)
         return this;
+    }
+
+    public clickNextButton(): RightPanelServicesPage {
+        RightPanelServicesPageElement.NextButton.getElement()
+            .click()
+        return this
     }
 }

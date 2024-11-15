@@ -1,7 +1,21 @@
 export class SelectedServiceElement {
-    public getElement(): any {
-        return cy.get('app-item-list-v2-service-form-order-component')
+    public getComponent(): any {
+        return cy.get('whac-a-mole-container')
+            .find('.leading-tight.flex.gap-2').first()
             .scrollIntoView().should('be.visible')
-
     }
+
+    public getAmountOfSelectedService(): any {
+        return this.getComponent().find('.flex.gap-1').first()
+    }
+
+    public getTotalPrice(): any {
+        return this.getComponent().find('.text-nowrap.whitespace-nowrap').first()
+    }
+
+    public getTotalDuration(): any {
+        return this.getComponent().find('.text-nowrap.whitespace-nowrap').last()
+    }
+
+
 }
