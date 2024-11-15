@@ -25,7 +25,7 @@ describe("Client app health check test", () => {
         assertLogo()
         assertBusinessName()
         assertUrl(danishAddress)
-        assertDetailsTab(danishTabName)
+        assertDetailsTab(danishTabName)//TODO ask
     });
 
     it('assert corrected english page', function () {
