@@ -13,6 +13,8 @@ describe('Order form summary component test', () => {
         const testCases = [
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2,
+            TestCaseEnum.CASE_3,
+            TestCaseEnum.CASE_4,
         ];
 
         cy.loginOnPanel()
@@ -31,11 +33,19 @@ describe('Order form summary component test', () => {
                     .clickOnGivenAndHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
 
             testCases.forEach(testCase => {
-                const testData = OrderSummaryTestData.getTestData(testCase);
+                const testData = OrderSummaryTestData.getPlusTestData(testCase);
 
                 RightPanelPages.RightPanelServicesPage
                     .selectSpecificService(testData.service)
-                    .verifySelectedService('1', testData.price, testData.duration)
+                    .verifySelectedService(testData.amount, testData.price, testData.duration)
+            })
+
+            testCases.forEach(testCase => {
+                const testData = OrderSummaryTestData.getMinusTestData(testCase);
+
+                RightPanelPages.RightPanelServicesPage
+                    .unSpecificService(testData.service)
+                    .verifySelectedService(testData.amount, testData.price, testData.duration)
             })
         });
     });

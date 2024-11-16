@@ -31,6 +31,12 @@ export class RightPanelServicesPage {
         return this;
     }
 
+    public unSpecificService(service: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectSpecificServiceCheckbox.getMinusButton(service)
+            .click()
+        return this;
+    }
+
     public verifySelectedService(amount: string, price: string, duration: string): RightPanelServicesPage {
         this.verifyAmountOfTotalService(amount)
         this.verifyTotalPrice(price)

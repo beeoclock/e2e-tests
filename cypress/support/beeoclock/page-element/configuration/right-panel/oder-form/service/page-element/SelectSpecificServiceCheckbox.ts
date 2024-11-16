@@ -10,4 +10,10 @@ export class SelectSpecificServiceCheckbox {
             .find('.bi.bi-plus-lg')
             .scrollIntoView().should('be.visible')
     }
+
+    public getMinusButton(service: string): any {
+        return this.getElement(service)
+            .find('.bi.bi-dash-lg')
+            .scrollIntoView().should('be.visible')
+    }
 }
