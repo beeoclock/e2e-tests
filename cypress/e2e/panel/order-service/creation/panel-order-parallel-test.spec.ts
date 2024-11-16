@@ -45,24 +45,16 @@ describe('panel - order service', () => {
             CalendarPages.CalendarTablePage
                 .clickOnGivenAndHour(testData.specialist, testData.time)
 
-            cy.log('add order')
-            RightPanelPages.RightPanelServicesPage
-                .clickAddOrderButton()
-
             cy.log('add service')
             RightPanelPages.RightPanelServicesPage
-                .clickAddServiceButton()
-
-            cy.log('add service')
-            RightPanelPages.RightPanelServicesPage
-                .clickAddServiceButton()
                 .selectSpecificService(testData.service)
-                .verifySelectedService(testData.service)
+                .verifySelectedService('1', testData.price, testData.duration)
+                .clickNextButton()
                 .openSelectTime()
                 .selectHour(testData.hour)
                 .selectMinute(testData.minute)
                 .clickSubmitSelectedTime()
-                .selectPriceOfService(testData.price)
+                .selectPriceOfService(testData.updatedPrice)
                 .selectSpecialist(testData.specialistFirstName)
             RightPanelPages.SummaryAndPaymentServicePage
                 .verifyOrderService(testData.summary)

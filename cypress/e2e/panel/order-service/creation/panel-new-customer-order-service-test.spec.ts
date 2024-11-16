@@ -36,10 +36,8 @@ describe('panel new customer order service', () => {
                 cy.log('CASE - 1')
                 CalendarPages.CalendarTablePage
                     .clickOnGivenAndHour(testData.specialist, testData.time)
-                RightPanelPages.RightPanelServicesPage
-                    // .clickAddOrderButton()
-                    // .clickAddServiceButton()
 
+                RightPanelPages.RightPanelServicesPage
                     .selectSpecificService(testData.service)
                     .verifySelectedService('1', testData.price, testData.duration)
 
@@ -73,9 +71,6 @@ describe('panel new customer order service', () => {
                         .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
                         .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
 
-                    // cy.log('TEMP - delete order by api')
-                    // OrderApi.deleteOrderWithGivenId(oderID)
-
                     cy.log('click, delete and verify deletion on table');
                     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
                     OrderTabPages.OrderActionTable
@@ -96,12 +91,11 @@ describe('panel new customer order service', () => {
 
                 CalendarPages.CalendarTablePage
                     .clickOnGivenAndHour(testData.nextSpecialist, testData.time)
-                RightPanelPages.RightPanelServicesPage
-                    .clickAddOrderButton()
-                    .clickAddServiceButton()
 
+                cy.log('aassertions');
+                RightPanelPages.RightPanelServicesPage
                     .selectSpecificService(testData.nextService)
-                    .verifySelectedService('1', testData.nextService, testData.nextDuration)
+                    .verifySelectedService('1', testData.nextPrice, testData.nextDuration)
 
                     .clickOpenCustomerPopover()
                     .selectSpecificCustomerType(CustomerTypeEnum.CLIENT);
@@ -115,7 +109,8 @@ describe('panel new customer order service', () => {
                     .clickConfirmButton();
 
                 RightPanelPages.RightPanelServicesPage
-                    .selectPriceOfService(testData.nextPrice)
+                    .clickNextButton()
+                    .selectPriceOfService(testData.nextPriceUpdated)
                 RightPanelPages.SummaryAndPaymentServicePage
                     .verifyOrderService(testData.nextSummary)
                     .verifyOrderSpecialist(testData.nextSpecialistLastName)
