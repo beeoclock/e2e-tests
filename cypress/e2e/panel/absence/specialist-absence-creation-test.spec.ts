@@ -47,6 +47,8 @@ describe('specialist absence creation test', () => {
                 .clickOnGivenAndHour(testData.specialist, testData.time);
             RightPanelPages.BreakScienceGivenTimePage
                 .verifySelectedNextDayTimeLabel(testData.selectedTime)
+                .verifySelectedSpecialistLabel(testData.specialist)
+                .clickAbsenceButton()
                 .clickBreakRange(testData.absenceRange)
             RightPanelPages.AbsencePage
                 .verifyAbsenceFromDate(testData.absenceFromDate)
@@ -55,6 +57,8 @@ describe('specialist absence creation test', () => {
                 .verifyAbsenceToTime(testData.absenceToTime)
                 .typeAbsenceNote(testData.absenceNote)
                 .clickSaveButton()
+            RightPanelPages.RightPanelNavigationPage
+                .clickCloseRightPanel()
 
             CalendarPages.CalendarTablePage
                 .assertAbsenceOnTable(testData.assertTableAbsence)
