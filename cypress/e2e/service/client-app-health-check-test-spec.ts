@@ -3,9 +3,13 @@ import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
 import {faker} from "@faker-js/faker";
 
 describe("Client app health check test", () => {
-    const danishAddress = 'https://beeoclock.com/da/barbershop_brooklyn'
-    const englishAddress = 'https://beeoclock.com/en/barbershop_brooklyn'
-    const taiwanAddress = 'https://beeoclock.com/tw/barbershop_brooklyn'
+    // const danishAddress = 'https://beeoclock.com/da/barbershop_brooklyn'
+    // const englishAddress = 'https://beeoclock.com/en/barbershop_brooklyn'
+    // const taiwanAddress = 'https://beeoclock.com/tw/barbershop_brooklyn'
+
+    const danishAddress = 'https://beeoclock--pr120-develop-j2tplmgj.web.app/da/barbershop_brooklyn'
+    const englishAddress = 'https://beeoclock--pr120-develop-j2tplmgj.web.app/en/barbershop_brooklyn'
+    const taiwanAddress = 'https://beeoclock--pr120-develop-j2tplmgj.web.app/tw/barbershop_brooklyn'
 
     const danishTabName = 'Detaljer og'
     const englishTabName = 'Details'
