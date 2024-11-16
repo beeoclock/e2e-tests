@@ -43,12 +43,10 @@ describe('panel new customer order service', () => {
                 cy.log('CASE - 1')
                 CalendarPages.CalendarTablePage
                     .clickOnGivenAndHour(testData.specialist, testData.time)
-                RightPanelPages.RightPanelServicesPage
-                    .clickAddOrderButton()
-                    .clickAddServiceButton()
 
+                RightPanelPages.RightPanelServicesPage
                     .selectSpecificService(testData.service)
-                    .verifySelectedService(testData.service)
+                    .verifySelectedService('1', testData.price, testData.duration)
 
                     .clickOpenCustomerPopover()
                     .selectSpecificCustomerType(CustomerTypeEnum.NEW);
@@ -59,7 +57,8 @@ describe('panel new customer order service', () => {
                     .typeCustomerPhone(testData.phone)
                     .clickConfirmButton();
                 RightPanelPages.RightPanelServicesPage
-                    .selectPriceOfService(testData.price)
+                    .clickNextButton()
+                    .selectPriceOfService(testData.updatedPrice)
                     .selectSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME);
                 RightPanelPages.SummaryAndPaymentServicePage
                     .verifyOrderService(testData.summary)
@@ -69,10 +68,6 @@ describe('panel new customer order service', () => {
                     .selectPaymentStatus(testData.PaymentStatus)
                     .typeBusinessNote(testData.businessNote)
                     .clickSaveButton();
-
-                cy.log('close panel');
-                RightPanelPages.RightPanelNavigationPage
-                    .clickCloseRightPanel()
 
                 cy.get('@orderId').then((orderId) => {
                     cy.log('Order ID is: ' + orderId);
