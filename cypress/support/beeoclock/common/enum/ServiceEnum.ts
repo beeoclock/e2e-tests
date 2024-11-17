@@ -1,13 +1,11 @@
 export enum ServiceEnum {
 
-    //default
-    // PUBLIC_PANEL = 'https://dev.beeoclock.com/pl/e2e',
+    //develop
+    PUBLIC_PANEL = 'https://dev.beeoclock.com/pl/e2e',
     // CLIENT_PANEL = 'https://panel.dev.beeoclock.com/662a4637a4b376d20c065b1d/event/calendar-with-specialists',
 
     //PR
-    // CLIENT_PANEL = 'https://panel.dev.beeoclock.com/662a4637a4b376d20c065b1d/event/calendar-with-specialists',
-
-    PUBLIC_PANEL = 'https://beeoclock--pr120-develop-j2tplmgj.web.app/pl/e2e',
+    // PUBLIC_PANEL = 'https://beeoclock--pr120-develop-j2tplmgj.web.app/pl/e2e',
     CLIENT_PANEL = 'https://business-panel-dev-beeoclock--pr564-boc-39-t3xpe7hv.web.app/',
 
     //https://beeoclock--pr120-develop-j2tplmgj.web.app/pl/e2e/order/form
