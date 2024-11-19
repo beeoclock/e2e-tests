@@ -9,6 +9,12 @@ export class SelectDayPage {
         return this;
     }
 
+    public selectGivenNextDay(days: number): SelectDayPage {
+        SelectDayPageElement.SelectDayButton.getElement(DateUtils.getNextGivenDayNumber(days))
+            .click()
+        return this;
+    }
+
     public assertSelectedServiceSection(selectedService: string, serviceTime: string): SelectDayPage {
         this.assertLabel()
         this.assertSelectedServiceName(selectedService)

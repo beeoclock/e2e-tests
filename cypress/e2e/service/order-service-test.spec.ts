@@ -2,6 +2,9 @@ import {ServicesPages} from "../../support/beeoclock/page-element/services/Servi
 import {CompanyEnum} from "../../support/beeoclock/page-element/services/enum/CompanyEnum";
 import {ServiceEnum} from "../../support/beeoclock/common/enum/ServiceEnum";
 import {BusinessNameEnum} from "../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
+import {ServiceNameEnum} from "../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
+import {SpecialistNameEnum} from "../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
+import {TimeEnum} from "../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
 
 describe('order service', () => {
 
@@ -72,7 +75,6 @@ describe('order service', () => {
                 .verifyServiceSpecialist(item.Specialist)
             ServicesPages.OrderSummaryNavigationPage
                 .clickBackArrow()
-
         })
     })
 })

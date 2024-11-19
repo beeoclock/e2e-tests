@@ -1,4 +1,5 @@
 import {BookingSelectServicePageElement} from "./BookingSelectServicePageElement";
+import {ApiInterceptionHelper} from "../../../common/Interception/ApiInterceptionHelper";
 
 export class BookingSelectServicePage {
     private selectComponent = BookingSelectServicePageElement.OptionElement
@@ -16,8 +17,10 @@ export class BookingSelectServicePage {
     }
 
     public clickSelectSpecialistAndOrder(): BookingSelectServicePage {
+        const getSlot = ApiInterceptionHelper.getSlot()
         cy.get('service-list').contains('Wybierz specjalistę i datę')
             .click()
+        ApiInterceptionHelper.waitForAlias(getSlot)
         return this;
     }
 

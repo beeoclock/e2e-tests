@@ -253,6 +253,12 @@ export class DateUtils {
         return nextDay.date();
     }
 
+    public static getNextGivenDayNumber(days: number): number {
+        const today = moment();
+        const nextDay = today.add(days, 'day');
+        return nextDay.date();
+    }
+
     public static getFirstThreeLettersOfNextDay(): string {
         const today = moment();
         const nextDay = today.add(1, 'day');

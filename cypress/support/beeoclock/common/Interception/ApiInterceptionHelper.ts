@@ -64,6 +64,12 @@ export class ApiInterceptionHelper {
         return getAbsence
     }
 
+    public static getSlot(): string {
+        const getSlot = 'getSlot' + DateUtils.getCurrentTime();
+        cy.intercept('GET', EntryPointEnum.PUBLIC_PAGE_API_ENTRY_POINT + '/slot/busy?*').as(getSlot);
+        return getSlot
+    }
+
     public static createAbsence(): string {
         const createAbsence = 'createAbsence' + DateUtils.getCurrentTime();
         cy.intercept('POST', EntryPointEnum.API_ENTRY_POINT + '/absence').as(createAbsence);
