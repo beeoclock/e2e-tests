@@ -7,10 +7,6 @@ describe("Client app health check test", () => {
     const englishAddress = 'https://beeoclock.com/en/barbershop_brooklyn'
     const taiwanAddress = 'https://beeoclock.com/tw/barbershop_brooklyn'
 
-    // const danishAddress = 'https://beeoclock--pr120-develop-j2tplmgj.web.app/da/barbershop_brooklyn'
-    // const englishAddress = 'https://beeoclock--pr120-develop-j2tplmgj.web.app/en/barbershop_brooklyn'
-    // const taiwanAddress = 'https://beeoclock--pr120-develop-j2tplmgj.web.app/tw/barbershop_brooklyn'
-
     const danishTabName = 'Detaljer og'
     const englishTabName = 'Details'
     const clientName = 'Barbershop Brooklyn'
@@ -29,7 +25,7 @@ describe("Client app health check test", () => {
         assertLogo()
         assertBusinessName()
         assertUrl(danishAddress)
-        assertDetailsTab(danishTabName)//TODO ask
+        assertDetailsTab(danishTabName)
     });
 
     it('assert corrected english page', function () {
