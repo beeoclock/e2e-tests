@@ -2,7 +2,7 @@ export class OptionElement {
 
     public getElement(order: string): any {
         return cy.get('select-service-multiple').contains(order).parents('select-service-multiple').first()
-            .find('.flex.gap-4.items-center')
+            .find('.flex.gap-4.items-center').scrollIntoView().should('be.visible')
     }
 
     public getAddButton(order: string): any {

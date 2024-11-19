@@ -8,6 +8,8 @@ describe('order time slot test', () => {
 
     it('should test slot full time range', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
+        ServicesPages.BookingSelectServicePage
+            .verifyCorrectForm()
 
         cy.log('CASE 1')
         ServicesPages.BookingSelectServicePage
