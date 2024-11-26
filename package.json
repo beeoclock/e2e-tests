@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "8.4.1",
-    "dotenv": "^16.4.5",
+    "dotenv": "16.4.5",
     "moment": "2.30.1"
   }
 }
