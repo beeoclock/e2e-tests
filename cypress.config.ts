@@ -1,6 +1,7 @@
 import { defineConfig } from 'cypress';
+import * as dotenv from 'dotenv';
 
-// dotenv.config();
+dotenv.config();
 
 export default defineConfig({
   projectId: 'cypress-beeclock-at',

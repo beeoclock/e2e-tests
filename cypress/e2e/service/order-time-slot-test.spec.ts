@@ -3,13 +3,11 @@ import {ServicesPages} from "../../support/beeoclock/page-element/services/Servi
 import {ServiceNameEnum} from "../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {SpecialistNameEnum} from "../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {TimeEnum} from "../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
-import {ClientPropertiesEnum} from "../../support/beeoclock/common/enum/ClientPropertiesEnum";
 
 describe('order time slot test', () => {
 
     it('should test slot full time range', () => {
 
-        cy.log('LOGIN: ' + ClientPropertiesEnum.LOGIN)
         cy.visit(ServiceEnum.PUBLIC_PANEL)
         ServicesPages.BookingSelectServicePage
             .verifyCorrectForm()
