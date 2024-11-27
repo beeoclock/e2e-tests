@@ -13,7 +13,6 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 require('cypress-xpath');
-require("cypress-cloud/support");
 
 // Import commands.js using ES2015 syntax:
 import './commands';
