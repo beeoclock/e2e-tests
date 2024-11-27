@@ -1,13 +1,16 @@
-name: Client App Health Check
+name: Health Check Workflow
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *'  # 5:00 UTC
-    - cron: '0 19 * * *' # 19:00 UTC
+    - cron: '0 5 * * *'
+    - cron: '0 19 * * *'
 
 jobs:
-  health-check:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,10 +20,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.0.4'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run health check tests
+      - name: Run tests
         run: npm run client-app-health-check
