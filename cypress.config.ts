@@ -1,9 +1,14 @@
-import { defineConfig } from 'cypress'
+import { defineConfig } from 'cypress';
+import * as dotenv from 'dotenv';
 
-module.exports = defineConfig({
+dotenv.config();
+
+export default defineConfig({
   projectId: 'cypress-beeclock-at',
   env: {
-      apiBackendEntryPoint: 'https://api-dev.beeoclock.com/client/api/v1/',
+    apiBackendEntryPoint: 'https://api-dev.beeoclock.com/client/api/v1/',
+    LOGIN: process.env.LOGIN,
+    PASSWORD: process.env.PASSWORD,
   },
 
   e2e: {
@@ -17,6 +22,6 @@ module.exports = defineConfig({
     requestTimeout: 10000,
     chromeWebSecurity: false,
     includeShadowDom: true,
-    watchForFileChanges: false
+    watchForFileChanges: false,
   },
-})
+});

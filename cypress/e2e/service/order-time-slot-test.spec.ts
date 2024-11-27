@@ -7,6 +7,7 @@ import {TimeEnum} from "../../support/beeoclock/page-element/configuration/tab/c
 describe('order time slot test', () => {
 
     it('should test slot full time range', () => {
+
         cy.visit(ServiceEnum.PUBLIC_PANEL)
         ServicesPages.BookingSelectServicePage
             .verifyCorrectForm()

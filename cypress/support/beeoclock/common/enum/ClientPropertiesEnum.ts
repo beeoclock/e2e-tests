@@ -1,5 +1,6 @@
-export const ClientPropertiesEnum = {
+require('dotenv').config();
 
-    LOGIN : 'e2e.testing@dev.beeoclock.com',
-    PASSWORD :'mPdA8WbC41ET'
-}
+export const ClientPropertiesEnum = {
+    LOGIN: Cypress.env('LOGIN'),
+    PASSWORD: Cypress.env('PASSWORD')
+};

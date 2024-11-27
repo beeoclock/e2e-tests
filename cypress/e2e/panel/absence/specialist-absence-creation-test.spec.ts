@@ -69,7 +69,6 @@ describe('specialist absence creation test', () => {
                 .clickActionButton()
                 .clickGivenAction(AbsenceActionEnum.DEACTIVATE)
                 .clickGivenAction(AbsenceActionEnum.DELETE)
-
             LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
         })
     })
