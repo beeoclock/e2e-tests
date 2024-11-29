@@ -12,8 +12,9 @@ describe("Client app health check test", () => {
     const clientName = 'Barbershop Brooklyn'
 
     it('assert corrected danish page', function () {
-        cy.visit(danishAddress);
-        assertApiResponse()
+        cy.visit(danishAddress).then(() => {
+            assertApiResponse()
+        })
 
         cy.document().then((doc) => {
             const langAttribute = doc.documentElement.getAttribute('lang');
