@@ -79,7 +79,7 @@ describe("Client app health check test", () => {
 
     function assertApiResponse() {
         const getGivenClient = 'getGivenClient' + DateUtils.getCurrentTime()
-        cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn').as(getGivenClient);
+        cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn/specialist/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=100').as(getGivenClient);
         cy.wait('@' + getGivenClient);
     }
 });
