@@ -1,6 +1,6 @@
 import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages";
-import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
 import {faker} from "@faker-js/faker";
+import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
 
 describe("Client app health check test", () => {
     const danishAddress = 'https://beeoclock.com/da/barbershop_brooklyn'
@@ -11,9 +11,14 @@ describe("Client app health check test", () => {
     const englishTabName = 'Details'
     const clientName = 'Barbershop Brooklyn'
 
+    before('clear', () => {
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
+    })
+
     it('assert corrected danish page', function () {
         cy.visit(danishAddress).then(() => {
-            assertApiResponse()
+               assertApiResponse()
         })
 
         cy.document().then((doc) => {
@@ -73,7 +78,7 @@ describe("Client app health check test", () => {
     }
 
     function assertApiResponse() {
-        const getGivenClient = 'getGivenClient' + faker.finance.creditCardCVV()
+        const getGivenClient = 'getGivenClient' + DateUtils.getCurrentTime()
         cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn').as(getGivenClient);
         cy.wait('@' + getGivenClient);
     }
