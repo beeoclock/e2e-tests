@@ -73,7 +73,7 @@ describe("Client app health check test", () => {
     }
 
     function assertApiResponse() {
-        const getGivenClient = 'getGivenClient' + DateUtils.getCurrentTimeFormatted() + faker.finance.creditCardCVV()
+        const getGivenClient = 'getGivenClient' + faker.finance.creditCardCVV()
         cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn').as(getGivenClient);
         cy.wait('@' + getGivenClient);
     }
