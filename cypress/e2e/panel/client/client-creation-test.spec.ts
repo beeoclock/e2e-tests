@@ -42,7 +42,6 @@ describe('customer creation test', () => {
 
         LeftMenuPage.clickClientTab();
 
-
         cy.log('add button')
         CommonElementPage.clickAddResourceButton()
 
