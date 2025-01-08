@@ -7,6 +7,7 @@ import {AbsencePages} from "../../../support/beeoclock/page-element/configuratio
 import {AbsenceActionEnum} from "../../../support/beeoclock/page-element/configuration/tab/absence/absence-action/enum/AbsenceActionEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelAbsenceCreationDataProvider} from "../../../fixtures/panel/absence/PanelAbsenceCreationDataProvider";
+import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
 
 describe('specialist absence creation test', () => {
 
@@ -21,6 +22,7 @@ describe('specialist absence creation test', () => {
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2
         ];
+        cy.log('PASS: ' + ClientPropertiesEnum.PASSWORD)
 
         cy.loginOnPanel()
 
@@ -57,11 +59,12 @@ describe('specialist absence creation test', () => {
                 .verifyAbsenceToTime(testData.absenceToTime)
                 .typeAbsenceNote(testData.absenceNote)
                 .clickSaveButton()
-            RightPanelPages.RightPanelNavigationPage
-                .clickCloseRightPanel()
 
             CalendarPages.CalendarTablePage
                 .assertAbsenceOnTable(testData.assertTableAbsence)
+
+            RightPanelPages.RightPanelNavigationPage
+                .clickCloseRightPanel()
 
             LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
