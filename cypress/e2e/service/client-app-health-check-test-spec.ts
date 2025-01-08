@@ -1,5 +1,4 @@
 import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages";
-import {faker} from "@faker-js/faker";
 import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
 
 describe("Client app health check test", () => {
