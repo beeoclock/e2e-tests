@@ -6,6 +6,7 @@ export class BookingSelectServicePage {
 
     public selectSpecificOrder(order: string, count?: string): BookingSelectServicePage {
         this.verifyCorrectForm()
+        cy.wait(1000)// TODO temp wait for re-render app
         this.selectComponent.getAddButton(order)
             .click().then(() => {
             this.selectComponent.getMinusButton(order)
@@ -37,6 +38,7 @@ export class BookingSelectServicePage {
 
         const detailsTab = cy.get('.flex.justify-start').find('.me-2').last()
         detailsTab.should('not.have.class', 'active').and('have.class', 'hover:text-gray-600')
+        cy.document().its('readyState').should('equal', 'complete')
         return this;
     }
 
