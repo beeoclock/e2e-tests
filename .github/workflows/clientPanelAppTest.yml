@@ -19,5 +19,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set environment variables
+        env:
+          LOGIN: ${{ secrets.LOGIN }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          echo "Environment variables set successfully."
+
       - name: Run client app tests
+        env:
+          LOGIN: ${{ secrets.LOGIN }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: npm run client-panel-app-test
