@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cypress:open": "npx cypress open",
-    "client-panel-app-test": "npx cypress run --spec cypress/e2e/panel --browser edge",
+    "client-panel-app-test": "npx cypress run --spec cypress/e2e/panel",
     "client-app-test": "npx cypress run --spec cypress/e2e/service",
     "client-app-health-check": "npx cypress run --spec cypress/e2e/service/client-app-health-check-test-spec.ts"
   },
