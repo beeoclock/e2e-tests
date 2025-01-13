@@ -19,5 +19,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set timezone
+        run: sudo timedatectl set-timezone Europe/Warsaw
+
       - name: Run client app tests
         run: npm run client-app-test
