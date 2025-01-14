@@ -19,7 +19,7 @@ describe('customer creation test', () => {
         cy.reload()
     })
 
-    it('test panel absence creation service', function () {
+    it('test panel custer creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2,
