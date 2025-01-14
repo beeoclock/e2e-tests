@@ -22,7 +22,6 @@ describe('specialist absence creation test', () => {
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2
         ];
-        cy.log('PASS: ' + ClientPropertiesEnum.PASSWORD)
 
         cy.loginOnPanel()
 
