@@ -47,7 +47,7 @@ export class ClientFormPage {
         const createCustomer = ClientsApiInterceptionHelper.createCustomer()
         SaveButton.getElement()
             .click().then(() => {
-            ApiInterceptionHelper.waitFor201Alias(createCustomer)
+            ApiInterceptionHelper.waitForAlias(createCustomer)
             //TODO add snackbar assertions
             //     cy.get('.toast-message').should('have.value', 'Klient został utworzony.')
                 cy.get('.toast-container').find('button').click()
