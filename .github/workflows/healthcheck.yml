@@ -1,9 +1,6 @@
 name: Health Check Workflow
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
   schedule:
     - cron: '0 5 * * *'

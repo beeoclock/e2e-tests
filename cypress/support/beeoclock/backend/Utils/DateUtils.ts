@@ -284,7 +284,7 @@ export class DateUtils {
     //
     public static getStartOfTomorrowUTC(): string {
         const date = this.getCurrentDateFormatted()
-        return date + 'T23:00:00.000Z'
+        return  moment.utc().tz('Europe/Warsaw').add(1, 'days').startOf('day').toISOString();
     }
 
     public static getEndOfTomorrowUTC(): string {

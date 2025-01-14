@@ -85,14 +85,14 @@ export class RightPanelServicesPage {
     public selectMinute(minute?: string): RightPanelServicesPage {
         if (minute == '2') {
             cy.get('.ion-delegate-host > .ng-untouched')
-                .find('ion-picker-column').last()
+                .find('ion-picker-column').last().scrollIntoView()
                 .find('ion-picker-column-option').eq(0).scrollIntoView().click()
         }
         if (minute == '30') {
             cy.get('.ion-delegate-host > .ng-untouched')
-                .find('ion-picker-column').last()
+                .find('ion-picker-column').last().scrollIntoView()
                 .find('ion-picker-column-option').eq(28).scrollIntoView().click()
-        } else {}
+        }
         return this;
     }
 
@@ -105,7 +105,8 @@ export class RightPanelServicesPage {
 
     public selectPriceOfService(price: string): RightPanelServicesPage {
         RightPanelServicesPageElement.OpenPriceInputElement.getElement()
-            .click()
+            .click({force: true})
+        cy.wait(200)
         this.typePrice(price)
         return this;
     }
@@ -176,7 +177,7 @@ export class RightPanelServicesPage {
 
     public clickNextButton(): RightPanelServicesPage {
         RightPanelServicesPageElement.NextButton.getElement()
-            .click()
+            .click({force: true})
         return this
     }
 }

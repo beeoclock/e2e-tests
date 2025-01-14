@@ -1,0 +1,36 @@
+name: Client Panel App Test Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  client-app-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set timezone
+        run: sudo timedatectl set-timezone Europe/Warsaw
+
+      - name: Set environment variables
+        env:
+          LOGIN: ${{ secrets.LOGIN }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          echo "Environment variables set successfully."
+
+      - name: Run client panel app tests
+        env:
+          LOGIN: ${{ secrets.LOGIN }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: npm run client-panel-app-test
