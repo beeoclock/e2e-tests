@@ -35,6 +35,4 @@ export class CalendarNavigationPage {
         })
         return this;
     }
-
-
 }
