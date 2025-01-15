@@ -32,8 +32,16 @@ jobs:
       - name: Set timezone
         run: sudo timedatectl set-timezone Europe/Warsaw
 
+      - name: Debug locale and timezone
+        run: |
+          echo "Current locale:"
+          locale
+          echo "Current timezone:"
+          timedatectl
+
       - name: Run client app tests
         env:
           LANG: pl_PL.UTF-8
           LC_ALL: pl_PL.UTF-8
+          TZ: Europe/Warsaw
         run: npm run client-app-test

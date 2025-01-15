@@ -6,6 +6,10 @@ describe('order next service', () => {
 
     const address: string = CompanyEnum.COMPANY_ADDRESS
 
+    before(function () {
+
+    })
+
     beforeEach(function () {
         cy.fixture('order-next-service-test-data.json').as('orderNextServiceCreation');
     });
