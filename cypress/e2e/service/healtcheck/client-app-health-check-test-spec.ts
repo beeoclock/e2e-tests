@@ -1,5 +1,5 @@
-import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages";
-import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
+import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages";
+import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 
 describe("Client app health check test", () => {
     const danishAddress = 'https://beeoclock.com/da/barbershop_brooklyn'

@@ -1,6 +1,6 @@
-import {ServicesPages} from "../../support/beeoclock/page-element/services/ServicesPages"
-import {CompanyEnum} from "../../support/beeoclock/page-element/services/enum/CompanyEnum";
-import {BusinessNameEnum} from "../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
+import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages"
+import {CompanyEnum} from "../../../support/beeoclock/page-element/services/enum/CompanyEnum";
+import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 
 describe('order next service', () => {
 
