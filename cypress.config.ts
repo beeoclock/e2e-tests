@@ -12,6 +12,9 @@ export default defineConfig({
   },
 
   e2e: {
+    retries: {
+      runMode: 2
+    },
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
     viewportHeight: 1080,
     viewportWidth: 1920,
