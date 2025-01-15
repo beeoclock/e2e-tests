@@ -148,6 +148,16 @@ export class DateUtils {
         return currentTime.format("HH_mm");
     }
 
+    public static getCurrentHour(): string {
+        const currentTime = moment();
+        return currentTime.format("HH:mm");
+    }
+
+    public static getCurrentPlusGivenHour(hours: number): string {
+        const currentTime = moment().add(hours, 'hours')
+        return currentTime.format("HH:00");
+    }
+
     public static getCurrentYear(): string {
         const currentTime = moment();
         return currentTime.format("YYYY");

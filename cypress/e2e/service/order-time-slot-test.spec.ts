@@ -3,10 +3,13 @@ import {ServicesPages} from "../../support/beeoclock/page-element/services/Servi
 import {ServiceNameEnum} from "../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {SpecialistNameEnum} from "../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {TimeEnum} from "../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
+import {DateUtils} from "../../support/beeoclock/backend/Utils/DateUtils";
 
 describe('order time slot test', () => {
+    let currentHour = DateUtils.getCurrentHour()
+    let nextHour = DateUtils.getCurrentPlusGivenHour(1)
 
-    it('test 1 should test slot full time range', () => {
+    it('test 1 should test free slot visibility', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
         ServicesPages.BookingSelectServicePage
             .verifyCorrectForm()
@@ -37,7 +40,7 @@ describe('order time slot test', () => {
             .clickBackByButton()
     })
 
-    it('test 2', () => {
+    it('test 2 should test free slot visibility', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
 
         ServicesPages.BookingSelectServicePage
@@ -66,7 +69,7 @@ describe('order time slot test', () => {
             .clickBackByButton()
     })
 
-    it('test 3', () => {
+    it('test 3 should test free slot visibility', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
 
         ServicesPages.BookingSelectServicePage
@@ -93,5 +96,16 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20_30)
             .clickBackByButton()
+    });
+
+    it('test 4 should test free slot visibility', () => {
+        cy.visit(ServiceEnum.PUBLIC_PANEL)
+
+        ServicesPages.BookingSelectServicePage
+            .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
+            .clickSelectSpecialistAndOrder()
+        ServicesPages.SelectTimePage
+            .verifyGivenSlotNotExist(currentHour)
+            .assertSpecificTime(nextHour)
     });
 });
