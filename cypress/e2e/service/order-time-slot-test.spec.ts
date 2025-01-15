@@ -6,13 +6,11 @@ import {TimeEnum} from "../../support/beeoclock/page-element/configuration/tab/c
 
 describe('order time slot test', () => {
 
-    it('should test slot full time range', () => {
-
+    it('test 1 should test slot full time range', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
         ServicesPages.BookingSelectServicePage
             .verifyCorrectForm()
 
-        cy.log('CASE 1')
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.E2E_HAIRCUT.toLowerCase())
             .clickSelectSpecialistAndOrder()
@@ -37,8 +35,10 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20_30)
             .clickBackByButton()
+    })
 
-        cy.log('CASE 2')
+    it('test 2', () => {
+        cy.visit(ServiceEnum.PUBLIC_PANEL)
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
             .clickSelectSpecialistAndOrder()
@@ -63,8 +63,11 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20)
             .clickBackByButton()
+    })
 
+    it('test 3', () => {
         cy.log('CASE 3')
+        cy.visit(ServiceEnum.PUBLIC_PANEL)
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
             .clickSelectSpecialistAndOrder()
