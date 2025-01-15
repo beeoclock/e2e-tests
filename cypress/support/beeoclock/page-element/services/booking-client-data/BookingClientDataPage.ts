@@ -134,12 +134,13 @@ export class BookingClientDataPage {
 
     public verifyPhonePrefix(prefix: string): BookingClientDataPage {
         const element = BookingClientDataPageElement.PhonePrefixElement
-            if (!element.getElement().contains('+48')) {
+            // if (!element.getElement().contains('+1')) {
                 element.getElement().click().then(() => {
-                    cy.get('[placeholder="Search"]').type('poland')
+                    cy.get('[placeholder="Search"]').type('Poland')
                     cy.contains('li', 'Poland').click()
                 })
-            }
+            // }
+        cy.wait(100)
             element.getElement().should('have.prop', 'textContent').and('include', prefix)
         return this;
     }
