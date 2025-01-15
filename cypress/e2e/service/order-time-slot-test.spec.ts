@@ -39,6 +39,7 @@ describe('order time slot test', () => {
 
     it('test 2', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
+
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
             .clickSelectSpecialistAndOrder()
@@ -66,8 +67,8 @@ describe('order time slot test', () => {
     })
 
     it('test 3', () => {
-        cy.log('CASE 3')
         cy.visit(ServiceEnum.PUBLIC_PANEL)
+
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
             .clickSelectSpecialistAndOrder()
