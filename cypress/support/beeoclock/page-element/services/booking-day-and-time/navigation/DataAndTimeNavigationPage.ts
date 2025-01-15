@@ -1,11 +1,11 @@
-import { DateUtils } from "../../../../backend/Utils/DateUtils";
-import { DataAndTimeNavigationPageElement } from "./DataAndTimeNavigationPageElement";
+import {DataAndTimeNavigationPageElement} from "./DataAndTimeNavigationPageElement";
 
 export class DataAndTimeNavigationPage {
 
     public clickNextStepButton(): DataAndTimeNavigationPage {
         DataAndTimeNavigationPageElement.BookButton.getElement()
-            .click()
+            .click();
+        cy.url().should('include', '/order/cart')
         return this;
     }
 }

@@ -14,6 +14,10 @@ describe('order service', () => {
     it('order service form test', function () {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
 
+        cy.document().then((doc) => {
+            doc.documentElement.lang = 'pl';
+        });
+
         this.orderServiceCreation.forEach(item => {
             cy.log('Case: ' + item.case);
 

@@ -5,6 +5,7 @@ import {BookingClientDataPageElement} from "./BookingClientDataPageElement";
 export class BookingClientDataPage {
 
     public typeFirstName(firstName: string): BookingClientDataPage {
+        cy.get('cart-details-component').should('be.visible');
         this.verifyFirstNameLabel()
         BookingClientDataPageElement.FirstNameInput.getElement()
             .clear()
