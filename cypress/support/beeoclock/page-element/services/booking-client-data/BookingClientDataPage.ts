@@ -133,10 +133,17 @@ export class BookingClientDataPage {
     }
 
     public verifyPhonePrefix(prefix: string): BookingClientDataPage {
-        BookingClientDataPageElement.PhonePrefixElement.getElement()
-            .should('have.prop', 'textContent').and('include', prefix)
+        const element = BookingClientDataPageElement.PhonePrefixElement
+            // if (!element.getElement().contains('+48')) {
+                element.getElement().click().then(() => {
+                    cy.get('[placeholder="Search"]').type('poland')
+                    cy.contains('li', 'Poland').click()
+                })
+            // }
+            element.getElement().should('have.prop', 'textContent').and('include', prefix)
         return this;
     }
+
     public verifySelectServicesHeader(): BookingClientDataPage {
         cy.contains('div', 'Zamówione usługi').should('be.visible')
         return this;
