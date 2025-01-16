@@ -106,6 +106,11 @@ describe('panel new customer order service', () => {
                         .typePrice('500')
                     OrderTabPages.OrderEditionFormPage
                         .assertPrice(orderID, '500,00 zł')
+
+                    // cy.log('get order table module');// TODO ask when id is changes because in this case id !== id
+                    // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR);
+                    // CalendarPages.CalendarTablePage
+                    //     .clickOnGivenOrderByItsId(orderID)
                 })
             })
         })
@@ -128,7 +133,8 @@ describe('panel new customer order service', () => {
                 CalendarPages.CalendarTablePage
                     .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
                     .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, '18:00-18:30MarthaD\'Amore-Simonise2e-strzyżenie')
-                    .clickOnGivenOrderByItsId(orderID)
+                    .clickOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
+                    // .clickOnGivenOrderByItsId(orderID)TODO JW
             })
         })
     })
