@@ -1,6 +1,7 @@
 import {RightPanelServicesPageElement} from "./RightPanelServicesPageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import {CustomerTypeEnum} from "./enum/CustomerTypeEnum";
+import {OrderPriceComponent} from "../../../tab/order-tab/order-edition/order-price/OrderPriceComponent";
 
 export class RightPanelServicesPage {
 

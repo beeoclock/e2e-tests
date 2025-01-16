@@ -19,6 +19,13 @@ export class CalendarTablePage {
         return this;
     }
 
+    public clickOnGivenOrderByItsId(orderId: string): CalendarTablePage {
+        CalendarTablePageElement.OrderTableElement.getIdElement(orderId)
+            .click()
+            .then(() => {cy.get('whac-a-mole').scrollIntoView().should('be.visible')})
+        return this;
+    }
+
     public verifyTimeOrderOnTable(specialistFirstName: string, specialistLastName: string, value: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
             .invoke('prop', 'textContent')

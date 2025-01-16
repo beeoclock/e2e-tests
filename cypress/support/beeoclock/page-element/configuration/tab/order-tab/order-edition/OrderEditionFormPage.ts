@@ -47,4 +47,14 @@ export class OrderEditionFormPage {
         return this
     }
 
+    public assertPrice(orderId: string, price: string): OrderEditionFormPage {
+        OrderEditionFormPageElement.OrderPriceComponent.getElement(orderId)
+            .invoke('prop', 'innerText').then((innerText) => {
+            const normalizedText = innerText.replace(/\s/g, '');
+            const normalizedPrice = price.replace(/\s/g, '');
+            expect(normalizedText).to.include(normalizedPrice);
+        })
+        return this;
+    }
+
 }
