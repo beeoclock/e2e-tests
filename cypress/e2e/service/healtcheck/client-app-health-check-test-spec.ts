@@ -10,12 +10,15 @@ describe("Client app health check test", () => {
     const englishTabName = 'Details'
     const clientName = 'Barbershop Brooklyn'
 
+    const emptyDomain = 'https://dev.beeoclock.com/pl'
+    const businessHeader = 'Rejestrowanie klientów online - automatyzacja biznesu!'
+
     before('clear', () => {
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage()
     })
 
-    it('assert corrected danish page', function () {
+    it('test 1 assert corrected danish page', function () {
         cy.visit(danishAddress)
 
         cy.document().then((doc) => {
@@ -31,7 +34,7 @@ describe("Client app health check test", () => {
         assertDetailsTab(danishTabName)
     });
 
-    it('assert corrected english page', function () {
+    it('test 2 assert corrected english page', function () {
         cy.visit(englishAddress);
         assertApiResponse()
 
@@ -48,13 +51,28 @@ describe("Client app health check test", () => {
         assertDetailsTab(englishTabName)
     });
 
-    it('assert corrected lang on the unsupported language', function () {
+    it('test 3 assert corrected lang on the unsupported language', function () {
         cy.visit(taiwanAddress);
 
         cy.document().then((doc) => {
             const langAttribute = doc.documentElement.getAttribute('lang');
             expect(langAttribute).to.equal('en-US');
         });
+    });
+
+    it('test 4 assert correct redirect', function () {
+        cy.visit(emptyDomain)
+        let description = ' Bee O\'clock to usługa online umożliwiająca wygodne umawianie spotkań z klientami. Nie trać klientów: daj im możliwość umówienia się na spotkanie w dowolnym momencie. Zautomatyzuj swój biznes - zarządzaj spotkaniami, klientami, płatnościami i pracownikami łatwo i wydajnie dzięki Bee O\'clock. '
+
+        cy.document().then((doc) => {
+            const langAttribute = doc.documentElement.getAttribute('lang');
+            expect(langAttribute).to.equal('pl');
+        });
+
+        assertUrl('https://dev.beeoclock.biz/pl')
+        verifyPlRedirectPage()
+        cy.get('h1').should('contain.text', businessHeader);
+        cy.contains('p', description)
     });
 
     function assertLogo() {
@@ -78,5 +96,10 @@ describe("Client app health check test", () => {
         const getGivenClient = 'getGivenClient' + DateUtils.getCurrentTime()
         cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn/specialist/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=100').as(getGivenClient);
         cy.wait('@' + getGivenClient);
+    }
+
+    function verifyPlRedirectPage() {
+        cy.get('.object-cover')
+            .should('have.prop', 'src', 'https://dev.beeoclock.biz/assets/iPad_Air_calenadr-with-specialist.png')
     }
 });
