@@ -9,8 +9,8 @@ export class CalendarTablePage {
 
     public clickOnGivenAndHour(specialist: string, index: number): CalendarTablePage {
         CalendarTablePageElement.SpecificTableElement.getElement(specialist, index)
-            .click().then(() => {cy.get('whac-a-mole').scrollIntoView().should('be.visible')})
-
+            .click({force: true}).then(() => {
+                cy.get('whac-a-mole').scrollIntoView().should('be.visible')})
         return this;
     }
 
