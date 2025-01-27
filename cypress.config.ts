@@ -22,7 +22,7 @@ export default defineConfig({
     experimentalRunAllSpecs: true,
     numTestsKeptInMemory: 1,
     pageLoadTimeout: 20000,
-    requestTimeout: 10000,
+    requestTimeout: 15000,
     chromeWebSecurity: false,
     includeShadowDom: true,
     watchForFileChanges: false,

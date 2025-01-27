@@ -25,6 +25,7 @@ before(() => {
 function clearAllData() {
     cy.clearCookies();
     cy.clearLocalStorage();
+    cy.clearAllSessionStorage()
 
     cy.window().then((win) => {
         if (win.caches) {
