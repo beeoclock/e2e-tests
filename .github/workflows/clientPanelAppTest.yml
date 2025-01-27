@@ -53,8 +53,8 @@ jobs:
           echo "Current timezone:"
           timedatectl
 
-      - name: Test API connectivity
-        run: curl -I https://example-api.com/health
+      - name: Cleanup order
+        run: npm run order-cleanup
 
       - name: Run client panel app tests
         run: npm run client-panel-app-test -- --reporter mocha-junit-reporter
