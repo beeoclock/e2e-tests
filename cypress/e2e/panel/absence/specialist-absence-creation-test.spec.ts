@@ -7,6 +7,8 @@ import {AbsencePages} from "../../../support/beeoclock/page-element/configuratio
 import {AbsenceActionEnum} from "../../../support/beeoclock/page-element/configuration/tab/absence/absence-action/enum/AbsenceActionEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelAbsenceCreationDataProvider} from "../../../fixtures/panel/absence/PanelAbsenceCreationDataProvider";
+import {AbsenceColumnRowEnum} from "../../../support/beeoclock/page-element/configuration/tab/absence/table-verifier/enum/AbsenceColumnRowEnum";
+import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 
 describe('specialist absence creation test', () => {
 
@@ -66,6 +68,15 @@ describe('specialist absence creation test', () => {
 
             LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
+            AbsencePages.AbsenceFilterPage
+                .searchAbsence(testData.absenceNote)
+            AbsencePages.AbsenceTableVerifier
+                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.TYPE, 'Przerwa')
+                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.PROGRESS_STATUS, 'Zaplanowane')
+                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.ATTENDEES, '1')
+                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceFromTime)
+                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceToTime)
+                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.CREATED_AT, DateUtils.getCurrentDate() + ', ' + DateUtils.getCurrentHour())
             AbsencePages.AbsenceActionPage
                 .clickActionButton()
                 .clickGivenAction(AbsenceActionEnum.DEACTIVATE)

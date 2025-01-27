@@ -148,9 +148,14 @@ export class DateUtils {
         return currentTime.format("HH_mm");
     }
 
-    public static getCurrentHour(): string {
+    public static getCurrentHourWithMinutes(): string {
         const currentTime = moment();
         return currentTime.format("HH:mm");
+    }
+
+    public static getCurrentHour(): string {
+        const currentTime = moment();
+        return currentTime.format("HH");
     }
 
     public static getCurrentPlusGivenHour(hours: number): string {

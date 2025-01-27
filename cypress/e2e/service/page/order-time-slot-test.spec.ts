@@ -6,7 +6,7 @@ import {TimeEnum} from "../../../support/beeoclock/page-element/configuration/ta
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 
 describe('order time slot test', () => {
-    let currentHour = DateUtils.getCurrentHour()
+    let currentHour = DateUtils.getCurrentHourWithMinutes()
     let nextHour = DateUtils.getCurrentPlusGivenHour(1)
 
     it('test 1 should test free slot visibility', () => {
