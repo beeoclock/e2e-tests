@@ -57,7 +57,7 @@ jobs:
         run: npm run order-cleanup
 
       - name: Run client panel app tests
-        run: npm run client-panel-app-test -- --reporter mocha-junit-reporter
+        run: npm run client-panel-app-test
 
       - name: Upload Cypress artifacts
         if: failure()
