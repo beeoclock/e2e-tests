@@ -6,6 +6,9 @@ on:
 jobs:
   client-app-test:
     runs-on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
 
     steps:
       - name: Checkout code
@@ -16,21 +19,32 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm install
 
-      - name: Set locale to Polish
+      - name: Verify Node.js and npm version
+        run: |
+          node -v
+          npm -v
+
+      - name: Set locale and timezone
         run: |
           sudo apt-get update
           sudo apt-get install -y locales
           sudo locale-gen pl_PL.UTF-8
           sudo update-locale LANG=pl_PL.UTF-8
+          sudo timedatectl set-timezone Europe/Warsaw
         env:
           LANG: pl_PL.UTF-8
           LC_ALL: pl_PL.UTF-8
-
-      - name: Set timezone
-        run: sudo timedatectl set-timezone Europe/Warsaw
 
       - name: Debug locale and timezone
         run: |
@@ -39,15 +53,15 @@ jobs:
           echo "Current timezone:"
           timedatectl
 
-      - name: Set environment variables
-        env:
-          LOGIN: ${{ secrets.LOGIN }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-        run: |
-          echo "Environment variables set successfully."
+      - name: Cleanup order
+        run: npm run order-cleanup
 
       - name: Run client panel app tests
-        env:
-          LOGIN: ${{ secrets.LOGIN }}
-          PASSWORD: ${{ secrets.PASSWORD }}
         run: npm run client-panel-app-test
+
+      - name: Upload Cypress artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: cypress/screenshots

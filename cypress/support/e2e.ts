@@ -18,5 +18,23 @@ require('cypress-xpath');
 import './commands';
 import 'cypress-file-upload';
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+before(() => {
+    clearAllData();
+});
+
+function clearAllData() {
+    cy.clearCookies();
+    cy.clearLocalStorage();
+    cy.clearAllSessionStorage()
+
+    cy.window().then((win) => {
+        if (win.caches) {
+            win.caches.keys().then((cacheNames) => {
+                cacheNames.forEach((cacheName) => {
+                    win.caches.delete(cacheName);
+                });
+            });
+        }
+        win.sessionStorage.clear();
+    });
+}
