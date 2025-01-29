@@ -82,6 +82,9 @@ describe('specialist absence creation test', () => {
             AbsencePages.AbsenceActionPage
                 .clickActionButton()
                 .clickGivenAction(AbsenceActionEnum.DEACTIVATE)
+            AbsencePages.AbsenceTableVerifier
+                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.PROGRESS_STATUS, 'Anulowana')
+            AbsencePages.AbsenceActionPage
                 .clickGivenAction(AbsenceActionEnum.DELETE)
             LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
         })
@@ -128,6 +131,9 @@ describe('specialist absence creation test', () => {
         AbsencePages.AbsenceActionPage
             .clickActionButton()
             .clickGivenAction(AbsenceActionEnum.DEACTIVATE)
+        AbsencePages.AbsenceTableVerifier
+            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.PROGRESS_STATUS, 'Anulowana')
+        AbsencePages.AbsenceActionPage
             .clickGivenAction(AbsenceActionEnum.DELETE)
         LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
     })
