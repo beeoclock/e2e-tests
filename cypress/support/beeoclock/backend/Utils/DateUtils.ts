@@ -148,9 +148,25 @@ export class DateUtils {
         return currentTime.format("HH_mm");
     }
 
+    public static getCurrentHourWithMinutes(): string {
+        // Get the current time rounded to the nearest minute to avoid fluctuations
+        const currentTime = moment();
+        const roundedTime = currentTime.seconds() >= 30 ? currentTime.add(1, 'minute') : currentTime;
+        return roundedTime.startOf('minute').format("HH:mm");
+    }
+
+    public static getHourWithAddedMinutes(minutesToAdd: number): string {
+        // Get the current time rounded to the nearest minute
+        const currentTime = moment();
+        const roundedTime = currentTime.seconds() >= 30 ? currentTime.add(1, 'minute') : currentTime;
+
+        const updatedTime = roundedTime.add(minutesToAdd, 'minutes');
+        return updatedTime.startOf('minute').format("HH:mm");
+    }
+
     public static getCurrentHour(): string {
         const currentTime = moment();
-        return currentTime.format("HH:mm");
+        return currentTime.format("HH");
     }
 
     public static getCurrentPlusGivenHour(hours: number): string {

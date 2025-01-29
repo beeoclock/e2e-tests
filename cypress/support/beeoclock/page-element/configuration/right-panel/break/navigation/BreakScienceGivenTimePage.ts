@@ -32,4 +32,12 @@ export class BreakScienceGivenTimePage {
             .click();
         return this;
     }
+
+    //science now
+
+    public clickBreakRangeScienceNow(range: string): BreakScienceGivenTimePage {
+        BreakNavigationElement.SelectTimeRange.getElement(range)
+            .click();
+        return this;
+    }
 }

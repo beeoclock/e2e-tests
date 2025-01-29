@@ -28,6 +28,14 @@ export class CalendarNavigationPage {
         return this;
     }
 
+    public clickPreviousDayArrow(): CalendarNavigationPage {
+        const getOrder: string = ApiInterceptionHelper.getOrder()
+        CalendarNavigationPageElement.PreviousDayArrow.getElement()
+            .click()
+        cy.wait('@' + getOrder)
+        return this;
+    }
+
     public verifyNextDayDate(): CalendarNavigationPage {
         CalendarNavigationPageElement.DateInformationLabel.getElement()
             .invoke('prop', 'outerText').then(outerText => {
