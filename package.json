@@ -6,7 +6,7 @@
   "scripts": {
     "cypress:open": "npx cypress open",
 
-    "client-panel-app-test": "npx cypress run --spec cypress/e2e/panel --browser edge",
+    "client-panel-app-test": "npx cypress run --spec cypress/e2e/panel",
     "order-cleanup": "npx cypress run --spec cypress/e2e/backend/delete-order-api-test.spec.ts",
     "client-app-test": "npx cypress run --spec cypress/e2e/service/page --browser edge",
     "client-app-health-check": "npx cypress run --spec cypress/e2e/service/healtcheck/client-app-health-check-test-spec.ts"

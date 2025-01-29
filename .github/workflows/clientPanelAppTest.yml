@@ -21,12 +21,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
-
-      - name: Verify Node.js and npm version
-        run: |
-          node -v
-          npm -v
+        run: npm ci
 
       - name: Set locale and timezone
         run: |
