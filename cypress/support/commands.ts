@@ -25,10 +25,10 @@ Cypress.Commands.add('loginOnPanel', () => {
         onBeforeLoad: (win) => {
             win.sessionStorage.clear();
             win.localStorage.clear();
+            win.sessionStorage.clear();
             win.localStorage.setItem('language', 'pl');
         }
     });
-    cy.document().its('readyState').should('eq', 'complete');
 
     cy.log('login');
     PanelLoginPageElement.EmailInput.getElement();
@@ -36,6 +36,8 @@ Cypress.Commands.add('loginOnPanel', () => {
     PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
     PanelLoginPage.clickLoginButton();
     PanelLoginPage.selectGivenBusinessAndStoreToken(BusinessNameEnum.HAIRCUT_AND_BARBER);
+    cy.document().its('readyState').should('eq', 'complete');
+
 });
 
 Cypress.Commands.add('loginOnPublicPage', () => {

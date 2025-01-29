@@ -44,13 +44,13 @@ export class ClientFormPage {
     }
 
     public clickSaveButton(): ClientFormPage {
-        const createCustomer = ClientsApiInterceptionHelper.createCustomer()
+        const createCustomer: string = ClientsApiInterceptionHelper.createCustomer()
         SaveButton.getElement()
-            .click().then(() => {
+            .click()
             ApiInterceptionHelper.waitFor201Alias(createCustomer)
                 cy.get('.toast-container').find('button').click()
             cy.wait(1000)
-        })
+
         return this;
     }
 }

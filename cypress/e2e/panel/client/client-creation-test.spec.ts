@@ -77,6 +77,7 @@ describe('customer creation test', () => {
                 .clickDeactivateClient()
                 .clickActionButton(testData.lastName)//roll down
             ReloadCommonButton.getElement().click()
+            cy.wait(500)
             ClientTabPages.ClientTabActionPage
                 .clickActionButton(testData.lastName)//roll up
                 .clickDeleteClient()
