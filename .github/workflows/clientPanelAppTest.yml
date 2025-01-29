@@ -18,17 +18,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
 
       - name: Verify Node.js and npm version
         run: |
@@ -37,11 +30,9 @@ jobs:
 
       - name: Set locale and timezone
         run: |
-          sudo apt-get update
-          sudo apt-get install -y locales
-          sudo locale-gen pl_PL.UTF-8
-          sudo update-locale LANG=pl_PL.UTF-8
           sudo timedatectl set-timezone Europe/Warsaw
+          echo "LANG=pl_PL.UTF-8" | sudo tee -a /etc/environment
+          echo "LC_ALL=pl_PL.UTF-8" | sudo tee -a /etc/environment
         env:
           LANG: pl_PL.UTF-8
           LC_ALL: pl_PL.UTF-8
@@ -59,9 +50,12 @@ jobs:
       - name: Run client panel app tests
         run: npm run client-panel-app-test
 
-      - name: Upload Cypress artifacts
+      - name: Upload Cypress artifacts on failure
         if: failure()
         uses: actions/upload-artifact@v3
         with:
           name: cypress-artifacts
-          path: cypress/screenshots
+          path: |
+            cypress/screenshots
+            cypress/videos
+            cypress/results
