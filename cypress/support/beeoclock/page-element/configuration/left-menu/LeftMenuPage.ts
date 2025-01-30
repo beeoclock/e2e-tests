@@ -2,6 +2,7 @@ import {LeftMenuPageElement} from "./LeftMenuPageElement";
 import {ApiInterceptionHelper} from "../../../common/Interception/ApiInterceptionHelper";
 import {TabNameEnum} from "./enum/TabNameEnum";
 import {ClientsApiInterceptionHelper} from "../../../common/Interception/clients/ClientsApiInterceptionHelper";
+import {ProductsApiRequestHelper} from "../../../common/Interception/products/ProductsApiRequestHelper";
 
 export class LeftMenuPage {
 
@@ -42,6 +43,16 @@ export class LeftMenuPage {
         ApiInterceptionHelper.waitForQueryAliasWithAssert(getCustomers)
         cy.get('customer-desktop-layout-list-component').should('be.visible')
         cy.get('customer-table-list-component').should('be.visible')
+        return this;
+    }
+
+    public static clickProductTab(): LeftMenuPage {
+        const getProducts = ProductsApiRequestHelper.getProducts()
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.PRODUCTS)
+            .click()
+        ApiInterceptionHelper.waitForQueryAliasWithAssert(getProducts)
+        cy.get('product-desktop-layout-list-component').should('be.visible')
+        cy.get('product-table-list-component').should('be.visible')
         return this;
     }
 }
