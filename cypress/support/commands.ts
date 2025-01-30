@@ -37,8 +37,8 @@ Cypress.Commands.add('loginOnPanel', () => {
     PanelLoginPage.clickLoginButton();
     PanelLoginPage.selectGivenBusinessAndStoreToken(BusinessNameEnum.HAIRCUT_AND_BARBER);
     cy.document().its('readyState').should('eq', 'complete');
-
 });
+
 
 Cypress.Commands.add('loginOnPublicPage', () => {
     cy.log('visit')

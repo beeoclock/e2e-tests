@@ -21,6 +21,19 @@ export class PanelLoginPage {
         return this;
     }
 
+    public static clickLoginButtonAndStoreToken(): PanelLoginPage {
+        const getIdentityProfile = ApiInterceptionHelper.getIdentityProfile()
+        PanelLoginPageElement.LoginButton.getElement()
+            .click().then(() => {
+            cy.wait('@' + getIdentityProfile).then((interception) => {
+                const authorizationHeader = interception.request.headers['authorization'];
+                const token = (authorizationHeader as string).split(' ')[1];
+                cy.wrap(token).as('token');
+            })
+        });
+        return this;
+    }
+
     public static selectGivenBusinessAndStoreToken(business: string): PanelLoginPage {
         const getBusinessProfile = ApiInterceptionHelper.getBusinessProfile()
         PanelLoginPageElement.SelectBusinessOption.getElement(business)

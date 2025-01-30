@@ -28,6 +28,12 @@ export class ApiInterceptionHelper {
         return getBusinessProfile
     }
 
+    public static getIdentityProfile(): string {
+        const getIdentityProfile = 'getIdentityProfile' + DateUtils.getCurrentTime();
+        cy.intercept('GET', 'https://api-dev.beeoclock.com' + '/identity/api/v1/member-context/related?*').as(getIdentityProfile);
+        return getIdentityProfile
+    }
+
     public static getService(): string {
         const alias = 'getService' + DateUtils.getCurrentTime();
         cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/service/paged?*').as(alias);
