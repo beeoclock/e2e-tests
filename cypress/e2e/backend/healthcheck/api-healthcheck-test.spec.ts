@@ -22,25 +22,25 @@ describe("panel api healthcheck", () => {
         });
     });
 
-    it('assert unauthorized status', function () {
+    it('get business profile and assert unauthorized response', function () {
         BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.Unauthorized, BackendCommonEnum.INVALID_TOKEN, {
             failOnStatusCode: false
         });
     });
 
-    it('assert correct status', function () {
+    it('get business profile and assert correct response', function () {
         BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
             cy.log('response', JSON.stringify(response));
         });
     });
 
-    it('get identity profile', function () {
+    it('get identity profile and assert expected response', function () {
         IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
             expect(JSON.stringify(response)).to.equal(JSON.stringify(IdentityData.DATA));
         })
     });
 
-    it('get analytic Info', function () {
+    it('get analytic Info and assert all response keys', function () {
         AnalyticApi.getDateRangeReport(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
             expect(response).to.have.all.keys(
                 "startDateTime", "endDateTime", "totalOrderServices", "totalOrders", "totalRevenue", "specialistReports"
