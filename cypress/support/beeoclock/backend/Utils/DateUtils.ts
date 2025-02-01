@@ -1,5 +1,5 @@
-import * as moment from "moment";
 import "moment-timezone/index";
+import moment = require('moment');
 
 export class DateUtils {
 
@@ -36,10 +36,6 @@ export class DateUtils {
 
     public static getCurrentTime(): number {
         return new Date(Date.now()).getTime();
-    }
-
-    public static getCurrentTimeFormatted(): string {
-        return moment().toISOString();
     }
 
     public static getCurrentMoment(): string {
@@ -293,7 +289,7 @@ export class DateUtils {
     }
 
     public static getStartOfTodayUTC(): string {
-        return moment.tz('Europe/Warsaw').startOf('day').toISOString();
+        return moment.utc().startOf('day').toISOString();
     }
 
     public static getStartOfPreviousDays(days: number) {
@@ -304,7 +300,7 @@ export class DateUtils {
     }
 
     public static getEndOfTodayUTC(): string {
-        return moment.tz('Europe/Warsaw').endOf('day').toISOString();
+        return moment.utc().endOf('day').toISOString();
     }
 
     //
