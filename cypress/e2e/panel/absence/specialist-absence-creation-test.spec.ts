@@ -70,8 +70,6 @@ describe('specialist absence creation test', () => {
 
             LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
-            AbsencePages.AbsenceFilterPage
-                .searchAbsence(testData.absenceNote)
             AbsencePages.AbsenceTableVerifier
                 .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.TYPE, 'Przerwa')
                 .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.PROGRESS_STATUS, 'Zaplanowane')
@@ -119,8 +117,6 @@ describe('specialist absence creation test', () => {
 
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
-        AbsencePages.AbsenceFilterPage
-            .searchAbsence("SZYBKA PRZERWA")
         AbsencePages.AbsenceTableVerifier
             .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.TYPE, 'Przerwa')
             .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.PROGRESS_STATUS, 'W trakcie')
