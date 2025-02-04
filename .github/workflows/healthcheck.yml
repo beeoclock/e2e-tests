@@ -1,4 +1,4 @@
-name: Health Check Workflow
+name: Client app Health Check Workflow
 
 on:
   workflow_dispatch:
