@@ -14,6 +14,8 @@ declare global {
             loginOnPanel(): void;
 
             loginOnPublicPage(): void;
+            loginOnProductPanel(): void;
+            getEmail(): any;
         }
     }
 }
@@ -39,6 +41,26 @@ Cypress.Commands.add('loginOnPanel', () => {
     cy.document().its('readyState').should('eq', 'complete');
 });
 
+Cypress.Commands.add('loginOnProductPanel', () => {
+    cy.log('visit')
+    cy.visit(ServiceEnum.PRODUCT_CLIENT_PANEL, {
+        failOnStatusCode: false,
+        onBeforeLoad: (win) => {
+            win.sessionStorage.clear();
+            win.localStorage.clear();
+            win.sessionStorage.clear();
+            win.localStorage.setItem('language', 'pl');
+        }
+    });
+
+    cy.log('login');
+    PanelLoginPageElement.EmailInput.getElement();
+    PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
+    PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
+    PanelLoginPage.clickLoginButton();
+    PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER);
+    cy.document().its('readyState').should('eq', 'complete');
+});
 
 Cypress.Commands.add('loginOnPublicPage', () => {
     cy.log('visit')
@@ -50,7 +72,15 @@ Cypress.Commands.add('loginOnPublicPage', () => {
         //     cy.wrap(token).as('token');
         // })
     })
-
 });
 
+Cypress.Commands.add('getEmail', () => {
+    return cy.task('getLastEmail').then((email: { subject: string; body: string } | null) => {
+        if (!email) {
+            throw new Error('No email received!');
+        }
+        cy.log(`📩 Email received: ${email.subject}`);
+        return email;
+    });
+});
 

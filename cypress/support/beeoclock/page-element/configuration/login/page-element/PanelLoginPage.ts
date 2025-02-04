@@ -46,4 +46,10 @@ export class PanelLoginPage {
         });
         return this;
     }
+
+    public static selectGivenBusiness(business: string): PanelLoginPage {
+        PanelLoginPageElement.SelectBusinessOption.getElement(business)
+            .click();
+        return this;
+    }
 }

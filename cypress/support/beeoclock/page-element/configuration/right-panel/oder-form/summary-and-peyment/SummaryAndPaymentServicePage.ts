@@ -1,5 +1,6 @@
 import {SummaryAndPaymentServicePageElement} from "./SummaryAndPaymentServicePageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
+import {NotificationsPage} from "../../../notiifcations/NotificationsPage";
 
 export class SummaryAndPaymentServicePage {
 
@@ -89,17 +90,26 @@ export class SummaryAndPaymentServicePage {
         return this;
     }
 
-    public clickSaveButton(): SummaryAndPaymentServicePage {
+    public clickSaveButton(sendEmail: boolean = false): SummaryAndPaymentServicePage {
         const createOrder = ApiInterceptionHelper.createOrder()
         const createPayment = ApiInterceptionHelper.createServicePayment()
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
-        cy.wait('@' + createOrder).then((interception) => {
-            const responseBody = interception.response.body;
-            const orderId = responseBody._id;
-            cy.wrap(orderId).as('orderId');
+            .then(() => {
+                if (sendEmail) {
+                    NotificationsPage.clickEmailNotificationsToggle()
+                    NotificationsPage.clickConfirmButton()
+                } else {
+                    NotificationsPage.clickConfirmButton()
+                }
+            }).then(() => {
+            cy.wait('@' + createOrder).then((interception) => {
+                const responseBody = interception.response.body;
+                const orderId = responseBody._id;
+                cy.wrap(orderId).as('orderId');
+            })
+            ApiInterceptionHelper.waitFor201Alias(createPayment)
         })
-        ApiInterceptionHelper.waitFor201Alias(createPayment)
         return this;
     }
 }
