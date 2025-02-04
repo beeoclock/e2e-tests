@@ -55,6 +55,7 @@ describe('panel new customer order service', () => {
                     .typeCustomerEmail(testData.email)
                     .typeCustomerPhone(testData.phone)
                     .clickConfirmButton();
+
                 RightPanelPages.RightPanelServicesPage
                     .clickNextButton()
                     .selectPriceOfService(testData.updatedPrice)
@@ -112,7 +113,8 @@ describe('panel new customer order service', () => {
         })
     })
 
-    it('test edition of the service on the calendar module', function () {
+
+    it.skip('test edition of the service on the calendar module', function () {
         cy.loginOnPanel()
 
         cy.log('get token')

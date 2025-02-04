@@ -106,7 +106,7 @@ export class SummaryAndPaymentServicePage {
             cy.wait('@' + createOrder).then((interception) => {
                 const responseBody = interception.response.body;
 
-                const orderId = responseBody.services[0].orderAppointmentDetails.specialists[0].member._id;
+                const orderId = responseBody._id;
                 cy.wrap(orderId).as('orderId');
             })
             ApiInterceptionHelper.waitFor201Alias(createPayment)

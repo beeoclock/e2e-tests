@@ -1,6 +1,7 @@
 import {RightPanelServicesPageElement} from "./RightPanelServicesPageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import {CustomerTypeEnum} from "./enum/CustomerTypeEnum";
+import {NotificationsPage} from "../../../notiifcations/NotificationsPage";
 
 export class RightPanelServicesPage {
 
@@ -136,11 +137,15 @@ export class RightPanelServicesPage {
         return this;
     }
 
-    public typePrice(price: string): RightPanelServicesPage {
+    public typePrice(price: string, sendEmail: boolean = false): RightPanelServicesPage {
         RightPanelServicesPageElement.OrderPriceInput.getElement()
             .clear()
             .type(price).then(() => {
-            cy.contains('button', 'Potwierdź').click()
+            cy.contains('button', 'Potwierdź').click().then(() => {
+                if (sendEmail) {
+                    NotificationsPage.handleEmailNotificationsToggle(sendEmail)
+                }
+            })
         })
         return this;
     }
