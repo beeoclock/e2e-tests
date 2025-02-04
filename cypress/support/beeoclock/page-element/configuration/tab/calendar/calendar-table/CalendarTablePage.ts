@@ -23,7 +23,13 @@ export class CalendarTablePage {
     public clickOnGivenOrderByItsId(orderId: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getIdElement(orderId)
             .click()
-            .then(() => {cy.get('whac-a-mole').scrollIntoView().should('be.visible')})
+            .then(() => {
+                cy.get('whac-a-mole').scrollIntoView().should('be.visible')
+                cy.get('app-item-list-v2-service-form-order-component').scrollIntoView().should('be.visible')
+                cy.get('event-container-details-component').scrollIntoView().should('be.visible')
+                cy.get('event-meta-details').scrollIntoView().should('be.visible')
+                cy.get('.truncate.font-bold').contains('Szczegółowy widok wydarzenia').scrollIntoView().should('be.visible')
+            })
         return this;
     }
 

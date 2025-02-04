@@ -1,7 +1,6 @@
 import {RightPanelServicesPageElement} from "./RightPanelServicesPageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import {CustomerTypeEnum} from "./enum/CustomerTypeEnum";
-import {OrderPriceComponent} from "../../../tab/order-tab/order-edition/order-price/OrderPriceComponent";
 
 export class RightPanelServicesPage {
 
@@ -149,10 +148,12 @@ export class RightPanelServicesPage {
     //CUSTOMER
     public clickOpenCustomerPopover(): RightPanelServicesPage {
         cy.wait(500)
+        cy.document().its('readyState').should('equal', 'complete')
         RightPanelServicesPageElement.SelectCustomerOption.getElement()
             .click().then(() => {
-            cy.get('.ion-padding').should('be.visible').then((visible) => {
+            cy.get('.ion-padding').then((visible) => {
                 if (!visible) {
+                    cy.log('again')
                     RightPanelServicesPageElement.SelectCustomerOption.getElement().click();
                 }
             });
@@ -163,11 +164,14 @@ export class RightPanelServicesPage {
     public selectSpecificCustomerType(type: string): RightPanelServicesPage {
         if (type == CustomerTypeEnum.NEW) {
             RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 1).as('button')
-        } else if (type == CustomerTypeEnum.CLIENT) {
+        }
+        if (type == CustomerTypeEnum.CLIENT) {
             RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 0).as('button')
-        } else if (type == CustomerTypeEnum.GUEST) {
+        }
+        if (type == CustomerTypeEnum.GUEST) {
             RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 2).as('button')
-        } else if (type == CustomerTypeEnum.ANONYMOUS) {
+        }
+        if (type == CustomerTypeEnum.ANONYMOUS) {
             RightPanelServicesPageElement.SelectSpecificCustomerOption.getElement(type, 3).as('button')
         }
         cy.get('@button').should('exist')

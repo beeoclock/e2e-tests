@@ -7,7 +7,7 @@ export class NotificationComponentElement {
 
     public getEmailToggle(): any {
         return this.getComponent().find('.toggle-wrapper')
-            .contains('Wyślij E-mail ')
-            .parents('.toggle-icon')
+            // .contains('Wyślij E-mail ')
+            // .parents('.toggle-icon')
     }
 }

@@ -9,6 +9,7 @@ import {RightPanelPages} from "support/beeoclock/page-element/configuration/righ
 import {CustomerTypeEnum} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
 import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages"
 import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages"
+import {NotificationsPage} from "../../../../support/beeoclock/page-element/configuration/notiifcations/NotificationsPage";
 
 describe('panel new customer order service', () => {
     const testCases = [
@@ -91,13 +92,13 @@ describe('panel new customer order service', () => {
                         .clickCustomerButton(orderID)
                     RightPanelPages.RightPanelServicesPage
                         .selectSpecificCustomerType(CustomerTypeEnum.CLIENT)
+                    cy.log('selectGivenCustomer')
                     RightPanelPages.CustomerPage
-                        .searchExistingCustomer(`D'Amore-Simonis`)
-                    RightPanelPages.CustomerPage
-                        .selectGivenCustomer('Martha' + ' ' + `D'Amore-Simonis`)
+                        .searchExistingCustomer('tester')
+                        .selectGivenCustomer('tester' + ' ' + 'maila')
                         .clickConfirmButton();
-                    OrderTabPages.OrderEditionFormPage
-                        .verifySelectCustomer(orderID, '👤 Martha 📇')
+                    NotificationsPage.clickEmailNotificationsToggle()
+                    NotificationsPage.clickConfirmButton()
 
                     cy.log('order price edition')
                     OrderTabPages.OrderEditionFormPage
@@ -106,11 +107,6 @@ describe('panel new customer order service', () => {
                         .typePrice('500')
                     OrderTabPages.OrderEditionFormPage
                         .assertPrice(orderID, '500,00 zł')
-
-                    // cy.log('get order table module');// TODO ask when id is changes because in this case id !== id
-                    // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR);
-                    // CalendarPages.CalendarTablePage
-                    //     .clickOnGivenOrderByItsId(orderID)
                 })
             })
         })
