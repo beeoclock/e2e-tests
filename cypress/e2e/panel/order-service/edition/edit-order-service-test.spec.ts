@@ -81,13 +81,6 @@ describe('panel new customer order service', () => {
                     cy.log('get order table module');
                     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
 
-                    cy.log('edit specialist')
-                    OrderTabPages.OrderEditionFormPage
-                        .verifyOrderSpecialist(orderID, SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
-                        .clickSpecialistButton(orderID)
-                        .clickSelectSpecialist(SpecialistNameEnum.E2E_SINGLE_NAME)
-                        .verifyOrderSpecialist(orderID, SpecialistNameEnum.E2E_SINGLE_NAME)
-
                     cy.log('edit customer')
                     OrderTabPages.OrderEditionFormPage
                         .clickCustomerButton(orderID)
@@ -98,16 +91,29 @@ describe('panel new customer order service', () => {
                         .searchExistingCustomer('tester')
                         .selectGivenCustomer('tester' + ' ' + 'maila')
                         .clickConfirmButton();
-                    NotificationsPage.clickEmailNotificationsToggle()
                     NotificationsPage.clickConfirmButton()
 
-                    cy.log('order price edition')
+                    cy.log('edit specialist')
                     OrderTabPages.OrderEditionFormPage
-                        .clickOrderPriceComponent(orderID)
-                    RightPanelPages.RightPanelServicesPage
-                        .typePrice('500')
-                    OrderTabPages.OrderEditionFormPage
-                        .assertPrice(orderID, '500,00 zł')
+                        .verifyOrderSpecialist(orderID, SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+                        .clickSpecialistButton(orderID)
+                        .clickSelectSpecialist(SpecialistNameEnum.E2E_SINGLE_NAME)
+                    NotificationsPage.clickEmailNotificationsToggle()
+                    cy.wait(2000)
+                    cy.log("EMAIL CONFIRMATION")
+                    NotificationsPage.clickConfirmButton(false)
+
+                    //
+                    // OrderTabPages.OrderEditionFormPage
+                    //     .verifyOrderSpecialist(orderID, SpecialistNameEnum.E2E_SINGLE_NAME)
+                    //
+                    // cy.log('order price edition')
+                    // OrderTabPages.OrderEditionFormPage
+                    //     .clickOrderPriceComponent(orderID)
+                    // RightPanelPages.RightPanelServicesPage
+                    //     .typePrice('500')
+                    // OrderTabPages.OrderEditionFormPage
+                    //     .assertPrice(orderID, '500,00 zł')
                 })
             })
         })

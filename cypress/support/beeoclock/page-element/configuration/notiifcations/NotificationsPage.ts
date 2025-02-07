@@ -8,21 +8,24 @@ export class NotificationsPage {
         return this;
     }
 
-    public static clickConfirmButton(): NotificationsPage {
+    public static clickConfirmButton(sendEmail: boolean = false): NotificationsPage {
         NotificationsPageElement.ConfirmButton.getElement()
             .click();
 
-        cy.getEmail().then((email: { subject: string; body: string }) => {
-            cy.log('email subject', email.subject);
-            cy.log('email body', email.body);
-        });
+        if (sendEmail) {
+            cy.wait(2000)
+            cy.getEmail().then((email: { subject: string; body: string }) => {
+                cy.log('email subject', email.subject);
+                cy.log('email body', email.body);
+            });
+        }
         return this;
     }
 
     public static handleEmailNotificationsToggle(sendEmail: boolean = false): void {
         if (sendEmail) {
             this.clickEmailNotificationsToggle()
-            this.clickConfirmButton()
+            this.clickConfirmButton(true)
         } else {
             this.clickConfirmButton()
         }

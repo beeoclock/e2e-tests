@@ -23,7 +23,7 @@ export class OrderEditionFormPage {
         OrderEditionFormPageElement.SelectGivenSpecialist
             .getElement(specialist)
             .click().then(() => {
-            NotificationsPage.handleEmailNotificationsToggle(sendEmail)
+            // NotificationsPage.handleEmailNotificationsToggle(sendEmail)
         })
         return this;
     }

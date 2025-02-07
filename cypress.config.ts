@@ -1,5 +1,6 @@
-import { defineConfig } from 'cypress';
+import {defineConfig} from 'cypress';
 import * as dotenv from 'dotenv';
+import { getLastEmail } from 'support/getEmail';
 
 dotenv.config();
 
@@ -13,6 +14,14 @@ export default defineConfig({
   },
 
   e2e: {
+    setupNodeEvents(on, config) {
+      on('task', {
+        getLastEmail: async () => {
+          return await getLastEmail();
+        }
+      });
+      return config;
+    },
     retries: {
       runMode: 2
     },

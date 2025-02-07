@@ -46,7 +46,6 @@ export class CustomerPage {
         const getCustomer = CustomerApiInterceptionHelper.getCustomer()
         RightPanelServicesPageElement.ExistingCustomerInput.getElement()
             .type(customer)
-            // .type('{enter}')
         ApiInterceptionHelper.waitForAlias(getCustomer)
         return this;
     }

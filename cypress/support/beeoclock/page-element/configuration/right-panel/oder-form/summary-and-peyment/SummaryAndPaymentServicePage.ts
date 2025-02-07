@@ -98,7 +98,7 @@ export class SummaryAndPaymentServicePage {
             .then(() => {
                 if (sendEmail) {
                     NotificationsPage.clickEmailNotificationsToggle()
-                    NotificationsPage.clickConfirmButton()
+                    NotificationsPage.clickConfirmButton(sendEmail)
                 } else {
                     NotificationsPage.clickConfirmButton()
                 }
