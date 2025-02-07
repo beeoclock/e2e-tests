@@ -67,7 +67,7 @@ describe('panel new customer order service', () => {
                     .selectPaymentMethod(testData.paymentMethod)
                     .selectPaymentStatus(testData.PaymentStatus)
                     .typeBusinessNote(testData.businessNote)
-                    .clickSaveButton();
+                    .clickSaveButton(true);
 
                 cy.get('@orderId').then((orderId) => {
                     cy.log('Order ID is: ' + orderId);
@@ -86,6 +86,7 @@ describe('panel new customer order service', () => {
                         .clickCustomerButton(orderID)
                     RightPanelPages.RightPanelServicesPage
                         .selectSpecificCustomerType(CustomerTypeEnum.CLIENT)
+
                     cy.log('selectGivenCustomer')
                     RightPanelPages.CustomerPage
                         .searchExistingCustomer('tester')
@@ -103,7 +104,6 @@ describe('panel new customer order service', () => {
                     cy.log("EMAIL CONFIRMATION")
                     NotificationsPage.clickConfirmButton(false)
 
-                    //
                     // OrderTabPages.OrderEditionFormPage
                     //     .verifyOrderSpecialist(orderID, SpecialistNameEnum.E2E_SINGLE_NAME)
                     //
