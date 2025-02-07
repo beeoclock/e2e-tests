@@ -5,7 +5,6 @@ import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 export class BusinessProfileApi {
 
     public static getBusinessProfileDetails(expectedCode: HTTPStatusCodeType, tokenId: string, options: Partial<Cypress.RequestOptions>): any {
-
         const url = EntryPointEnum.API_ENTRY_POINT + `/business-profile`;
         return cy.request({
             method: 'GET',

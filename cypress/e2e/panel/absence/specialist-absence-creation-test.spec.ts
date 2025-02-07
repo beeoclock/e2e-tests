@@ -11,6 +11,7 @@ import {AbsenceColumnRowEnum} from "../../../support/beeoclock/page-element/conf
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarTableTimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
+import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('specialist absence creation test', () => {
 
@@ -30,6 +31,7 @@ describe('specialist absence creation test', () => {
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
+            AbsenceApi.deleteAllAbsences()
         });
 
         cy.log('assert login url');
