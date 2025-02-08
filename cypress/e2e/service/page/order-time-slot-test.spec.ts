@@ -2,7 +2,9 @@ import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
 import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages";
 import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {TimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
+import {
+    TimeEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 
 describe('order time slot test', () => {
@@ -108,4 +110,11 @@ describe('order time slot test', () => {
             .verifyGivenSlotNotExist(currentHour)
             .assertSpecificTime(nextHour)
     });
+
+
+    function assertFirstFreeSlot(): string {
+        let time: number = parseInt(DateUtils.getCurrentHour(), 10);
+
+        return time < 12 ? "12" : `${time + 1}:00`;
+    }
 });

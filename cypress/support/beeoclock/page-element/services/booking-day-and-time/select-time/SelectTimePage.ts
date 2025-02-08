@@ -1,4 +1,5 @@
 import {SelectTimePageElement} from "./SelectTimePageElement";
+import {DateUtils} from "../../../../backend/Utils/DateUtils";
 
 export class SelectTimePage {
 
@@ -9,7 +10,12 @@ export class SelectTimePage {
     }
 
     public assertSpecificTime(time: string): SelectTimePage {
-        SelectTimePageElement.SelectSpecificTime.getElement(time)
+        // If the current time is less than 10, the time will be 12:00
+        if (parseInt(DateUtils.getCurrentHour()) < 10) {
+            SelectTimePageElement.SelectSpecificTime.getElement('12:00')
+        } else {
+            SelectTimePageElement.SelectSpecificTime.getElement(time)
+        }
         return this;
     }
 
