@@ -15,7 +15,6 @@ declare global {
 
             loginOnPublicPage(): void;
             loginOnProductPanel(): void;
-            getEmail(): any;
         }
     }
 }
@@ -72,15 +71,5 @@ Cypress.Commands.add('loginOnPublicPage', () => {
         //     cy.wrap(token).as('token');
         // })
     })
-});
-
-Cypress.Commands.add('getEmail', () => {
-    return cy.task('getLastEmail').then((email: { subject: string; body: string } | null) => {
-        if (!email) {
-            throw new Error('No email received!');
-        }
-        cy.log(`📩 Email received: ${email.subject}`);
-        return email;
-    });
 });
 

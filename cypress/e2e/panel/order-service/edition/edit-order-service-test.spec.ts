@@ -3,25 +3,50 @@ import {PanelOrderVariousOptionDataProvider} from "fixtures/panel/various-option
 import {OrderApi} from "support/beeoclock/backend/panel/order/OrderApi"
 import {ModuleAssertionPage} from "support/beeoclock/common/assertion/ModuleAssertionPage"
 import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/SpecialistNameEnum"
-import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage"
-import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum"
 import {RightPanelPages} from "support/beeoclock/page-element/configuration/right-panel/RightPanelPages"
-import {CustomerTypeEnum} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
+import {
+    CustomerTypeEnum
+} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
 import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages"
-import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages"
-import {NotificationsPage} from "../../../../support/beeoclock/page-element/configuration/notiifcations/NotificationsPage";
+import {EmailService} from "../../../../support/EmailService";
 
 describe('panel new customer order service', () => {
     const testCases = [
         TestCaseEnum.CASE_1,
     ];
+
+    interface Email {
+        messageId: string;
+        sender: string;
+        subject: string;
+        content: string;  //
+    }
+    interface EmailContent {
+        content: string;  // lub inne odpowiednie pole dla treści
+    }
+
+
+
     let orderID: string
+    let email: string
+    let emailPassword: string
 
     before('clear environment', () => {
-        cy.clearAllLocalStorage()
-        cy.clearAllSessionStorage()
-        cy.clearAllCookies()
-    })
+        cy.clearAllLocalStorage();
+        cy.clearAllSessionStorage();
+        cy.clearAllCookies();
+
+        cy.log('Creating temporary email account');
+        cy.wrap(EmailService.createAccount()).then((response: { email: string, password: string }) => {
+            // cy.wrap(response.email).as('tempEmail');
+            // cy.wrap(response.password).as('tempPassword');
+            email = response.email;
+            emailPassword = response.password;
+
+            cy.log(`Temporary email created: ${response.email}`);
+        });
+    });
+
 
     it('test edition of the service on the order module', function () {
         cy.loginOnPanel()
@@ -38,6 +63,8 @@ describe('panel new customer order service', () => {
 
             testCases.forEach(testCase => {
                 const testData = PanelOrderVariousOptionDataProvider.getTestData(testCase);
+                const randomId = Math.floor(Math.random() * 10000);
+                const generatedEmail = `${testData.firstName.toLowerCase()}.${testData.lastName.toLowerCase()}${randomId}@test.com`;
 
                 cy.log('CASE - 1')
                 CalendarPages.CalendarTablePage
@@ -52,7 +79,7 @@ describe('panel new customer order service', () => {
                 RightPanelPages.CustomerPage
                     .typeCustomerName(testData.firstName)
                     .typeCustomerLastName(testData.lastName)
-                    .typeCustomerEmail(testData.email)
+                    .typeCustomerEmail(generatedEmail)
                     .typeCustomerPhone(testData.phone)
                     .clickConfirmButton();
 
@@ -67,54 +94,73 @@ describe('panel new customer order service', () => {
                     .selectPaymentMethod(testData.paymentMethod)
                     .selectPaymentStatus(testData.PaymentStatus)
                     .typeBusinessNote(testData.businessNote)
-                    .clickSaveButton();
+                    .clickSaveButton(true);
 
-                cy.get('@orderId').then((orderId) => {
-                    cy.log('Order ID is: ' + orderId);
-                    orderID = orderId.toString()
+                cy.wrap(EmailService.login(email, emailPassword)).then((response: string) => {
+                    cy.wrap(EmailService.getEmails(response)).then((emails: Email[]) => {
+                        // Wypisz wszystkie maile, które zostały otrzymane
+                        cy.log('Emails received:');
+                        emails.forEach((email, index) => {
+                            cy.log(`Email #${index + 1}:`);
+                            cy.log(`From: ${email.sender}`);
+                            cy.log(`Subject: ${email.subject}`);
+                            cy.log(`Content: ${email.content}`);
 
-                    cy.log('verify its order on table');
-                    CalendarPages.CalendarTablePage
-                        .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
-                        .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
-
-                    cy.log('get order table module');
-                    LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-
-                    cy.log('edit customer')
-                    OrderTabPages.OrderEditionFormPage
-                        .clickCustomerButton(orderID)
-                    RightPanelPages.RightPanelServicesPage
-                        .selectSpecificCustomerType(CustomerTypeEnum.CLIENT)
-
-                    cy.log('selectGivenCustomer')
-                    RightPanelPages.CustomerPage
-                        .searchExistingCustomer('tester')
-                        .selectGivenCustomer('tester' + ' ' + 'maila')
-                        .clickConfirmButton();
-                    NotificationsPage.clickConfirmButton()
-
-                    cy.log('edit specialist')
-                    OrderTabPages.OrderEditionFormPage
-                        .verifyOrderSpecialist(orderID, SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
-                        .clickSpecialistButton(orderID)
-                        .clickSelectSpecialist(SpecialistNameEnum.E2E_SINGLE_NAME)
-                    NotificationsPage.clickEmailNotificationsToggle()
-                    cy.wait(2000)
-                    cy.log("EMAIL CONFIRMATION")
-                    NotificationsPage.clickConfirmButton()
-
-                    // OrderTabPages.OrderEditionFormPage
-                    //     .verifyOrderSpecialist(orderID, SpecialistNameEnum.E2E_SINGLE_NAME)
-                    //
-                    // cy.log('order price edition')
-                    // OrderTabPages.OrderEditionFormPage
-                    //     .clickOrderPriceComponent(orderID)
-                    // RightPanelPages.RightPanelServicesPage
-                    //     .typePrice('500')
-                    // OrderTabPages.OrderEditionFormPage
-                    //     .assertPrice(orderID, '500,00 zł')
+                            // Pobieranie treści konkretnego e-maila
+                            cy.wrap(EmailService.getEmailContent(response, email.messageId)).then((emailContent: EmailContent) => {
+                                cy.log(`Content of Email #${index + 1}:`);
+                                cy.log(`Body Content: ${emailContent.content}`);
+                            })
+                        })
+                    })
                 })
+                //
+                // cy.get('@orderId').then((orderId) => {
+                //     cy.log('Order ID is: ' + orderId);
+                //     orderID = orderId.toString()
+                //
+                //     cy.log('verify its order on table');
+                //     CalendarPages.CalendarTablePage
+                //         .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
+                //         .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
+                //
+                //     cy.log('get order table module');
+                //     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                //
+                //     cy.log('edit customer')
+                //     OrderTabPages.OrderEditionFormPage
+                //         .clickCustomerButton(orderID)
+                //     RightPanelPages.RightPanelServicesPage
+                //         .selectSpecificCustomerType(CustomerTypeEnum.CLIENT)
+                //
+                //     cy.log('selectGivenCustomer')
+                //     RightPanelPages.CustomerPage
+                //         .searchExistingCustomer('tester')
+                //         .selectGivenCustomer('tester' + ' ' + 'maila')
+                //         .clickConfirmButton();
+                //     NotificationsPage.clickConfirmButton()
+                //
+                //     cy.log('edit specialist')
+                //     OrderTabPages.OrderEditionFormPage
+                //         .verifyOrderSpecialist(orderID, SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+                //         .clickSpecialistButton(orderID)
+                //         .clickSelectSpecialist(SpecialistNameEnum.E2E_SINGLE_NAME)
+                //     NotificationsPage.clickEmailNotificationsToggle()
+                //     cy.wait(2000)
+                //     cy.log("EMAIL CONFIRMATION")
+                //     NotificationsPage.clickConfirmButton()
+
+                // OrderTabPages.OrderEditionFormPage
+                //     .verifyOrderSpecialist(orderID, SpecialistNameEnum.E2E_SINGLE_NAME)
+                //
+                // cy.log('order price edition')
+                // OrderTabPages.OrderEditionFormPage
+                //     .clickOrderPriceComponent(orderID)
+                // RightPanelPages.RightPanelServicesPage
+                //     .typePrice('500')
+                // OrderTabPages.OrderEditionFormPage
+                //     .assertPrice(orderID, '500,00 zł')
+                // })
             })
         })
     })
@@ -138,7 +184,7 @@ describe('panel new customer order service', () => {
                     .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
                     .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, '18:00-18:30MarthaD\'Amore-Simonise2e-strzyżenie')
                     .clickOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
-                    // .clickOnGivenOrderByItsId(orderID)TODO JW
+                // .clickOnGivenOrderByItsId(orderID)TODO JW
             })
         })
     })

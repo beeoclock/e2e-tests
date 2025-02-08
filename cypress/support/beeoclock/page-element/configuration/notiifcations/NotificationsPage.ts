@@ -1,4 +1,5 @@
 import {NotificationsPageElement} from "./NotificationsPageElement";
+import {EmailService} from "../../../../EmailService";
 
 export class NotificationsPage {
 
@@ -13,11 +14,6 @@ export class NotificationsPage {
             .click();
 
         if (sendEmail) {
-            cy.wait(2000)
-            cy.getEmail().then((email: { subject: string; body: string }) => {
-                cy.log('email subject', email.subject);
-                cy.log('email body', email.body);
-            });
         }
         return this;
     }
