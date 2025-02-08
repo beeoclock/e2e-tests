@@ -2,6 +2,7 @@ import {LeftMenuPageElement} from "./LeftMenuPageElement";
 import {ApiInterceptionHelper} from "../../../common/Interception/ApiInterceptionHelper";
 import {TabNameEnum} from "./enum/TabNameEnum";
 import {ClientsApiInterceptionHelper} from "../../../common/Interception/clients/ClientsApiInterceptionHelper";
+import {ServiceApiInterceptionHelper} from "../../../common/Interception/service/ServiceApiInterceptionHelper";
 
 export class LeftMenuPage {
 
@@ -42,6 +43,21 @@ export class LeftMenuPage {
         ApiInterceptionHelper.waitForQueryAliasWithAssert(getCustomers)
         cy.get('customer-desktop-layout-list-component').should('be.visible')
         cy.get('customer-table-list-component').should('be.visible')
+        return this;
+    }
+
+    public static clickServiceTab(): LeftMenuPage {
+        const getServices: string = ServiceApiInterceptionHelper.getServices()
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.SERVICE)
+            .click()
+        cy.wait('@' + getServices).then((interception) => {
+            const response = interception.response.body
+            const totalSize = response.totalSize
+            cy.get('utility-table-state-pagination-component')
+                .contains('p', ' Razem: ' + totalSize).should('be.visible')
+        })
+        cy.get('service-desktop-layout-list-component').should('be.visible')
+        cy.get('service-table-list-component').should('be.visible')
         return this;
     }
 }

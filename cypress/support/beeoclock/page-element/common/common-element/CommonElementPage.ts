@@ -5,7 +5,6 @@ import {SearchInput} from "./element/SearchInput";
 
 export class CommonElementPage {
 
-
     public static clickSaveButton(): CommonElementPage {
         SaveButton.getElement().click()
         return this;

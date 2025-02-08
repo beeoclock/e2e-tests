@@ -6,6 +6,7 @@ import {BreakScienceGivenTimePage} from "./break/navigation/BreakScienceGivenTim
 import {AbsencePage} from "./break/absence/AbsencePage";
 import {ClientFormPage} from "./client-form/ClientFormPage";
 import {ClientFilterPage} from "./client-form/filter/ClientFilterPage";
+import {ServicePage} from "./service/ServicePage";
 
 export class RightPanelPages {
 
@@ -17,4 +18,5 @@ export class RightPanelPages {
     public static AbsencePage: AbsencePage = new AbsencePage()
     public static ClientFormPage: ClientFormPage = new ClientFormPage()
     public static ClientFilterPage: ClientFilterPage = new ClientFilterPage()
+    public static ServicePage: ServicePage = new ServicePage()
 }
