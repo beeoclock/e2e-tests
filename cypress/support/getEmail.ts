@@ -1,56 +1,51 @@
-import imapSimple, { ImapSimpleOptions, ImapSimple, Message } from 'imap-simple';
-import { simpleParser } from 'mailparser';
+import axios from 'axios';
 
-const imapConfig: ImapSimpleOptions = {
-    imap: {
-        user: 'jan.zaduminski@beeoclock.com',
-        password: process.env.MAIL_PASSWORD,
-        host: 'mx1.mirohost.net',
-        port: 993,
-        tls: true,
-        authTimeout: 5000,
-    },
-};
+const API_URL = 'https://api.mail.tm';
 
 /**
- * Pobiera ostatni e-mail z inboxa.
+ * Tworzy konto e-mail w Mail.tm i zwraca adres e-mail oraz hasło.
  */
-export async function getLastEmail(
-    maxRetries = 6,
-    intervalMs = 2000
-): Promise<{ subject: string; body: string } | null> {
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-        let connection: ImapSimple | null = null;
-        try {
-            connection = await imapSimple.connect(imapConfig);
-            await connection.openBox('INBOX');
+async function createAccount() {
+    const domainRes = await axios.get(`${API_URL}/domains`);
+    const domain = domainRes.data["hydra:member"][0].domain; // Pobieranie pierwszej dostępnej domeny
 
-            const searchCriteria = ['ALL'];
-            const fetchOptions = { bodies: '', markSeen: true };
+    const email = `test${Math.floor(Math.random() * 10000)}@${domain}`;
+    const password = 'securepassword123';
 
-            const messages: Message[] = await connection.search(searchCriteria, fetchOptions);
+    await axios.post(`${API_URL}/accounts`, { address: email, password });
 
-            if (messages.length === 0) {
-                console.log(`Attempt ${attempt}/${maxRetries}: No email found, retrying...`);
-                await new Promise((resolve) => setTimeout(resolve, intervalMs));
-                continue;
-            }
-
-            const latestEmail = messages[messages.length - 1];
-            const parsedEmail = await simpleParser(latestEmail.parts[0].body || '');
-
-            return { subject: parsedEmail.subject || '', body: parsedEmail.text || '' };
-        } catch (error) {
-            console.error(`IMAP ERROR (attempt ${attempt}/${maxRetries}):`, error);
-        } finally {
-            if (connection) {
-                await connection.end();
-            }
-        }
-
-        await new Promise((resolve) => setTimeout(resolve, intervalMs));
-    }
-
-    console.warn('Max retries reached. No email received.');
-    return null;
+    console.log(`Created email: ${email}`);
+    return { email, password };
 }
+
+/**
+ * Loguje się do Mail.tm i zwraca token autoryzacyjny.
+ */
+async function login(email: string, password: string) {
+    const response = await axios.post(`${API_URL}/token`, { address: email, password });
+    return response.data.token;
+}
+
+/**
+ * Pobiera listę wiadomości e-mail.
+ */
+async function getEmails(token: string) {
+    const response = await axios.get(`${API_URL}/messages`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data["hydra:member"]; // Lista e-maili
+}
+
+/**
+ * Pobiera treść konkretnej wiadomości e-mail.
+ */
+async function getEmailContent(token: string, messageId: string) {
+    const response = await axios.get(`${API_URL}/messages/${messageId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+}
+
+/**
+ * Przykładowe użycie.
+ */
