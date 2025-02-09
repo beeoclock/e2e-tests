@@ -21,10 +21,10 @@ describe('panel new customer order service', () => {
         subject: string;
         content: string;  //
     }
+
     interface EmailContent {
         content: string;  // lub inne odpowiednie pole dla treści
     }
-
 
 
     let orderID: string
@@ -63,8 +63,6 @@ describe('panel new customer order service', () => {
 
             testCases.forEach(testCase => {
                 const testData = PanelOrderVariousOptionDataProvider.getTestData(testCase);
-                const randomId = Math.floor(Math.random() * 10000);
-                const generatedEmail = `${testData.firstName.toLowerCase()}.${testData.lastName.toLowerCase()}${randomId}@test.com`;
 
                 cy.log('CASE - 1')
                 CalendarPages.CalendarTablePage
@@ -79,7 +77,7 @@ describe('panel new customer order service', () => {
                 RightPanelPages.CustomerPage
                     .typeCustomerName(testData.firstName)
                     .typeCustomerLastName(testData.lastName)
-                    .typeCustomerEmail(generatedEmail)
+                    .typeCustomerEmail(email)
                     .typeCustomerPhone(testData.phone)
                     .clickConfirmButton();
 
@@ -95,21 +93,28 @@ describe('panel new customer order service', () => {
                     .selectPaymentStatus(testData.PaymentStatus)
                     .typeBusinessNote(testData.businessNote)
                     .clickSaveButton(true);
+                cy.wait(5000)
 
                 cy.wrap(EmailService.login(email, emailPassword)).then((response: string) => {
                     cy.wrap(EmailService.getEmails(response)).then((emails: Email[]) => {
-                        // Wypisz wszystkie maile, które zostały otrzymane
                         cy.log('Emails received:');
+
                         emails.forEach((email, index) => {
                             cy.log(`Email #${index + 1}:`);
                             cy.log(`From: ${email.sender}`);
                             cy.log(`Subject: ${email.subject}`);
                             cy.log(`Content: ${email.content}`);
 
-                            // Pobieranie treści konkretnego e-maila
-                            cy.wrap(EmailService.getEmailContent(response, email.messageId)).then((emailContent: EmailContent) => {
-                                cy.log(`Content of Email #${index + 1}:`);
-                                cy.log(`Body Content: ${emailContent.content}`);
+                            cy.request({
+                                method: 'GET',
+                                url: `https://api.mail.tm/messages`,
+                                headers: {
+                                    Authorization: `Bearer ${response}`,
+                                }
+                            }).then((emailResponse) => {
+                                cy.log(`Full Email Content #${index + 1}:`);
+                                cy.log(emailResponse.body.content); // Wyświetlenie treści w konsoli
+                                console.log(emailResponse.body.content); //
                             })
                         })
                     })

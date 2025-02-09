@@ -8,7 +8,7 @@ export class EmailService {
      */
     public static async createAccount() {
         const domainRes = await axios.get(`${API_URL}/domains`);
-        const domain = domainRes.data["hydra:member"][0].domain; // Pobieranie pierwszej dostępnej domeny
+        const domain = domainRes.data["hydra:member"][0].domain;
 
         const email = `test${Math.floor(Math.random() * 10000)}@${domain}`;
         const password = 'securepassword123';

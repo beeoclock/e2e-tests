@@ -12,9 +12,6 @@ export class NotificationsPage {
     public static clickConfirmButton(sendEmail: boolean = false): NotificationsPage {
         NotificationsPageElement.ConfirmButton.getElement()
             .click();
-
-        if (sendEmail) {
-        }
         return this;
     }
 
