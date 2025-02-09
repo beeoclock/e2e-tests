@@ -104,18 +104,10 @@ describe('panel new customer order service', () => {
                             cy.log(`From: ${email.sender}`);
                             cy.log(`Subject: ${email.subject}`);
                             cy.log(`Content: ${email.content}`);
-
-                            cy.request({
-                                method: 'GET',
-                                url: `https://api.mail.tm/messages`,
-                                headers: {
-                                    Authorization: `Bearer ${response}`,
-                                }
-                            }).then((emailResponse) => {
-                                cy.log(`Full Email Content #${index + 1}:`);
-                                cy.log(emailResponse.body.content); // Wyświetlenie treści w konsoli
-                                console.log(emailResponse.body.content); //
-                            })
+                            cy.log(`messageId: ${email.messageId}`);
+                            // cy.wrap(EmailService.getEmailContent(response, email.messageId)).then((content: EmailContent) => {
+                            //     cy.log(`Content: ${content.content}`);
+                            // })
                         })
                     })
                 })
