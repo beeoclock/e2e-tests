@@ -299,6 +299,12 @@ export class DateUtils {
             .toISOString();
     }
 
+    public static getTodayInPolishFormat(): string {
+        return moment.tz('Europe/Warsaw')
+            .locale('pl')
+            .format('dddd D MMMM YYYY');
+    }
+
     public static getEndOfTodayUTC(): string {
         return moment.utc().endOf('day').toISOString();
     }

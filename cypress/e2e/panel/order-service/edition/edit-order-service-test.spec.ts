@@ -88,9 +88,10 @@ describe('panel new customer order service', () => {
 
                         emails.forEach((email: IEmails, index) => {
                             cy.log(`Email #${index + 1}:`);
-                            cy.log(`Subject: ${email.subject}`);
-                            cy.log(`intro: ${email.intro}`);
                             cy.log(`messageId: ${emails[0].id}`);
+
+                            expect(email.subject).to.include(testData.mailSubject)
+                            expect(email.intro).to.include(testData.mailIntro)
 
                             cy.wrap(EmailService.getEmailContent(response, email.id)).then((content: IEmailContent) => {
                                 cy.log(`subject: ${JSON.stringify(content.subject)}`);
