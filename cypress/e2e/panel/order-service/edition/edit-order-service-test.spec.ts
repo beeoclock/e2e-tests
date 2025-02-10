@@ -4,11 +4,16 @@ import {OrderApi} from "support/beeoclock/backend/panel/order/OrderApi"
 import {ModuleAssertionPage} from "support/beeoclock/common/assertion/ModuleAssertionPage"
 import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/SpecialistNameEnum"
 import {RightPanelPages} from "support/beeoclock/page-element/configuration/right-panel/RightPanelPages"
-import {CustomerTypeEnum} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
+import {
+    CustomerTypeEnum
+} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
 import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages"
 import {EmailService} from "../../../../support/beeoclock/notifications/EmailService";
 import {IEmails} from "../../../../support/beeoclock/notifications/interface/IEmails";
-import {IEmailContent} from "../../../../support/beeoclock/notifications/interface/IEmailContent";
+import {AssertionsHelper} from "support/beeoclock/common/assertion/AssertionsHelper"
+import {IEmailContent} from "support/beeoclock/notifications/interface/IEmailContent"
+import {DateUtils} from "support/beeoclock/backend/Utils/DateUtils"
+import {BackendCommonEnum} from "support/beeoclock/backend/enum/BackendCommonEnum"
 
 describe('panel new customer order service', () => {
     const testCases = [
@@ -16,24 +21,12 @@ describe('panel new customer order service', () => {
     ];
     let orderID: string
     let email: string
+    let emailId: string
     let emailPassword: string
 
-    before('clear environment', () => {
-        cy.clearAllLocalStorage();
-        cy.clearAllSessionStorage();
-        cy.clearAllCookies();
-
-        cy.log('Creating temporary email account');
-        cy.wrap(EmailService.createAccount()).then((response: { email: string, password: string }) => {
-            // cy.wrap(response.email).as('tempEmail');
-            // cy.wrap(response.password).as('tempPassword');
-            email = response.email;
-            emailPassword = response.password;
-
-            cy.log(`Temporary email created: ${response.email}`);
-        });
+    before('clear environment and create temporary email', () => {
+        setupAndCreateTemporaryEmail()
     });
-
 
     it('test edition of the service on the order module', function () {
         cy.loginOnPanel()
@@ -80,78 +73,48 @@ describe('panel new customer order service', () => {
                     .selectPaymentStatus(testData.PaymentStatus)
                     .typeBusinessNote(testData.businessNote)
                     .clickSaveButton(true);
-                cy.wait(5000)
 
-                cy.wrap(EmailService.login(email, emailPassword)).then((response: string) => {
-                    cy.log('token: ', response)
-                    cy.wrap(EmailService.getEmails(response)).then((emails: IEmails[]) => {
+                cy.get('@orderId').then((orderId) => {
+                    cy.log('Order ID is: ' + orderId);
+                    orderID = orderId.toString();
 
-                        emails.forEach((email: IEmails, index) => {
-                            cy.log(`Email #${index + 1}:`);
-                            cy.log(`messageId: ${emails[0].id}`);
+                    cy.log('get token');
+                    cy.wrap(EmailService.login(email, emailPassword)).then((response: string) => {
+                        cy.log('token: ', response);
+                        cy.wrap(response).as('emailToken'); // token assigning
+                        waitForEmail(response, testData.mailSubject) //dynamically wait for email
+                    });
 
-                            expect(email.subject).to.include(testData.mailSubject)
-                            expect(email.intro).to.include(testData.mailIntro)
+                    cy.log('assert email header');
+                    cy.get('@emailToken').then((token) => {
+                        cy.wrap(EmailService.getEmails(token.toString())).then((emails: IEmails[]) => {
+                            cy.wrap(emails).each((email: IEmails, index) => {
+                                cy.log(`Email #${index + 1}:`);
+                                cy.log(`messageId: ${email.id}`);
+                                expect(email.subject).to.include(testData.mailSubject);
+                                expect(email.intro).to.include(testData.mailIntro);
+                                cy.wrap(email.id.toString()).as('emailId'); // assigning emailId
+                            });
+                        });
+                    });
 
-                            cy.wrap(EmailService.getEmailContent(response, email.id)).then((content: IEmailContent) => {
-                                cy.log(`subject: ${JSON.stringify(content.subject)}`);
-                                cy.log(`intro: ${JSON.stringify(content.intro)}`);
-                                cy.log(`text: ${JSON.stringify(content.text)}`);
-                            })
-                        })
-                    })
-                })
-                //
-                // cy.get('@orderId').then((orderId) => {
-                //     cy.log('Order ID is: ' + orderId);
-                //     orderID = orderId.toString()
-                //
-                //     cy.log('verify its order on table');
-                //     CalendarPages.CalendarTablePage
-                //         .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
-                //         .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
-                //
-                //     cy.log('get order table module');
-                //     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                //
-                //     cy.log('edit customer')
-                //     OrderTabPages.OrderEditionFormPage
-                //         .clickCustomerButton(orderID)
-                //     RightPanelPages.RightPanelServicesPage
-                //         .selectSpecificCustomerType(CustomerTypeEnum.CLIENT)
-                //
-                //     cy.log('selectGivenCustomer')
-                //     RightPanelPages.CustomerPage
-                //         .searchExistingCustomer('tester')
-                //         .selectGivenCustomer('tester' + ' ' + 'maila')
-                //         .clickConfirmButton();
-                //     NotificationsPage.clickConfirmButton()
-                //
-                //     cy.log('edit specialist')
-                //     OrderTabPages.OrderEditionFormPage
-                //         .verifyOrderSpecialist(orderID, SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
-                //         .clickSpecialistButton(orderID)
-                //         .clickSelectSpecialist(SpecialistNameEnum.E2E_SINGLE_NAME)
-                //     NotificationsPage.clickEmailNotificationsToggle()
-                //     cy.wait(2000)
-                //     cy.log("EMAIL CONFIRMATION")
-                //     NotificationsPage.clickConfirmButton()
-
-                // OrderTabPages.OrderEditionFormPage
-                //     .verifyOrderSpecialist(orderID, SpecialistNameEnum.E2E_SINGLE_NAME)
-                //
-                // cy.log('order price edition')
-                // OrderTabPages.OrderEditionFormPage
-                //     .clickOrderPriceComponent(orderID)
-                // RightPanelPages.RightPanelServicesPage
-                //     .typePrice('500')
-                // OrderTabPages.OrderEditionFormPage
-                //     .assertPrice(orderID, '500,00 zł')
-                // })
-            })
-        })
-    })
-
+                    cy.log('assert email content');
+                    cy.get('@emailToken').then((token) => {
+                        cy.get('@emailId').then((emailId) => {
+                            cy.wrap(EmailService.getEmailContent(token.toString(), emailId.toString())).then((content: IEmailContent) => {
+                                const emailText = AssertionsHelper.normalizeText(content.text);
+                                expect(emailText).to.include(`WITAJ, ${testData.firstName.toUpperCase()}!`);
+                                expect(emailText).to.include(`${testData.service} zostało zarezerwowane w Haircut&Barber w ${DateUtils.getTodayInPolishFormat()} o 18:00`);
+                                expect(emailText).to.include(`Twój specjalista: ${SpecialistNameEnum.ZALEWSKI_FIRST_NAME} ${SpecialistNameEnum.ZALEWSKI_LAST_NAME}`);
+                                expect(emailText).to.include(`https://dev.beeoclock.com/${BackendCommonEnum.X_Business_Tenant_Id}/order/${orderID}`);
+                                expect(emailText).to.include(`support@beeoclock.com`);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
 
     it.skip('test edition of the service on the calendar module', function () {
         cy.loginOnPanel()
@@ -175,4 +138,43 @@ describe('panel new customer order service', () => {
             })
         })
     })
+
+    function setupAndCreateTemporaryEmail() {
+        cy.clearAllLocalStorage();
+        cy.clearAllSessionStorage();
+        cy.clearAllCookies();
+
+        cy.log('Creating temporary email account');
+        cy.wrap(EmailService.createAccount()).then((response: { email: string, password: string }) => {
+            email = response.email;
+            emailPassword = response.password;
+
+            cy.log(`Temporary email created: ${response.email}`);
+        });
+    }
+
+    function waitForEmail(token: string, expectedSubject: string): any {
+        let retries = 0;
+        let maxRetries: number = 16;
+        let interval: number = 500;
+
+        const checkForEmail = () => {
+            cy.wrap(EmailService.getEmails(token)).then((emails: IEmails[]) => {
+                const emailFound = emails.find((email) => email.subject.includes(expectedSubject));
+
+                if (emailFound) {
+                    cy.log('Email found!');
+                    cy.wrap(emailFound).as('email');
+                } else if (retries < maxRetries) {
+                    retries++;
+                    cy.wait(interval);
+                    cy.log('no email found interval: ' + retries + '/' + maxRetries)// Czekaj przez określony interwał
+                    checkForEmail();
+                } else {
+                    throw new Error('No email found after maximum retries');
+                }
+            });
+        };
+        checkForEmail();
+    }
 })
