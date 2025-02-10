@@ -116,29 +116,6 @@ describe('panel new customer order service', () => {
         });
     });
 
-    it.skip('test edition of the service on the calendar module', function () {
-        cy.loginOnPanel()
-
-        cy.log('get token')
-        cy.get('@token').then(token => {
-            cy.log('token: ' + token);
-
-            cy.log('verify calendar tab component');
-            ModuleAssertionPage.verifyCalendarTabModule()
-
-            testCases.forEach(testCase => {
-                const testData = PanelOrderVariousOptionDataProvider.getTestData(testCase);
-
-                cy.log('verify its order on table');
-                CalendarPages.CalendarTablePage
-                    .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
-                    .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, '18:00-18:30MarthaD\'Amore-Simonise2e-strzyżenie')
-                    .clickOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
-                // .clickOnGivenOrderByItsId(orderID)TODO JW
-            })
-        })
-    })
-
     function setupAndCreateTemporaryEmail() {
         cy.clearAllLocalStorage();
         cy.clearAllSessionStorage();
