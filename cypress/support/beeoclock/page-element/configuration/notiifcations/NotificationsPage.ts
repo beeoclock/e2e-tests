@@ -1,5 +1,5 @@
 import {NotificationsPageElement} from "./NotificationsPageElement";
-import {EmailService} from "../../../../EmailService";
+import {EmailService} from "../../../notifications/EmailService";
 
 export class NotificationsPage {
 

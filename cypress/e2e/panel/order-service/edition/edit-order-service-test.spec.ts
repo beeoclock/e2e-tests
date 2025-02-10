@@ -4,29 +4,16 @@ import {OrderApi} from "support/beeoclock/backend/panel/order/OrderApi"
 import {ModuleAssertionPage} from "support/beeoclock/common/assertion/ModuleAssertionPage"
 import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/SpecialistNameEnum"
 import {RightPanelPages} from "support/beeoclock/page-element/configuration/right-panel/RightPanelPages"
-import {
-    CustomerTypeEnum
-} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
+import {CustomerTypeEnum} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum"
 import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages"
-import {EmailService} from "../../../../support/EmailService";
+import {EmailService} from "../../../../support/beeoclock/notifications/EmailService";
+import {IEmails} from "../../../../support/beeoclock/notifications/interface/IEmails";
+import {IEmailContent} from "../../../../support/beeoclock/notifications/interface/IEmailContent";
 
 describe('panel new customer order service', () => {
     const testCases = [
         TestCaseEnum.CASE_1,
     ];
-
-    interface Email {
-        messageId: string;
-        sender: string;
-        subject: string;
-        content: string;  //
-    }
-
-    interface EmailContent {
-        content: string;  // lub inne odpowiednie pole dla treści
-    }
-
-
     let orderID: string
     let email: string
     let emailPassword: string
@@ -96,18 +83,20 @@ describe('panel new customer order service', () => {
                 cy.wait(5000)
 
                 cy.wrap(EmailService.login(email, emailPassword)).then((response: string) => {
-                    cy.wrap(EmailService.getEmails(response)).then((emails: Email[]) => {
-                        cy.log('Emails received:');
+                    cy.log('token: ', response)
+                    cy.wrap(EmailService.getEmails(response)).then((emails: IEmails[]) => {
 
-                        emails.forEach((email, index) => {
+                        emails.forEach((email: IEmails, index) => {
                             cy.log(`Email #${index + 1}:`);
-                            cy.log(`From: ${email.sender}`);
                             cy.log(`Subject: ${email.subject}`);
-                            cy.log(`Content: ${email.content}`);
-                            cy.log(`messageId: ${email.messageId}`);
-                            // cy.wrap(EmailService.getEmailContent(response, email.messageId)).then((content: EmailContent) => {
-                            //     cy.log(`Content: ${content.content}`);
-                            // })
+                            cy.log(`intro: ${email.intro}`);
+                            cy.log(`messageId: ${emails[0].id}`);
+
+                            cy.wrap(EmailService.getEmailContent(response, email.id)).then((content: IEmailContent) => {
+                                cy.log(`subject: ${JSON.stringify(content.subject)}`);
+                                cy.log(`intro: ${JSON.stringify(content.intro)}`);
+                                cy.log(`text: ${JSON.stringify(content.text)}`);
+                            })
                         })
                     })
                 })
