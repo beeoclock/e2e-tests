@@ -38,7 +38,7 @@ export class PanelOrderVariousOptionDataProvider {
                     businessNote: `USUŃ MNIE - notatka nr: ${controlNumber}` ,
                     assertTime: '18:00 - 18:30  Piotr Kowalczyk' + ServiceNameEnum.E2E_HAIRCUT.toLowerCase(),
                     mailSubject: `Zarezerwowane Wydarzenie: ${ServiceNameEnum.E2E_HAIRCUT.toLowerCase()} w Haircut&Barber w ${DateUtils.getTodayInPolishFormat()} o 18:00 - Bee O\'clock`,
-                    mailIntro: `WITAJ, PIOTR! ${ServiceNameEnum.E2E_HAIRCUT.toLowerCase()} zostało zarezerwowane w Haircut&Barber w ${DateUtils.getTodayInPolishFormat()} o 18:00 Twój specjalista:…`,
+                    mailIntro: `WITAJ, PIOTR! ${ServiceNameEnum.E2E_HAIRCUT.toLowerCase()} zostało zarezerwowane w Haircut&Barber w ${DateUtils.getTodayInPolishFormat()} o 18:00`,
 
                     // next case
                     nextSpecialist: SpecialistNameEnum.E2E_E2E,

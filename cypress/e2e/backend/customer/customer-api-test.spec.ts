@@ -76,8 +76,8 @@ describe('customer api test', () => {
         const customer: ICustomer = new CustomerBuilder()
             .setFirstName(customerData.firstName)
             .setLastName(customerData.lastName)
-            .setPhone(null)
-            .setEmail(null)
+            .setPhone('')
+            .setEmail('')
             .setCustomerType(customerData.customerType)
             .setState(customerData.state)
             .setCreatedAt(customerData.createdAt)
@@ -93,8 +93,8 @@ describe('customer api test', () => {
 
     it('should get bad request when no names data', () => {
         const customer: ICustomer = new CustomerBuilder()
-            .setFirstName(null)
-            .setLastName(null)
+            .setFirstName('')
+            .setLastName('')
             .setPhone(customerData.phone)
             .setEmail(customerData.email)
             .setCustomerType(customerData.customerType)

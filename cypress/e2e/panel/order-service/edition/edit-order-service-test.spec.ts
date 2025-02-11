@@ -82,7 +82,8 @@ describe('panel new customer order service', () => {
                     cy.wrap(EmailService.login(email, emailPassword)).then((response: string) => {
                         cy.log('token: ', response);
                         cy.wrap(response).as('emailToken'); // token assigning
-                        waitForEmail(response, testData.mailSubject) //dynamically wait for email
+                        // waitForEmail(response, testData.mailSubject) //dynamically wait for email
+                        cy.wait(5000)
                     });
 
                     cy.log('assert email header');
@@ -101,7 +102,7 @@ describe('panel new customer order service', () => {
                     cy.log('assert email content');
                     cy.get('@emailToken').then((token) => {
                         cy.get('@emailId').then((emailId) => {
-                            cy.wrap(EmailService.getEmailContent(token.toString(), emailId.toString())).then((content: IEmailContent) => {
+                            EmailService.getEmailContent(token.toString(), emailId.toString()).then((content: IEmailContent) => {
                                 const emailText = AssertionsHelper.normalizeText(content.text);
                                 expect(emailText).to.include(`WITAJ, ${testData.firstName.toUpperCase()}!`);
                                 expect(emailText).to.include(`${testData.service} zostało zarezerwowane w Haircut&Barber w ${DateUtils.getTodayInPolishFormat()} o 18:00`);
