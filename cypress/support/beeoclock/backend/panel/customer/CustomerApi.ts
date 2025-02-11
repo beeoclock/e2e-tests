@@ -6,9 +6,8 @@ import {ICustomerSearchCriteria} from "./queries/ICustomerSearchCriteria";
 
 export class CustomerApi {
 
-    public static createCustomerWithBuilder(customer: ICustomer, givenToken?: string): any {
+    public static createCustomerWithBuilder(customer: ICustomer, options: Partial<Cypress.RequestOptions>, givenToken?: string, ): any {
         const token = givenToken || Cypress.env('token');
-        // cy.get('@token').then(token => {
             return cy.request({
                 method: 'POST',
                 url: EntryPointEnum.API_ENTRY_POINT + '/customer',
@@ -18,11 +17,11 @@ export class CustomerApi {
                 body: customer,
                 auth: {
                     bearer: token
-                }
+                },
+                ...options
             }).then(response => {
-                return response.body;
+                return response;
             })
-        // })
     }
 
     public static getCustomerPaged(query: ICustomerSearchCriteria, givenToken?: string): any {

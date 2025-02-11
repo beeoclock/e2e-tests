@@ -42,7 +42,7 @@ describe('customer api test', () => {
             .setNote(customerData.note)
             .build();
 
-        CustomerApi.createCustomerWithBuilder(customer)
+        CustomerApi.createCustomerWithBuilder(customer, {failOnStatusCode: false})
 
         const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
             .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
@@ -85,7 +85,7 @@ describe('customer api test', () => {
             .setNote(customerData.note)
             .build();
 
-        CustomerApi.createCustomerWithBuilder(customer)
+        CustomerApi.createCustomerWithBuilder(customer, {failOnStatusCode: false})
             .then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.BadRequest);
             })
@@ -104,7 +104,7 @@ describe('customer api test', () => {
             .setNote(customerData.note)
             .build();
 
-        CustomerApi.createCustomerWithBuilder(customer)
+        CustomerApi.createCustomerWithBuilder(customer, {failOnStatusCode: false})
             .then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.BadRequest);
             })
@@ -123,7 +123,7 @@ describe('customer api test', () => {
             .setNote(customerData.note)
             .build();
 
-        CustomerApi.createCustomerWithBuilder(customer)
+        CustomerApi.createCustomerWithBuilder(customer, {failOnStatusCode: false})
             .then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.BadRequest);
             })
@@ -142,7 +142,7 @@ describe('customer api test', () => {
             .setNote(customerData.note)
             .build();
 
-        CustomerApi.createCustomerWithBuilder(customer)
+        CustomerApi.createCustomerWithBuilder(customer, {failOnStatusCode: false})
             .then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.BadRequest);
             })
