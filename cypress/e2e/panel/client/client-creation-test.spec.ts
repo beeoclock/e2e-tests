@@ -7,8 +7,13 @@ import {RightPanelPages} from "../../../support/beeoclock/page-element/configura
 import {CommonPropertiesEnum} from "../../../support/beeoclock/page-element/common/enum/CommonPropertiesEnum";
 import {ClientCreationDataProvider} from "../../../fixtures/panel/client/ClientCreationDataProvider";
 import {ClientTabPages} from "../../../support/beeoclock/page-element/configuration/tab/client/ClientTabPages";
-import {ClientTableCellEnum} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
-import {ReloadCommonButton} from "../../../support/beeoclock/page-element/common/common-element/element/ReloadCommonButton";
+import {
+    ClientTableCellEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
+import {
+    ReloadCommonButton
+} from "../../../support/beeoclock/page-element/common/common-element/element/ReloadCommonButton";
+import {ThrottleEnum} from "../../../support/beeoclock/common/enum/ThrottleEnum";
 
 describe('customer creation test', () => {
 
@@ -49,6 +54,7 @@ describe('customer creation test', () => {
             const testData = ClientCreationDataProvider.getTestData(testCase);
             cy.log('case: ' + testCase)
 
+            cy.setNetworkThrottle(ThrottleEnum.OFFLINE)
             cy.log('creation')
             RightPanelPages.ClientFormPage
                 .typeGivenCustomerInput(CommonPropertiesEnum.FIRST_NAME, testData.firstName)
