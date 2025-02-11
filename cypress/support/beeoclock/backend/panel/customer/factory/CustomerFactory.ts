@@ -23,7 +23,7 @@ export class CustomerFactory {
             phone: "48" + NumericUtils.generateRandomValueWithoutZeroPrefix(9),
             email: `${firstName}.${lastName}@example.com`,
             note: null,
-            customerType: CustomerTypeEnum.NEW
+            customerType: CustomerTypeEnum.REGULAR
         };
     }
 

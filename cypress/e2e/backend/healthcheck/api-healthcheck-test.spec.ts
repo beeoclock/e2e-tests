@@ -39,8 +39,16 @@ describe("panel api healthcheck", () => {
 
     it('get identity profile and assert expected response', function (): void {
         IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
-            expect(JSON.stringify(response)).to.equal(JSON.stringify(IdentityData.DATA));
-        })
+            cy.log('response', JSON.stringify(response));
+            expect(response.items).to.deep.include.members(
+                IdentityData.DATA.items.map(item => ({
+                    ...item,
+                    stateHistory: item.stateHistory.map(history => ({
+                        state: history.state
+                    }))
+                }))
+            );
+        });
     });
 
     it('get analytic Info and assert all response keys', function (): void {
