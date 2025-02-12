@@ -3,7 +3,7 @@ import {ClientPropertiesEnum} from "../../common/enum/ClientPropertiesEnum";
 export class AuthApi {
 
     public static getToken(): Cypress.Chainable<unknown> {
-        const url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword';
+        const url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' + ClientPropertiesEnum.API_KEY;
         return cy.request({
             method: 'POST',
             url: url,
