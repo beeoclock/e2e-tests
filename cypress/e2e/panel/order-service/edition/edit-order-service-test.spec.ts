@@ -22,9 +22,29 @@ describe('panel new customer order service', () => {
     let orderID: string
     let email: string
     let emailId: string
+    let emailToken: string
     let emailPassword: string
 
-    before('clear environment and create temporary email', () => {
+    before(() => {
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
+        cy.clearCookies()
+
+        cy.window().then((win) => {
+            if (win.caches) {
+                win.caches.keys().then((cacheNames) => {
+                    cacheNames.forEach((cacheName) => {
+                        win.caches.delete(cacheName);
+                    });
+                });
+            }
+            win.sessionStorage.clear();
+            win.indexedDB.deleteDatabase('firebaseLocalStorageDb');
+            Cypress.env('aliases', {})
+        });
+    })
+
+    it('clear environment and create temporary email', () => {
         setupAndCreateTemporaryEmail()
     });
 
@@ -77,63 +97,74 @@ describe('panel new customer order service', () => {
                 cy.get('@orderId').then((orderId) => {
                     cy.log('Order ID is: ' + orderId);
                     orderID = orderId.toString();
+                })
+            })
+        })
+    });
 
-                    cy.log('get token');
-                    cy.wrap(EmailService.login(email, emailPassword)).then((response: string) => {
-                        cy.log('token: ', response);
-                        cy.wrap(response).as('emailToken'); // token assigning
-                        // waitForEmail(response, testData.mailSubject) //dynamically wait for email
-                        cy.wait(5000)
-                    });
+    it('get email', function () {
+        testCases.forEach(testCase => {
+            const testData = PanelOrderVariousOptionDataProvider.getTestData(testCase);
+            cy.log('get token');
+            cy.wrap(null).then(() => {
+                EmailService.login(email, emailPassword).then((response: string) => {
+                    emailToken = response;
+                    waitForEmail(emailToken, testData.mailSubject) //dynamically wait for email
+                })
+            });
+        })
+    })
 
-                    cy.log('assert email header');
-                    cy.get('@emailToken').then((token) => {
-                        cy.wrap(EmailService.getEmails(token.toString())).then((emails: IEmails[]) => {
-                            cy.wrap(emails).each((email: IEmails, index) => {
-                                cy.log(`Email #${index + 1}:`);
-                                cy.log(`messageId: ${email.id}`);
-                                expect(email.subject).to.include(testData.mailSubject);
-                                expect(email.intro).to.include(testData.mailIntro);
-                                cy.wrap(email.id.toString()).as('emailId'); // assigning emailId
-                            });
-                        });
-                    });
+    it('assert email content', function () {
+        testCases.forEach(testCase => {
+            const testData = PanelOrderVariousOptionDataProvider.getTestData(testCase);
 
-                    cy.log('assert email content');
-                    cy.get('@emailToken').then((token) => {
-                        cy.get('@emailId').then((emailId) => {
-                            EmailService.getEmailContent(token.toString(), emailId.toString()).then((content: IEmailContent) => {
-                                const emailText = AssertionsHelper.normalizeText(content.text);
-                                expect(emailText).to.include(`WITAJ, ${testData.firstName.toUpperCase()}!`);
-                                expect(emailText).to.include(`${testData.service} zostało zarezerwowane w Haircut&Barber w ${DateUtils.getTodayInPolishFormat()} o 18:00`);
-                                expect(emailText).to.include(`Twój specjalista: ${SpecialistNameEnum.ZALEWSKI_FIRST_NAME} ${SpecialistNameEnum.ZALEWSKI_LAST_NAME}`);
-                                expect(emailText).to.include(`https://dev.beeoclock.com/${BackendCommonEnum.X_Business_Tenant_Id}/order/${orderID}`);
-                                expect(emailText).to.include(`support@beeoclock.com`);
-                            });
-                        });
-                    });
+            cy.log('assert email header');
+            EmailService.getEmails(emailToken).then((emails: IEmails[]) => {
+                cy.wrap(emails).each((email: IEmails, index) => {
+                    cy.log(`Email #${index + 1}:`);
+                    cy.log(`messageId: ${email.id}`);
+                    expect(email.subject).to.include(testData.mailSubject);
+                    expect(email.intro).to.include(testData.mailIntro);
+
+                    emailId = email.id.toString()
                 });
             });
         });
-    });
+    })
+
+    it('assert email content', function () {
+        testCases.forEach(testCase => {
+            const testData = PanelOrderVariousOptionDataProvider.getTestData(testCase);
+
+            cy.log('assert email content');
+            cy.wrap(null).then(() => {
+                EmailService.getEmailContent(emailToken, emailId).then((content: IEmailContent) => {
+                    const emailText = AssertionsHelper.normalizeText(content.text);
+                    expect(emailText).to.include(`WITAJ, ${testData.firstName.toUpperCase()}!`);
+                    expect(emailText).to.include(`${testData.service} zostało zarezerwowane w Haircut&Barber w ${DateUtils.getTodayInPolishFormat()} o 18:00`);
+                    expect(emailText).to.include(`Twój specjalista: ${SpecialistNameEnum.ZALEWSKI_FIRST_NAME} ${SpecialistNameEnum.ZALEWSKI_LAST_NAME}`);
+                    expect(emailText).to.include(`https://dev.beeoclock.com/${BackendCommonEnum.X_Business_Tenant_Id}/order/${orderID}`);
+                    expect(emailText).to.include(`support@beeoclock.com`);
+                });
+            })
+        })
+    })
 
     function setupAndCreateTemporaryEmail() {
-        cy.clearAllLocalStorage();
-        cy.clearAllSessionStorage();
-        cy.clearAllCookies();
-
-        cy.log('Creating temporary email account');
-        cy.wrap(EmailService.createAccount()).then((response: { email: string, password: string }) => {
-            email = response.email;
-            emailPassword = response.password;
-
-            cy.log(`Temporary email created: ${response.email}`);
+        cy.wrap(null).then(() => {
+            EmailService.createAccount().then((response: { email: string, password: string }) => {
+                email = response.email;
+                emailPassword = response.password;
+            }).then(() => {
+                return null
+            })
         });
     }
 
     function waitForEmail(token: string, expectedSubject: string): any {
         let retries = 0;
-        let maxRetries: number = 16;
+        let maxRetries: number = 25;
         let interval: number = 500;
 
         const checkForEmail = () => {
@@ -155,4 +186,8 @@ describe('panel new customer order service', () => {
         };
         checkForEmail();
     }
+
+    afterEach(() => {
+        Cypress.env('aliases', {});
+    });
 })
