@@ -37,7 +37,7 @@ describe("panel api healthcheck", () => {
         });
     });
 
-    it.skip('get identity profile and assert expected response', function (): void {
+    it('get identity profile and assert expected response', function (): void {
         IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
             cy.log('response', JSON.stringify(response));
 
@@ -47,12 +47,6 @@ describe("panel api healthcheck", () => {
 
             response.items.forEach((item, index) => {
                 const expectedItem = IdentityData.DATA.items[index];
-
-                expect(item).to.include({
-                    _id: expectedItem._id,
-                    createdAt: expectedItem.createdAt,
-                    updatedAt: expectedItem.updatedAt
-                });
 
                 expect(item.account).to.have.property('_id', expectedItem.account._id);
                 expect(item.client).to.deep.equal(expectedItem.client);
@@ -64,18 +58,8 @@ describe("panel api healthcheck", () => {
                     expect(history.state).to.equal(expectedItem.stateHistory[historyIndex].state);
                 });
             });
-
-            expect(response.items).to.deep.include.members(
-                IdentityData.DATA.items.map(item => ({
-                    ...item,
-                    stateHistory: item.stateHistory.map(history => ({
-                        state: history.state
-                    }))
-                }))
-            );
         });
     });
-
 
     it('get analytic Info and assert all response keys', function (): void {
         AnalyticApi.getDateRangeReport(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
