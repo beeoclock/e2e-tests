@@ -1,17 +1,17 @@
-import { TestCaseEnum } from "fixtures/enum/TestCaseEnum";
-import { PanelOrderVariousOptionDataProvider } from "fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
-import { OrderApi } from "support/beeoclock/backend/panel/order/OrderApi";
-import { ModuleAssertionPage } from "support/beeoclock/common/assertion/ModuleAssertionPage";
-import { SpecialistNameEnum } from "support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import { RightPanelPages } from "support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import { CustomerTypeEnum } from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
-import { CalendarPages } from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
-import { EmailService } from "../../../../support/beeoclock/notifications/EmailService";
-import { IEmails } from "../../../../support/beeoclock/notifications/interface/IEmails";
-import { AssertionsHelper } from "support/beeoclock/common/assertion/AssertionsHelper";
-import { IEmailContent } from "support/beeoclock/notifications/interface/IEmailContent";
-import { DateUtils } from "support/beeoclock/backend/Utils/DateUtils";
-import { BackendCommonEnum } from "support/beeoclock/backend/enum/BackendCommonEnum";
+import {TestCaseEnum} from "fixtures/enum/TestCaseEnum";
+import {PanelOrderVariousOptionDataProvider} from "fixtures/panel/various-option/PanelOrderVariousOptionDataProvider";
+import {OrderApi} from "support/beeoclock/backend/panel/order/OrderApi";
+import {ModuleAssertionPage} from "support/beeoclock/common/assertion/ModuleAssertionPage";
+import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/SpecialistNameEnum";
+import {RightPanelPages} from "support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
+import {CustomerTypeEnum} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
+import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
+import {EmailService} from "../../../../support/beeoclock/notifications/EmailService";
+import {IEmails} from "../../../../support/beeoclock/notifications/interface/IEmails";
+import {AssertionsHelper} from "support/beeoclock/common/assertion/AssertionsHelper";
+import {IEmailContent} from "support/beeoclock/notifications/interface/IEmailContent";
+import {DateUtils} from "support/beeoclock/backend/Utils/DateUtils";
+import {BackendCommonEnum} from "support/beeoclock/backend/enum/BackendCommonEnum";
 
 describe("Panel new customer order service", () => {
     const testCases = [TestCaseEnum.CASE_1];
@@ -69,21 +69,23 @@ describe("Panel new customer order service", () => {
                     .typeBusinessNote(testData.businessNote)
                     .clickSaveButton(true);
 
+                cy.log("Get email token");
+                cy.wait(5000);
+
                 cy.get("@orderId").then((orderId) => {
                     orderID = orderId.toString();
 
-                    cy.log("Get email token");
-                    cy.wait(5000);
-
                     cy.log("Assert email header");
-                        cy.wrap(EmailService.getEmails()).then((emails: IEmails[]) => {
+                    EmailService.getEmails().then((emails: IEmails[]) => {
                             cy.wrap(emails).each((email: IEmails) => {
                                 expect(email.subject).to.include(testData.mailSubject);
                                 expect(email.intro).to.include(testData.mailIntro);
                                 cy.wrap(email.id.toString()).as("emailId");
+                                cy.log('emailID: ' + email.id.toString() );
                             });
                         });
 
+                    cy.wait(1000);
                     cy.log("Assert email content");
                     cy.get("@emailId").then((emailId) => {
                         cy.wrap(EmailService.getEmailContent(emailId.toString())).then((content: IEmailContent) => {

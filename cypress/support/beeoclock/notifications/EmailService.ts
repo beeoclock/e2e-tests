@@ -44,7 +44,7 @@ export class EmailService {
      * Pobiera listę wiadomości e-mail.
      */
     public static async getEmails(retries = 5, delay = 3000) {
-        await EmailService.ensureToken();
+        await EmailService.refreshToken();
         for (let i = 0; i < retries; i++) {
             const response = await axios.get(`${API_URL}/messages`, {
                 headers: {Authorization: `Bearer ${EmailService.token}`},
