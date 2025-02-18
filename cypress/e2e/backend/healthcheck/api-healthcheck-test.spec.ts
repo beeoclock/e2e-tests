@@ -42,7 +42,6 @@ describe("panel api healthcheck", () => {
             cy.log('response', JSON.stringify(response));
 
             expect(response).to.have.property('items').that.is.an('array');
-
             expect(response.items).to.have.length(IdentityData.DATA.items.length);
 
             response.items.forEach((item, index) => {
@@ -50,7 +49,6 @@ describe("panel api healthcheck", () => {
 
                 expect(item.account).to.have.property('_id', expectedItem.account._id);
                 expect(item.client).to.deep.equal(expectedItem.client);
-
                 expect(item).to.have.property('stateHistory').that.is.an('array');
 
                 item.stateHistory.forEach((history, historyIndex) => {
