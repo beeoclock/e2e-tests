@@ -28,6 +28,11 @@ export class CustomerBuilder {
         };
     }
 
+    setId(id: string): CustomerBuilder {
+        this.customer._id = id;
+        return this;
+    }
+
     setVersion(version: string): CustomerBuilder {
         this.customer._version = version;
         return this;

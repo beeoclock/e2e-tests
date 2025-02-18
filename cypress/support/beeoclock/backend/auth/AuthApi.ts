@@ -1,9 +1,8 @@
-import {ClientPropertiesEnum} from "../../common/enum/ClientPropertiesEnum";
+import { ClientPropertiesEnum } from "../../common/enum/ClientPropertiesEnum";
 
 export class AuthApi {
-
-    public static getToken(): Cypress.Chainable<unknown> {
-        const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + ClientPropertiesEnum.API_KEY;
+    public static getToken(): Cypress.Chainable<string> {
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ClientPropertiesEnum.API_KEY}`;
         return cy.request({
             method: 'POST',
             url: url,
@@ -14,7 +13,7 @@ export class AuthApi {
                 "returnSecureToken": true
             },
         }).then(response => {
-            return response.body.idToken
+            return response.body.idToken as string;
         });
     }
 }

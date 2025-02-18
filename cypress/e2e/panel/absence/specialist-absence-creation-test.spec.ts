@@ -37,10 +37,11 @@ describe('specialist absence creation test', () => {
         cy.log('assert login url');
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
 
-        cy.log('currentDate')
+        cy.log('assert current date')
         CalendarPages.CalendarNavigationPage
             .verifyCurrenDate()
-        cy.log('next date')
+
+        cy.log('select next date with assert')
         CalendarPages.CalendarNavigationPage
             .clickNextDayArrow()
             .verifyNextDayDate();
@@ -110,7 +111,6 @@ describe('specialist absence creation test', () => {
                 .typeAbsenceNote('SZYBKA PRZERWA')
                 .clickSaveButton()
 
-        ////
         CalendarPages.CalendarTablePage
             .assertAbsenceOnTable(dataFrom + ' - ' + dataTo + '\nPrzerwa')
 

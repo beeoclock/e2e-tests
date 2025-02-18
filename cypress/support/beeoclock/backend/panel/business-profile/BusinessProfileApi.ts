@@ -3,12 +3,13 @@ import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 
 export class BusinessProfileApi {
+ private static token = Cypress.env('token');
 
     public static getBusinessProfileDetails(expectedCode: HTTPStatusCodeType, tokenId: string, options: Partial<Cypress.RequestOptions>): any {
         const url = EntryPointEnum.API_ENTRY_POINT + `/business-profile`;
         return cy.request({
             method: 'GET',
-            url: url,
+            url: EntryPointEnum.API_ENTRY_POINT + `/business-profile`,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
             },
