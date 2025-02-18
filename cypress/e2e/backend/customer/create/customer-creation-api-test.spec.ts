@@ -1,19 +1,25 @@
-import {CustomerApi} from "../../../support/beeoclock/backend/panel/customer/CustomerApi";
-import {ICustomerSearchCriteria} from "../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
+import {CustomerApi} from "../../../../support/beeoclock/backend/panel/customer/CustomerApi";
+import {ICustomerSearchCriteria} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
 import {CustomerSearchCriteriaBuilder} from "support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
-import {BackendCommonEnum} from "../../../support/beeoclock/backend/enum/BackendCommonEnum";
+import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {CustomerFactory} from "support/beeoclock/backend/panel/customer/factory/CustomerFactory";
 import {ICustomer} from "support/beeoclock/backend/panel/customer/create/ICustomer";
 import {CustomerBuilder} from "support/beeoclock/backend/panel/customer/create/CustomerBuilder";
-import {StateEnum} from "../../../support/beeoclock/backend/state-history/StateEnum";
-import {HTTPStatusCodeType} from "../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
+import {StateEnum} from "../../../../support/beeoclock/backend/state-history/StateEnum";
+import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
 
 describe('customer api test', () => {
-    let token: string
     let customerData: ICustomer
 
     beforeEach('get test data', () => {
         customerData = CustomerFactory.createCustomer();
+    })
+
+    afterEach('delete customer after each test', () => {
+        CustomerApi.deleteCustomer(customerData._id, {})
+            .then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+            })
     })
 
     it('should create customer with minimal properties and assert its properties', () => {
