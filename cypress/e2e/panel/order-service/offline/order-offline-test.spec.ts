@@ -10,13 +10,9 @@ import {
     CustomerTypeEnum
 } from "../../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {SpecialistNameEnum} from "../../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {LeftMenuPage} from "../../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import {TabNameEnum} from "../../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {OrderTabPages} from "../../../../support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
-import {
-    OrderActionsEnum
-} from "../../../../support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 import {ThrottleEnum} from "../../../../support/beeoclock/common/enum/ThrottleEnum";
+import { TabNameEnum } from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 
 describe('order offline test', () => {
     it('test panel new customer order service', function () {
@@ -69,6 +65,10 @@ describe('order offline test', () => {
                     .selectPaymentStatus(testData.PaymentStatus)
                     .typeBusinessNote(testData.businessNote)
                     .clickSaveButton();
+
+                cy.setNetworkThrottle(ThrottleEnum.NO_THROTTLING)
+
+                LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
 
                 // cy.get('@orderId').then((orderId) => {
                 //     cy.log('Order ID is: ' + orderId);
