@@ -45,13 +45,3 @@ jobs:
 
       - name: Run client panel app tests
         run: npm run client-panel-app-test
-
-      - name: Upload Cypress artifacts on failure
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-artifacts
-          path: |
-            cypress/screenshots
-            cypress/videos
-            cypress/results
