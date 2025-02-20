@@ -1,0 +1,99 @@
+import {ICustomer} from "../../../../support/beeoclock/backend/panel/customer/create/ICustomer";
+import {CustomerFactory} from "../../../../support/beeoclock/backend/panel/customer/factory/CustomerFactory";
+import {CustomerApi} from "../../../../support/beeoclock/backend/panel/customer/CustomerApi";
+import {ICustomerSearchCriteria} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
+import {CustomerSearchCriteriaBuilder} from "../../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
+import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/BackendCommonEnum";
+import {CustomerStateEnum} from "../../../../support/beeoclock/backend/panel/customer/enum/CustomerStateEnum";
+/*
+endpoints:
+- GET /customer/paged
+- GET /customer/{customerId}
+ */
+describe('customer queries api test', () => {
+    let customerData: ICustomer;
+
+    beforeEach('create customer to edit', () => {
+        customerData = CustomerFactory.createCustomer()
+        CustomerApi.createCustomerWithBuilder(customerData, {})
+    })
+
+    it('get paged customer with given pageSize and assert', () => {
+        let pageSize: string[];
+        pageSize = ['1', '2', '15', '20', '30', '33', '78', '94'];
+
+        pageSize.forEach(size => {
+            const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+                .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+                .withOrderBy('name')
+                .withOrderDir('asc')
+                .withPage(1)
+                .withPageSize(Number(size))
+                .build();
+
+            CustomerApi.getCustomerPaged(criteria, {})
+                .then(response => {
+                    cy.log('total:', response.totalSize)
+                    expect(response.items).to.have.lengthOf(Number(size))
+                    expect(response).to.have.property('totalSize', response.items.length)
+                })
+        })
+    });
+
+    it('get paged customer with given page and assert', () => {
+        let pageSize: string[];
+        pageSize = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+
+        let previousPageEmails: string[] = [];
+
+        pageSize.forEach(size => {
+            cy.log('size:', size)
+            const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+                .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+                .withOrderBy('name')
+                .withOrderDir('asc')
+                .withPage(Number(size))
+                .withPageSize(20)
+                .build();
+
+            CustomerApi.getCustomerPaged(criteria, {})
+                .then(response => {
+                    expect(response.items).to.have.lengthOf(20);
+                    expect(response).to.have.property('totalSize', 20);
+
+                    response.items.forEach(item => {
+                        expect(previousPageEmails).to.not.equal(item.email);
+                    });
+
+                    response.items.forEach(item => {
+                        previousPageEmails.push(item.email);
+                    });
+                })
+        })
+    });
+
+    it('get paged customer with given state and assert', () => {
+        Object.values(CustomerStateEnum).forEach(state => {
+            cy.log('state:', state);
+            const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+                .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+                .withOrderBy('name')
+                .withOrderDir('asc')
+                .withPage(1)
+                .withState(state)
+                .build();
+
+            CustomerApi.getCustomerPaged(criteria, {})
+                .then(response => {
+
+                    expect(response.items).to.have.lengthOf(response.totalSize);
+
+                    if (response.items.length > 0) {
+                        response.items.forEach(item => {
+                            expect(item.state).to.equal(state);
+                        });
+                    }
+                });
+        });
+    });
+});

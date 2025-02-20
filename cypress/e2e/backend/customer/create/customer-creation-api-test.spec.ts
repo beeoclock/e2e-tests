@@ -47,7 +47,7 @@ describe('customer api test', () => {
             .withPhrase(customerData.email)
             .build();
 
-        CustomerApi.getCustomerPaged(criteria)
+        CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
                 cy.log('Response:', JSON.stringify(response));
                 expect(response).to.have.property('items').that.is.an('array').with.length.greaterThan(0);

@@ -48,7 +48,7 @@ describe('customer update api test', () => {
             .withPhrase(customerData.email)
             .build();
 
-        CustomerApi.getCustomerPaged(criteria)
+        CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
                 cy.log('Response:', JSON.stringify(response));
                 expect(response).to.have.property('items').that.is.an('array').with.length.greaterThan(0);
@@ -96,7 +96,7 @@ describe('customer update api test', () => {
             .withPhrase(customerData.firstName + '@example.com')
             .build();
 
-        CustomerApi.getCustomerPaged(criteria)
+        CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
                 cy.log('Response:', JSON.stringify(response));
                 expect(response).to.have.property('items').that.is.an('array').with.length.greaterThan(0);
@@ -113,6 +113,40 @@ describe('customer update api test', () => {
 
                 expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
                 expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.ACTIVE,);
+            });
+    })
+
+    it('should try update customer on incorrect email', () => {
+        const customer: ICustomer = new CustomerBuilder()
+            .setId(customerData._id)
+            .setFirstName(customerData.firstName)
+            .setLastName(customerData.lastName)
+            .setPhone(customerData.phone)
+            .setEmail(customerData.firstName + '.com')
+            .setCustomerType(customerData.customerType)
+            .setState(customerData.state)
+            .setCreatedAt(customerData.createdAt)
+            .setUpdatedAt(customerData.updatedAt)
+            .setNote(customerData.note)
+            .build();
+
+        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {failOnStatusCode: false})
+            .then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.BadRequest);
+            })
+
+        const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+            .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+            .withOrderBy('name')
+            .withOrderDir('asc')
+            .withPage(1)
+            .withPageSize(10)
+            .withPhrase(customerData.firstName + '.com')
+            .build();
+
+        CustomerApi.getCustomerPaged(criteria, {})
+            .then(response => {
+                expect(response).to.have.property('items').that.is.an('array').with.length(0);
             });
     })
 })
