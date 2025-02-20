@@ -11,7 +11,7 @@ describe('order time slot test', () => {
     let currentHour = DateUtils.getCurrentHourWithMinutes()
 
     before('clean orders & absences', () => {
-        // OrderApi.deleteAllCurrentOrders()
+        OrderApi.deleteAllCurrentOrders()
         AbsenceApi.deleteAllAbsences()
     })
 

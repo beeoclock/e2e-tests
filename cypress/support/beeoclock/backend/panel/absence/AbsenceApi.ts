@@ -2,7 +2,6 @@ import {DateUtils} from "../../Utils/DateUtils";
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {AuthApi} from "../../auth/AuthApi";
-let token: string;
 
 export class AbsenceApi {
 
@@ -10,7 +9,6 @@ export class AbsenceApi {
         const bearer =  AuthApi.getToken();
         return bearer;
     }
-
 
     public static getAllAbsenceIds(): any {
         this.getToken()
