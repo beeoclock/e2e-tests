@@ -9,6 +9,10 @@ on:
 jobs:
   client-app-test:
     runs-on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
 
     steps:
       - name: Checkout code

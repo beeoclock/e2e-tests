@@ -2,14 +2,18 @@ import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
 import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages";
 import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {
-    TimeEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
+import {TimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
+import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
+import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('order time slot test', () => {
     let currentHour = DateUtils.getCurrentHourWithMinutes()
-    let nextHour = DateUtils.getCurrentPlusGivenHour(1)
+
+    before('clean orders & absences', () => {
+        OrderApi.deleteAllCurrentOrders()
+        AbsenceApi.deleteAllAbsences()
+    })
 
     it('test 1 should test free slot visibility', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
