@@ -1,11 +1,21 @@
 import {DateUtils} from "../../Utils/DateUtils";
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
+import {AuthApi} from "../../auth/AuthApi";
+let token: string;
 
 export class AbsenceApi {
 
+    private static getToken(): Cypress.Chainable<string> {
+        const bearer =  AuthApi.getToken();
+        return bearer;
+    }
+
+
     public static getAllAbsenceIds(): any {
-        return cy.get<string>('@token').then(tokenId => {
+        this.getToken()
+        // return cy.get<string>('@token').then(tokenId => {
+        const tokenId = Cypress.env('token');
             const start: string = DateUtils.getStartOfPreviousDays(100);
             const end: string = DateUtils.getEndOfTomorrowUTC();
             const url: string = EntryPointEnum.API_ENTRY_POINT + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
@@ -29,11 +39,11 @@ export class AbsenceApi {
                     return cy.wrap([]);
                 }
             });
-        });
     }
 
     public static deleteAbsenceWithGivenId(id: string): any {
-        return cy.get<string>('@token').then(tokenId => {
+        // return cy.get<string>('@token').then(tokenId => {
+        const tokenId = Cypress.env('token');
             return cy.request({
                 method: 'DELETE',
                 url: EntryPointEnum.API_ENTRY_POINT + '/absence/' + id,
@@ -46,7 +56,7 @@ export class AbsenceApi {
             }).then(response => {
                 expect(response.status).to.equal(200);
             })
-        });
+        // });
     }
 
     public static deleteAllAbsences(): void {
