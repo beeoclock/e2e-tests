@@ -6,6 +6,7 @@ import { PanelLoginPageElement } from "support/beeoclock/page-element/configurat
 import { PanelLoginPage } from "support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 
 describe("delete all absences by API", (): void => {
+
     before('clear environment', () => {
         cy.clearAllLocalStorage();
         cy.clearAllSessionStorage();

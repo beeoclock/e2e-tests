@@ -1,4 +1,4 @@
-name: Panel App API tests Workflow
+name: Panel App API Health Check Workflow
 
 on:
   workflow_dispatch:
@@ -27,7 +27,3 @@ jobs:
 
       - name: Run healthcheck
         run: npm run panel-app-api-health-check
-
-      - name: Run customer tests
-        run: npx cypress run --spec cypress/e2e/backend/customer
-

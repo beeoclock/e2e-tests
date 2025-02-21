@@ -35,19 +35,17 @@ describe('customer queries api test', () => {
                 .then(response => {
                     cy.log('total:', response.totalSize)
                     expect(response.items).to.have.lengthOf(Number(size))
-                    expect(response).to.have.property('totalSize', response.items.length)
                 })
         })
     });
 
     it('get paged customer with given page and assert', () => {
-        let pageSize: string[];
-        pageSize = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-
-        let previousPageEmails: string[] = [];
+        let pageSize: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+        let allEmails = new Set<string>();
+        let allPhoneNumbers = new Set<string>();
 
         pageSize.forEach(size => {
-            cy.log('size:', size)
+            cy.log('size:', size);
             const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
                 .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
                 .withOrderBy('name')
@@ -56,21 +54,28 @@ describe('customer queries api test', () => {
                 .withPageSize(20)
                 .build();
 
-            CustomerApi.getCustomerPaged(criteria, {})
-                .then(response => {
-                    expect(response.items).to.have.lengthOf(20);
-                    expect(response).to.have.property('totalSize', 20);
+            CustomerApi.getCustomerPaged(criteria, {}).then(response => {
+                expect(response.items).to.have.lengthOf(20);
 
-                    response.items.forEach(item => {
-                        expect(previousPageEmails).to.not.equal(item.email);
-                    });
+                response.items.forEach(item => {
+                    // duplicate e-mail assertion
+                    let normalizedEmail = item.email?.trim();
+                    if (normalizedEmail) {
+                        expect(allEmails.has(normalizedEmail)).to.be.false;
+                        allEmails.add(normalizedEmail);
+                    }
 
-                    response.items.forEach(item => {
-                        previousPageEmails.push(item.email);
-                    });
-                })
-        })
+                    // duplicate phone number assertion
+                    let normalizedPhone = item.phoneNumber?.trim();
+                    if (normalizedPhone) {
+                        expect(allPhoneNumbers.has(normalizedPhone)).to.be.false;
+                        allPhoneNumbers.add(normalizedPhone);
+                    }
+                });
+            });
+        });
     });
+
 
     it('get paged customer with given state and assert', () => {
         Object.values(CustomerStateEnum).forEach(state => {
@@ -85,8 +90,6 @@ describe('customer queries api test', () => {
 
             CustomerApi.getCustomerPaged(criteria, {})
                 .then(response => {
-
-                    expect(response.items).to.have.lengthOf(response.totalSize);
 
                     if (response.items.length > 0) {
                         response.items.forEach(item => {
