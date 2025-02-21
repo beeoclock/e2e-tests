@@ -54,7 +54,6 @@ describe('customer creation test', () => {
             const testData = ClientCreationDataProvider.getTestData(testCase);
             cy.log('case: ' + testCase)
 
-            cy.setNetworkThrottle(ThrottleEnum.OFFLINE)
             cy.log('creation')
             RightPanelPages.ClientFormPage
                 .typeGivenCustomerInput(CommonPropertiesEnum.FIRST_NAME, testData.firstName)

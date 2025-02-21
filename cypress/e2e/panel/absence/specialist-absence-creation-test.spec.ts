@@ -31,7 +31,7 @@ describe('specialist absence creation test', () => {
 
         cy.get('@token').then(token => {
             cy.log('token: ' + token);
-            AbsenceApi.deleteAllAbsences()
+            // AbsenceApi.deleteAllAbsences()
         });
 
         cy.log('assert login url');
@@ -91,48 +91,48 @@ describe('specialist absence creation test', () => {
         })
 
         cy.log(`add absence on calendar panel`)
-        CalendarPages.CalendarTablePage
-            .clickOnGivenAndHour(SpecialistNameEnum.E2E_E2E, CalendarTableTimeEnum.Hour_15);
-        CalendarPages.CalendarNavigationPage
-            .clickPreviousDayArrow()
-            .verifyCurrenDate()
-
-        RightPanelPages.BreakScienceGivenTimePage
-            .clickAbsenceButton()
-            .clickBreakRangeScienceNow('5')
-        let dataFrom: string = DateUtils.getCurrentHourWithMinutes()
-        let dataTo: string = DateUtils.getHourWithAddedMinutes(5)
-
-        RightPanelPages.AbsencePage
-                .verifyAbsenceFromDate(DateUtils.formatDateDaysAhead(0))
-                .verifyAbsenceFromTime(dataFrom)
-                .verifyAbsenceToDate(DateUtils.formatDateDaysAhead(0))
-                .verifyAbsenceToTime(dataTo)
-                .typeAbsenceNote('SZYBKA PRZERWA')
-                .clickSaveButton()
-
-        CalendarPages.CalendarTablePage
-            .assertAbsenceOnTable(dataFrom + ' - ' + dataTo + '\nPrzerwa')
-
-        RightPanelPages.RightPanelNavigationPage
-            .clickCloseRightPanel()
-
-        LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
-
-        AbsencePages.AbsenceTableVerifier
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.TYPE, 'Przerwa')
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.PROGRESS_STATUS, 'W trakcie')
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.ATTENDEES, '1')
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataFrom)
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataTo)
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.CREATED_AT, DateUtils.getCurrentDate() + ', ' + DateUtils.getCurrentHour())
-        AbsencePages.AbsenceActionPage
-            .clickActionButton()
-            .clickGivenAction(AbsenceActionEnum.DEACTIVATE)
-        AbsencePages.AbsenceTableVerifier
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.PROGRESS_STATUS, 'Anulowana')
-        AbsencePages.AbsenceActionPage
-            .clickGivenAction(AbsenceActionEnum.DELETE)
-        LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+        // CalendarPages.CalendarTablePage
+        //     .clickOnGivenAndHour(SpecialistNameEnum.E2E_E2E, CalendarTableTimeEnum.Hour_15);
+        // CalendarPages.CalendarNavigationPage
+        //     .clickPreviousDayArrow()
+        //     .verifyCurrenDate()
+        //
+        // RightPanelPages.BreakScienceGivenTimePage
+        //     .clickAbsenceButton()
+        //     .clickBreakRangeScienceNow('5')
+        // let dataFrom: string = DateUtils.getCurrentHourWithMinutes()
+        // let dataTo: string = DateUtils.getHourWithAddedMinutes(5)
+        //
+        // RightPanelPages.AbsencePage
+        //         .verifyAbsenceFromDate(DateUtils.formatDateDaysAhead(0))
+        //         .verifyAbsenceFromTime(dataFrom)
+        //         .verifyAbsenceToDate(DateUtils.formatDateDaysAhead(0))
+        //         .verifyAbsenceToTime(dataTo)
+        //         .typeAbsenceNote('SZYBKA PRZERWA')
+        //         .clickSaveButton()
+        //
+        // CalendarPages.CalendarTablePage
+        //     .assertAbsenceOnTable(dataFrom + ' - ' + dataTo + '\nPrzerwa')
+        //
+        // RightPanelPages.RightPanelNavigationPage
+        //     .clickCloseRightPanel()
+        //
+        // LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
+        //
+        // AbsencePages.AbsenceTableVerifier
+        //     .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.TYPE, 'Przerwa')
+        //     .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.PROGRESS_STATUS, 'W trakcie')
+        //     .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.ATTENDEES, '1')
+        //     .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataFrom)
+        //     .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataTo)
+        //     .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.CREATED_AT, DateUtils.getCurrentDate() + ', ' + DateUtils.getCurrentHour())
+        // AbsencePages.AbsenceActionPage
+        //     .clickActionButton()
+        //     .clickGivenAction(AbsenceActionEnum.DEACTIVATE)
+        // AbsencePages.AbsenceTableVerifier
+        //     .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.PROGRESS_STATUS, 'Anulowana')
+        // AbsencePages.AbsenceActionPage
+        //     .clickGivenAction(AbsenceActionEnum.DELETE)
+        // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
     })
 });

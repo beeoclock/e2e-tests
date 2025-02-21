@@ -6,8 +6,6 @@ export class AbsenceApi {
 
     public static getAllAbsenceIds(): any {
         return cy.get<string>('@token').then(tokenId => {
-            const start: string = DateUtils.getStartOfPreviousDays(100);
-            const end: string = DateUtils.getEndOfTomorrowUTC();
             const url: string = EntryPointEnum.API_ENTRY_POINT + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
             return cy.request({
                 method: 'GET',

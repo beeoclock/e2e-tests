@@ -23,7 +23,7 @@ require('cypress-xpath');
  * clear all storage and assign to global env valid token before any test
  */
 before(() => {
-    clearAllData()
+    // clearAllData()
 
     AuthApi.getToken().then(token => {
         Cypress.env('token', token);
