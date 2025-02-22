@@ -23,6 +23,7 @@ export class OrderApi {
                 headers: {
                     'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
                 },
+                qs: {state: "active"},
                 auth: {
                     bearer: tokenId
                 }

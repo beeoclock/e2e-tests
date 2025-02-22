@@ -23,7 +23,7 @@ require('cypress-xpath');
  * clear all storage and assign to global env valid token before any test
  */
 before(() => {
-    // clearAllData()
+    clearAllData()
 
     AuthApi.getToken().then(token => {
         Cypress.env('token', token);
@@ -33,5 +33,18 @@ before(() => {
 function clearAllData() {
     cy.clearCookies();
     cy.clearLocalStorage();
-    cy.clearAllSessionStorage()
+    cy.clearAllSessionStorage();
+
+    // IndexedDB
+    // cy.window().then((win) => {
+    //     if (win.indexedDB) {
+    //         win.indexedDB.databases().then((databases) => {
+    //             databases.forEach((db) => {
+    //                 if (db.name) {
+    //                     win.indexedDB.deleteDatabase(db.name);
+    //                 }
+    //             });
+    //         });
+    //     }
+    // });
 }

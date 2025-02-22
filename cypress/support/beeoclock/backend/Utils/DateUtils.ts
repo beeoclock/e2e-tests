@@ -1,4 +1,6 @@
 import "moment-timezone/index";
+import dayjs from 'dayjs';
+
 import moment = require('moment');
 
 export class DateUtils {
@@ -145,19 +147,24 @@ export class DateUtils {
     }
 
     public static getCurrentHourWithMinutes(): string {
-        // Get the current time rounded to the nearest minute to avoid fluctuations
-        const currentTime = moment();
-        const roundedTime = currentTime.seconds() >= 30 ? currentTime.add(1, 'minute') : currentTime;
-        return roundedTime.startOf('minute').format("HH:mm");
+        return dayjs().format("HH:mm")
+    }
+
+    public static assertCurrentTimeMatches(actualTime: string): void {
+        const expectedTime = this.getCurrentHourWithMinutes();
+        const previousTime = moment().subtract(1, 'minute').format("HH:mm");
+
+        cy.wrap(actualTime).should('be.oneOf', [expectedTime, previousTime]);
     }
 
     public static getHourWithAddedMinutes(minutesToAdd: number): string {
         // Get the current time rounded to the nearest minute
-        const currentTime = moment();
-        const roundedTime = currentTime.seconds() >= 30 ? currentTime.add(1, 'minute') : currentTime;
+        // const currentTime = moment();
+        //
+        // const updatedTime = currentTime.add(minutesToAdd, 'minutes');
+        // return updatedTime.startOf('minute').format("HH:mm");
 
-        const updatedTime = roundedTime.add(minutesToAdd, 'minutes');
-        return updatedTime.startOf('minute').format("HH:mm");
+        return dayjs().add(minutesToAdd, 'minutes').format("HH:mm");
     }
 
     public static getCurrentHour(): string {
