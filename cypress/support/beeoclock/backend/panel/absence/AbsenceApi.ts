@@ -4,6 +4,7 @@ import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 
 export class AbsenceApi {
 
+
     public static getAllAbsenceIds(): any {
         return cy.get<string>('@token').then(tokenId => {
             const url: string = EntryPointEnum.API_ENTRY_POINT + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
@@ -13,6 +14,7 @@ export class AbsenceApi {
                 headers: {
                     'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
                 },
+                qs: {state: "active"},
                 auth: {
                     bearer: tokenId
                 }
