@@ -19,10 +19,6 @@ describe('Order form summary component test', () => {
 
         cy.loginOnPanel()
 
-        cy.log('get token')
-        cy.get('@token').then(token => {
-            cy.log('token: ' + token);
-
             cy.log('delete orders before test')
             OrderApi.deleteAllCurrentOrders()
 
@@ -48,5 +44,4 @@ describe('Order form summary component test', () => {
                     .verifySelectedService(testData.amount, testData.price, testData.duration)
             })
         });
-    });
 })

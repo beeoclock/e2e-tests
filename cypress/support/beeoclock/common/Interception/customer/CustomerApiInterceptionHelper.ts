@@ -13,5 +13,9 @@ export class CustomerApiInterceptionHelper {
         return getCustomer
     }
 
-
+    public static updateCustomer(): string {
+        const updateCustomer = 'updateCustomer' + DateUtils.getCurrentTime();
+        cy.intercept('PUT', EntryPointEnum.API_ENTRY_POINT + '/customer/*').as(updateCustomer)
+        return updateCustomer
+    }
 }

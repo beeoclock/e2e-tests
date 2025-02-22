@@ -23,7 +23,7 @@ export class ClientsApiInterceptionHelper {
 
     public static deleteCustomer(): string {
         const deleteCustomer = 'deleteCustomer' + DateUtils.getCurrentTime();
-        cy.intercept('DELETE', EntryPointEnum.API_ENTRY_POINT + '/customer/*').as(deleteCustomer);
+        cy.intercept('PUT', EntryPointEnum.API_ENTRY_POINT + '/customer/*').as(deleteCustomer);
         return deleteCustomer
     }
 

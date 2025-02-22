@@ -4,5 +4,5 @@ export enum ClientTableCellEnum {
     EMAIL = 'email',
     PHONE = 'phone',
     NOTE = 'note',
-    ACTIVE_STATUS = 'active'
+    ACTIVE_STATUS = 'state'
 }
