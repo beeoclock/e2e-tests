@@ -71,7 +71,7 @@ describe('order offline test', () => {
                 LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
 
                 // cy.get('@orderId').then((orderId) => {
-                //     cy.log('Order ID is: ' + orderId);
+                //     cy.log('Order ID is: ' + orderId);pu
                 //     let oderID: string = orderId.toString()
                 //
                 //     cy.log('verify its order on table');

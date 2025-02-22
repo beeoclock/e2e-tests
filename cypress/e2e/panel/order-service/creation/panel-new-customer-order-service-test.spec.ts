@@ -10,22 +10,20 @@ import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-me
 import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {OrderActionsEnum} from "support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
+import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('panel new customer order service', () => {
 
+    before('setup', () => {
+        OrderApi.deleteAllCurrentOrders()
+        AbsenceApi.deleteAllAbsences()
+    })
     it('test panel new customer order service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
         ];
 
         cy.loginOnPanel()
-
-        cy.log('get token')
-        cy.get('@token').then(token => {
-            cy.log('token: ' + token);
-
-            cy.log('delete orders before test')
-            OrderApi.deleteAllCurrentOrders()
 
             cy.log('verify calendar tab component');
             ModuleAssertionPage.verifyCalendarTabModule()
@@ -142,4 +140,3 @@ describe('panel new customer order service', () => {
             });
         })
     })
-})
