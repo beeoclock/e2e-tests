@@ -11,13 +11,13 @@ export class AbsenceApiInterceptionHelper {
 
     public static deactivateAbsence(): string {
         const deactivateAbsence = 'deactivateAbsence' + DateUtils.getCurrentTime();
-        cy.intercept('PATCH', EntryPointEnum.API_ENTRY_POINT + '/absence/*/archive').as(deactivateAbsence);
+        cy.intercept('PUT', EntryPointEnum.API_ENTRY_POINT + '/absence/*').as(deactivateAbsence);
         return deactivateAbsence
     }
 
     public static deleteAbsence(): string {
         const deleteAbsence = 'deleteAbsence' + DateUtils.getCurrentTime();
-        cy.intercept('DELETE', EntryPointEnum.API_ENTRY_POINT + '/absence/*').as(deleteAbsence);
+        cy.intercept('PUT', EntryPointEnum.API_ENTRY_POINT + '/absence/*').as(deleteAbsence);
         return deleteAbsence
     }
 

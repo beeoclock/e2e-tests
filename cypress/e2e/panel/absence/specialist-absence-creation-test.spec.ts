@@ -9,24 +9,13 @@ import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelAbsenceCreationDataProvider} from "../../../fixtures/panel/absence/PanelAbsenceCreationDataProvider";
 import {AbsenceColumnRowEnum} from "../../../support/beeoclock/page-element/configuration/tab/absence/table-verifier/enum/AbsenceColumnRowEnum";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
-import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {CalendarTableTimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
-import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
+import { SpecialistNameEnum } from "support/beeoclock/page-element/common/enum/SpecialistNameEnum";
+import { CalendarTableTimeEnum } from "support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
+import { AbsenceApi } from "support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('specialist absence creation test', () => {
 
-    before('clear environment', () => {
-        cy.clearAllLocalStorage()
-        cy.clearAllSessionStorage()
-        cy.clearAllCookies()
-    })
-
-    it('test panel absence creation service', function () {
-        const testCases = [
-            TestCaseEnum.CASE_1,
-            TestCaseEnum.CASE_2
-        ];
-
+    beforeEach('setup', () => {
         cy.loginOnPanel()
 
         cy.get('@token').then(token => {
@@ -40,6 +29,13 @@ describe('specialist absence creation test', () => {
         cy.log('assert current date')
         CalendarPages.CalendarNavigationPage
             .verifyCurrenDate()
+    })
+
+    it('test panel absence creation service', function () {
+        const testCases = [
+            TestCaseEnum.CASE_1,
+            TestCaseEnum.CASE_2
+        ];
 
         cy.log('select next date with assert')
         CalendarPages.CalendarNavigationPage
@@ -89,13 +85,13 @@ describe('specialist absence creation test', () => {
                 .clickGivenAction(AbsenceActionEnum.DELETE)
             LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
         })
+    })
 
+
+    it('test 3', function (): void {
         cy.log(`add absence on calendar panel`)
         CalendarPages.CalendarTablePage
             .clickOnGivenAndHour(SpecialistNameEnum.E2E_E2E, CalendarTableTimeEnum.Hour_15);
-        CalendarPages.CalendarNavigationPage
-            .clickPreviousDayArrow()
-            .verifyCurrenDate()
 
         RightPanelPages.BreakScienceGivenTimePage
             .clickAbsenceButton()

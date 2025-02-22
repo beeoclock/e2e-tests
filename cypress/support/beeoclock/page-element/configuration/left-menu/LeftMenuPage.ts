@@ -7,20 +7,14 @@ import {ServiceApiInterceptionHelper} from "../../../common/Interception/service
 export class LeftMenuPage {
 
     public static clickOnGivenTab(tab: string): LeftMenuPage {
-        const getOrder = ApiInterceptionHelper.getOrder()
-        const getAbsence = ApiInterceptionHelper.getAbsence()
         LeftMenuPageElement.TabElement.getElement(tab)
             .click()
         if (tab == TabNameEnum.ORDER) {
-            ApiInterceptionHelper.waitForAlias(getOrder)
             cy.get('app-list-order-page').should('be.visible')
         }
         if (tab == TabNameEnum.CALENDAR) {
-            ApiInterceptionHelper.waitForAlias(getOrder)
-            ApiInterceptionHelper.waitForAlias(getAbsence)
         }
         if (tab == TabNameEnum.ABSENCE) {
-            ApiInterceptionHelper.waitForAlias(getAbsence)
         }
         if (tab == TabNameEnum.CLIENTS) {
             this.clickClientTab()

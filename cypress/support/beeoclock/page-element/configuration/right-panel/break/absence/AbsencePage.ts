@@ -41,10 +41,8 @@ export class AbsencePage {
 
     public clickSaveButton(): AbsencePage {
         const createAbsence = ApiInterceptionHelper.createAbsence()
-        const getAbsence = ApiInterceptionHelper.getAbsence()
         CommonElementPage.clickSaveButton()
         ApiInterceptionHelper.waitForAlias(createAbsence)
-        ApiInterceptionHelper.waitForAlias(getAbsence)
         cy.document().its('readyState').should('equal', 'complete')
         cy.get('whac-a-mole').should('not.contain', 'Przetwarzanie')
         return this;
