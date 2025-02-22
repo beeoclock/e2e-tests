@@ -77,6 +77,7 @@ describe("panel api healthcheck", () => {
         })
     });
 
+
     function loginAndStoreToken() {
         cy.visit(ServiceEnum.CLIENT_PANEL, {
             failOnStatusCode: false,

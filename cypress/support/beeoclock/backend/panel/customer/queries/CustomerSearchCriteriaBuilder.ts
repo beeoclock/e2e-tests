@@ -1,3 +1,4 @@
+import { CustomerStateEnum } from "../enum/CustomerStateEnum";
 import { ICustomerSearchCriteria } from "./ICustomerSearchCriteria";
 
 export class CustomerSearchCriteriaBuilder {
@@ -30,6 +31,11 @@ export class CustomerSearchCriteriaBuilder {
 
     public withPageSize(pageSize: number): this {
         this.criteria.pageSize = pageSize;
+        return this;
+    }
+
+    public withState(state: CustomerStateEnum): this {
+        this.criteria.state = state;
         return this;
     }
 

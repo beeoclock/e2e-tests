@@ -1,11 +1,19 @@
 import {DateUtils} from "../../Utils/DateUtils";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
+import {AuthApi} from "../../auth/AuthApi";
 
 export class OrderApi {
 
+    private static getToken(): Cypress.Chainable<string> {
+        const bearer = AuthApi.getToken();
+        return bearer;
+    }
+
     public static getOrderIds(): any {
-        return cy.get<string>('@token').then(tokenId => {
+        this.getToken()
+        // return cy.get<string>('@token').then(tokenId => {
+        const tokenId = Cypress.env('token');
             const start = DateUtils.getStartOfPreviousDays(100);
             const end = DateUtils.getEndOfTomorrowUTC();
             const url = EntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedAt&orderDir=desc`;
@@ -29,11 +37,13 @@ export class OrderApi {
                     return cy.wrap([]);
                 }
             });
-        });
+        // });
     }
 
     public static getAllOrderIds(): any {
-        return cy.get<string>('@token').then(tokenId => {
+        // return cy.get<string>('@token').then(tokenId => {
+        this.getToken()
+        const tokenId = Cypress.env('token');
             const start = DateUtils.getStartOfPreviousDays(100);
             const end = DateUtils.getEndOfTomorrowUTC();
             const url = EntryPointEnum.API_ENTRY_POINT + '/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
@@ -57,11 +67,12 @@ export class OrderApi {
                     return cy.wrap([]);
                 }
             });
-        });
+        // });
     }
 
     public static deleteOrderWithGivenId(id: string): any {
-        return cy.get<string>('@token').then(tokenId => {
+        // return cy.get<string>('@token').then(tokenId => {
+        const tokenId = Cypress.env('token');
             return cy.request({
                 method: 'DELETE',
                 url: EntryPointEnum.API_ENTRY_POINT + '/order/' + id,
@@ -74,7 +85,7 @@ export class OrderApi {
             }).then(response => {
                 expect(response.status).to.equal(200);
             })
-        });
+        // });
     }
 
     public static deleteOrders(orderIds: string[]): any {
@@ -101,7 +112,8 @@ export class OrderApi {
     }
 
     public static assertSuccessfulDeletion(orderId: string): any {
-        return cy.get<string>('@token').then(tokenId => {
+        // return cy.get<string>('@token').then(tokenId => {
+        const tokenId = Cypress.env('token');
             const url = EntryPointEnum.API_ENTRY_POINT + '/order/' + orderId;
             return cy.request({
                 method: 'GET',
@@ -118,7 +130,7 @@ export class OrderApi {
                 cy.log("Order Status: " + orderStatus);
                 expect(orderStatus).to.equal('deleted');
             });
-        });
+        // });
     }
 
     public static deleteAllCurrentOrders(): void {
