@@ -18,6 +18,7 @@ describe('panel new customer order service', () => {
         OrderApi.deleteAllCurrentOrders()
         AbsenceApi.deleteAllAbsences()
     })
+
     it('test panel new customer order service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
