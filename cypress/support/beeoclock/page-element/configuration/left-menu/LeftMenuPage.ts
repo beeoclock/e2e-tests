@@ -5,8 +5,6 @@ import {ServiceApiInterceptionHelper} from "../../../common/Interception/service
 import {CustomerApiInterceptionHelper} from "../../../common/Interception/customer/CustomerApiInterceptionHelper";
 import {MemberApiInterceptionHelper} from "../../../common/Interception/member/MemberApiInterceptionHelper";
 import {PaymentApiInterceptionHelper} from "../../../common/Interception/payment/PaymentApiInterceptionHelper";
-import Chainable = Cypress.Chainable;
-import HTML = Mocha.reporters.HTML;
 
 export class LeftMenuPage {
 
@@ -14,7 +12,6 @@ export class LeftMenuPage {
         LeftMenuPageElement.TabElement.getElement(tab)
             .click()
         if (tab == TabNameEnum.ORDER) {
-            cy.get('app-list-order-page').should('be.visible')
         }
         if (tab == TabNameEnum.CALENDAR) {
         }
@@ -23,6 +20,7 @@ export class LeftMenuPage {
         if (tab == TabNameEnum.CLIENTS) {
             this.clickClientTab()
         }
+        LeftMenuPage.assertIsSynchronized(true)
         return this;
     }
 
@@ -69,12 +67,21 @@ export class LeftMenuPage {
         const getBusinessProfile: string = ApiInterceptionHelper.getBusinessProfile()
 
         LeftMenuPageElement.SynchronizingComponent.getElement().click().then(() => {
-            LeftMenuPageElement.SynchronizingComponent.getElement().dblclick()
             cy.log('Waiting for synchronization requests to complete...');
-            ApiInterceptionHelper.waitForAliases([getMember, getOrder, getServices, getPayment, getBusinessProfile, getCustomer]);
+            ApiInterceptionHelper.waitForAliases([getAbsence, getMember, getOrder, getServices, getPayment, getBusinessProfile, getCustomer]);
         })
 
-        LeftMenuPageElement.SynchronizingComponent.getElement().find('.text-xs').contains ('Zsynchronizowano', {timeout: 20000});
+        this.assertIsSynchronized(true)
+        cy.wait(1000)
+        return this;
+    }
+
+    public static assertIsSynchronized(isSynchronized: boolean): LeftMenuPage {
+        if (isSynchronized) {
+            LeftMenuPageElement.SynchronizingComponent.getElement().find('.text-xs').contains('Zsynchronizowano', {timeout: 20000});
+        } else {
+            LeftMenuPageElement.SynchronizingComponent.getElement().find('.text-xs').contains('Synchronizacja w toku…', {timeout: 20000});
+        }
         return this;
     }
 }
