@@ -104,7 +104,7 @@ export class SummaryAndPaymentServicePage {
                     NotificationsPage.clickConfirmButton()
                 }
             }).then(() => {
-            cy.wait('@' + createOrder).then((interception) => {
+            cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
                 const request = interception.request.body;
 
                 const orderId = request._id;

@@ -15,9 +15,9 @@ export class OrderApi {
     public static getOrderIds(): any {
         this.getToken()
         const tokenId = Cypress.env('token');
-        const start = DateUtils.getStartOfPreviousDays(100);
+        const start = DateUtils.getStartOfPreviousDays(5);
         const end = DateUtils.getEndOfTomorrowUTC();
-        const url = EntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedAt&orderDir=desc`;
+        const url = EntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedScience&orderDir=desc&statuses=done&statuses=accepted&statuses=requested`;
         return cy.request({
             method: 'GET',
             url: url,
@@ -26,13 +26,14 @@ export class OrderApi {
             },
             qs: {
                 state: StateEnum.active,
-                statuses: [OrderStatusEnum.done, OrderStatusEnum.confirmed],
+                // statuses: [OrderStatusEnum.done, OrderStatusEnum.confirmed],
             },
             auth: {
                 bearer: tokenId
             }
         }).then(response => {
             expect(response.status).to.equal(200);
+            cy.log('Response: ' + JSON.stringify(response.body));
             const filteredItems = response.body.items.filter(({services}) => {
                 return services.some(({state, status}) => {
                     return state === StateEnum.active && [OrderServiceStatusEnum.done, OrderServiceStatusEnum.accepted].includes(status);
@@ -50,7 +51,6 @@ export class OrderApi {
     }
 
     public static getAllOrderIds(): any {
-        // return cy.get<string>('@token').then(tokenId => {
         this.getToken()
         const tokenId = Cypress.env('token');
         const start = DateUtils.getStartOfPreviousDays(100);
@@ -97,6 +97,25 @@ export class OrderApi {
         // });
     }
 
+    public static getOrderWithGivenId(id: string): any {
+        // return cy.get<string>('@token').then(tokenId => {
+        const tokenId = Cypress.env('token');
+        return cy.request({
+            method: 'GET',
+            url: EntryPointEnum.API_ENTRY_POINT + '/order/' + id,
+            headers: {
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+            },
+            auth: {
+                bearer: tokenId
+            }
+        }).then(response => {
+            expect(response.status).to.equal(200);
+            return response.body;
+        })
+        // });
+    }
+
     public static deleteOrders(orderIds: string[]): any {
         if (0 === orderIds.length) {
             cy.log('No orders to delete');
@@ -121,7 +140,6 @@ export class OrderApi {
     }
 
     public static assertSuccessfulDeletion(orderId: string): any {
-        // return cy.get<string>('@token').then(tokenId => {
         const tokenId = Cypress.env('token');
         const url = EntryPointEnum.API_ENTRY_POINT + '/order/' + orderId;
         return cy.request({
@@ -136,10 +154,15 @@ export class OrderApi {
         }).then(response => {
             expect(response.status).to.equal(200);
             const orderStatus = response.body.status;
+
+            const stateHistory = response.body.stateHistory;
             cy.log("Order Status: " + orderStatus);
             expect(orderStatus).to.equal('deleted');
+
+            const latestState = stateHistory[stateHistory.length - 1];
+            expect(latestState.state).to.equal('deleted');
+            cy.log("Latest state history entry: " + JSON.stringify(latestState));
         });
-        // });
     }
 
     public static deleteAllCurrentOrders(): void {

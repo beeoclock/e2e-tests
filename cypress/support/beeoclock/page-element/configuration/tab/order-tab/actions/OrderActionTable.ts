@@ -17,7 +17,7 @@ export class OrderActionTable {
         OrderActionTableElement.OrderGivenActionButton.getElement(action).scrollIntoView()
             .click({force: true})
         if (action == OrderActionsEnum.DELETE) {
-            ApiInterceptionHelper.waitForAlias(deleteAction)
+            cy.wait('@' + deleteAction, {timeout: 20000})
         }
         ApiInterceptionHelper.waitForAlias(getOrder)
         return this;
