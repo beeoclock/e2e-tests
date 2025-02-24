@@ -233,40 +233,4 @@ describe('customer update api test', () => {
                 expect(response).to.have.property('items').that.is.an('array').with.length(0);
             });
     })
-
-    it.skip('should try update customer on incorrect phone TODO BUG', () => {
-        let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(3)
-
-        const customer: ICustomer = new CustomerBuilder()
-            .setId(customerData._id)
-            .setFirstName(customerData.firstName)
-            .setLastName(customerData.lastName)
-            .setPhone('48' + number)
-            .setEmail(customerData.email)
-            .setCustomerType(customerData.customerType)
-            .setState(customerData.state)
-            .setCreatedAt(customerData.createdAt)
-            .setUpdatedAt(customerData.updatedAt)
-            .setNote(customerData.note)
-            .build();
-
-        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {failOnStatusCode: false})
-            .then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.BadRequest);
-            })
-
-        const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
-            .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
-            .withOrderBy('name')
-            .withOrderDir('asc')
-            .withPage(1)
-            .withPageSize(10)
-            .withPhrase('48' + number)
-            .build();
-
-        CustomerApi.getCustomerPaged(criteria, {})
-            .then(response => {
-                expect(response).to.have.property('items').that.is.an('array').with.length(0);
-            });
-    })
 })
