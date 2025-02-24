@@ -2,6 +2,9 @@ import {DateUtils} from "../../Utils/DateUtils";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 import {AuthApi} from "../../auth/AuthApi";
+import {OrderStatusEnum} from "./enum/OrderStatusEnum";
+import {StateEnum} from "./enum/StateEnum";
+import {OrderServiceStatusEnum} from "./enum/OrderServiceStatusEnum";
 
 export class OrderApi {
 
@@ -11,12 +14,10 @@ export class OrderApi {
 
     public static getOrderIds(): any {
         this.getToken()
-        // return cy.get<string>('@token').then(tokenId => {
         const tokenId = Cypress.env('token');
         const start = DateUtils.getStartOfPreviousDays(100);
         const end = DateUtils.getEndOfTomorrowUTC();
-        const statusesUrl = 'statuses=done&statuses=draft&statuses=inProgress&statuses=confirmed&statuses=requested';
-        const url = EntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedAt&orderDir=desc&${statusesUrl}`;
+        const url = EntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedAt&orderDir=desc`;
         return cy.request({
             method: 'GET',
             url: url,
@@ -24,18 +25,21 @@ export class OrderApi {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
             },
             qs: {
-                // TODO nice to ask why it is not working, demand use statusesUrl instead -_-
-                // state: "active",
-                // statuses: ["done", "draft", "inProgress", "confirmed", "requested"],
-                // //statuses=done&statuses=draft&statuses=inProgress&statuses=confirmed&statuses=requested
+                state: StateEnum.active,
+                statuses: [OrderStatusEnum.done, OrderStatusEnum.confirmed],
             },
             auth: {
                 bearer: tokenId
             }
         }).then(response => {
             expect(response.status).to.equal(200);
-            if (Array.isArray(response.body.items) && response.body.items.length > 0) {
-                const orderIds = response.body.items.map((order: any) => order._id);
+            const filteredItems = response.body.items.filter(({services}) => {
+                return services.some(({state, status}) => {
+                    return state === StateEnum.active && [OrderServiceStatusEnum.done, OrderServiceStatusEnum.accepted].includes(status);
+                })
+            });
+            if (Array.isArray(filteredItems) && filteredItems.length > 0) {
+                const orderIds = filteredItems.map((order: any) => order._id);
                 cy.log('Order IDs:', orderIds.join(', '));
                 return cy.wrap(orderIds);
             } else {
@@ -43,7 +47,6 @@ export class OrderApi {
                 return cy.wrap([]);
             }
         });
-        // });
     }
 
     public static getAllOrderIds(): any {
@@ -143,7 +146,6 @@ export class OrderApi {
         OrderApi.getOrderIds().then(orderIds => {
             if (orderIds.length !== 0) {
                 OrderApi.deleteOrders(orderIds);
-                cy.reload()
             }
         })
     }
@@ -152,7 +154,6 @@ export class OrderApi {
         OrderApi.getAllOrderIds().then(orderIds => {
             if (orderIds.length !== 0) {
                 OrderApi.deleteOrders(orderIds);
-                cy.reload()
             }
         })
     }

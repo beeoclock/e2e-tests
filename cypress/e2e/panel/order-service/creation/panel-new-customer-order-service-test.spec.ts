@@ -19,12 +19,19 @@ describe('panel new customer order service', () => {
         AbsenceApi.deleteAllAbsences()
     })
 
+    beforeEach('login', () => {
+        cy.loginOnPanel()
+    })
+
+    it('handle synchronization', function(): void {
+        cy.log('handle synchronization process')
+        LeftMenuPage.synchronizeWithInterception()
+    })
+
     it('test panel new customer order service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
         ];
-
-        cy.loginOnPanel()
 
             cy.log('verify calendar tab component');
             ModuleAssertionPage.verifyCalendarTabModule()
@@ -73,6 +80,8 @@ describe('panel new customer order service', () => {
                     cy.log('click, delete and verify deletion on table');
                     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
                     OrderTabPages.OrderActionTable
+                        // .clickOnSelectStatusElement()
+                        // .selectGivenStatusIfNotSelected('W toku')
                         .clickActionButton(oderID)
                         .clickSpecificAction(OrderActionsEnum.DELETE)
                         .verifyOrderWithGivenIdNotExist(oderID)

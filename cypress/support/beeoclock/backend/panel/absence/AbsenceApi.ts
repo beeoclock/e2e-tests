@@ -10,7 +10,7 @@ export class AbsenceApi {
 
     public static getAllAbsenceIds(): any {
         this.getToken()
-        // return cy.get<string>('@token').then(tokenId => {
+
         const tokenId = Cypress.env('token');
         const url: string = EntryPointEnum.API_ENTRY_POINT + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
         return cy.request({
@@ -26,7 +26,7 @@ export class AbsenceApi {
         }).then(response => {
             expect(response.status).to.equal(200);
             if (Array.isArray(response.body.items) && response.body.items.length > 0) {
-                const absenceids = response.body.items.map((order: any) => order._id);
+                const absenceids = response.body.items.map((absence: any) => absence._id);
                 cy.log('absence Ids:', absenceids.join(', '));
                 return cy.wrap(absenceids);
             } else {

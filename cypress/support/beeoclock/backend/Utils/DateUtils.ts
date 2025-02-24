@@ -307,6 +307,10 @@ export class DateUtils {
     }
 
     public static getTodayInPolishFormat(): string {
+        return dayjs().format("D MMMM, ddd");
+    }
+
+    public static getFormattedDate(): string {
         return moment.tz('Europe/Warsaw')
             .locale('pl')
             .format('dddd D MMMM YYYY');

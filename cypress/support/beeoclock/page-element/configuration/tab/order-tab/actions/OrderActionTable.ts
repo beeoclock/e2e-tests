@@ -27,4 +27,23 @@ export class OrderActionTable {
         cy.get('#table-row-' + orderId).should('not.exist')
         return this;
     }
+
+    public clickOnSelectStatusElement(): OrderActionTable {
+        OrderActionTableElement.StatusSelectorComponent.getComponent()
+            .click()
+        cy.wait(2000)
+        return this;
+    }
+
+    public selectGivenStatusIfNotSelected(status: string): OrderActionTable {
+        const checkbox = OrderActionTableElement.StatusSelectorComponent.getGivenStatusCheckbox(status);
+
+        checkbox.invoke('attr', 'aria-checked').then((isChecked) => {
+            if (isChecked !== 'true') {
+                checkbox.click({force: true});
+            }
+        });
+        return this;
+    }
+
 }
