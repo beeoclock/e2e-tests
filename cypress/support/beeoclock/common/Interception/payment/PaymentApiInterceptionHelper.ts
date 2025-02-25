@@ -12,4 +12,10 @@ export class PaymentApiInterceptionHelper {
         }
         return getPayment
     }
+
+    public static createServicePayment(): string {
+        const createPayment = 'createPayment' + DateUtils.getCurrentTime();
+        cy.intercept('POST', EntryPointEnum.API_ENTRY_POINT + '/payment').as(createPayment);
+        return createPayment
+    }
 }

@@ -106,6 +106,8 @@ export class SummaryAndPaymentServicePage {
             }).then(() => {
             cy.wait('@' + createOrder).then((interception) => {
                 const request = interception.request.body;
+                cy.log(JSON.stringify(request))
+                cy.log('ID: ', request._id)
 
                 const orderId = request._id;
                 cy.wrap(orderId).as('orderId');

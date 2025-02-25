@@ -1,8 +1,8 @@
 export class OrderGivenActionButton {
-    public getElement(action: string): any {
-        return cy.get('.z-10.bg-white.divide-y')
-            .find('li')
-            .contains(action)
+    public getElement(orderId: string, action: string): any {
+        return cy.get(`#table-row-${orderId}`, {includeShadowDom: false})
+             .find('li')
+            .contains('button', action)
             .scrollIntoView()
             .should('exist')
     }

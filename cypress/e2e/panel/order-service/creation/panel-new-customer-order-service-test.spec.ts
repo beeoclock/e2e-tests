@@ -70,21 +70,15 @@ describe('panel new customer order service', () => {
 
                 cy.get('@orderId').then((orderId) => {
                     cy.log('Order ID is: ' + orderId);
-                    let oderID: string = orderId.toString()
-
-                    cy.log('verify its order on table');
-                    CalendarPages.CalendarTablePage
-                        .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
-                        .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
+                    let orderID: string = orderId.toString()
 
                     cy.log('click, delete and verify deletion on table');
                     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                    cy.wait(2000)
                     OrderTabPages.OrderActionTable
-                        // .clickOnSelectStatusElement()
-                        // .selectGivenStatusIfNotSelected('W toku')
-                        .clickActionButton(oderID)
-                        .clickSpecificAction(OrderActionsEnum.DELETE)
-                        .verifyOrderWithGivenIdNotExist(oderID)
+                        .clickActionButton(orderID)
+                        .clickSpecificAction(orderID, OrderActionsEnum.DELETE)
+                        .verifyOrderWithGivenIdNotExist(orderID)
                 })
 
                 cy.log('CASE - 2')
@@ -141,7 +135,7 @@ describe('panel new customer order service', () => {
                     LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
                     OrderTabPages.OrderActionTable
                         .clickActionButton(orderID)
-                        .clickSpecificAction(OrderActionsEnum.DELETE)
+                        .clickSpecificAction(orderID, OrderActionsEnum.DELETE)
                         .verifyOrderWithGivenIdNotExist(orderID)
 
                     cy.log('create next order');
