@@ -4,6 +4,6 @@ describe("delete all order's by api", (): void => {
 
     it('should delete all order by api', function () {
         cy.log('delete orders with assertion that its status equal deleted')
-        OrderApi.deleteAllCurrentOrders()
+        OrderApi.deleteAllCurrentOrdersWithAssertion()
     });
 });
