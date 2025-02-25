@@ -12,7 +12,6 @@ export class AbsenceApi {
 
     public static getAllAbsenceIds(): any {
         this.getToken()
-
         const tokenId = Cypress.env('token');
         const url: string = EntryPointEnum.API_ENTRY_POINT + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
         return cy.request({
@@ -46,7 +45,6 @@ export class AbsenceApi {
     }
 
     public static deleteAbsenceWithGivenId(id: string): any {
-        // return cy.get<string>('@token').then(tokenId => {
         const tokenId = Cypress.env('token');
         return cy.request({
             method: 'DELETE',
@@ -60,7 +58,6 @@ export class AbsenceApi {
         }).then(response => {
             expect(response.status).to.equal(200);
         })
-        // });
     }
 
     public static deleteAllAbsences(): void {
