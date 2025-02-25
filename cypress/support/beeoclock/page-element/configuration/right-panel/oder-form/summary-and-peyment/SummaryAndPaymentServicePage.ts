@@ -104,10 +104,12 @@ export class SummaryAndPaymentServicePage {
                     NotificationsPage.clickConfirmButton()
                 }
             }).then(() => {
-            cy.wait('@' + createOrder).then((interception) => {
-                const responseBody = interception.response.body;
+            cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
+                const request = interception.request.body;
+                cy.log(JSON.stringify(request))
+                cy.log('ID: ', request._id)
 
-                const orderId = responseBody._id;
+                const orderId = request._id;
                 cy.wrap(orderId).as('orderId');
             })
             ApiInterceptionHelper.waitFor201Alias(createPayment)

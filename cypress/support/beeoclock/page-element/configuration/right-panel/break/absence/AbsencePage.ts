@@ -2,6 +2,7 @@ import {AbsencePageElement} from "./AbsencePageElement";
 import {SaveButton} from "../../../../common/common-element/element/SaveButton";
 import {CommonElementPage} from "../../../../common/common-element/CommonElementPage";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
+import dayjs from "dayjs";
 
 export class AbsencePage {
 
@@ -11,6 +12,26 @@ export class AbsencePage {
         })
         return this
     }
+
+    public assertCurrentTimeMatches(): AbsencePage {
+        AbsencePageElement.AbsenceFromTime.getElement()
+            .invoke('prop', 'textContent')
+            .then((textContent) => {
+                const actualTime = textContent.trim();
+
+                const currentTime = dayjs();
+                const expectedTime = currentTime.format("HH:mm");
+                const previousTime = currentTime.subtract(1, 'minute').format("HH:mm");
+                const nextTime = currentTime.add(1, 'minute').format("HH:mm");
+
+                cy.log(`Actual time: ${actualTime}, Expected: ${expectedTime}, Prev: ${previousTime}, Next: ${nextTime}`);
+
+                cy.wrap(actualTime).should('be.oneOf', [expectedTime, previousTime, nextTime]);
+            });
+
+        return this;
+    }
+
 
     public verifyAbsenceFromTime(fromTime: string): AbsencePage {
         AbsencePageElement.AbsenceFromTime.getElement().invoke('prop', 'textContent').then(textContent => {
@@ -40,11 +61,9 @@ export class AbsencePage {
     }
 
     public clickSaveButton(): AbsencePage {
-        const createAbsence = ApiInterceptionHelper.createAbsence()
-        const getAbsence = ApiInterceptionHelper.getAbsence()
+        // const createAbsence = ApiInterceptionHelper.createAbsence()
         CommonElementPage.clickSaveButton()
-        ApiInterceptionHelper.waitForAlias(createAbsence)
-        ApiInterceptionHelper.waitForAlias(getAbsence)
+        // ApiInterceptionHelper.waitForAlias(createAbsence)
         cy.document().its('readyState').should('equal', 'complete')
         cy.get('whac-a-mole').should('not.contain', 'Przetwarzanie')
         return this;

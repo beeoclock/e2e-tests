@@ -16,6 +16,9 @@ import {AuthApi} from "./beeoclock/backend/auth/AuthApi";
 // Import commands.js using ES2015 syntax:
 import './commands';
 import 'cypress-file-upload';
+import {OrderApi} from "./beeoclock/backend/panel/order/OrderApi";
+import {AbsenceApi} from "./beeoclock/backend/panel/absence/AbsenceApi";
+import { CalendarTablePage } from "./beeoclock/page-element/configuration/tab/calendar/calendar-table/CalendarTablePage";
 
 require('cypress-xpath');
 
@@ -23,15 +26,13 @@ require('cypress-xpath');
  * clear all storage and assign to global env valid token before any test
  */
 before(() => {
-    clearAllData()
-
     AuthApi.getToken().then(token => {
-        Cypress.env('token', token);
-    });
+      Cypress.env().token = token;
+    })
 });
 
 function clearAllData() {
     cy.clearCookies();
     cy.clearLocalStorage();
-    cy.clearAllSessionStorage()
+    cy.clearAllSessionStorage();
 }

@@ -13,6 +13,7 @@ export class AuthApi {
                 "returnSecureToken": true
             },
         }).then(response => {
+            expect(response.status).to.equal(200);
             return response.body.idToken as string;
         });
     }

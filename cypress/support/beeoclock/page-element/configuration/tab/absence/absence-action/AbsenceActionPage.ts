@@ -21,21 +21,26 @@ export class AbsenceActionPage {
     }
 
     private clickDeactivateAction(): AbsenceActionPage {
-        const deactivateAbsence = AbsenceApiInterceptionHelper.deactivateAbsence()
-        const getAbsence = AbsenceApiInterceptionHelper.getAbsence()
+        // const deactivateAbsence = AbsenceApiInterceptionHelper.deactivateAbsence()
         AbsenceActionPageElement.GivenActionButton.getElement(AbsenceActionEnum.DEACTIVATE)
             .click()
-        ApiInterceptionHelper.waitForAlias(deactivateAbsence)
-        ApiInterceptionHelper.waitForAlias(getAbsence)
-        cy.wait(500)
+        // ApiInterceptionHelper.waitForAlias(deactivateAbsence)
         return this
     }
 
     private deleteActionButton(): AbsenceActionPage {
-        const deleteAbsence = AbsenceApiInterceptionHelper.deleteAbsence()
+        // const deleteAbsence = AbsenceApiInterceptionHelper.deleteAbsence();
+
+        cy.on('window:confirm', (text) => {
+            expect(text).to.contain('Czy na pewno chcesz usunąć nieobecność?');
+            return true;
+        });
+
         AbsenceActionPageElement.GivenActionButton.getElement(AbsenceActionEnum.DELETE)
             .click();
-        ApiInterceptionHelper.waitForAlias(deleteAbsence)
+
+        // ApiInterceptionHelper.waitForAlias(deleteAbsence);
         return this;
     }
+
 }

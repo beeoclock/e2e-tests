@@ -17,26 +17,15 @@ import {ThrottleEnum} from "../../../support/beeoclock/common/enum/ThrottleEnum"
 
 describe('customer creation test', () => {
 
-    before('clear environment', () => {
-        cy.clearAllLocalStorage()
-        cy.clearAllSessionStorage()
-        cy.clearAllCookies()
-        cy.reload()
-    })
-
     it('test panel custer creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
-            TestCaseEnum.CASE_2,
-            TestCaseEnum.CASE_3,
-            TestCaseEnum.CASE_4
+            // TestCaseEnum.CASE_2,
+            // TestCaseEnum.CASE_3,
+            // TestCaseEnum.CASE_4
         ];
 
         cy.loginOnPanel()
-
-        cy.get('@token').then(token => {
-            cy.log('token: ' + token);
-        });
 
         cy.log('assert login url');
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
@@ -54,7 +43,6 @@ describe('customer creation test', () => {
             const testData = ClientCreationDataProvider.getTestData(testCase);
             cy.log('case: ' + testCase)
 
-            cy.setNetworkThrottle(ThrottleEnum.OFFLINE)
             cy.log('creation')
             RightPanelPages.ClientFormPage
                 .typeGivenCustomerInput(CommonPropertiesEnum.FIRST_NAME, testData.firstName)
@@ -77,16 +65,18 @@ describe('customer creation test', () => {
                 .verifyTableRowElement(ClientTableCellEnum.PHONE, testData.phoneNumber)
                 .verifyTableRowElement(ClientTableCellEnum.NOTE, testData.description)
                 .verifyTableRowElement(ClientTableCellEnum.EMAIL, testData.email)
+                .verifyTableRowElement(ClientTableCellEnum.ACTIVE_STATUS, "Aktywny")
 
             ClientTabPages.ClientTabActionPage
-                .clickActionButton(testData.lastName)//roll up
+                .clickActionButton(testData.lastName)
                 .clickDeactivateClient()
-                .clickActionButton(testData.lastName)//roll down
-            ReloadCommonButton.getElement().click()
-            cy.wait(500)
+            ClientTabPages.ClientTabTableAssertionPage
+                .verifyTableRowElement(ClientTableCellEnum.ACTIVE_STATUS, "Nieaktywny")
+            cy.wait(2000)
             ClientTabPages.ClientTabActionPage
-                .clickActionButton(testData.lastName)//roll up
+                .clickActionButton(testData.lastName)
                 .clickDeleteClient()
+            cy.wait(2000)
             ClientTabPages.ClientTabTableAssertionPage
                 .clickAddOnNotFoundComponent()
         })

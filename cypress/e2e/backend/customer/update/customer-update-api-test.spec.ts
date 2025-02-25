@@ -5,9 +5,9 @@ import {CustomerBuilder} from "../../../../support/beeoclock/backend/panel/custo
 import {ICustomerSearchCriteria} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
 import {CustomerSearchCriteriaBuilder} from "../../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
 import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/BackendCommonEnum";
-import {StateEnum} from "../../../../support/beeoclock/backend/state-history/StateEnum";
 import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
 import {NumericUtils} from "../../../../support/beeoclock/backend/Utils/NumericUtils";
+import { StateEnum } from "support/beeoclock/backend/panel/order/enum/StateEnum";
 
 describe('customer update api test', () => {
     let customerData: ICustomer;
@@ -61,11 +61,11 @@ describe('customer update api test', () => {
                 expect(customerResponse).to.have.property('phone', customerData.phone);
                 expect(customerResponse).to.have.property('email', customerData.email);
                 expect(customerResponse).to.have.property('customerType', customerData.customerType);
-                expect(customerResponse).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse).to.have.property('state', StateEnum.active,);
                 expect(customerResponse).to.have.property('_id', customerData._id,);
 
                 expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
-                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.active,);
             });
     })
 
@@ -109,11 +109,11 @@ describe('customer update api test', () => {
                 expect(customerResponse).to.have.property('phone', customerData.phone);
                 expect(customerResponse).to.have.property('email', customerData.firstName + '@example.com');
                 expect(customerResponse).to.have.property('customerType', customerData.customerType);
-                expect(customerResponse).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse).to.have.property('state', StateEnum.active,);
                 expect(customerResponse).to.have.property('_id', customerData._id,);
 
                 expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
-                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.active,);
             });
     })
 
@@ -156,11 +156,11 @@ describe('customer update api test', () => {
                 expect(customerResponse).to.have.property('phone', '48' + number);
                 expect(customerResponse).to.have.property('email', customerData.email);
                 expect(customerResponse).to.have.property('customerType', customerData.customerType);
-                expect(customerResponse).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse).to.have.property('state', StateEnum.active,);
                 expect(customerResponse).to.have.property('_id', customerData._id,);
 
                 expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
-                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.active,);
             });
     })
 

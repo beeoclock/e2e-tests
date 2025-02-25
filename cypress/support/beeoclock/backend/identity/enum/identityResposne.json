@@ -1,5 +1,5 @@
-export class IdentityData {
-  static readonly DATA = {
+
+ {
   "items": [
     {
       "_id": "662a4638a4b376d20c065b23",
@@ -23,5 +23,4 @@ export class IdentityData {
     }
   ],
   "totalSize": 2
-};
 }

@@ -8,6 +8,10 @@ export class ApiInterceptionHelper {
         cy.wait('@' + alias);
     }
 
+    public static waitForAliases(alias: string[]): void {
+        alias.forEach(a => cy.wait(`@${a}`, { timeout: 20000 }));
+    }
+
     public static waitFor201Alias(alias: string): void {
         cy.wait('@' + alias).its('response.statusCode').should('eq', 201);
     }
@@ -84,7 +88,7 @@ export class ApiInterceptionHelper {
 
     public static deleteServices(): string {
         const deleteServices = 'deleteServices' + DateUtils.getCurrentTime();
-        cy.intercept('DELETE', EntryPointEnum.API_ENTRY_POINT + '/order/*').as(deleteServices);
+        cy.intercept('PUT', EntryPointEnum.API_ENTRY_POINT + '/order/*').as(deleteServices);
         return deleteServices
     }
 }
