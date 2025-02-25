@@ -7,6 +7,7 @@ import {CustomerSearchCriteriaBuilder} from "../../../../support/beeoclock/backe
 import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {StateEnum} from "../../../../support/beeoclock/backend/state-history/StateEnum";
 import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
+import {NumericUtils} from "../../../../support/beeoclock/backend/Utils/NumericUtils";
 
 describe('customer update api test', () => {
     let customerData: ICustomer;
@@ -116,6 +117,53 @@ describe('customer update api test', () => {
             });
     })
 
+    it('update customer phone', () => {
+        let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
+        const customer: ICustomer = new CustomerBuilder()
+            .setId(customerData._id)
+            .setFirstName(customerData.firstName)
+            .setLastName(customerData.lastName)
+            .setPhone('48' + number)
+            .setEmail(customerData.email)
+            .setCustomerType(customerData.customerType)
+            .setState(customerData.state)
+            .setCreatedAt(customerData.createdAt)
+            .setUpdatedAt(customerData.updatedAt)
+            .setNote(customerData.note)
+            .build();
+
+        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {})
+            .then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+            })
+
+        const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+            .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+            .withOrderBy('name')
+            .withOrderDir('asc')
+            .withPage(1)
+            .withPageSize(10)
+            .withPhrase('48' + number)
+            .build();
+
+        CustomerApi.getCustomerPaged(criteria, {})
+            .then(response => {
+                cy.log('Response:', JSON.stringify(response));
+                const customerResponse: any = response.items[0];
+
+                expect(customerResponse).to.have.property('firstName', customerData.firstName);
+                expect(customerResponse).to.have.property('lastName', customerData.lastName);
+                expect(customerResponse).to.have.property('phone', '48' + number);
+                expect(customerResponse).to.have.property('email', customerData.email);
+                expect(customerResponse).to.have.property('customerType', customerData.customerType);
+                expect(customerResponse).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse).to.have.property('_id', customerData._id,);
+
+                expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.ACTIVE,);
+            });
+    })
+
     it('should try update customer on incorrect email', () => {
         const customer: ICustomer = new CustomerBuilder()
             .setId(customerData._id)
@@ -142,6 +190,42 @@ describe('customer update api test', () => {
             .withPage(1)
             .withPageSize(10)
             .withPhrase(customerData.firstName + '.com')
+            .build();
+
+        CustomerApi.getCustomerPaged(criteria, {})
+            .then(response => {
+                expect(response).to.have.property('items').that.is.an('array').with.length(0);
+            });
+    })
+
+    it.skip('should try update customer on incorrect phone TODO BUG', () => {
+        let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(3)
+
+        const customer: ICustomer = new CustomerBuilder()
+            .setId(customerData._id)
+            .setFirstName(customerData.firstName)
+            .setLastName(customerData.lastName)
+            .setPhone('48' + number)
+            .setEmail(customerData.email)
+            .setCustomerType(customerData.customerType)
+            .setState(customerData.state)
+            .setCreatedAt(customerData.createdAt)
+            .setUpdatedAt(customerData.updatedAt)
+            .setNote(customerData.note)
+            .build();
+
+        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {failOnStatusCode: false})
+            .then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.BadRequest);
+            })
+
+        const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+            .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+            .withOrderBy('name')
+            .withOrderDir('asc')
+            .withPage(1)
+            .withPageSize(10)
+            .withPhrase('48' + number)
             .build();
 
         CustomerApi.getCustomerPaged(criteria, {})

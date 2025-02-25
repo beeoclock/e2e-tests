@@ -3,8 +3,7 @@ name: Panel App API Health Check Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *'
-    - cron: '0 16 * * *'
+    - cron: '0 * * * *'
 
 jobs:
   run-tests:
@@ -26,6 +25,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
+      - name: Run healthcheck
         run: npm run panel-app-api-health-check
-
