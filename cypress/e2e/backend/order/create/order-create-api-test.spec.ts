@@ -1,4 +1,3 @@
-import {OrderDtoBuilder} from "../../../../support/beeoclock/backend/panel/order/create/builder/OrderBuilder";
 import {OrderStatusEnum} from "../../../../support/beeoclock/backend/panel/order/enum/OrderStatusEnum";
 import {DateUtils} from "../../../../support/beeoclock/backend/Utils/DateUtils";
 import {MetaDtoBuilder} from "../../../../support/beeoclock/backend/panel/state/builder/MetaDtoBuilder";
@@ -22,20 +21,20 @@ describe('order creation page', () => {
             .setSetAt(now)
             .build()
 
-        const order = new OrderDtoBuilder()
-            .setVersion('1.0')
-            .setId('123')
-            .setStateHistory([stateHistory])
-            .setState(StateEnum.active)
-            .setCreatedAt(DateUtils.getCurrentDateIso())
-            .setUpdatedAt((DateUtils.getCurrentDateIso()))
-            .setObject('order')
-            .setStatus(OrderStatusEnum.confirmed)
-            .setMeta(metaDto)
-            .setProducts([])
-            .build();
+        // const order = new OrderDtoBuilder()
+        //     .setVersion('1.0')
+        //     .setId('123')
+        //     .setStateHistory([stateHistory])
+        //     .setState(StateEnum.active)
+        //     .setCreatedAt(DateUtils.getCurrentDateIso())
+        //     .setUpdatedAt((DateUtils.getCurrentDateIso()))
+        //     .setObject('order')
+        //     .setStatus(OrderStatusEnum.confirmed)
+        //     .setMeta(metaDto)
+        //     .setProducts([])
+        //     .build();
 
         // OrderCreationApi.createOrderWithBuilder(order, {});
-        console.log(order);
+        // console.log(order);
     });
 });
