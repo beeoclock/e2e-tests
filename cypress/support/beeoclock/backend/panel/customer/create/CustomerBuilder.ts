@@ -1,9 +1,11 @@
 import { ICustomer } from "./ICustomer";
-import { StateEnum } from "../../../state-history/StateEnum";
+
 import { CustomerTypeEnum } from "../enum/CustomerTypeEnum";
-import { IStateHistory } from "../../../state-history/IStateHistory";
+
 import {faker} from "@faker-js/faker";
 import {NumericUtils} from "../../../Utils/NumericUtils";
+import { StateEnum } from "../../order/enum/StateEnum";
+import { IStateHistory } from "../../state/interface/IStateHistory";
 
 export class CustomerBuilder {
     private customer: ICustomer;
@@ -15,7 +17,7 @@ export class CustomerBuilder {
             _version: "1",
             _id: NumericUtils.generateObjectId(),
             stateHistory: [],
-            state: StateEnum.ACTIVE,
+            state: StateEnum.active,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             object: "CustomerDto",

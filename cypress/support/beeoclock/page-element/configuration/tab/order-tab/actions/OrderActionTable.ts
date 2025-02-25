@@ -1,37 +1,40 @@
 import {OrderActionTableElement} from "./OrderActionTableElement";
 import {OrderActionsEnum} from "./enum/OrderActionsEnum";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
+import {StateEnum} from "../../../../../backend/panel/order/enum/StateEnum";
+import {OrderInterceptionHelper} from "../../../../../common/Interception/order/OrderInterceptionHelper";
 
 export class OrderActionTable {
 
-    public clickActionButton(noteNumber: string): OrderActionTable {
-        OrderActionTableElement.OrderActionButton.getElement(noteNumber)
+    public clickActionButton(orderId: string): OrderActionTable {
+        OrderActionTableElement.OrderActionButton.getElement(orderId)
             .click();
         return this;
     }
 
-    public clickSpecificAction(action: string): OrderActionTable {
-        cy.wait(200)
-        const getOrder = ApiInterceptionHelper.getOrder()
-        const deleteAction = ApiInterceptionHelper.deleteServices()
-        OrderActionTableElement.OrderGivenActionButton.getElement(action).scrollIntoView()
+    public clickSpecificAction(orderId: string, action: string): OrderActionTable {
+        const getOrder: string = OrderInterceptionHelper.getOrderById(orderId)
+        const deleteAction: string = ApiInterceptionHelper.deleteServices()
+
+        OrderActionTableElement.OrderGivenActionButton.getElement(orderId, action).scrollIntoView()
             .click({force: true})
         if (action == OrderActionsEnum.DELETE) {
-            cy.wait('@' + deleteAction, {timeout: 20000})
+           cy.wait('@' + deleteAction).then((interception) => {
+                expect(interception.request.body.state).to.equal(StateEnum.deleted)
+            })
         }
         ApiInterceptionHelper.waitForAlias(getOrder)
         return this;
     }
 
     public verifyOrderWithGivenIdNotExist(orderId: string): OrderActionTable {
-        cy.get('#table-row-' + orderId).should('not.exist')
+        cy.get('#table-row-' + orderId, {includeShadowDom: false}).should('not.exist')
         return this;
     }
 
     public clickOnSelectStatusElement(): OrderActionTable {
         OrderActionTableElement.StatusSelectorComponent.getComponent()
             .click()
-        cy.wait(2000)
         return this;
     }
 

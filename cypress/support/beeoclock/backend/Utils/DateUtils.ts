@@ -1,6 +1,6 @@
 import "moment-timezone/index";
 import dayjs from 'dayjs';
-
+import 'dayjs/locale/pl';
 import moment = require('moment');
 
 export class DateUtils {
@@ -158,12 +158,6 @@ export class DateUtils {
     }
 
     public static getHourWithAddedMinutes(minutesToAdd: number): string {
-        // Get the current time rounded to the nearest minute
-        // const currentTime = moment();
-        //
-        // const updatedTime = currentTime.add(minutesToAdd, 'minutes');
-        // return updatedTime.startOf('minute').format("HH:mm");
-
         return dayjs().add(minutesToAdd, 'minutes').format("HH:mm");
     }
 
@@ -269,7 +263,6 @@ export class DateUtils {
         return newDate.format("DD.MM.YYYY HH");
     }
 
-
     public static getCurrentDateMinusDaysPlusMinutes(minusDays: number, minutes: number): string {
         let currentDate = moment().subtract(minusDays, 'days').add(minutes, 'minutes');
         const newDate = currentDate.format("DD.MM.YYYY HH:mm");
@@ -299,6 +292,10 @@ export class DateUtils {
         return moment.utc().startOf('day').toISOString();
     }
 
+    public static getCurrentDateIso(): string {
+        return moment.utc().toISOString();
+    }
+
     public static getStartOfPreviousDays(days: number) {
         return moment.tz('Europe/Warsaw')
             .subtract(days, 'days')
@@ -307,7 +304,9 @@ export class DateUtils {
     }
 
     public static getTodayInPolishFormat(): string {
-        return dayjs().format("D MMMM, ddd");
+        return dayjs()
+            .locale('pl')
+            .format('D MMMM , ddd.')
     }
 
     public static getFormattedDate(): string {

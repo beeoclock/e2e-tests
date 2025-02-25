@@ -43,10 +43,8 @@ export class CustomerPage {
     //existing customer
 
     public searchExistingCustomer(customer: string): CustomerPage {
-        const getCustomer = CustomerApiInterceptionHelper.getCustomer()
         RightPanelServicesPageElement.ExistingCustomerInput.getElement()
             .type(customer)
-        ApiInterceptionHelper.waitForAlias(getCustomer)
         return this;
     }
 

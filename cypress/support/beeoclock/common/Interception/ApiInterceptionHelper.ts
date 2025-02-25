@@ -88,7 +88,7 @@ export class ApiInterceptionHelper {
 
     public static deleteServices(): string {
         const deleteServices = 'deleteServices' + DateUtils.getCurrentTime();
-        cy.intercept('DELETE', EntryPointEnum.API_ENTRY_POINT + '/order/*').as(deleteServices);
+        cy.intercept('PUT', EntryPointEnum.API_ENTRY_POINT + '/order/*').as(deleteServices);
         return deleteServices
     }
 }

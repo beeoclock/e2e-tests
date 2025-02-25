@@ -5,9 +5,9 @@ import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/Back
 import {CustomerFactory} from "support/beeoclock/backend/panel/customer/factory/CustomerFactory";
 import {ICustomer} from "support/beeoclock/backend/panel/customer/create/ICustomer";
 import {CustomerBuilder} from "support/beeoclock/backend/panel/customer/create/CustomerBuilder";
-import {StateEnum} from "../../../../support/beeoclock/backend/state-history/StateEnum";
 import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
 import {faker} from "@faker-js/faker";
+import { StateEnum } from "support/beeoclock/backend/panel/order/enum/StateEnum";
 
 describe('customer api test', () => {
     let customerData: ICustomer
@@ -60,11 +60,11 @@ describe('customer api test', () => {
                 expect(customerResponse).to.have.property('phone', customerData.phone);
                 expect(customerResponse).to.have.property('email', customerData.email);
                 expect(customerResponse).to.have.property('customerType', customerData.customerType);
-                expect(customerResponse).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse).to.have.property('state', StateEnum.active,);
                 expect(customerResponse).to.have.property('_id', customerData._id,);
 
                 expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
-                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.ACTIVE,);
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.active,);
             });
     })
 

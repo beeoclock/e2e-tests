@@ -26,20 +26,22 @@ export class OrderApi {
             },
             qs: {
                 state: StateEnum.active,
-                // statuses: [OrderStatusEnum.done, OrderStatusEnum.confirmed],
+                statuses: [OrderStatusEnum.done, OrderStatusEnum.confirmed],
             },
             auth: {
                 bearer: tokenId
             }
         }).then(response => {
             expect(response.status).to.equal(200);
-            cy.log('Response: ' + JSON.stringify(response.body));
+            cy.log('not filtered items: ' + JSON.stringify(response.body.totalSize));
+
             const filteredItems = response.body.items.filter(({services}) => {
                 return services.some(({state, status}) => {
                     return state === StateEnum.active && [OrderServiceStatusEnum.done, OrderServiceStatusEnum.accepted].includes(status);
                 })
             });
-            if (Array.isArray(filteredItems) && filteredItems.length > 0) {
+            cy.log('filtered items: ', JSON.stringify(filteredItems));
+            if (Array.isArray(filteredItems)) {
                 const orderIds = filteredItems.map((order: any) => order._id);
                 cy.log('Order IDs:', orderIds.join(', '));
                 return cy.wrap(orderIds);
@@ -162,6 +164,19 @@ export class OrderApi {
             const latestState = stateHistory[stateHistory.length - 1];
             expect(latestState.state).to.equal('deleted');
             cy.log("Latest state history entry: " + JSON.stringify(latestState));
+
+            const services = response.body.services;
+            services.forEach((service: any, index: number) => {
+                cy.log(`Checking service ${index + 1} with ID: ${service._id}`);
+                expect(service.state).to.equal('deleted');
+
+                const serviceStateHistory = service.stateHistory;
+                expect(serviceStateHistory.length).to.be.greaterThan(0);
+
+                const latestServiceState = serviceStateHistory[serviceStateHistory.length - 1];
+                expect(latestServiceState.state).to.equal('deleted');
+                cy.log("Latest service state history entry: " + JSON.stringify(latestServiceState));
+            });
         });
     }
 
