@@ -14,5 +14,4 @@ export interface IProductDto {
     languageVersions: ILanguageVersionDto[];
     price: IProductPriceDto;
     tags: string[];
-
 }

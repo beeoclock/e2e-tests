@@ -1,10 +1,8 @@
-import { IMetaDto } from "../../../state/interface/IMetaDto";
-import { IOrderProductDto } from "./IOrderProductDto";
-import {StateEnum} from "../../enum/StateEnum";
-import {OrderStatusEnum} from "../../enum/OrderStatusEnum";
-import { IStateHistory } from "../../../state/interface/IStateHistory";
-import { IOrderServiceDto } from "./IOrderServiceDto";
-import { IOrderNotificationSettingsDto } from "./IOrderNotificationSettingsDto";
+import {IMetaDto} from "../../../state/interface/IMetaDto";
+import {IOrderProductDto} from "./IOrderProductDto";
+import {IStateHistory} from "../../../state/interface/IStateHistory";
+import {IOrderServiceDto} from "./IOrderServiceDto";
+import {IOrderNotificationSettingsDto} from "./IOrderNotificationSettingsDto";
 
 export interface IOrderDto {
     _version: string;

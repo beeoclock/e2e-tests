@@ -14,11 +14,11 @@ export interface IServiceDto {
     createdAt: string;
     updatedAt: string;
     object: string;
-    configuration: IServiceConfigurationDto;
-    presentation: IPresentationDto;
-    prepaymentPolicy: IPrepaymentPolicyDto;
-    languageVersions: ILanguageVersionDto[];
-    durationVersions: IDurationVersionDto[];
-    schedules: IScheduleDto[];
+    configuration?: IServiceConfigurationDto;
+    presentation?: IPresentationDto;
+    prepaymentPolicy?: IPrepaymentPolicyDto;
+    languageVersions?: ILanguageVersionDto[];
+    durationVersions?: IDurationVersionDto[];
+    schedules?: IScheduleDto[];
     order: number;
 }
