@@ -1,4 +1,5 @@
 import {CalendarTablePageElement} from "./CalendarTablePageElement";
+import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
 
 export class CalendarTablePage {
 
@@ -57,6 +58,24 @@ export class CalendarTablePage {
             .invoke('prop', 'outerText').then(outerText => {
                 expect(outerText).to.include(value)
         })
+        return this;
+    }
+
+    public waitForOrderToDisappear(): CalendarTablePage {
+        function checkAndRetry() {
+            cy.get('app-event-calendar-with-specialists-widget-component', { timeout: 5000 })
+                .then(($el) => {
+                    if ($el.length) {
+                        LeftMenuPage.synchronizeWithInterception()
+                        cy.reload();
+
+                        checkAndRetry();
+                    } else {
+                        cy.log('Element zniknął, koniec retry.');
+                    }
+                });
+        }
+        checkAndRetry();
         return this;
     }
 }

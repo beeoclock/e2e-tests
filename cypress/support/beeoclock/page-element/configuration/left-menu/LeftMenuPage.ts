@@ -77,11 +77,13 @@ export class LeftMenuPage {
     }
 
     public static assertIsSynchronized(isSynchronized: boolean): LeftMenuPage {
-        if (isSynchronized) {
-            LeftMenuPageElement.SynchronizingComponent.getElement().find('.text-xs').contains('Zsynchronizowano', {timeout: 20000});
-        } else {
-            LeftMenuPageElement.SynchronizingComponent.getElement().find('.text-xs').contains('Synchronizacja w toku…', {timeout: 20000});
-        }
+        const expectedText = isSynchronized ? 'Zsynchronizowano' : 'Synchronizacja w toku…';
+
+        LeftMenuPageElement.SynchronizingComponent.getElement()
+            .find('.text-xs', { timeout: 20000 })
+            .should('contain.text', expectedText);
+
         return this;
     }
+
 }

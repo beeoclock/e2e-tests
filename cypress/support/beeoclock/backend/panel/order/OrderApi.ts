@@ -7,7 +7,6 @@ import {StateEnum} from "./enum/StateEnum";
 import {OrderServiceStatusEnum} from "./enum/OrderServiceStatusEnum";
 
 export class OrderApi {
-
     private static getToken(): Cypress.Chainable<string> {
         return AuthApi.getToken();
     }
@@ -47,7 +46,7 @@ export class OrderApi {
                 return cy.wrap(orderIds);
             } else {
                 cy.log('No orders found');
-                return cy.wrap([]);
+                return cy.wrap('no filtered order found');
             }
         });
     }
@@ -83,6 +82,7 @@ export class OrderApi {
 
     public static deleteOrderWithGivenId(id: string): any {
         // return cy.get<string>('@token').then(tokenId => {
+        this.getToken()
         const tokenId = Cypress.env('token');
         return cy.request({
             method: 'DELETE',
@@ -95,6 +95,7 @@ export class OrderApi {
             }
         }).then(response => {
             expect(response.status).to.equal(200);
+            return response
         })
         // });
     }
