@@ -292,6 +292,10 @@ export class DateUtils {
         return moment.utc().startOf('day').toISOString();
     }
 
+    public static getCurrentDateIso(): string {
+        return moment.utc().toISOString();
+    }
+
     public static getStartOfPreviousDays(days: number) {
         return moment.tz('Europe/Warsaw')
             .subtract(days, 'days')
