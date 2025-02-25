@@ -1,6 +1,8 @@
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {AuthApi} from "../../auth/AuthApi";
+import {DateUtils} from "../../Utils/DateUtils";
+import {StateEnum} from "../order/enum/StateEnum";
 
 export class AbsenceApi {
 
@@ -19,14 +21,21 @@ export class AbsenceApi {
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
             },
-            qs: {state: "active"},
+            qs: {
+                start: DateUtils.getStartOfPreviousDays(1),
+                end: DateUtils.getEndOfTomorrowUTC()
+            },
             auth: {
                 bearer: tokenId
             }
         }).then(response => {
             expect(response.status).to.equal(200);
+            const absenceids = response.body.items
+                .filter(({state}) => state !== StateEnum.deleted)
+                .map((absence: any) => absence._id);
+
             if (Array.isArray(response.body.items) && response.body.items.length > 0) {
-                const absenceids = response.body.items.map((absence: any) => absence._id);
+                absenceids.map((absence: any) => absence._id);
                 cy.log('absence Ids:', absenceids.join(', '));
                 return cy.wrap(absenceids);
             } else {
