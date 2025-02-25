@@ -1,6 +1,6 @@
-import { IStateHistory } from "support/beeoclock/backend/state-history/IStateHistory";
 import { IProductDto } from "./IProductDto";
 import { IMetaDto } from "../../../state/interface/IMetaDto";
+import { IStateHistory } from "../../../state/interface/IStateHistory";
 
 export interface IOrderProductDto {
     _version: string;

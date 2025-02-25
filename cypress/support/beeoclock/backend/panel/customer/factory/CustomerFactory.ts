@@ -2,7 +2,7 @@ import {faker} from "@faker-js/faker";
 import {ICustomer} from "../create/ICustomer";
 import {CustomerTypeEnum} from "../enum/CustomerTypeEnum";
 import {NumericUtils} from "support/beeoclock/backend/Utils/NumericUtils";
-import {StateEnum} from "support/beeoclock/backend/state-history/StateEnum";
+import { StateEnum } from "../../order/enum/StateEnum";
 
 export class CustomerFactory {
 
@@ -14,7 +14,7 @@ export class CustomerFactory {
             _version: "1",
             _id: NumericUtils.generateObjectId(),
             stateHistory: [],
-            state: StateEnum.ACTIVE,
+            state: StateEnum.active,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             object: "CustomerDto",
@@ -33,7 +33,7 @@ export class CustomerFactory {
             _version: "1",
             _id: NumericUtils.generateObjectId(),
             stateHistory: [],
-            state: StateEnum.ACTIVE,
+            state: StateEnum.active,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             object: "CustomerDto",

@@ -1,4 +1,6 @@
+import {StateEnum} from "../../order/enum/StateEnum";
+
 export interface IStateHistory {
-    state: string;
+    state: StateEnum;
     setAt: string;
 }

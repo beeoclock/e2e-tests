@@ -73,7 +73,7 @@ describe('panel - order service', () => {
                 LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
                 OrderTabPages.OrderActionTable
                     .clickActionButton(oderID)
-                    .clickSpecificAction(OrderActionsEnum.DELETE)
+                    .clickSpecificAction(oderID, OrderActionsEnum.DELETE)
                     .verifyOrderWithGivenIdNotExist(oderID)
 
                 cy.log('create next order');

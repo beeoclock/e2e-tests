@@ -1,56 +1,79 @@
-import {NumericUtils} from "../../../../Utils/NumericUtils";
+import {IMetaDto} from "../../../state/interface/IMetaDto";
+import {IOrderDto} from "../interfaces/IOrderDto";
+import {IOrderProductDto} from "../interfaces/IOrderProductDto";
 import {StateEnum} from "../../enum/StateEnum";
 import {OrderStatusEnum} from "../../enum/OrderStatusEnum";
-import {DateUtils} from "../../../../Utils/DateUtils";
+import { IStateHistory } from "../../../state/interface/IStateHistory";
 
-class OrderBuilder {
-    private order: any;
+export class OrderDtoBuilder {
+    private order: IOrderDto;
 
     constructor() {
         this.order = {
-            businessNote: "API",
-            version: "1",
-            methodname: "Order.Create",
-            args: {
-                service_order: {
-                    requested_start_date: "",
-                    requested_completion_date: "",
-                    service_id: "",
-                    member_id: "",
-
-                }
-            },
+            _version: '1',
+            _id: '',
+            stateHistory: [],
             state: StateEnum.active,
-            updatedAt: DateUtils.getCurrentDateIso(),
+            createdAt: '',
+            updatedAt: '',
+            object: '',
             status: OrderStatusEnum.confirmed,
-            _id: NumericUtils.generateObjectId(),
-            _version: "1"
+            meta: {} as IMetaDto,
+            products: []
         };
     }
 
-    setRequestedStartDate(startDate: string) {
-        this.order.args.service_order.requested_start_date = startDate;
+    setVersion(version: string): OrderDtoBuilder {
+        this.order._version = version;
         return this;
     }
 
-    setRequestedCompletionDate(completionDate: string) {
-        this.order.args.service_order.requested_completion_date = completionDate;
+    setId(id: string): OrderDtoBuilder {
+        this.order._id = id;
         return this;
     }
 
-    setServiceId(serviceId: string) {
-        this.order.args.service_order.service_id = serviceId;
+    setStateHistory(stateHistory: IStateHistory[]): OrderDtoBuilder {
+        this.order.stateHistory = stateHistory;
         return this;
     }
 
-    setMemberId(memberId: string) {
-        this.order.args.service_order.member_id = memberId;
+    setState(state: StateEnum): OrderDtoBuilder {
+        this.order.state = state;
         return this;
     }
 
-    build() {
+    setCreatedAt(createdAt: string): OrderDtoBuilder {
+        this.order.createdAt = createdAt;
+        return this;
+    }
+
+    setUpdatedAt(updatedAt: string): OrderDtoBuilder {
+        this.order.updatedAt = updatedAt;
+        return this;
+    }
+
+    setObject(object: string): OrderDtoBuilder {
+        this.order.object = object;
+        return this;
+    }
+
+    setStatus(status: OrderStatusEnum): OrderDtoBuilder {
+        this.order.status = status;
+        return this;
+    }
+
+    setMeta(meta: IMetaDto): OrderDtoBuilder {
+        this.order.meta = meta;
+        return this;
+    }
+
+    setProducts(products: IOrderProductDto[]): OrderDtoBuilder {
+        this.order.products = products;
+        return this;
+    }
+
+    build(): IOrderDto {
         return this.order;
     }
 }
-
-export default OrderBuilder;
