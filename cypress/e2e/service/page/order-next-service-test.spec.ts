@@ -1,6 +1,8 @@
 import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages"
 import {CompanyEnum} from "../../../support/beeoclock/page-element/services/enum/CompanyEnum";
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
+import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
+import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('order next service', () => {
 
@@ -9,6 +11,11 @@ describe('order next service', () => {
     beforeEach(function () {
         cy.fixture('order-next-service-test-data.json').as('orderNextServiceCreation');
     });
+
+    before('clear environment', () => {
+        OrderApi.deleteAllCurrentOrdersWithAssertion()
+        AbsenceApi.deleteAllAbsences()
+    })
 
     it('order next service form test', function () {
         cy.loginOnPublicPage()

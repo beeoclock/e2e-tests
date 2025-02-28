@@ -2,10 +2,16 @@ import {ServicesPages} from "../../../support/beeoclock/page-element/services/Se
 import {CompanyEnum} from "../../../support/beeoclock/page-element/services/enum/CompanyEnum";
 import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
+import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
+import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('order service', () => {
-
     const address: string = CompanyEnum.COMPANY_ADDRESS
+
+    before('clear environment', () => {
+        OrderApi.deleteAllCurrentOrdersWithAssertion()
+        AbsenceApi.deleteAllAbsences()
+    })
 
     beforeEach(function () {
         cy.fixture('order-service-test-data.json').as('orderServiceCreation');
