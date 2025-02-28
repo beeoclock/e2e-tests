@@ -60,22 +60,4 @@ export class CalendarTablePage {
         })
         return this;
     }
-
-    public waitForOrderToDisappear(): CalendarTablePage {
-        function checkAndRetry() {
-            cy.get('app-event-calendar-with-specialists-widget-component', { timeout: 5000 })
-                .then(($el) => {
-                    if ($el.length) {
-                        LeftMenuPage.synchronizeWithInterception()
-                        cy.reload();
-
-                        checkAndRetry();
-                    } else {
-                        cy.log('Element zniknął, koniec retry.');
-                    }
-                });
-        }
-        checkAndRetry();
-        return this;
-    }
 }

@@ -10,24 +10,20 @@ import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-me
 import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {OrderActionsEnum} from "support/beeoclock/page-element/configuration/tab/order-tab/actions/enum/OrderActionsEnum";
 import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
+import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('panel new customer order service', () => {
 
     it('clear environment', () => {
-        OrderApi.getOrderIds().then(result => {
-            if (result === 'no filtered order found') {
-                cy.log('no orders to delete')
-            } else {
-                OrderApi.deleteAllCurrentOrdersWithAssertion()
-            }
-        });
+        OrderApi.deleteAllCurrentOrdersWithAssertion()
+        AbsenceApi.deleteAllAbsences()
+        cy.window().its('localStorage').invoke('clear')
     })
 
     it('handle synchronization', function (): void {
         cy.loginOnPanel()
         cy.log('handle synchronization process')
         LeftMenuPage.synchronizeWithInterception()
-        CalendarPages.CalendarTablePage.waitForOrderToDisappear()
     })
 
     it('test panel new customer order service', function () {

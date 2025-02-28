@@ -16,6 +16,7 @@ import {AuthApi} from "./beeoclock/backend/auth/AuthApi";
 // Import commands.js using ES2015 syntax:
 import './commands';
 import 'cypress-file-upload';
+import {BackendCommonEnum} from "./beeoclock/backend/enum/BackendCommonEnum";
 
 require('cypress-xpath');
 
@@ -24,11 +25,17 @@ require('cypress-xpath');
  */
 before(() => {
     clearAllData();
+    deleteIndexDb();
 
     AuthApi.getToken().then(token => {
         Cypress.env('token', token);
     })
 });
+
+function deleteIndexDb() {
+    indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-order');
+    indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-absence');
+}
 
 function clearAllData() {
     cy.clearCookies();
