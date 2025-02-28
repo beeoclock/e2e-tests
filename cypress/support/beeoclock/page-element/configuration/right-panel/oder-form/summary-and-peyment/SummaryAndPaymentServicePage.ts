@@ -98,7 +98,6 @@ export class SummaryAndPaymentServicePage {
             .then(() => {
                 if (sendEmail) {
                     NotificationsPage.clickEmailNotificationsToggle()
-                    cy.wait(1000)
                     NotificationsPage.clickConfirmButton(sendEmail)
                 } else {
                     NotificationsPage.clickConfirmButton()
