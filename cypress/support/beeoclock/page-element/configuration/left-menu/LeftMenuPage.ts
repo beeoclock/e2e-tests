@@ -43,37 +43,43 @@ export class LeftMenuPage {
     }
 
     public static clickServiceTab(): LeftMenuPage {
-        // const getServices: string = ServiceApiInterceptionHelper.getServices()
         LeftMenuPageElement.TabElement.getElement(TabNameEnum.SERVICE)
             .click()
-        // cy.wait('@' + getServices).then((interception) => {
-        //     const response = interception.response.body
-        //     const totalSize = response.totalSize
-        //     cy.get('utility-table-state-pagination-component')
-        //         .contains('p', ' Razem: ' + totalSize).should('be.visible')
-        // // })
         cy.get('service-desktop-layout-list-component').should('be.visible')
         cy.get('service-table-list-component').should('be.visible')
         return this;
     }
 
     public static synchronizeWithInterception(): LeftMenuPage {
-        const getAbsence: string = ApiInterceptionHelper.getAbsence()
-        const getCustomer: string = CustomerApiInterceptionHelper.getCustomer()
-        const getMember: string= MemberApiInterceptionHelper.getMember()
-        const getOrder: string = ApiInterceptionHelper.getOrder()
-        const getServices: string = ServiceApiInterceptionHelper.getServices()
-        const getPayment: string = PaymentApiInterceptionHelper.getPayment()
-        const getBusinessProfile: string = ApiInterceptionHelper.getBusinessProfile()
+        cy.wrap(null).then(() => {
+            cy.log('wait until synchronization is done');
+            this.assertIsSynchronized(true)
+        }).then((): void => {
+            cy.log('handle synchronization');
+            const getAbsence: string = ApiInterceptionHelper.getAbsence()
+            const getCustomer: string = CustomerApiInterceptionHelper.getCustomer()
+            const getMember: string= MemberApiInterceptionHelper.getMember()
+            const getOrder: string = ApiInterceptionHelper.getOrder()
+            const getServices: string = ServiceApiInterceptionHelper.getServices()
+            const getPayment: string = PaymentApiInterceptionHelper.getPayment()
+            const getBusinessProfile: string = ApiInterceptionHelper.getBusinessProfile()
 
-        LeftMenuPageElement.SynchronizingComponent.getElement().click().then(() => {
-            cy.log('Waiting for synchronization requests to complete...');
-            ApiInterceptionHelper.waitForAliases([getAbsence, getMember, getOrder, getServices, getPayment, getBusinessProfile, getCustomer]);
+            LeftMenuPageElement.SynchronizingComponent.getElement().click().then(() => {
+                cy.log('Waiting for synchronization requests to complete...');
+                ApiInterceptionHelper.waitForAliases([getAbsence, getMember, getOrder, getServices, getPayment, getBusinessProfile, getCustomer]);
+            })
         })
-
         this.assertIsSynchronized(true)
         cy.wait(1000)
         return this;
+    }
+
+    public static handleSynchronization(): LeftMenuPage {
+        LeftMenuPageElement.SynchronizingComponent.getElement()
+            .click();
+        this.assertIsSynchronized(true)
+        cy.log('Waiting for synchronization requests to complete...');
+        return this
     }
 
     public static assertIsSynchronized(isSynchronized: boolean): LeftMenuPage {

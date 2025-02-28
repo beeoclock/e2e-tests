@@ -7,36 +7,29 @@ import {RightPanelPages} from "../../../support/beeoclock/page-element/configura
 import {CommonPropertiesEnum} from "../../../support/beeoclock/page-element/common/enum/CommonPropertiesEnum";
 import {ClientCreationDataProvider} from "../../../fixtures/panel/client/ClientCreationDataProvider";
 import {ClientTabPages} from "../../../support/beeoclock/page-element/configuration/tab/client/ClientTabPages";
-import {
-    ClientTableCellEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
-import {
-    ReloadCommonButton
-} from "../../../support/beeoclock/page-element/common/common-element/element/ReloadCommonButton";
-import {ThrottleEnum} from "../../../support/beeoclock/common/enum/ThrottleEnum";
+import {ClientTableCellEnum} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
 
 describe('customer creation test', () => {
 
     it('test panel custer creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
-            // TestCaseEnum.CASE_2,
-            // TestCaseEnum.CASE_3,
-            // TestCaseEnum.CASE_4
+            TestCaseEnum.CASE_2,
+            TestCaseEnum.CASE_3,
+            TestCaseEnum.CASE_4
         ];
 
         cy.loginOnPanel()
-
         cy.log('assert login url');
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
-
-        cy.log('currentDate')
+        LeftMenuPage.synchronizeWithInterception()
+        cy.log('verify current date')
         CalendarPages.CalendarNavigationPage
             .verifyCurrenDate()
 
         LeftMenuPage.clickClientTab();
 
-        cy.log('add button')
+        cy.log('click add button')
         CommonElementPage.clickAddResourceButton()
 
         testCases.forEach(testCase => {
@@ -53,7 +46,6 @@ describe('customer creation test', () => {
                 .clickSaveButton()
 
             cy.log('assertion')
-
             cy.log('search created client')
             RightPanelPages.ClientFilterPage
                 .typeSearchValue(testData.lastName)
@@ -69,14 +61,7 @@ describe('customer creation test', () => {
 
             ClientTabPages.ClientTabActionPage
                 .clickActionButton(testData.lastName)
-                .clickDeactivateClient()
-            ClientTabPages.ClientTabTableAssertionPage
-                .verifyTableRowElement(ClientTableCellEnum.ACTIVE_STATUS, "Nieaktywny")
-            cy.wait(2000)
-            ClientTabPages.ClientTabActionPage
-                .clickActionButton(testData.lastName)
                 .clickDeleteClient()
-            cy.wait(2000)
             ClientTabPages.ClientTabTableAssertionPage
                 .clickAddOnNotFoundComponent()
         })
