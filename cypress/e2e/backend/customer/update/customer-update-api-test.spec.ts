@@ -7,7 +7,9 @@ import {CustomerSearchCriteriaBuilder} from "../../../../support/beeoclock/backe
 import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
 import {NumericUtils} from "../../../../support/beeoclock/backend/Utils/NumericUtils";
-import { StateEnum } from "support/beeoclock/backend/panel/order/enum/StateEnum";
+import {StateEnum} from "support/beeoclock/backend/panel/order/enum/StateEnum";
+import {StateHistoryBuilder} from "../../../../support/beeoclock/backend/panel/state/builder/StateHistoryBuilder";
+import {IStateHistory} from "../../../../support/beeoclock/backend/panel/state/interface/IStateHistory";
 
 describe('customer update api test', () => {
     let customerData: ICustomer;
@@ -233,4 +235,192 @@ describe('customer update api test', () => {
                 expect(response).to.have.property('items').that.is.an('array').with.length(0);
             });
     })
+
+    it('should update customer phone prefix', () => {
+        let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
+
+        const customer: ICustomer = new CustomerBuilder()
+            .setId(customerData._id)
+            .setFirstName(customerData.firstName)
+            .setLastName(customerData.lastName)
+            .setPhone('380' + number)
+            .setEmail(customerData.email)
+            .setCustomerType(customerData.customerType)
+            .setState(customerData.state)
+            .setCreatedAt(customerData.createdAt)
+            .setUpdatedAt(customerData.updatedAt)
+            .setNote(customerData.note)
+            .build();
+
+        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {failOnStatusCode: false})
+            .then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+            })
+
+        const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+            .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+            .withOrderBy('name')
+            .withOrderDir('asc')
+            .withPage(1)
+            .withPageSize(10)
+            .withPhrase('380' + number)
+            .build();
+
+        CustomerApi.getCustomerPaged(criteria, {})
+            .then(response => {
+                cy.log('Response:', JSON.stringify(response));
+                const customerResponse: any = response.items[0];
+
+                expect(customerResponse).to.have.property('firstName', customerData.firstName);
+                expect(customerResponse).to.have.property('lastName', customerData.lastName);
+                expect(customerResponse).to.have.property('phone', '380' + number);
+                expect(customerResponse).to.have.property('email', customerData.email);
+                expect(customerResponse).to.have.property('customerType', customerData.customerType);
+                expect(customerResponse).to.have.property('state', StateEnum.active,);
+                expect(customerResponse).to.have.property('_id', customerData._id,);
+
+                expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.active,);
+            });
+    })
+
+    it('should set customer as inactive, then assert it whole state history', () => {
+        let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
+
+        const now = new Date();
+        const activeStateTime = now.toISOString();
+        const inactiveStateTime = new Date(now.getTime() + 5000).toISOString();
+
+        const activeStateHistory: IStateHistory = new StateHistoryBuilder()
+            .setState(StateEnum.active)
+            .setSetAt(activeStateTime)
+            .build();
+
+        const inactiveStateHistory: IStateHistory = new StateHistoryBuilder()
+            .setState(StateEnum.inactive)
+            .setSetAt(inactiveStateTime)
+            .build();
+
+        const customer: ICustomer = new CustomerBuilder()
+            .setId(customerData._id)
+            .setFirstName(customerData.firstName)
+            .setLastName(customerData.lastName)
+            .setPhone('48' + number)
+            .setEmail(customerData.email)
+            .setCustomerType(customerData.customerType)
+            .setState(StateEnum.inactive)
+            .setCreatedAt(customerData.createdAt)
+            .setStateHistory([activeStateHistory, inactiveStateHistory])
+            .setUpdatedAt(inactiveStateTime)
+            .setNote(customerData.note)
+            .build();
+
+        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, { failOnStatusCode: false })
+            .then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+            });
+
+        CustomerApi.getCustomerById(customerData._id).then(response => {
+            cy.log('Customer Response:', JSON.stringify(response));
+        });
+
+        const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+            .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+            .withOrderBy('name')
+            .withOrderDir('asc')
+            .withPage(1)
+            .withPageSize(10)
+            .withPhrase('48' + number)
+            .build();
+
+        CustomerApi.getCustomerPaged(criteria, {})
+            .then(response => {
+                const customerResponse: any = response.items[0];
+                cy.log('Response:', JSON.stringify(customerResponse));
+
+                expect(customerResponse).to.have.property('firstName', customerData.firstName);
+                expect(customerResponse).to.have.property('lastName', customerData.lastName);
+                expect(customerResponse).to.have.property('phone', '48' + number);
+                expect(customerResponse).to.have.property('email', customerData.email);
+                expect(customerResponse).to.have.property('customerType', customerData.customerType);
+                expect(customerResponse).to.have.property('state', StateEnum.inactive);
+                expect(customerResponse).to.have.property('_id', customerData._id);
+
+                expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.active);
+                expect(customerResponse.stateHistory[0]).to.have.property('setAt', activeStateTime);
+                expect(customerResponse.stateHistory[1]).to.have.property('state', StateEnum.inactive);
+                expect(customerResponse.stateHistory[1]).to.have.property('setAt', inactiveStateTime);
+            });
+    });
+
+    it('should set customer as deleted, then assert it whole state history', () => {
+        let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
+
+        const now = new Date();
+        const activeStateTime = now.toISOString();
+        const deletedStateTime = new Date(now.getTime() + 5000).toISOString();
+
+        const activeStateHistory: IStateHistory = new StateHistoryBuilder()
+            .setState(StateEnum.active)
+            .setSetAt(activeStateTime)
+            .build();
+
+        const deletedStateHistory: IStateHistory = new StateHistoryBuilder()
+            .setState(StateEnum.deleted)
+            .setSetAt(deletedStateTime)
+            .build();
+
+        const customer: ICustomer = new CustomerBuilder()
+            .setId(customerData._id)
+            .setFirstName(customerData.firstName)
+            .setLastName(customerData.lastName)
+            .setPhone('48' + number)
+            .setEmail(customerData.email)
+            .setCustomerType(customerData.customerType)
+            .setState(StateEnum.deleted)
+            .setCreatedAt(customerData.createdAt)
+            .setStateHistory([activeStateHistory, deletedStateHistory])
+            .setUpdatedAt(deletedStateTime)
+            .setNote(customerData.note)
+            .build();
+
+        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, { failOnStatusCode: false })
+            .then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+            });
+
+        CustomerApi.getCustomerById(customerData._id).then(response => {
+            cy.log('Customer Response:', JSON.stringify(response));
+        });
+
+        const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
+            .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
+            .withOrderBy('name')
+            .withOrderDir('asc')
+            .withPage(1)
+            .withPageSize(10)
+            .withPhrase('48' + number)
+            .build();
+
+        CustomerApi.getCustomerPaged(criteria, {})
+            .then(response => {
+                const customerResponse: any = response.items[0];
+                cy.log('Response:', JSON.stringify(customerResponse));
+
+                expect(customerResponse).to.have.property('firstName', customerData.firstName);
+                expect(customerResponse).to.have.property('lastName', customerData.lastName);
+                expect(customerResponse).to.have.property('phone', '48' + number);
+                expect(customerResponse).to.have.property('email', customerData.email);
+                expect(customerResponse).to.have.property('customerType', customerData.customerType);
+                expect(customerResponse).to.have.property('state', StateEnum.deleted);
+                expect(customerResponse).to.have.property('_id', customerData._id);
+
+                expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.active);
+                expect(customerResponse.stateHistory[0]).to.have.property('setAt', activeStateTime);
+                expect(customerResponse.stateHistory[1]).to.have.property('state', StateEnum.deleted);
+                expect(customerResponse.stateHistory[1]).to.have.property('setAt', deletedStateTime);
+            });
+    });
 })
