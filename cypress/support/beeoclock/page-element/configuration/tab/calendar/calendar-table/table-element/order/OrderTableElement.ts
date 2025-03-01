@@ -13,5 +13,13 @@ export class OrderTableElement {
             .filter(`[data-member-id="${id}"]`)
             .scrollIntoView().should('exist');
     }
+
+
+    public getElementByOrderId(orderId: string): any {
+        return cy.get('app-calendar-with-specialists-widget-component')
+            .find('app-event-calendar-with-specialists-widget-component')
+            .filter(`data-order-id=${orderId}"]`)
+            .scrollIntoView().should('exist');
+    }
 }
 

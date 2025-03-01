@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export default defineConfig({
-  projectId: 'cypress-beeclock-at',
+  projectId: '8ne51s',
   env: {
     apiBackendEntryPoint: 'https://api-dev.beeoclock.com/client/api/v1/',
     LOGIN: process.env.LOGIN,

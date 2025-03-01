@@ -16,7 +16,7 @@ import {data} from "cypress/types/jquery";
 
 export class PanelOrderCreationDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {
-        let Data: string = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
+        let Data: string = DateUtils.getCurrentDateWithGivenFormat("D.MM.YYYY")
 
         switch (caseEnum) {
             case TestCaseEnum.CASE_1:
@@ -33,7 +33,7 @@ export class PanelOrderCreationDataProvider {
                     nextDuration: '30min',
                     price: '30',
                     updatedPrice: '40',
-                    summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + "   18:00\n⏳" +  " 30min " + SpecialistNameEnum.ZALEWSKI_FIRST_NAME + "\n" + "40,00 zł" + "\n👤 Anonimowy",
+                    summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + ", 18:00\n⏳" +  " 30min " + SpecialistNameEnum.ZALEWSKI_FIRST_NAME + "\n" + "40,00 zł" + "\n👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CARD,
                     PaymentStatus: PaymentStatusEnum.IN_PROGRESS,
                     dataAssert: Data + '18:00',
@@ -54,7 +54,7 @@ export class PanelOrderCreationDataProvider {
                     duration: '30min',
                     price: '40',
                     updatedPrice: '50',
-                    summary:  ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + "\nPL\n⏰ " + Data + " 07:00\n ⏳ 2min Tomasz 50,00 zł 👤 Anonimowy",
+                    summary:  ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + "\nPL\n⏰ " + Data + ", 07:00\n ⏳ 2min Tomasz 50,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CASH,
                     PaymentStatus: PaymentStatusEnum.SUCCESS,
                     dataAssert: Data + '07:00',
@@ -75,7 +75,7 @@ export class PanelOrderCreationDataProvider {
                     duration: '15min',
                     price: '30',
                     updatedPrice: '150',
-                    summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + "   12:00\n⏳" +  " 15min " + "e2e 150,00 zł 👤 Anonimowy",
+                    summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + ", 12:00\n⏳" +  " 15min " + "e2e 150,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CARD,
                     PaymentStatus: PaymentStatusEnum.REJECTION,
                     dataAssert: Data + '12:00',
@@ -96,7 +96,7 @@ export class PanelOrderCreationDataProvider {
                     duration: '30min',
                     price: '40',
                     updatedPrice: '475',
-                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + " PL ⏰ " + Data + " 15:00 ⏳ 2g, 2min e2e 475,00 zł 👤 Anonimowy",
+                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + " PL ⏰ " + Data + ", 15:00 ⏳ 2g, 2min e2e 475,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CASH,
                     PaymentStatus: PaymentStatusEnum.REGISTERED,
                     dataAssert: Data + '15:00',
