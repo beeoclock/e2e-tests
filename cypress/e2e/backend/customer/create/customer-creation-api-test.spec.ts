@@ -76,7 +76,7 @@ describe('customer api test', () => {
             .setFirstName(customerData.firstName)
             .setLastName(customerData.lastName + '-Kulej')
             .setPhone(customerData.phone)
-            .setEmail(customerData.email)
+            .setEmail(customerData.lastName + '-Kulej' + '.' + customerData.firstName + '@longmailcontentwithnumber123exaample.ue' )
             .setCustomerType(customerData.customerType)
             .setState(customerData.state)
             .setCreatedAt(customerData.createdAt)
@@ -90,22 +90,19 @@ describe('customer api test', () => {
             .then(response => {
                 cy.log('get customer by its id, response:', JSON.stringify(response));
 
-                // const customerResponse: any = response
-                //
-                // expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
-                // expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.ACTIVE,);
-                // expect(customerResponse.stateHistory[0]).to.have.property('setAt').match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
-                //
-                // expect(customerResponse).to.have.property('firstName', customerData.firstName);
-                // expect(customerResponse).to.have.property('lastName', customerData.lastName + '-Kulej');
-                // expect(customerResponse).to.have.property('phone', customerData.phone);
-                // expect(customerResponse).to.have.property('email', customerData.email);
-                // expect(customerResponse).to.have.property('customerType', customerData.customerType);
-                // // expect(customerResponse).to.have.property('state', StateEnum.ACTIVE,);
-                // expect(customerResponse).to.have.property('_id', customerData._id,);
-                // expect(customerResponse).to.have.property('note', note);
+                const customerResponse: any = response
 
+                expect(customerResponse.stateHistory).to.be.an('array').that.is.not.empty;
+                expect(customerResponse.stateHistory[0]).to.have.property('state', StateEnum.active,);
+                expect(customerResponse.stateHistory[0]).to.have.property('setAt').match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
 
+                expect(customerResponse).to.have.property('firstName', customerData.firstName);
+                expect(customerResponse).to.have.property('lastName', customerData.lastName + '-Kulej');
+                expect(customerResponse).to.have.property('phone', customerData.phone);
+                expect(customerResponse).to.have.property('email', customerData.lastName + '-Kulej' + '.' + customerData.firstName + '@longmailcontentwithnumber123exaample.ue');
+                expect(customerResponse).to.have.property('customerType', customerData.customerType);
+                expect(customerResponse).to.have.property('_id', customerData._id,);
+                expect(customerResponse).to.have.property('note', note);
             });
     })
 

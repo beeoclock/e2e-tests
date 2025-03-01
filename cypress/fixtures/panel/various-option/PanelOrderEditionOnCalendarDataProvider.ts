@@ -10,8 +10,8 @@ import {PaymentStatusEnum} from "../../../support/beeoclock/page-element/configu
 export class PanelOrderEditionOnCalendarDataProvider {
 
     static getTestData(caseEnum: TestCaseEnum) {
-        let Data: string = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
-        let nextDayData: string = DateUtils.getCurrentDatePlusGivenDay(1)
+        let Data: string = DateUtils.getCurrentDateWithGivenFormat("D.MM.YYYY")
+        let nextDayData: string = DateUtils.getCurrentDatePlusGivenDay(1, "D.MM.YYYY")
         const controlNumber: string = faker.finance.pin(5);
 
         switch (caseEnum) {

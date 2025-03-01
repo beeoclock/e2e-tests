@@ -9,8 +9,8 @@ import {faker} from "@faker-js/faker";
 
 export class PanelOrderVariousOptionDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {
-        let Data: string = DateUtils.getCurrentDateWithGivenFormat("YYYY-MM-DD")
-        let nextDayData: string = DateUtils.getCurrentDatePlusGivenDay(1)
+        let Data: string = DateUtils.getCurrentDateWithGivenFormat("D.MM.YYYY");
+        let nextDayData: string = DateUtils.getCurrentDatePlusGivenDay(1, "D.MM.YYYY")
         const controlNumber: string = faker.finance.pin(5);
 
         switch (caseEnum) {
@@ -30,7 +30,7 @@ export class PanelOrderVariousOptionDataProvider {
                     lastName: 'Kowalczyk',
                     email: 'piotr.kowalczyk@beeoclock.com',
                     phone: '510-557-420',
-                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + "\nPL\n⏰ " + Data + "   18:00\n⏳" +  " 30min " +  SpecialistNameEnum.ZALEWSKI_FIRST_NAME + "\n" + '200,00 zł 👤 Piotr 🆕',
+                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + "\nPL\n⏰ " + Data + ", 18:00\n⏳" +  " 30min " +  SpecialistNameEnum.ZALEWSKI_FIRST_NAME + "\n" + '200,00 zł 👤 Piotr 🆕',
                     paymentMethod: PaymentOptionEnum.CARD,
                     PaymentStatus: PaymentStatusEnum.IN_PROGRESS,
                     dataAssert: Data + '18:00',

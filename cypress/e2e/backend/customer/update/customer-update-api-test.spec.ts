@@ -388,6 +388,23 @@ describe('customer update api test', () => {
         CustomerApi.updateCustomerWithBuilder(customer, customerData._id, { failOnStatusCode: false })
             .then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK);
+
+                const updatedCustomer = response.body;
+                cy.log('Updated Customer (Preview):', JSON.stringify(updatedCustomer));
+
+                expect(updatedCustomer).to.have.property('firstName', customerData.firstName);
+                expect(updatedCustomer).to.have.property('lastName', customerData.lastName);
+                expect(updatedCustomer).to.have.property('phone', '48' + number);
+                expect(updatedCustomer).to.have.property('email', customerData.email);
+                expect(updatedCustomer).to.have.property('customerType', customerData.customerType);
+                expect(updatedCustomer).to.have.property('state', StateEnum.deleted);
+                expect(updatedCustomer).to.have.property('_id', customerData._id);
+
+                expect(updatedCustomer.stateHistory).to.be.an('array').that.is.not.empty;
+                expect(updatedCustomer.stateHistory[0]).to.have.property('state', StateEnum.active);
+                expect(updatedCustomer.stateHistory[0]).to.have.property('setAt', activeStateTime);
+                expect(updatedCustomer.stateHistory[1]).to.have.property('state', StateEnum.deleted);
+                expect(updatedCustomer.stateHistory[1]).to.have.property('setAt', deletedStateTime);
             });
 
         CustomerApi.getCustomerById(customerData._id).then(response => {
