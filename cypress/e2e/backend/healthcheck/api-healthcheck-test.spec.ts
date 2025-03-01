@@ -11,6 +11,7 @@ import {AnalyticApi} from "../../../support/beeoclock/backend/panel/analytic/Ana
 import {ProductApi} from "../../../support/beeoclock/backend/panel/product/ProductApi";
 import {ProductTagBuilder} from "../../../support/beeoclock/backend/panel/product/tag/ProductTagBuilder";
 import {NumericUtils} from "../../../support/beeoclock/backend/Utils/NumericUtils";
+import {faker} from "@faker-js/faker";
 
 describe("panel api healthcheck", () => {
     let token: string
@@ -69,7 +70,7 @@ describe("panel api healthcheck", () => {
 
     it('create product tag and delete', function (): void {
         let id: string = NumericUtils.generateObjectId()
-        const tag = new ProductTagBuilder().setId(id).build();
+        const tag = new ProductTagBuilder().setId(id).setName('TAG NO ' + faker.finance.pin(6)).build();
         ProductApi.createProductTag(tag, token).then(() => {
             ProductApi.deleteProductTag(id, token).then(() => {
                 cy.log('product tag deleted');
