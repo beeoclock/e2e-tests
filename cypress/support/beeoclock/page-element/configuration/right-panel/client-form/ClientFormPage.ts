@@ -2,14 +2,15 @@ import {CustomerInput} from "./page-element/CustomerInput";
 import {CommonPropertiesEnum} from "../../../common/enum/CommonPropertiesEnum";
 import {ClientDescriptionInput} from "./page-element/ClientDescriptionInput";
 import {SaveButton} from "../../../common/common-element/element/SaveButton";
-import {ClientsApiInterceptionHelper} from "../../../../common/Interception/clients/ClientsApiInterceptionHelper";
-import {ApiInterceptionHelper} from "../../../../common/Interception/ApiInterceptionHelper";
 import {ClientPhoneInput} from "./page-element/ClientPhoneInput";
+import {LeftMenuPage} from "../../left-menu/LeftMenuPage";
+import { ClientsApiInterceptionHelper } from "support/beeoclock/common/Interception/clients/ClientsApiInterceptionHelper";
+import { ApiInterceptionHelper } from "support/beeoclock/common/Interception/ApiInterceptionHelper";
 
 export class ClientFormPage {
 
     public typeGivenCustomerInput(label: CommonPropertiesEnum, value: string): ClientFormPage {
-        if(value) {
+        if (value) {
             CustomerInput.getElement(label).type(value).then(() => {
                 this.verifyGivenCustomerInput(label, value)
             })
@@ -18,8 +19,8 @@ export class ClientFormPage {
     }
 
     public typeGivenCustomerPhone(value: string): ClientFormPage {
-        if(value) {
-         ClientPhoneInput.getInput().type(value)
+        if (value) {
+            ClientPhoneInput.getInput().type(value)
         }
         return this
     }
@@ -44,12 +45,14 @@ export class ClientFormPage {
     }
 
     public clickSaveButton(): ClientFormPage {
-        // const createCustomer: string = ClientsApiInterceptionHelper.createCustomer()
+        const createCustomer: string = ClientsApiInterceptionHelper.createCustomer()
         SaveButton.getElement()
             .click()
-            // ApiInterceptionHelper.waitFor201Alias(createCustomer)
-                cy.get('.toast-container').find('button').click()
-            cy.wait(1000)
+        ApiInterceptionHelper.waitFor201Alias(createCustomer)
+        cy.get('.toast-container').find('button')
+            .click()
+        LeftMenuPage.assertIsSynchronizationExecuted()
+        LeftMenuPage.assertIsSynchronized(true)
         return this;
     }
 }
