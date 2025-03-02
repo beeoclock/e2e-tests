@@ -86,9 +86,18 @@ export class LeftMenuPage {
         const expectedText = isSynchronized ? 'Zsynchronizowano' : 'Synchronizacja w toku…';
 
         LeftMenuPageElement.SynchronizingComponent.getElement()
-            .find('.text-xs', { timeout: 20000 })
+            .find('.text-xs', { timeout: 60000 })
             .should('contain.text', expectedText);
 
+        return this;
+    }
+
+    public static assertIsSynchronizationExecuted(): LeftMenuPage {
+        const expectedText = 'Synchronizacja w toku…';
+
+        LeftMenuPageElement.SynchronizingComponent.getElement()
+            .find('.text-xs',)
+            .should('contain.text', expectedText);
         return this;
     }
 

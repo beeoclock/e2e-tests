@@ -3,6 +3,7 @@ import {SaveButton} from "../../../../common/common-element/element/SaveButton";
 import {CommonElementPage} from "../../../../common/common-element/CommonElementPage";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import dayjs from "dayjs";
+import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
 
 export class AbsencePage {
 
@@ -66,6 +67,8 @@ export class AbsencePage {
         // ApiInterceptionHelper.waitForAlias(createAbsence)
         cy.document().its('readyState').should('equal', 'complete')
         cy.get('whac-a-mole').should('not.contain', 'Przetwarzanie')
+        LeftMenuPage.assertIsSynchronizationExecuted()
+        LeftMenuPage.assertIsSynchronized(true)
         return this;
     }
 }

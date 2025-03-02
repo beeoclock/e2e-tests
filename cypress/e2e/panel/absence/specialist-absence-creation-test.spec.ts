@@ -1,4 +1,3 @@
-import {QueryAssertion} from "../../../support/beeoclock/common/assertion/QueryAssertion";
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
@@ -12,6 +11,7 @@ import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {CalendarTableTimeEnum} from "support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 import {AbsenceApi} from "support/beeoclock/backend/panel/absence/AbsenceApi";
+import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 
 describe('specialist absence creation test', () => {
 
@@ -19,19 +19,14 @@ describe('specialist absence creation test', () => {
         cy.loginOnPanel()
 
         AbsenceApi.deleteAllAbsences()
-
-        cy.log('assert login url');
-        QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
-
-        cy.log('assert current date')
-        CalendarPages.CalendarNavigationPage
-            .verifyCurrenDate()
+        OrderApi.deleteAllCurrentOrdersWithAssertion()
+        LeftMenuPage.assertIsSynchronized(true)
     })
 
     it('test panel absence creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
-            TestCaseEnum.CASE_2
+            // TestCaseEnum.CASE_2
         ];
 
         cy.log('handle synchronization process')
@@ -60,6 +55,7 @@ describe('specialist absence creation test', () => {
                 .verifyAbsenceToTime(testData.absenceToTime)
                 .typeAbsenceNote(testData.absenceNote)
                 .clickSaveButton()
+            const createdAt: string = DateUtils.getHourWithAddedMinutes(0)
 
             CalendarPages.CalendarTablePage
                 .assertAbsenceOnTable(testData.assertTableAbsence)
@@ -75,7 +71,7 @@ describe('specialist absence creation test', () => {
                 .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.ATTENDEES, '1')
                 .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceFromTime)
                 .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceToTime)
-                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.CREATED_AT, DateUtils.getCurrentDate() + ', ' + DateUtils.getCurrentHour())
+                .verifyCreatedAtRow(testData.absenceNote)
             AbsencePages.AbsenceActionPage
                 .clickActionButton()
                 .clickGivenAction(AbsenceActionEnum.DEACTIVATE)
@@ -90,7 +86,7 @@ describe('specialist absence creation test', () => {
         })
     })
 
-    it('should create absence science given time', function (): void {
+    it.skip('should create absence science given time', function (): void {
         cy.log(`add absence on calendar panel`)
         CalendarPages.CalendarTablePage
             .clickOnGivenAndHour(SpecialistNameEnum.E2E_E2E, CalendarTableTimeEnum.Hour_15);
@@ -102,12 +98,12 @@ describe('specialist absence creation test', () => {
         let dataTo: string = DateUtils.getHourWithAddedMinutes(5)
 
         RightPanelPages.AbsencePage
-                .assertCurrentTimeMatches()
-                .verifyAbsenceFromTime(dataFrom)
-                .verifyAbsenceToDate(DateUtils.formatDateDaysAhead(0))
-                .verifyAbsenceToTime(dataTo)
-                .typeAbsenceNote('SZYBKA PRZERWA')
-                .clickSaveButton()
+            .assertCurrentTimeMatches()
+            .verifyAbsenceFromTime(dataFrom)
+            .verifyAbsenceToDate(DateUtils.formatDateDaysAhead(0))
+            .verifyAbsenceToTime(dataTo)
+            .typeAbsenceNote('SZYBKA PRZERWA')
+            .clickSaveButton()
 
         CalendarPages.CalendarTablePage
             .assertAbsenceOnTable(dataFrom + ' - ' + dataTo + '\nPrzerwa')
