@@ -41,7 +41,7 @@ export class CalendarNavigationPage {
     public verifyNextDayDate(): CalendarNavigationPage {
         CalendarNavigationPageElement.DateInformationLabel.getElement()
             .invoke('prop', 'outerText').then(outerText => {
-            expect(outerText).to.contain("Jutro\n" + DateUtils.getCurrentDatePlusGivenDay(1))
+            expect(outerText).to.contain("Jutro\n" + DateUtils.getCurrentDatePlusGivenDay(1, "YYYY-MM-DD"));
         })
         return this;
     }

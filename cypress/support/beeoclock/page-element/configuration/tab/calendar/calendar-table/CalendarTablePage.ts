@@ -34,8 +34,8 @@ export class CalendarTablePage {
         return this;
     }
 
-    public verifyTimeOrderOnTable(specialistFirstName: string, specialistLastName: string, value: string): CalendarTablePage {
-        CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
+    public verifyTimeOrderOnTable(orderId, value: string): CalendarTablePage {
+        CalendarTablePageElement.OrderTableElement.getElementByOrderId(orderId)
             .invoke('prop', 'textContent')
             .then((text) => {
                 const normalizedText = text.replace(/\s/g, '');

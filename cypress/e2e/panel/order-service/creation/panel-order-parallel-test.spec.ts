@@ -22,9 +22,18 @@ describe('panel - order service', () => {
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage()
         cy.clearAllCookies()
+    })
 
-        OrderApi.deleteAllOrders()
+    it('clear environment', () => {
+        OrderApi.deleteAllCurrentOrdersWithAssertion()
         AbsenceApi.deleteAllAbsences()
+        cy.window().its('localStorage').invoke('clear')
+    })
+
+    it('handle synchronization', function (): void {
+        cy.loginOnPanel()
+        cy.log('handle synchronization process')
+        LeftMenuPage.synchronizeWithInterception()
     })
 
     it('test panel order service', function () {
@@ -62,19 +71,18 @@ describe('panel - order service', () => {
 
             cy.get('@orderId').then((orderId) => {
                 cy.log('Order ID is: ' + orderId);
-                let oderID: string = orderId.toString()
+                let orderID: string = orderId.toString()
 
                 cy.log('verify its order on table');
                 CalendarPages.CalendarTablePage
-                    .findAndVerifyOrderTableElement(testData.specialistFirstName, testData.specialistLastName)
-                    .verifyTimeOrderOnTable(testData.specialistFirstName, testData.specialistLastName, testData.assertTime);
+                    .verifyTimeOrderOnTable(orderID, testData.assertTime);
 
                 cy.log('click, delete and verify deletion on table');
                 LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
                 OrderTabPages.OrderActionTable
-                    .clickActionButton(oderID)
-                    .clickSpecificAction(oderID, OrderActionsEnum.DELETE)
-                    .verifyOrderWithGivenIdNotExist(oderID)
+                    .clickActionButton(orderID)
+                    .clickSpecificAction(orderID, OrderActionsEnum.DELETE)
+                    .verifyOrderWithGivenIdNotExist(orderID)
 
                 cy.log('create next order');
                 LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)

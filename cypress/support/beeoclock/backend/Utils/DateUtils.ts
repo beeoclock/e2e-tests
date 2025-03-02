@@ -129,10 +129,10 @@ export class DateUtils {
         return newDate.format("YYYY-MM-DD");
     }
 
-    public static getCurrentDatePlusGivenDay(days: number): string {
+    public static getCurrentDatePlusGivenDay(days: number, format: string): string {
         const currentDate = moment();
         const newDate = currentDate.add(days, 'days');
-        return newDate.format("YYYY-MM-DD");
+        return newDate.format(format);
     }
 
     public static getCurrentDate(): string {

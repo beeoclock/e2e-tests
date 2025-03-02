@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "8025:8025" 
+      - "1025:1025"
+    networks:
+     - beeoclock-network
+
+networks:
+  beeoclock-network:
+    driver: bridge
