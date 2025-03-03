@@ -125,24 +125,26 @@ export class SummaryAndPaymentServicePage {
             .find('.bi.bi-dash-circle').scrollIntoView().should('be.visible')
 
         const btn = icon.parent('button')
+        btn.scrollIntoView().should('be.visible')
+
         btn.click()
             .then(() => {
-            cy.get('.alert-wrapper')
-                .scrollIntoView().should('be.visible')
-                .invoke('prop', 'innerText')
-                .then(alertText => {
+                cy.get('.alert-wrapper')
+                    .scrollIntoView().should('be.visible')
+                    .invoke('prop', 'innerText')
+                    .then(alertText => {
 
-                    expect(alertText).to.include("Usuwanie zamówionej usługi");
-                    expect(alertText).to.include("Usunięcie ostatnio zamówionej usługi powoduje automatyczne usunięcie samego zamówienia.");
-                    expect(alertText).to.include("Czy naprawdę chcesz usunąć zamówioną usługę?");
-                    expect(alertText).to.include("Anuluj");
-                    expect(alertText).to.include("Usuń");
-                });
+                        expect(alertText).to.include("Usuwanie zamówionej usługi");
+                        expect(alertText).to.include("Usunięcie ostatnio zamówionej usługi powoduje automatyczne usunięcie samego zamówienia.");
+                        expect(alertText).to.include("Czy naprawdę chcesz usunąć zamówioną usługę?");
+                        expect(alertText).to.include("Anuluj");
+                        expect(alertText).to.include("Usuń");
+                    });
 
-            cy.contains('button', 'Usuń').scrollIntoView().should('be.visible')
-                .click();
-            LeftMenuPage.assertIsSynchronized(true)
-        })
+                cy.contains('button', 'Usuń').scrollIntoView().should('be.visible')
+                    .click();
+                LeftMenuPage.assertIsSynchronized(true)
+            })
         return this;
     }
 }
