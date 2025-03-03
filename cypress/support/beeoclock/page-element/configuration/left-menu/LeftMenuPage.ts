@@ -88,7 +88,6 @@ export class LeftMenuPage {
         LeftMenuPageElement.SynchronizingComponent.getElement()
             .find('.text-xs', { timeout: 60000 })
             .should('contain.text', expectedText);
-
         return this;
     }
 

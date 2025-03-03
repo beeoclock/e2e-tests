@@ -12,7 +12,8 @@ export class CalendarTablePage {
         CalendarTablePageElement.SpecificTableElement.getElement(specialist, index)
             .click({force: true})
             .then(() => {
-                cy.get('whac-a-mole').scrollIntoView().should('be.visible')})
+                cy.get('whac-a-mole').scrollIntoView().should('be.visible')
+            })
         return this;
     }
 
@@ -30,6 +31,11 @@ export class CalendarTablePage {
                 cy.get('event-container-details-component').scrollIntoView().should('be.visible')
                 cy.get('event-meta-details').scrollIntoView().should('be.visible')
                 cy.get('.truncate.font-bold').contains('Szczegółowy widok wydarzenia').scrollIntoView().should('be.visible')
+                cy.get('.bi.bi-dash-circle').scrollIntoView().should('be.visible')
+                cy.wait(1000)//TODO delete this!
+                cy.document().its('readyState').should('equal', 'complete')
+                LeftMenuPage.assertIsSynchronized(true)
+
             })
         return this;
     }
@@ -56,7 +62,7 @@ export class CalendarTablePage {
     public assertAbsenceOnTable(value: string): CalendarTablePage {
         CalendarTablePageElement.AbsenceTableElement.getElement()
             .invoke('prop', 'outerText').then(outerText => {
-                expect(outerText).to.include(value)
+            expect(outerText).to.include(value)
         })
         return this;
     }

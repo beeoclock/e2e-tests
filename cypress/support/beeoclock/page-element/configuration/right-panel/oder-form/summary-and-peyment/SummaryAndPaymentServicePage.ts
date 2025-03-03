@@ -95,6 +95,7 @@ export class SummaryAndPaymentServicePage {
     public clickSaveButton(sendEmail: boolean = false): SummaryAndPaymentServicePage {
         const createOrder = ApiInterceptionHelper.createOrder()
         const createPayment = ApiInterceptionHelper.createServicePayment()
+        LeftMenuPage.assertIsSynchronized(true)
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
             .then(() => {
@@ -103,6 +104,8 @@ export class SummaryAndPaymentServicePage {
                     NotificationsPage.clickConfirmButton(sendEmail)
                 } else {
                     NotificationsPage.clickConfirmButton()
+                    cy.wait(500)//TODO TEMP!
+                    LeftMenuPageElement.SynchronizingComponent.getElement().click() //TODO TEMP!!!!!!
                     cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
                         const request = interception.request.body;
                         cy.log('ID: ', request._id)
@@ -111,13 +114,9 @@ export class SummaryAndPaymentServicePage {
                         cy.wrap(orderId).as('orderId');
                     })
                     ApiInterceptionHelper.waitFor201Alias(createPayment)
+                    LeftMenuPage.assertIsSynchronized(true)
                 }
-            }).then(() => {
-
-            // LeftMenuPageElement.SynchronizingComponent.getElement().click() //TODO TEMP!!!!!!
-
-
-        })
+            })
         return this;
     }
 
@@ -125,9 +124,24 @@ export class SummaryAndPaymentServicePage {
         const icon = cy.get('app-item-list-v2-service-form-order-component')
             .find('.bi.bi-dash-circle').scrollIntoView().should('be.visible')
 
-        icon.click().then(() => {
-            cy.contains('button', 'Usuń')
+        const btn = icon.parent('button')
+        btn.click()
+            .then(() => {
+            cy.get('.alert-wrapper')
+                .scrollIntoView().should('be.visible')
+                .invoke('prop', 'innerText')
+                .then(alertText => {
+
+                    expect(alertText).to.include("Usuwanie zamówionej usługi");
+                    expect(alertText).to.include("Usunięcie ostatnio zamówionej usługi powoduje automatyczne usunięcie samego zamówienia.");
+                    expect(alertText).to.include("Czy naprawdę chcesz usunąć zamówioną usługę?");
+                    expect(alertText).to.include("Anuluj");
+                    expect(alertText).to.include("Usuń");
+                });
+
+            cy.contains('button', 'Usuń').scrollIntoView().should('be.visible')
                 .click();
+            LeftMenuPage.assertIsSynchronized(true)
         })
         return this;
     }
