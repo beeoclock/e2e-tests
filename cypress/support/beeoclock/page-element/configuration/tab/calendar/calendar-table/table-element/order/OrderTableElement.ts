@@ -16,10 +16,8 @@ export class OrderTableElement {
 
 
     public getElementByOrderId(orderId: string): any {
-        return cy.get('app-calendar-with-specialists-widget-component')
-            .find('app-event-calendar-with-specialists-widget-component')
-            .filter(`data-order-id=${orderId}"]`)
-            .scrollIntoView().should('exist');
+        return cy.get(`[data-order-id=${orderId}]`)
+            .scrollIntoView().should('be.visible')
     }
 }
 

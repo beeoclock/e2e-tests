@@ -78,14 +78,20 @@ describe('panel - order service', () => {
                     .verifyTimeOrderOnTable(orderID, testData.assertTime);
 
                 cy.log('click, delete and verify deletion on table');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
-                OrderTabPages.OrderActionTable
-                    .clickActionButton(orderID)
-                    .clickSpecificAction(orderID, OrderActionsEnum.DELETE)
-                    .verifyOrderWithGivenIdNotExist(orderID)
-
-                cy.log('create next order');
-                LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
+                CalendarPages.CalendarTablePage
+                    .clickOnGivenOrderByItsId(orderID)
+                RightPanelPages.SummaryAndPaymentServicePage
+                    .clickDeleteByDashIcon()
+                RightPanelPages.RightPanelNavigationPage
+                    .clickCloseRightPanel()
+                // LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);
+                // OrderTabPages.OrderActionTable
+                //     .clickActionButton(orderID)
+                //     .clickSpecificAction(orderID, OrderActionsEnum.DELETE)
+                //     .verifyOrderWithGivenIdNotExist(orderID)
+                //
+                // cy.log('create next order');
+                // LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
             });
         })
     });

@@ -39,7 +39,7 @@ export class OrderApi {
                     return state === StateEnum.active && [OrderServiceStatusEnum.done, OrderServiceStatusEnum.accepted].includes(status);
                 })
             });
-            cy.log('filtered items: ', JSON.stringify(filteredItems));
+            cy.log('filtered items: ', JSON.stringify(filteredItems.length));
             if (Array.isArray(filteredItems)) {
                 const orderIds = filteredItems.map((order: any) => order._id);
                 cy.log('Order IDs:', orderIds.join(', '));

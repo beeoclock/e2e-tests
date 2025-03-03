@@ -50,7 +50,7 @@ export class PanelOrderVariousOptionDataProvider {
                     nextPriceUpdated: '80',
                     newFirstName: 'Piotr',
                     newLastName: 'Kowalczyk',
-                    nextSummary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + nextDayData + "   18:00\n⏳" +  " 15min " + SpecialistNameEnum.E2E_SINGLE_NAME + "\n" + '80,00 zł 👤 Piotr 📇',
+                    nextSummary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + nextDayData + ",   18:00\n⏳" +  " 15min " + SpecialistNameEnum.E2E_SINGLE_NAME + "\n" + '80,00 zł 👤 Piotr 📇',
                     nextPaymentMethod: PaymentOptionEnum.CASH,
                     nextPaymentStatus: PaymentStatusEnum.SUCCESS,
                     nextDataAssert: nextDayData + '18:00',
