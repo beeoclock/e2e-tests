@@ -2,7 +2,6 @@ import {RightPanelPages} from "../../../../support/beeoclock/page-element/config
 import {CalendarPages} from "../../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {TestCaseEnum} from "../../../../fixtures/enum/TestCaseEnum";
 import {PanelOrderCreationDataProvider} from "../../../../fixtures/panel/order/PanelOrderCreationDataProvider";
-import {ModuleAssertionPage} from "../../../../support/beeoclock/common/assertion/ModuleAssertionPage";
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
