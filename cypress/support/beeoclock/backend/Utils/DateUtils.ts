@@ -78,7 +78,7 @@ export class DateUtils {
     public static getCurrentDatePlusDays(days: number): string {
         let currentDate = new Date();
         currentDate.setDate(currentDate.getDate() + days);
-        return moment(currentDate).format("DD.MM.YYYY");
+        return moment(currentDate).format("D.MM.YYYY");
     }
 
     public static getCurrentDateWithGivenFormat(format: string): string {

@@ -2,7 +2,6 @@ import {ClientTabActionPageElement} from "./ClientTabActionPageElement";
 import {AbsenceActionEnum} from "../../absence/absence-action/enum/AbsenceActionEnum";
 import {ClientsApiInterceptionHelper} from "../../../../../common/Interception/clients/ClientsApiInterceptionHelper";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
-import {CustomerApiInterceptionHelper} from "../../../../../common/Interception/customer/CustomerApiInterceptionHelper";
 
 export class ClientTabActionPage {
 
@@ -37,9 +36,12 @@ export class ClientTabActionPage {
         ClientTabActionPageElement.GivenActionButton.getElement(AbsenceActionEnum.DELETE)
             .click()
             .then(() => {
-            ApiInterceptionHelper.waitForAlias(deletion)
-            cy.wait(1000)
-        })
+                ApiInterceptionHelper.waitForAlias(deletion)
+
+                //TEMP! BUG! - after deletion, the toast should not be visible
+                cy.get('.toast-container').find('button')
+                    .click()
+            })
         return this
     }
 }
