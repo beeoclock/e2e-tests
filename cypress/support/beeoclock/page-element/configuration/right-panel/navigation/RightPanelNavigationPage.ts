@@ -11,7 +11,9 @@ export class RightPanelNavigationPage {
     public clickCloseRightPanel(): RightPanelNavigationPage {
         cy.log('close panel')
         RightPanelNavigationPageElement.CloseRightPanelButton.getElement()
-            .click()
+            .click().then(() => {
+                cy.get('whac-a-mole').should('not.be.visible')
+        })
         return this
     }
 }

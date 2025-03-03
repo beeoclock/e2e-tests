@@ -127,7 +127,7 @@ describe('panel new customer order service', () => {
                 cy.log('verify its order on table');
                 CalendarPages.CalendarTablePage
                     .findAndVerifyOrderTableElement(testData.nextSpecialistLastName, testData.nextSpecialistLastName)
-                    .verifyTimeOrderOnTable(testData.nextSpecialistLastName, testData.nextSpecialistLastName, testData.nextAssertTime);
+                    .verifyTimeOrderOnTable(orderID, testData.nextAssertTime);
 
                 cy.log('click, delete and verify deletion on table');
                 LeftMenuPage.clickOnGivenTab(TabNameEnum.ORDER);

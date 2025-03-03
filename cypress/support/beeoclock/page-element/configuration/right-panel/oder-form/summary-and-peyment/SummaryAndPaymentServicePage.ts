@@ -1,6 +1,8 @@
 import {SummaryAndPaymentServicePageElement} from "./SummaryAndPaymentServicePageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import {NotificationsPage} from "../../../notiifcations/NotificationsPage";
+import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
+import {LeftMenuPageElement} from "../../../left-menu/LeftMenuPageElement";
 
 export class SummaryAndPaymentServicePage {
 
@@ -101,16 +103,31 @@ export class SummaryAndPaymentServicePage {
                     NotificationsPage.clickConfirmButton(sendEmail)
                 } else {
                     NotificationsPage.clickConfirmButton()
+                    cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
+                        const request = interception.request.body;
+                        cy.log('ID: ', request._id)
+
+                        const orderId = request._id;
+                        cy.wrap(orderId).as('orderId');
+                    })
+                    ApiInterceptionHelper.waitFor201Alias(createPayment)
                 }
             }).then(() => {
-            cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
-                const request = interception.request.body;
-                cy.log('ID: ', request._id)
 
-                const orderId = request._id;
-                cy.wrap(orderId).as('orderId');
-            })
-            ApiInterceptionHelper.waitFor201Alias(createPayment)
+            // LeftMenuPageElement.SynchronizingComponent.getElement().click() //TODO TEMP!!!!!!
+
+
+        })
+        return this;
+    }
+
+    public clickDeleteByDashIcon(): SummaryAndPaymentServicePage {
+        const icon = cy.get('app-item-list-v2-service-form-order-component')
+            .find('.bi.bi-dash-circle').scrollIntoView().should('be.visible')
+
+        icon.click().then(() => {
+            cy.contains('button', 'Usuń')
+                .click();
         })
         return this;
     }
