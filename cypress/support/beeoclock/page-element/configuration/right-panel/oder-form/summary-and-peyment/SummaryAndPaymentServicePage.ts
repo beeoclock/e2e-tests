@@ -2,7 +2,6 @@ import {SummaryAndPaymentServicePageElement} from "./SummaryAndPaymentServicePag
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import {NotificationsPage} from "../../../notiifcations/NotificationsPage";
 import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
-import {LeftMenuPageElement} from "../../../left-menu/LeftMenuPageElement";
 
 export class SummaryAndPaymentServicePage {
 
@@ -92,20 +91,16 @@ export class SummaryAndPaymentServicePage {
         return this;
     }
 
-    public clickSaveButton(sendEmail: boolean = false): SummaryAndPaymentServicePage {
+    public clickSaveButton(paymentStatus: string): SummaryAndPaymentServicePage {
         const createOrder = ApiInterceptionHelper.createOrder()
         const createPayment = ApiInterceptionHelper.createServicePayment()
         LeftMenuPage.assertIsSynchronized(true)
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
             .then(() => {
-                if (sendEmail) {
-                    NotificationsPage.clickEmailNotificationsToggle()
-                    NotificationsPage.clickConfirmButton(sendEmail)
-                } else {
-                    NotificationsPage.clickConfirmButton()
+                LeftMenuPage.assertIsSynchronized(true)
+                NotificationsPage.clickConfirmButton()
                     cy.wait(500)//TODO TEMP!
-                    LeftMenuPageElement.SynchronizingComponent.getElement().click() //TODO TEMP!!!!!!
                     cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
                         const request = interception.request.body;
                         cy.log('ID: ', request._id)
@@ -113,9 +108,13 @@ export class SummaryAndPaymentServicePage {
                         const orderId = request._id;
                         cy.wrap(orderId).as('orderId');
                     })
-                    ApiInterceptionHelper.waitFor201Alias(createPayment)
+                cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
+                    const sendPaymentStatus = interception.request.body.status;
+                    expect(sendPaymentStatus).to.equal(paymentStatus);
+
+                })
+
                     LeftMenuPage.assertIsSynchronized(true)
-                }
             })
         return this;
     }
