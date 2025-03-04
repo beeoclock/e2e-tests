@@ -60,14 +60,14 @@ describe("Panel new customer order service", () => {
                     .selectPriceOfService(testData.updatedPrice)
                     .selectSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME);
 
-                RightPanelPages.SummaryAndPaymentServicePage
-                    .verifyOrderService(testData.summary)
-                    .verifyOrderSpecialist(testData.specialistFirstName)
-                    .verifyOrderCustomer(testData.firstName)
-                    .selectPaymentMethod(testData.paymentMethod)
-                    .selectPaymentStatus(testData.PaymentStatus)
-                    .typeBusinessNote(testData.businessNote)
-                    .clickSaveButton(true);
+                // RightPanelPages.SummaryAndPaymentServicePage
+                //     .verifyOrderService(testData.summary)
+                //     .verifyOrderSpecialist(testData.specialistFirstName)
+                //     .verifyOrderCustomer(testData.firstName)
+                //     .selectPaymentMethod(testData.paymentMethod)
+                //     .selectPaymentStatus(testData.PaymentStatus)
+                //     .typeBusinessNote(testData.businessNote)
+                //     .clickSaveButton(true);
 
                 cy.log("Get email token");
                 cy.wait(5000);

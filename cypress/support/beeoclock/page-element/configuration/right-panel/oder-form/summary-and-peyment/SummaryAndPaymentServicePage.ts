@@ -76,12 +76,11 @@ export class SummaryAndPaymentServicePage {
         return this;
     }
 
-    public selectPaymentStatus(status: string): SummaryAndPaymentServicePage {
-        SummaryAndPaymentServicePageElement.PaymentStatusSelector.getElement()
-            .click().then(() => {
-            SummaryAndPaymentServicePageElement.SelectPaymentStatusElement.getElement(status)
-                .click()
-        })
+    public selectPaymentStatus(status: boolean): SummaryAndPaymentServicePage {
+        if (status) {
+            SummaryAndPaymentServicePageElement.PaymentStatusSelector.getElement()
+                .click();
+        }
         return this;
     }
 
@@ -98,23 +97,17 @@ export class SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
             .then(() => {
-                LeftMenuPage.assertIsSynchronized(true)
                 NotificationsPage.clickConfirmButton()
-                    cy.wait(500)//TODO TEMP!
-                    cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
-                        const request = interception.request.body;
-                        cy.log('ID: ', request._id)
+                cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
+                    cy.wrap(interception.request.body._id).as('orderId');
+                })
 
-                        const orderId = request._id;
-                        cy.wrap(orderId).as('orderId');
-                    })
                 cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
                     const sendPaymentStatus = interception.request.body.status;
                     expect(sendPaymentStatus).to.equal(paymentStatus);
-
                 })
 
-                    LeftMenuPage.assertIsSynchronized(true)
+                LeftMenuPage.assertIsSynchronized(true)
             })
         return this;
     }

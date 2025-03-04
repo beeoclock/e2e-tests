@@ -18,9 +18,9 @@ describe('panel - order service', () => {
         OrderApi.deleteAllCurrentOrdersWithAssertion()
         AbsenceApi.deleteAllAbsences()
 
-        cy.loginOnPanel()
-        cy.log('handle synchronization process')
-        LeftMenuPage.synchronizeWithInterception()
+        // cy.loginOnPanel()
+        // cy.log('handle synchronization process')
+        // LeftMenuPage.synchronizeWithInterception()
     })
 
     beforeEach('login and wait till synchronization ended', () => {
@@ -52,10 +52,9 @@ describe('panel - order service', () => {
                 .verifyOrderService(testData.summary)
                 .verifyOrderSpecialist(testData.specialistFirstName)
                 .verifyOrderCustomer('Anonimowy')
-                // .selectPaymentMethod(testData.paymentMethod)
-                .selectPaymentStatus(testData.PaymentStatus)
+                .selectPaymentStatus(testData.payment.PaymentStatus)
                 .typeBusinessNote(testData.businessNote)
-                .clickSaveButton(tee);
+                .clickSaveButton(testData.payment.requestedPayment);
 
             cy.get('@orderId').then((orderId) => {
                 cy.log('Order ID is: ' + orderId);

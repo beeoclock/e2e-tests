@@ -23,8 +23,10 @@ export class CalendarTablePage {
     }
 
     public clickOnGivenOrderByItsId(orderId: string): CalendarTablePage {
+        LeftMenuPage.assertIsSynchronized(true)
         CalendarTablePageElement.OrderTableElement.getElementByOrderId(orderId)
             .click()
+            cy.wait(2000)
             .then(() => {
                 cy.get('whac-a-mole').scrollIntoView().should('be.visible')
                 cy.get('app-item-list-v2-service-form-order-component').scrollIntoView().should('be.visible')
@@ -32,10 +34,8 @@ export class CalendarTablePage {
                 cy.get('event-meta-details').scrollIntoView().should('be.visible')
                 cy.get('.truncate.font-bold').contains('Szczegółowy widok wydarzenia').scrollIntoView().should('be.visible')
                 cy.get('.bi.bi-dash-circle').scrollIntoView().should('be.visible')
-                cy.wait(1000)//TODO delete this!
                 cy.document().its('readyState').should('equal', 'complete')
                 LeftMenuPage.assertIsSynchronized(true)
-
             })
         return this;
     }

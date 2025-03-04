@@ -35,12 +35,9 @@ Cypress.Commands.add('loginOnPanel', () => {
         }
     });
 
-    Cypress.on('window:before:load', (win) => {
-        Object.defineProperty(win.navigator, 'language', { value: 'pl-PL', configurable: true });
-        Object.defineProperty(win.navigator, 'languages', { value: ['pl-PL', 'pl'], configurable: true });
-    });
-
     cy.log('login');
+
+    cy.get('.text-start').scrollIntoView().should('be.visible')
     PanelLoginPageElement.EmailInput.getElement();
     PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
     PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
