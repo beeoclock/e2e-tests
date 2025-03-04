@@ -24,6 +24,7 @@ export class PanelOrderCreationDataProvider {
                     duration: '15min',
                     nextDuration: '30min',
                     price: '30',
+                    priceAssert: '40,00 zł',
                     updatedPrice: '40',
                     summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + ", 18:00\n⏳" + " 30min " + SpecialistNameEnum.ZALEWSKI_FIRST_NAME + "\n" + "40,00 zł" + "\n👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CARD,
@@ -31,10 +32,12 @@ export class PanelOrderCreationDataProvider {
                         PaymentStatus: true,
                         requestedPayment: 'pending',
                     },
-                    dataAssert: Data + '18:00',
+                    summaryTime: '30min',
+                    dataAssert: Data + ', 18:00',
                     publicNote: 'usuń mnie',
                     businessNote: 'USUŃ MNIE - wartość do wyszukania na ekranie usług',
-                    assertTime: '18:00 - 18:30    Strzyżenie Brody'
+                    assertTime: '18:00 - 18:30    Strzyżenie Brody',
+
                 };
             case TestCaseEnum.CASE_2:
                 return {
@@ -48,6 +51,7 @@ export class PanelOrderCreationDataProvider {
                     minute: '2',
                     duration: '30min',
                     price: '40',
+                    priceAssert: '50,00 zł',
                     updatedPrice: '50',
                     summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + "\nPL\n⏰ " + Data + ", 07:00\n ⏳ 2min Tomasz 50,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CASH,
@@ -56,6 +60,7 @@ export class PanelOrderCreationDataProvider {
                         requestedPayment: 'pending',
                     },
                     dataAssert: Data + '07:00',
+                    summaryTime: '2min',
                     publicNote: 'test note',
                     businessNote: 'TEST - do usunięcia',
                     assertTime: '07:00-07:02 e2e-strzyżenie'
@@ -72,13 +77,15 @@ export class PanelOrderCreationDataProvider {
                     minute: null,
                     duration: '15min',
                     price: '30',
-                    updatedPrice: '150',
+                    updatedPrice: '150 zł',
                     summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + ", 12:00\n⏳" + " 15min " + "e2e 150,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CARD,
                     payment: {
                         PaymentStatus: false,
                         requestedPayment: 'succeeded',
-                    }, dataAssert: Data + '12:00',
+                    },
+                    dataAssert: Data + '12:00',
+                    summaryTime: '15min',
                     publicNote: 'sample note AAAAAAAAAAAA',
                     businessNote: 'SAMPLE - do usunięcia',
                     assertTime: '12:00 - 12:15   Strzyżenie Brody'
@@ -95,6 +102,7 @@ export class PanelOrderCreationDataProvider {
                     minute: '2',
                     duration: '30min',
                     price: '40',
+                    priceAssert: '475,00 zł',
                     updatedPrice: '475',
                     summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + " PL ⏰ " + Data + ", 15:00 ⏳ 2g, 2min e2e 475,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CASH,
@@ -102,7 +110,8 @@ export class PanelOrderCreationDataProvider {
                         PaymentStatus: false,
                         requestedPayment: 'succeeded',
                     },
-                    dataAssert: Data + '15:00',
+                    summaryTime: ' 2g, 2min',
+                    dataAssert: Data + ', 15:00',
                     publicNote: 'coloring note',
                     businessNote: 'COLORING - do usunięcia',
                     assertTime: '15:00 - 17:02    e2e-strzyżenie'

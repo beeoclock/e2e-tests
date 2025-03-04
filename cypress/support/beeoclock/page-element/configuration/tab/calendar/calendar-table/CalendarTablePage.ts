@@ -26,7 +26,6 @@ export class CalendarTablePage {
         LeftMenuPage.assertIsSynchronized(true)
         CalendarTablePageElement.OrderTableElement.getElementByOrderId(orderId)
             .click()
-            cy.wait(2000)
             .then(() => {
                 cy.get('whac-a-mole').scrollIntoView().should('be.visible')
                 cy.get('app-item-list-v2-service-form-order-component').scrollIntoView().should('be.visible')

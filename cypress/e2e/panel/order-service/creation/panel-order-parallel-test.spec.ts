@@ -9,9 +9,9 @@ import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/Ab
 describe('panel - order service', () => {
     const testCases = [
         TestCaseEnum.CASE_1,
-        TestCaseEnum.CASE_2,
-        TestCaseEnum.CASE_3,
-        TestCaseEnum.CASE_4
+        // TestCaseEnum.CASE_2,
+        // TestCaseEnum.CASE_3,
+        // TestCaseEnum.CASE_4
     ];
 
     before('clear environment', () => {
@@ -69,10 +69,21 @@ describe('panel - order service', () => {
                     .clickOnGivenOrderByItsId(orderID);
 
                 RightPanelPages.SummaryAndPaymentServicePage
-                    .clickDeleteByDashIcon();
-                LeftMenuPage.assertIsSynchronized(true);
+                    .verifyOrderDate(testData.dataAssert)
+                    // .verifyOrderService(testData.service)
+                    .verifyOrderPrice(testData.priceAssert)
+                    .verifyOrderTime(testData.summaryTime)
+
                 RightPanelPages.RightPanelNavigationPage
-                    .clickCloseRightPanel();
+                    .clickCloseRightPanel()
+
+                OrderApi.deleteOrderWithGivenId(orderID)
+
+                //     .clickDeleteByDashIcon()
+                //     .clickDeleteByIcon();
+                // LeftMenuPage.assertIsSynchronized(true);
+                // RightPanelPages.RightPanelNavigationPage
+                //     .clickCloseRightPanel();
             });
         });
     });

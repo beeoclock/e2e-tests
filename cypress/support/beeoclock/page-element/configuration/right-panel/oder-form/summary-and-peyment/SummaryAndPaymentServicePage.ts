@@ -29,20 +29,16 @@ export class SummaryAndPaymentServicePage {
 
     public verifyOrderDate(date: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummaryDateElement.getElement()
-            .invoke('prop', 'outerText')
-            .then((text) => {
-                const normalizedText = text.replace(/\s/g, '');
-                const normalizedPrice = date.replace(/\s/g, '');
-                expect(normalizedText).to.include(normalizedPrice);
+            .invoke('prop', 'outerText').then(outerText => {
+                expect(outerText).to.include(date);
             });
         return this;
     }
 
     public verifyOrderService(service: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummarySelectedServiceElement.getElement()
-            .invoke('prop', 'outerText')
-            .then((text) => {
-                const cleanedText = text.replace(/\s+/g, ' ').trim();
+            .invoke('prop', 'innerText').then(innerText => {
+                const cleanedText = innerText.replace(/\s+/g, ' ').trim();
                 const cleanedService = service.replace(/\s+/g, ' ').trim();
                 expect(cleanedText).to.include(cleanedService);
             });
@@ -119,24 +115,30 @@ export class SummaryAndPaymentServicePage {
         const btn = icon.parent('button')
         btn.scrollIntoView().should('be.visible')
 
-        btn.click()
-            .then(() => {
-                cy.get('.alert-wrapper')
-                    .scrollIntoView().should('be.visible')
-                    .invoke('prop', 'innerText')
-                    .then(alertText => {
+        btn.click().then(() => {
+            cy.get('.alert-wrapper')
+        })
+        return this;
+    }
 
-                        expect(alertText).to.include("Usuwanie zamówionej usługi");
-                        expect(alertText).to.include("Usunięcie ostatnio zamówionej usługi powoduje automatyczne usunięcie samego zamówienia.");
-                        expect(alertText).to.include("Czy naprawdę chcesz usunąć zamówioną usługę?");
-                        expect(alertText).to.include("Anuluj");
-                        expect(alertText).to.include("Usuń");
-                    });
+    public clickDeleteByIcon(): SummaryAndPaymentServicePage {
+        cy.get('.alert-wrapper')
+            .scrollIntoView().should('be.visible')
+            .invoke('prop', 'innerText')
 
-                cy.contains('button', 'Usuń').scrollIntoView().should('be.visible')
-                    .click();
-                LeftMenuPage.assertIsSynchronized(true)
-            })
+            .then(alertText => {
+
+                expect(alertText).to.include("Usuwanie zamówionej usługi");
+                expect(alertText).to.include("Usunięcie ostatnio zamówionej usługi powoduje automatyczne usunięcie samego zamówienia.");
+                expect(alertText).to.include("Czy naprawdę chcesz usunąć zamówioną usługę?");
+                expect(alertText).to.include("Anuluj");
+                expect(alertText).to.include("Usuń");
+            });
+
+        cy.contains('button', 'Usuń').scrollIntoView().should('be.visible')
+            .click();
+
+        LeftMenuPage.assertIsSynchronized(true)
         return this;
     }
 }
