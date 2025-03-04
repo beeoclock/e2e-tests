@@ -1,8 +1,6 @@
 export class PaymentStatusSelector {
     public getElement(): any {
-        return cy.contains('label', 'Status płatności')
-            .next('ng-select')
-            .find('.ng-arrow-wrapper')
-            .should('be.visible')
+        return cy.get('#order-form-inputs-payment-status')
+            .scrollIntoView().should('be.visible')
     }
 }

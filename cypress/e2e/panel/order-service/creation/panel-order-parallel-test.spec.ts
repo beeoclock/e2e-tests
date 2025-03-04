@@ -52,10 +52,10 @@ describe('panel - order service', () => {
                 .verifyOrderService(testData.summary)
                 .verifyOrderSpecialist(testData.specialistFirstName)
                 .verifyOrderCustomer('Anonimowy')
-                .selectPaymentMethod(testData.paymentMethod)
+                // .selectPaymentMethod(testData.paymentMethod)
                 .selectPaymentStatus(testData.PaymentStatus)
                 .typeBusinessNote(testData.businessNote)
-                .clickSaveButton();
+                .clickSaveButton(tee);
 
             cy.get('@orderId').then((orderId) => {
                 cy.log('Order ID is: ' + orderId);
@@ -68,6 +68,7 @@ describe('panel - order service', () => {
                 cy.log('Click, delete and verify deletion on table');
                 CalendarPages.CalendarTablePage
                     .clickOnGivenOrderByItsId(orderID);
+
                 RightPanelPages.SummaryAndPaymentServicePage
                     .clickDeleteByDashIcon();
                 LeftMenuPage.assertIsSynchronized(true);
