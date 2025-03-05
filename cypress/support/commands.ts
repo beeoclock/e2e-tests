@@ -36,8 +36,7 @@ Cypress.Commands.add('loginOnPanel', () => {
     });
 
     cy.log('login');
-
-    cy.get('.text-start').scrollIntoView().should('be.visible')
+    cy.get('.text-start', {timeout: 30000}).scrollIntoView().should('be.visible')
     PanelLoginPageElement.EmailInput.getElement();
     PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
     PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);

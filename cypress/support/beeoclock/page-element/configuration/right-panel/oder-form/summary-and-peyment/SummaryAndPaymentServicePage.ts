@@ -27,6 +27,14 @@ export class SummaryAndPaymentServicePage {
         return this;
     }
 
+    public verifyPaymentStatus(count: number, status: string): SummaryAndPaymentServicePage {
+        SummaryAndPaymentServicePageElement.PaymentStatusElement.getElement(count)
+            .invoke('prop', 'outerText').then(outerText => {
+            expect(outerText).to.include(status);
+        });
+        return this;
+    }
+
     public verifyOrderDate(date: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummaryDateElement.getElement()
             .invoke('prop', 'outerText').then(outerText => {
@@ -89,22 +97,24 @@ export class SummaryAndPaymentServicePage {
     public clickSaveButton(paymentStatus: string): SummaryAndPaymentServicePage {
         const createOrder = ApiInterceptionHelper.createOrder()
         const createPayment = ApiInterceptionHelper.createServicePayment()
+
         LeftMenuPage.assertIsSynchronized(true)
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
-            .then(() => {
-                NotificationsPage.clickConfirmButton()
-                cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
-                    cy.wrap(interception.request.body._id).as('orderId');
+
+        NotificationsPage.clickConfirmButton()
+
+        cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
+            cy.wrap(interception.request.body._id).as('orderId');
                 })
 
-                cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
+        cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
                     const sendPaymentStatus = interception.request.body.status;
                     expect(sendPaymentStatus).to.equal(paymentStatus);
                 })
 
                 LeftMenuPage.assertIsSynchronized(true)
-            })
+
         return this;
     }
 

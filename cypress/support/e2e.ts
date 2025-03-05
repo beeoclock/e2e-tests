@@ -25,7 +25,7 @@ require('cypress-xpath');
  */
 before(() => {
     clearAllData();
-    deleteIndexDb();
+    // deleteIndexDb();
 
     AuthApi.getToken().then(token => {
         Cypress.env('token', token);
