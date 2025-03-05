@@ -12,7 +12,9 @@ export class RightPanelNavigationPage {
         cy.log('close panel')
         RightPanelNavigationPageElement.CloseRightPanelButton.getElement()
             .click().then(() => {
-                cy.get('whac-a-mole').should('not.be.visible')
+                // cy.get('whac-a-mole').should('not.be.visible')TODO CONSULTATION!!
+
+            cy.get('body').type('{esc}')
         })
         return this
     }

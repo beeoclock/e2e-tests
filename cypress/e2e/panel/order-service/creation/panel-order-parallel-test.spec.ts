@@ -9,18 +9,14 @@ import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/Ab
 describe('panel - order service', () => {
     const testCases = [
         TestCaseEnum.CASE_1,
-        // TestCaseEnum.CASE_2,
-        // TestCaseEnum.CASE_3,
-        // TestCaseEnum.CASE_4
+        TestCaseEnum.CASE_2,
+        TestCaseEnum.CASE_3,
+        TestCaseEnum.CASE_4
     ];
 
     before('clear environment', () => {
         OrderApi.deleteAllCurrentOrdersWithAssertion()
         AbsenceApi.deleteAllAbsences()
-
-        // cy.loginOnPanel()
-        // cy.log('handle synchronization process')
-        // LeftMenuPage.synchronizeWithInterception()
     })
 
     beforeEach('login and wait till synchronization ended', () => {
@@ -52,7 +48,7 @@ describe('panel - order service', () => {
                 .verifyOrderService(testData.summary)
                 .verifyOrderSpecialist(testData.specialistFirstName)
                 .verifyOrderCustomer('Anonimowy')
-                .selectPaymentStatus(testData.payment.PaymentStatus)
+                .selectPaymentStatus(testData.payment.PaymentFlag)
                 .typeBusinessNote(testData.businessNote)
                 .clickSaveButton(testData.payment.requestedPayment);
 
@@ -70,9 +66,9 @@ describe('panel - order service', () => {
 
                 RightPanelPages.SummaryAndPaymentServicePage
                     .verifyOrderDate(testData.dataAssert)
-                    // .verifyOrderService(testData.service)
                     .verifyOrderPrice(testData.priceAssert)
                     .verifyOrderTime(testData.summaryTime)
+                    .verifyPaymentStatus(1, testData.payment.PaymentStatus)
 
                 RightPanelPages.RightPanelNavigationPage
                     .clickCloseRightPanel()

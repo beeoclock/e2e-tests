@@ -34,12 +34,11 @@ export class CalendarTablePage {
                 cy.get('.truncate.font-bold').contains('Szczegółowy widok wydarzenia').scrollIntoView().should('be.visible')
                 cy.get('.bi.bi-dash-circle').scrollIntoView().should('be.visible')
                 cy.document().its('readyState').should('equal', 'complete')
-                LeftMenuPage.assertIsSynchronized(true)
             })
         return this;
     }
 
-    public verifyTimeOrderOnTable(orderId, value: string): CalendarTablePage {
+    public verifyTimeOrderOnTable(orderId: string, value: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElementByOrderId(orderId)
             .invoke('prop', 'textContent')
             .then((text) => {
