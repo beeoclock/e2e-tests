@@ -1,8 +1,9 @@
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {DateUtils} from "../../Utils/DateUtils";
+import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 
 export class TariffsQueriesApi {
-    private static BASE_URL: string = "https://api-dev.beeoclock.com/tariff-plan/api/v1";
+    private static BASE_URL: string = EntryPointEnum.TARIFFS_ENTRY_POINT;
 
     static getTariffsPaged(expectedCode: HTTPStatusCodeType, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');

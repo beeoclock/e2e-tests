@@ -5,10 +5,11 @@ import {ServiceApiInterceptionHelper} from "../../../common/Interception/service
 import {CustomerApiInterceptionHelper} from "../../../common/Interception/customer/CustomerApiInterceptionHelper";
 import {MemberApiInterceptionHelper} from "../../../common/Interception/member/MemberApiInterceptionHelper";
 import {PaymentApiInterceptionHelper} from "../../../common/Interception/payment/PaymentApiInterceptionHelper";
+import {TariffsApiInterceptionHelper} from "../../../common/Interception/tariffs/TariffsApiInterceptionHelper";
 
 export class LeftMenuPage {
 
-    public static clickOnGivenTab(tab: string): LeftMenuPage {
+    public static clickOnGivenTab(tab: string, waitForSynchronize?: boolean): LeftMenuPage {
         LeftMenuPageElement.TabElement.getElement(tab)
             .click()
         if (tab == TabNameEnum.ORDER) {
@@ -20,7 +21,9 @@ export class LeftMenuPage {
         if (tab == TabNameEnum.CLIENTS) {
             this.clickClientTab()
         }
-        LeftMenuPage.assertIsSynchronized(true)
+        if (waitForSynchronize) {
+            LeftMenuPage.assertIsSynchronized(true)
+        }
         return this;
     }
 
@@ -63,12 +66,16 @@ export class LeftMenuPage {
             const getServices: string = ServiceApiInterceptionHelper.getServices()
             const getPayment: string = PaymentApiInterceptionHelper.getPayment()
             const getBusinessProfile: string = ApiInterceptionHelper.getBusinessProfile()
+            const getTariffs: string = TariffsApiInterceptionHelper.getTariffs()
+            const getTenantTariffs: string = TariffsApiInterceptionHelper.getTenantTariffs()
 
             LeftMenuPageElement.SynchronizingComponent.getElement().click().then(() => {
                 cy.log('Waiting for synchronization requests to complete...');
-                ApiInterceptionHelper.waitForAliases([getAbsence, getMember, getOrder, getServices, getPayment, getBusinessProfile, getCustomer]);
+                ApiInterceptionHelper.waitForAliases([getAbsence, getMember, getOrder, getServices,
+                    getPayment, getBusinessProfile, getCustomer, getTariffs, getTenantTariffs]);
             })
         })
+
         this.assertIsSynchronized(true)
         cy.wait(1000)
         return this;
