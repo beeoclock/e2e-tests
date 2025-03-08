@@ -6,7 +6,7 @@ import {ICustomerSearchCriteria} from "./queries/ICustomerSearchCriteria";
 
 export class CustomerApi {
 
-    public static createCustomerWithBuilder(customer: ICustomer, options: Partial<Cypress.RequestOptions>, givenToken?: string, ): any {
+    public static createCustomerWithBuilder(customer: ICustomer, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');
             return cy.request({
                 method: 'POST',
