@@ -39,7 +39,7 @@ describe('customer update api test', () => {
 
         CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {})
             .then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             })
 
         const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
@@ -87,7 +87,7 @@ describe('customer update api test', () => {
 
         CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {})
             .then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             })
 
         const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
@@ -136,7 +136,7 @@ describe('customer update api test', () => {
 
         CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {})
             .then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             })
 
         const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
@@ -254,7 +254,7 @@ describe('customer update api test', () => {
 
         CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {failOnStatusCode: false})
             .then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             })
 
         const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
@@ -317,7 +317,7 @@ describe('customer update api test', () => {
 
         CustomerApi.updateCustomerWithBuilder(customer, customerData._id, { failOnStatusCode: false })
             .then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             });
 
         CustomerApi.getCustomerById(customerData._id).then(response => {
@@ -387,7 +387,7 @@ describe('customer update api test', () => {
 
         CustomerApi.updateCustomerWithBuilder(customer, customerData._id, { failOnStatusCode: false })
             .then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
 
                 const updatedCustomer = response.body;
                 cy.log('Updated Customer (Preview):', JSON.stringify(updatedCustomer));

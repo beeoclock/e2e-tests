@@ -73,7 +73,7 @@ export class CustomerApi {
                 },
                     ...options
             }).then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
                 return response.body;
             })
     }
@@ -90,7 +90,7 @@ export class CustomerApi {
                 bearer: token
             }
         }).then(response => {
-            expect(response.status).to.equal(HTTPStatusCodeType.OK);
+            expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             return response.body;
         })
     }

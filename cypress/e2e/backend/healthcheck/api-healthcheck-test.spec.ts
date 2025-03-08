@@ -33,13 +33,13 @@ describe("panel api healthcheck", () => {
     });
 
     it('get business profile and assert correct response', function (): void {
-        BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
+        BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
             cy.log('response', JSON.stringify(response));
         });
     });
 
     it('get identity profile and assert expected response', function (): void {
-        IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
+        IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
             cy.log('response', JSON.stringify(response));
 
             expect(response).to.have.property('items').that.is.an('array');
@@ -61,7 +61,7 @@ describe("panel api healthcheck", () => {
     });
 
     it('get analytic Info and assert all response keys', function (): void {
-        AnalyticApi.getDateRangeReport(HTTPStatusCodeType.OK, token, {}).then((response: Record<string, any>): void => {
+        AnalyticApi.getDateRangeReport(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
             expect(response).to.have.all.keys(
                 "startDateTime", "endDateTime", "totalOrderServices", "totalOrders", "totalRevenue", "specialistReports"
             );

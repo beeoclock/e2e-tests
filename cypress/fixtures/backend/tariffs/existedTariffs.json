@@ -1,0 +1,485 @@
+{
+  "items": [
+    {
+      "_id": "66916aa0c5875b0caba6c438",
+      "createdAt": "2025-03-08T12:48:58.593Z",
+      "updatedAt": "2025-03-08T12:48:58.593Z",
+      "state": "active",
+      "stateHistory": [
+        {
+          "state": "active",
+          "setAt": "2025-03-08T12:48:58.022Z"
+        }
+      ],
+      "object": "TariffPlanDto",
+      "type": "Free",
+      "prices": [
+        {
+          "country": "PL",
+          "region": "EU",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 0,
+              "afterDiscount": 0
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 0,
+              "afterDiscount": 0
+            }
+          ],
+          "currency": "PLN",
+          "languageVersions": [
+            {
+              "title": "Free",
+              "description": "Free plan with basic features (PL).",
+              "language": "en"
+            },
+            {
+              "title": "Darmowy",
+              "description": "Bezpłatny plan z podstawowymi funkcjami (PL).",
+              "language": "pl"
+            },
+            {
+              "title": "Безкоштовний",
+              "description": "Безкоштовний план із базовими функціями (PL).",
+              "language": "uk"
+            },
+            {
+              "title": "Gratis",
+              "description": "Gratis plan med basale funktioner (PL).",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:58.556Z",
+          "updatedAt": "2025-03-08T12:48:58.556Z"
+        },
+        {
+          "region": "EU",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 0,
+              "afterDiscount": 0
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 0,
+              "afterDiscount": 0
+            }
+          ],
+          "currency": "EUR",
+          "languageVersions": [
+            {
+              "title": "Free",
+              "description": "Free plan (EU).",
+              "language": "en"
+            },
+            {
+              "title": "Darmowy",
+              "description": "Bezpłatny plan (EU).",
+              "language": "pl"
+            },
+            {
+              "title": "Безкоштовний",
+              "description": "Безкоштовний план (EU).",
+              "language": "uk"
+            },
+            {
+              "title": "Gratis",
+              "description": "Gratis plan (EU).",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:58.556Z",
+          "updatedAt": "2025-03-08T12:48:58.556Z"
+        },
+        {
+          "region": "WORLD",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 0,
+              "afterDiscount": 0
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 0,
+              "afterDiscount": 0
+            }
+          ],
+          "currency": "USD",
+          "languageVersions": [
+            {
+              "title": "Free",
+              "description": "Free plan (Worldwide).",
+              "language": "en"
+            },
+            {
+              "title": "Darmowy",
+              "description": "Bezpłatny plan (Świat).",
+              "language": "pl"
+            },
+            {
+              "title": "Безкоштовний",
+              "description": "Безкоштовний план (Світ).",
+              "language": "uk"
+            },
+            {
+              "title": "Gratis",
+              "description": "Gratis plan (Verdensomspændende).",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:58.556Z",
+          "updatedAt": "2025-03-08T12:48:58.556Z"
+        }
+      ],
+      "isPerSpecialist": false,
+      "specialistLimit": 1,
+      "pluginAttachment": {
+        "includeAll": false,
+        "excludeAll": false,
+        "includeList": [
+          "emailNotification"
+        ],
+        "excludeList": [
+          "assistantAI"
+        ],
+        "createdAt": "2025-03-08T12:48:58.536Z",
+        "updatedAt": "2025-03-08T12:48:58.536Z"
+      },
+      "features": [
+        "emailNotification",
+        "jsonLD",
+        "seoOptimization",
+        "adminPanel",
+        "publicPage"
+      ]
+    },
+    {
+      "_id": "66916aa0c5875b0caba6c439",
+      "createdAt": "2025-03-08T12:48:59.055Z",
+      "updatedAt": "2025-03-08T12:48:59.055Z",
+      "state": "active",
+      "stateHistory": [
+        {
+          "state": "active",
+          "setAt": "2025-03-08T12:48:58.729Z"
+        }
+      ],
+      "object": "TariffPlanDto",
+      "type": "Basic",
+      "prices": [
+        {
+          "country": "PL",
+          "region": "EU",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 59,
+              "afterDiscount": 59
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 708,
+              "afterDiscount": 637.2
+            }
+          ],
+          "currency": "PLN",
+          "languageVersions": [
+            {
+              "title": "Basic",
+              "description": "Basic plan for small teams (PL).",
+              "language": "en"
+            },
+            {
+              "title": "Podstawowy",
+              "description": "Podstawowy plan dla małych zespołów (PL).",
+              "language": "pl"
+            },
+            {
+              "title": "Базовий",
+              "description": "Базовий план для невеликих команд (PL).",
+              "language": "uk"
+            },
+            {
+              "title": "Basisk",
+              "description": "Basisk plan til små teams (PL).",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:59.042Z",
+          "updatedAt": "2025-03-08T12:48:59.042Z"
+        },
+        {
+          "region": "EU",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 49,
+              "afterDiscount": 49
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 588,
+              "afterDiscount": 529.2
+            }
+          ],
+          "currency": "EUR",
+          "languageVersions": [
+            {
+              "title": "Basic",
+              "description": "Basic plan (EU).",
+              "language": "en"
+            },
+            {
+              "title": "Podstawowy",
+              "description": "Podstawowy plan (EU).",
+              "language": "pl"
+            },
+            {
+              "title": "Базовий",
+              "description": "Базовий план (EU).",
+              "language": "uk"
+            },
+            {
+              "title": "Basisk",
+              "description": "Basisk plan (EU).",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:59.055Z",
+          "updatedAt": "2025-03-08T12:48:59.055Z"
+        },
+        {
+          "region": "WORLD",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 55,
+              "afterDiscount": 55
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 660,
+              "afterDiscount": 594
+            }
+          ],
+          "currency": "USD",
+          "languageVersions": [
+            {
+              "title": "Basic",
+              "description": "Basic plan (Worldwide).",
+              "language": "en"
+            },
+            {
+              "title": "Podstawowy",
+              "description": "Podstawowy plan (Świat).",
+              "language": "pl"
+            },
+            {
+              "title": "Базовий",
+              "description": "Базовий план (Світ).",
+              "language": "uk"
+            },
+            {
+              "title": "Basisk",
+              "description": "Basisk plan (Verdensomspændende).",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:59.055Z",
+          "updatedAt": "2025-03-08T12:48:59.055Z"
+        }
+      ],
+      "isPerSpecialist": false,
+      "specialistLimit": 5,
+      "pluginAttachment": {
+        "includeAll": false,
+        "excludeAll": false,
+        "includeList": [
+          "emailNotification",
+          "smsNotification",
+          "chat"
+        ],
+        "excludeList": [
+          "assistantAI"
+        ],
+        "createdAt": "2025-03-08T12:48:58.964Z",
+        "updatedAt": "2025-03-08T12:48:58.964Z"
+      },
+      "features": [
+        "unlimitedPlugins",
+        "emailNotification",
+        "smsNotification",
+        "jsonLD",
+        "seoOptimization",
+        "confirmationAfterUserPayment",
+        "adminPanel",
+        "publicPage"
+      ]
+    },
+    {
+      "_id": "66916aa0c5875b0caba6c440",
+      "createdAt": "2025-03-08T12:48:59.616Z",
+      "updatedAt": "2025-03-08T12:48:59.616Z",
+      "state": "active",
+      "stateHistory": [
+        {
+          "state": "active",
+          "setAt": "2025-03-08T12:48:59.177Z"
+        }
+      ],
+      "object": "TariffPlanDto",
+      "type": "Professional",
+      "prices": [
+        {
+          "country": "PL",
+          "region": "EU",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 189,
+              "afterDiscount": 189
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 2268,
+              "afterDiscount": 2041.2
+            }
+          ],
+          "currency": "PLN",
+          "languageVersions": [
+            {
+              "title": "Profesjonalny",
+              "description": "Profesjonalny plan (PL) dla rozwijających się zespołów.",
+              "language": "pl"
+            },
+            {
+              "title": "Професійний",
+              "description": "Професійний план (PL) для зростаючих команд.",
+              "language": "uk"
+            },
+            {
+              "title": "Professional",
+              "description": "Professional plan (PL) for growing teams.",
+              "language": "en"
+            },
+            {
+              "title": "Professionel",
+              "description": "Professionel plan (PL) til voksende teams.",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:59.615Z",
+          "updatedAt": "2025-03-08T12:48:59.615Z"
+        },
+        {
+          "region": "EU",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 89,
+              "afterDiscount": 89
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 1068,
+              "afterDiscount": 961.2
+            }
+          ],
+          "currency": "EUR",
+          "languageVersions": [
+            {
+              "title": "Profesjonalny",
+              "description": "Profesjonalny plan (EU).",
+              "language": "pl"
+            },
+            {
+              "title": "Професійний",
+              "description": "Професійний план (EU).",
+              "language": "uk"
+            },
+            {
+              "title": "Professional",
+              "description": "Professional plan (EU).",
+              "language": "en"
+            },
+            {
+              "title": "Professionel",
+              "description": "Professionel plan (EU).",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:59.616Z",
+          "updatedAt": "2025-03-08T12:48:59.616Z"
+        },
+        {
+          "region": "WORLD",
+          "values": [
+            {
+              "billingCycle": "monthly",
+              "beforeDiscount": 89,
+              "afterDiscount": 89
+            },
+            {
+              "billingCycle": "yearly",
+              "beforeDiscount": 1068,
+              "afterDiscount": 961.2
+            }
+          ],
+          "currency": "USD",
+          "languageVersions": [
+            {
+              "title": "Profesjonalny",
+              "description": "Profesjonalny plan (Świat).",
+              "language": "pl"
+            },
+            {
+              "title": "Професійний",
+              "description": "Професійний план (Світ).",
+              "language": "uk"
+            },
+            {
+              "title": "Professional",
+              "description": "Professional plan (Worldwide).",
+              "language": "en"
+            },
+            {
+              "title": "Professionel",
+              "description": "Professionel plan (Worldwide).",
+              "language": "da"
+            }
+          ],
+          "createdAt": "2025-03-08T12:48:59.616Z",
+          "updatedAt": "2025-03-08T12:48:59.616Z"
+        }
+      ],
+      "isPerSpecialist": false,
+      "specialistLimit": null,
+      "pluginAttachment": {
+        "includeAll": true,
+        "excludeAll": false,
+        "includeList": [],
+        "excludeList": [],
+        "createdAt": "2025-03-08T12:48:59.615Z",
+        "updatedAt": "2025-03-08T12:48:59.615Z"
+      },
+      "features": [
+        "unlimitedPlugins",
+        "emailNotification",
+        "smsNotification",
+        "jsonLD",
+        "seoOptimization",
+        "confirmationAfterUserPayment",
+        "adminPanel",
+        "publicPage",
+        "assistantAI",
+        "publicRestApi"
+      ]
+    }
+  ],
+  "totalSize": 3
+}

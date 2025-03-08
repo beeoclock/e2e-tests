@@ -19,7 +19,7 @@ describe('customer api test', () => {
     afterEach('delete customer after each test', () => {
         CustomerApi.deleteCustomer(customerData._id, {})
             .then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             })
     })
 

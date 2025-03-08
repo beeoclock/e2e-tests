@@ -16,7 +16,7 @@ export class ProductApi {
                 bearer: token
             }
         }).then(response => {
-            expect(response.status).to.equal(HTTPStatusCodeType.Created);
+            expect(response.status).to.equal(HTTPStatusCodeType.Created_201);
             return response.body;
         })
     }
@@ -32,7 +32,7 @@ export class ProductApi {
                 bearer: token
             }
         }).then(response => {
-            expect(response.status).to.equal(HTTPStatusCodeType.OK);
+            expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             return response.body;
         })
     }
