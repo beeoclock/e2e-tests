@@ -32,4 +32,26 @@ export class TariffsListPage {
             .contains('span', feature)
         return this;
     }
+
+    public clickUpdateGivenSlot(name: string): TariffsListPage {
+        this.tariffsComponent.getTariffsByName(name)
+            .contains('button', 'Zaktualizuj do ' + name).should('be.visible')
+            .click();
+        return this
+    }
+
+    public verifyGivenSlotIsSelected(name: string): TariffsListPage {
+        this.tariffsComponent.getTariffsByName(name)
+            .contains('button', 'Wybrane').should('be.visible')
+            .and('be.disabled')
+            .and('have.css', 'color', 'rgb(163, 163, 163)')
+        return this;
+    }
+
+    public verifyGivenSlotIsOpenToSelect(name: string): TariffsListPage {
+        this.tariffsComponent.getTariffsByName(name)
+            .contains('button', 'Zaktualizuj do ' + name).should('be.visible')
+            .and('have.css', 'background-color', 'rgb(255, 212, 41)')
+        return this;
+    }
 }

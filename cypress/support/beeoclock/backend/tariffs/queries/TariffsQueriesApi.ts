@@ -1,6 +1,7 @@
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {DateUtils} from "../../Utils/DateUtils";
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
+import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 
 export class TariffsQueriesApi {
     private static BASE_URL: string = EntryPointEnum.TARIFFS_ENTRY_POINT;
@@ -41,6 +42,25 @@ export class TariffsQueriesApi {
             ...options
         }).then(response => {
             expect(response.status).to.equal(expectedCode);
+            return response.body
+        });
+    }
+
+    static getChangeStatusSession(): any {
+        const token = Cypress.env('token');
+        const url = `${this.BASE_URL}/tenantTariffPlan/change-payment-method-checkout-session`;
+
+        return cy.request({
+            method: 'POST',
+            url: url,
+            headers: {
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+            },
+            auth: {
+                bearer: token
+            },
+        }).then(response => {
+            expect(response.status).to.equal(201);
             return response.body
         });
     }
