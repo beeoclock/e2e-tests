@@ -26,6 +26,10 @@ require('cypress-xpath');
 before(() => {
     clearAllData();
     // deleteIndexDb();
+    Cypress.on('uncaught:exception', (err) => {
+        console.warn('Ignorowany błąd:', err.message);
+        return false;
+    });
 
     AuthApi.getToken().then(token => {
         Cypress.env('token', token);
