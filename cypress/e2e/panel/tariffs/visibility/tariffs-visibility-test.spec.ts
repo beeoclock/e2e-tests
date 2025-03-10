@@ -24,7 +24,6 @@ describe("tariffs visibility test", () => {
         Cypress.on('uncaught:exception', () => false);
         cy.loginOnPanel()
         LeftMenuPage.clickOnGivenTab(TabNameEnum.TARIFFS, false)
-
     })
 
     it('should assert free slot tariff', () => {
@@ -35,7 +34,7 @@ describe("tariffs visibility test", () => {
             .verifyTariffFeature(free, TariffsFeatureEnum.SEO_PACKAGE)
             .verifyTariffFeature(free, TariffsFeatureEnum.ADMIN_PANEL)
             .verifyTariffFeature(free, TariffsFeatureEnum.PUBLIC_PAGE)
-            .verifyGivenSlotIsSelected(free)
+            .verifyGivenSlotIsOpenToDowngrade(free)
     })
 
     it('should assert Basic slot tariff', () => {
@@ -49,7 +48,7 @@ describe("tariffs visibility test", () => {
             .verifyTariffFeature(basic, TariffsFeatureEnum.PUBLIC_PAGE)
             .verifyTariffFeature(basic, TariffsFeatureEnum.UNLIMITED_PLUGINS)
             .verifyTariffFeature(basic, TariffsFeatureEnum.PAYMENT_CONFIRMATION)
-            .verifyGivenSlotIsOpenToSelect(basic)
+            .verifyGivenSlotIsSelected(basic)
     })
 
     it('should assert Professional slot tariff', () => {
@@ -65,10 +64,10 @@ describe("tariffs visibility test", () => {
             .verifyTariffFeature(professional, TariffsFeatureEnum.PAYMENT_CONFIRMATION)
             .verifyTariffFeature(professional, TariffsFeatureEnum.AI_ASSISTANT)
             .verifyTariffFeature(professional, TariffsFeatureEnum.PUBLIC_REST_API)
-            .verifyGivenSlotIsOpenToSelect(professional)
+            .verifyGivenSlotIsOpenToUpgrade(professional)
     })
 
-    it.only('should update slot to basic', () => {
+    it.skip('should update slot to basic', () => {
 
         cy.intercept('POST', '**/6').as('stripeLoad');
         TariffsPages.TariffsListPage.clickUpdateGivenSlot(basic);

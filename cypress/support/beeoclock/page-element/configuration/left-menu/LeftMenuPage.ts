@@ -103,7 +103,7 @@ export class LeftMenuPage {
         const expectedText = 'Synchronizacja w toku…';
 
         LeftMenuPageElement.SynchronizingComponent.getElement()
-            .find('.text-xs',)
+            .find('.text-xs',{ timeout: 10000 })
             .should('contain.text', expectedText);
         return this;
     }

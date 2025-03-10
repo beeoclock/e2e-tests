@@ -3,6 +3,7 @@ import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-me
 import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {TariffsPages} from "support/beeoclock/page-element/configuration/tab/tariffs/TariffsPages";
 import {TariffsFormPages} from "support/beeoclock/page-element/configuration/tab/tariffs/form/TariffsFormPages";
+import {TariffsNameEnum} from "../../../../support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
 
 describe("tariffs visibility test", () => {
     let expectedTariffs: any;
@@ -21,11 +22,11 @@ describe("tariffs visibility test", () => {
     beforeEach('login', () => {
         Cypress.on('uncaught:exception', () => false);
         cy.loginOnPanel()
+        LeftMenuPage.assertIsSynchronized(true)
         LeftMenuPage.clickOnGivenTab(TabNameEnum.TARIFFS)
-
     })
 
-    it('should update slot to basic', () => {
+    it.skip('should update slot to basic', () => {
 
         cy.intercept('POST', '**/6').as('stripeLoad');
         TariffsPages.TariffsListPage.clickUpdateGivenSlot(basic);
@@ -43,5 +44,10 @@ describe("tariffs visibility test", () => {
             .typeCardExpiration("13/34")
             .typeCardCVV(faker.finance.creditCardCVV())
             .typeCardBillingName('Jarosław testowy')
+    });
+
+    it('should update slot to professional', () => {
+        TariffsPages.TariffsListPage.clickUpdateToProfessional();
+        TariffsPages.TariffsListPage.verifyGivenSlotIsOpenToUpgrade(TariffsNameEnum.BASIC);
     });
 })

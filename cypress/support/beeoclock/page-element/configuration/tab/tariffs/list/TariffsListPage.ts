@@ -1,4 +1,7 @@
 import {TariffsListPageElement} from "./TariffsListPageElement";
+import {TariffsNameEnum} from "../enum/TariffsNameEnum";
+import {TariffsApiInterceptionHelper} from "../../../../../common/Interception/tariffs/TariffsApiInterceptionHelper";
+import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
 
 export class TariffsListPage {
     private tariffsComponent = TariffsListPageElement.TariffsComponent
@@ -40,6 +43,33 @@ export class TariffsListPage {
         return this
     }
 
+    public clickUpdateToProfessional(): TariffsListPage {
+        const updateTariff = TariffsApiInterceptionHelper.updateTariffs()
+        this.tariffsComponent.getTariffsByName(TariffsNameEnum.PROFESSIONAL)
+            .contains('button', 'Zaktualizuj do ' + TariffsNameEnum.PROFESSIONAL).should('be.visible')
+            .click();
+        cy.wait('@' + updateTariff).then(interception => {
+            const request = interception.request
+
+            expect(request.body.features).to.have.length(10)
+            expect(request.body.type).to.equal(TariffsNameEnum.PROFESSIONAL)
+            expect(request.body._id).to.equal('66916aa0c5875b0caba6c440')
+
+            expect(request.body).to.deep.include({
+                _id: '66916aa0c5875b0caba6c440',
+                type: TariffsNameEnum.PROFESSIONAL,
+                features: [
+                    "unlimitedPlugins", "emailNotification", "smsNotification", "jsonLD",
+                    "seoOptimization", "confirmationAfterUserPayment", "adminPanel",
+                    "publicPage", "assistantAI", "publicRestApi"
+                ]
+            })
+        })
+        LeftMenuPage.assertIsSynchronizationExecuted()
+        LeftMenuPage.assertIsSynchronized(true)
+        return this
+    }
+
     public verifyGivenSlotIsSelected(name: string): TariffsListPage {
         this.tariffsComponent.getTariffsByName(name)
             .contains('button', 'Wybrane').should('be.visible')
@@ -48,10 +78,16 @@ export class TariffsListPage {
         return this;
     }
 
-    public verifyGivenSlotIsOpenToSelect(name: string): TariffsListPage {
+    public verifyGivenSlotIsOpenToUpgrade(name: string): TariffsListPage {
         this.tariffsComponent.getTariffsByName(name)
             .contains('button', 'Zaktualizuj do ' + name).should('be.visible')
             .and('have.css', 'background-color', 'rgb(255, 212, 41)')
+        return this;
+    }
+
+    public verifyGivenSlotIsOpenToDowngrade(name: string): TariffsListPage {
+        this.tariffsComponent.getTariffsByName(name)
+            .contains('button', 'Obniż do ' + name).should('be.visible')
         return this;
     }
 }
