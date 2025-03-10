@@ -9,7 +9,7 @@ import {TariffsApiInterceptionHelper} from "../../../common/Interception/tariffs
 
 export class LeftMenuPage {
 
-    public static clickOnGivenTab(tab: string, waitForSynchronize?: boolean): LeftMenuPage {
+    public static clickOnGivenTab(tab: string, waitForSynchronize: boolean = true): LeftMenuPage {
         LeftMenuPageElement.TabElement.getElement(tab)
             .click()
         if (tab == TabNameEnum.ORDER) {

@@ -33,7 +33,6 @@ export default defineConfig({
     chromeWebSecurity: false,
     includeShadowDom: true,
     watchForFileChanges: false,
-    experimentalStudio: true,
     experimentalModifyObstructiveThirdPartyCode: true,
     experimentalWebKitSupport: true,
   },
