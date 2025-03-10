@@ -2,13 +2,13 @@
   "items": [
     {
       "_id": "66916aa0c5875b0caba6c438",
-      "createdAt": "2025-03-08T12:48:58.593Z",
-      "updatedAt": "2025-03-08T12:48:58.593Z",
+      "createdAt": "2025-03-08T23:01:03.064Z",
+      "updatedAt": "2025-03-08T23:01:03.064Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-08T12:48:58.022Z"
+          "setAt": "2025-03-08T23:01:02.196Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -52,8 +52,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:58.556Z",
-          "updatedAt": "2025-03-08T12:48:58.556Z"
+          "createdAt": "2025-03-08T23:01:02.996Z",
+          "updatedAt": "2025-03-08T23:01:02.996Z"
         },
         {
           "region": "EU",
@@ -92,8 +92,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:58.556Z",
-          "updatedAt": "2025-03-08T12:48:58.556Z"
+          "createdAt": "2025-03-08T23:01:03.062Z",
+          "updatedAt": "2025-03-08T23:01:03.062Z"
         },
         {
           "region": "WORLD",
@@ -132,8 +132,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:58.556Z",
-          "updatedAt": "2025-03-08T12:48:58.556Z"
+          "createdAt": "2025-03-08T23:01:03.063Z",
+          "updatedAt": "2025-03-08T23:01:03.063Z"
         }
       ],
       "isPerSpecialist": false,
@@ -147,8 +147,8 @@
         "excludeList": [
           "assistantAI"
         ],
-        "createdAt": "2025-03-08T12:48:58.536Z",
-        "updatedAt": "2025-03-08T12:48:58.536Z"
+        "createdAt": "2025-03-08T23:01:02.995Z",
+        "updatedAt": "2025-03-08T23:01:02.995Z"
       },
       "features": [
         "emailNotification",
@@ -160,13 +160,13 @@
     },
     {
       "_id": "66916aa0c5875b0caba6c439",
-      "createdAt": "2025-03-08T12:48:59.055Z",
-      "updatedAt": "2025-03-08T12:48:59.055Z",
+      "createdAt": "2025-03-08T23:01:03.515Z",
+      "updatedAt": "2025-03-08T23:01:03.515Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-08T12:48:58.729Z"
+          "setAt": "2025-03-08T23:01:03.298Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -210,8 +210,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:59.042Z",
-          "updatedAt": "2025-03-08T12:48:59.042Z"
+          "createdAt": "2025-03-08T23:01:03.492Z",
+          "updatedAt": "2025-03-08T23:01:03.492Z"
         },
         {
           "region": "EU",
@@ -250,8 +250,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:59.055Z",
-          "updatedAt": "2025-03-08T12:48:59.055Z"
+          "createdAt": "2025-03-08T23:01:03.492Z",
+          "updatedAt": "2025-03-08T23:01:03.492Z"
         },
         {
           "region": "WORLD",
@@ -290,8 +290,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:59.055Z",
-          "updatedAt": "2025-03-08T12:48:59.055Z"
+          "createdAt": "2025-03-08T23:01:03.492Z",
+          "updatedAt": "2025-03-08T23:01:03.492Z"
         }
       ],
       "isPerSpecialist": false,
@@ -307,8 +307,8 @@
         "excludeList": [
           "assistantAI"
         ],
-        "createdAt": "2025-03-08T12:48:58.964Z",
-        "updatedAt": "2025-03-08T12:48:58.964Z"
+        "createdAt": "2025-03-08T23:01:03.492Z",
+        "updatedAt": "2025-03-08T23:01:03.492Z"
       },
       "features": [
         "unlimitedPlugins",
@@ -323,13 +323,13 @@
     },
     {
       "_id": "66916aa0c5875b0caba6c440",
-      "createdAt": "2025-03-08T12:48:59.616Z",
-      "updatedAt": "2025-03-08T12:48:59.616Z",
+      "createdAt": "2025-03-08T23:01:04.096Z",
+      "updatedAt": "2025-03-08T23:01:04.096Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-08T12:48:59.177Z"
+          "setAt": "2025-03-08T23:01:03.755Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -373,8 +373,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:59.615Z",
-          "updatedAt": "2025-03-08T12:48:59.615Z"
+          "createdAt": "2025-03-08T23:01:04.049Z",
+          "updatedAt": "2025-03-08T23:01:04.049Z"
         },
         {
           "region": "EU",
@@ -413,8 +413,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:59.616Z",
-          "updatedAt": "2025-03-08T12:48:59.616Z"
+          "createdAt": "2025-03-08T23:01:04.096Z",
+          "updatedAt": "2025-03-08T23:01:04.096Z"
         },
         {
           "region": "WORLD",
@@ -453,8 +453,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T12:48:59.616Z",
-          "updatedAt": "2025-03-08T12:48:59.616Z"
+          "createdAt": "2025-03-08T23:01:04.096Z",
+          "updatedAt": "2025-03-08T23:01:04.096Z"
         }
       ],
       "isPerSpecialist": false,
@@ -464,8 +464,8 @@
         "excludeAll": false,
         "includeList": [],
         "excludeList": [],
-        "createdAt": "2025-03-08T12:48:59.615Z",
-        "updatedAt": "2025-03-08T12:48:59.615Z"
+        "createdAt": "2025-03-08T23:01:04.048Z",
+        "updatedAt": "2025-03-08T23:01:04.048Z"
       },
       "features": [
         "unlimitedPlugins",
