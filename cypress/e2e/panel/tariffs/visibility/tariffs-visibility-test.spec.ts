@@ -1,9 +1,10 @@
-import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {TariffsPages} from "../../../support/beeoclock/page-element/configuration/tab/tariffs/TariffsPages";
-import {TariffsFeatureEnum} from "../../../support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsFeatureEnum";
-import {TariffsFormPages} from "../../../support/beeoclock/page-element/configuration/tab/tariffs/form/TariffsFormPages";
+
 import {faker} from "@faker-js/faker";
+import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import { TabNameEnum } from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import { TariffsPages } from "support/beeoclock/page-element/configuration/tab/tariffs/TariffsPages";
+import { TariffsFeatureEnum } from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsFeatureEnum";
+import { TariffsFormPages } from "support/beeoclock/page-element/configuration/tab/tariffs/form/TariffsFormPages";
 
 describe("tariffs visibility test", () => {
     let expectedTariffs: any;
@@ -85,7 +86,5 @@ describe("tariffs visibility test", () => {
             .typeCardExpiration("13/34")
             .typeCardCVV(faker.finance.creditCardCVV())
             .typeCardBillingName('Jarosław testowy')
-
     });
-
 })
