@@ -4,19 +4,12 @@ import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-
 import { TabNameEnum } from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import { TariffsPages } from "support/beeoclock/page-element/configuration/tab/tariffs/TariffsPages";
 import { TariffsFeatureEnum } from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsFeatureEnum";
+import { TariffsNameEnum } from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
 import { TariffsFormPages } from "support/beeoclock/page-element/configuration/tab/tariffs/form/TariffsFormPages";
 
 describe("tariffs visibility test", () => {
-    let expectedTariffs: any;
-    const free: string = "Free"
-    const basic: string = "Basic"
-    const professional: string = "Professional"
-    const cardValue: string = '4242 4242 4242 4242'
 
     before(() => {
-        cy.fixture("backend/tariffs/existedTariffs.json").then((existedTariffs) => {
-            expectedTariffs = existedTariffs;
-        });
         Cypress.on('uncaught:exception', () => false);
     });
 
@@ -28,62 +21,42 @@ describe("tariffs visibility test", () => {
 
     it('should assert free slot tariff', () => {
         TariffsPages.TariffsListPage
-            .verifyTariffsPrize(free, '0 zł')
-            .verifyTariffFeature(free, TariffsFeatureEnum.EMAIL_NOTIFICATION)
-            .verifyTariffFeature(free, TariffsFeatureEnum.JSON_LD)
-            .verifyTariffFeature(free, TariffsFeatureEnum.SEO_PACKAGE)
-            .verifyTariffFeature(free, TariffsFeatureEnum.ADMIN_PANEL)
-            .verifyTariffFeature(free, TariffsFeatureEnum.PUBLIC_PAGE)
-            .verifyGivenSlotIsOpenToDowngrade(free)
+            .verifyTariffsPrize(TariffsNameEnum.FREE, '0 zł')
+            .verifyTariffFeature(TariffsNameEnum.FREE, TariffsFeatureEnum.EMAIL_NOTIFICATION)
+            .verifyTariffFeature(TariffsNameEnum.FREE, TariffsFeatureEnum.JSON_LD)
+            .verifyTariffFeature(TariffsNameEnum.FREE, TariffsFeatureEnum.SEO_PACKAGE)
+            .verifyTariffFeature(TariffsNameEnum.FREE, TariffsFeatureEnum.ADMIN_PANEL)
+            .verifyTariffFeature(TariffsNameEnum.FREE, TariffsFeatureEnum.PUBLIC_PAGE)
+            .verifyGivenSlotIsOpenToDowngrade(TariffsNameEnum.FREE)
     })
 
     it('should assert Basic slot tariff', () => {
         TariffsPages.TariffsListPage
-            .verifyTariffsPrize(basic, '59 zł')
-            .verifyTariffFeature(basic, TariffsFeatureEnum.EMAIL_NOTIFICATION)
-            .verifyTariffFeature(basic, TariffsFeatureEnum.SMS_NOTIFICATION)
-            .verifyTariffFeature(basic, TariffsFeatureEnum.JSON_LD)
-            .verifyTariffFeature(basic, TariffsFeatureEnum.SEO_PACKAGE)
-            .verifyTariffFeature(basic, TariffsFeatureEnum.ADMIN_PANEL)
-            .verifyTariffFeature(basic, TariffsFeatureEnum.PUBLIC_PAGE)
-            .verifyTariffFeature(basic, TariffsFeatureEnum.UNLIMITED_PLUGINS)
-            .verifyTariffFeature(basic, TariffsFeatureEnum.PAYMENT_CONFIRMATION)
-            .verifyGivenSlotIsSelected(basic)
+            .verifyTariffsPrize(TariffsNameEnum.BASIC, '59 zł')
+            .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.EMAIL_NOTIFICATION)
+            .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.SMS_NOTIFICATION)
+            .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.JSON_LD)
+            .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.SEO_PACKAGE)
+            .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.ADMIN_PANEL)
+            .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.PUBLIC_PAGE)
+            .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.UNLIMITED_PLUGINS)
+            .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.PAYMENT_CONFIRMATION)
+            .verifyGivenSlotIsSelected(TariffsNameEnum.BASIC)
     })
 
     it('should assert Professional slot tariff', () => {
         TariffsPages.TariffsListPage
-            .verifyTariffsPrize(professional, '189 zł')
-            .verifyTariffFeature(professional, TariffsFeatureEnum.EMAIL_NOTIFICATION)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.SMS_NOTIFICATION)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.JSON_LD)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.SEO_PACKAGE)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.ADMIN_PANEL)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.PUBLIC_PAGE)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.UNLIMITED_PLUGINS)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.PAYMENT_CONFIRMATION)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.AI_ASSISTANT)
-            .verifyTariffFeature(professional, TariffsFeatureEnum.PUBLIC_REST_API)
-            .verifyGivenSlotIsOpenToUpgrade(professional)
+            .verifyTariffsPrize(TariffsNameEnum.PROFESSIONAL, '189 zł')
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.EMAIL_NOTIFICATION)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.SMS_NOTIFICATION)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.JSON_LD)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.SEO_PACKAGE)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.ADMIN_PANEL)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.PUBLIC_PAGE)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.UNLIMITED_PLUGINS)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.PAYMENT_CONFIRMATION)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.AI_ASSISTANT)
+            .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.PUBLIC_REST_API)
+            .verifyGivenSlotIsOpenToUpgrade(TariffsNameEnum.PROFESSIONAL)
     })
-
-    it.skip('should update slot to basic', () => {
-
-        cy.intercept('POST', '**/6').as('stripeLoad');
-        TariffsPages.TariffsListPage.clickUpdateGivenSlot(basic);
-
-        cy.location('href', {timeout: 15000}).should('include', 'checkout.stripe.com');
-
-        cy.origin('https://checkout.stripe.com', () => {
-            cy.wait('@stripeLoad', {timeout: 20000});
-        })
-
-        TariffsFormPages.StripePage
-            .assertInputElement()
-            .assertOrderSummary(basic)
-            .typeCardValue(cardValue)
-            .typeCardExpiration("13/34")
-            .typeCardCVV(faker.finance.creditCardCVV())
-            .typeCardBillingName('Jarosław testowy')
-    });
 })

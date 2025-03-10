@@ -7,9 +7,6 @@ import {TariffsNameEnum} from "../../../../support/beeoclock/page-element/config
 
 describe("tariffs visibility test", () => {
     let expectedTariffs: any;
-    const free: string = "Free"
-    const basic: string = "Basic"
-    const professional: string = "Professional"
     const cardValue: string = '4242 4242 4242 4242'
 
     before(() => {
@@ -26,28 +23,10 @@ describe("tariffs visibility test", () => {
         LeftMenuPage.clickOnGivenTab(TabNameEnum.TARIFFS)
     })
 
-    it.skip('should update slot to basic', () => {
-
-        cy.intercept('POST', '**/6').as('stripeLoad');
-        TariffsPages.TariffsListPage.clickUpdateGivenSlot(basic);
-
-        cy.location('href', {timeout: 15000}).should('include', 'checkout.stripe.com');
-
-        cy.origin('https://checkout.stripe.com', () => {
-            cy.wait('@stripeLoad', {timeout: 20000});
-        })
-
-        TariffsFormPages.StripePage
-            .assertInputElement()
-            .assertOrderSummary(basic)
-            .typeCardValue(cardValue)
-            .typeCardExpiration("13/34")
-            .typeCardCVV(faker.finance.creditCardCVV())
-            .typeCardBillingName('Jarosław testowy')
-    });
-
     it('should update slot to professional', () => {
         TariffsPages.TariffsListPage.clickUpdateToProfessional();
+
+        cy.log('verify that tariffs pages updated after change tariff plan')
         TariffsPages.TariffsListPage.verifyGivenSlotIsOpenToUpgrade(TariffsNameEnum.BASIC);
     });
 })
