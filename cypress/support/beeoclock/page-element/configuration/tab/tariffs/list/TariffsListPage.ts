@@ -36,10 +36,29 @@ export class TariffsListPage {
         return this;
     }
 
-    public clickUpdateGivenSlot(name: string): TariffsListPage {
+    public clickUpdateToGivenSlot(name: string): TariffsListPage {
         this.tariffsComponent.getTariffsByName(name)
             .contains('button', 'Zaktualizuj do ' + name).should('be.visible')
             .click();
+        return this
+    }
+
+    public clickDowngradeToBasic(name: string): TariffsListPage {
+        const updateTariff = TariffsApiInterceptionHelper.updateTariffs()
+        this.tariffsComponent.getTariffsByName(name)
+            .contains('button', 'Obniż do ' + name).should('be.visible')
+            .click()
+        cy.wait('@' + updateTariff).then(interception => {
+            const request = interception.request
+
+            expect(request.body.type).to.equal(TariffsNameEnum.BASIC)
+            expect(request.body._id).to.equal('66916aa0c5875b0caba6c439')
+            expect(request.body.pluginAttachment.includeAll).to.equal(false)
+            expect(request.body.pluginAttachment.excludeAll).to.equal(false)
+        })
+
+        LeftMenuPage.assertIsSynchronizationExecuted()
+        LeftMenuPage.assertIsSynchronized(true)
         return this
     }
 
