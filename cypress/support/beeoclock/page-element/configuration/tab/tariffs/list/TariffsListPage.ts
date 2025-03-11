@@ -55,6 +55,16 @@ export class TariffsListPage {
             expect(request.body._id).to.equal('66916aa0c5875b0caba6c439')
             expect(request.body.pluginAttachment.includeAll).to.equal(false)
             expect(request.body.pluginAttachment.excludeAll).to.equal(false)
+
+            expect(request.body).to.deep.include({
+                _id: '66916aa0c5875b0caba6c439', //TODO change into enum
+                type: TariffsNameEnum.BASIC,
+                features: [
+                    "unlimitedPlugins", "emailNotification", "smsNotification", "jsonLD",
+                    "seoOptimization", "confirmationAfterUserPayment", "adminPanel",
+                    "publicPage",
+                ]
+            })
         })
 
         LeftMenuPage.assertIsSynchronizationExecuted()

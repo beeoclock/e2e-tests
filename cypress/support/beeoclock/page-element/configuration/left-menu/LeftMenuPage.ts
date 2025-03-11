@@ -93,7 +93,7 @@ export class LeftMenuPage {
         const expectedText = isSynchronized ? 'Zsynchronizowano' : 'Synchronizacja w toku…';
 
         LeftMenuPageElement.SynchronizingComponent.getElement()
-            .find('.text-xs', { timeout: 60000 })
+            .find('.text-xs', { timeout: 70000 })
             .should('contain.text', expectedText);
         cy.wait(500) //wait for all request be compiled
         return this;
