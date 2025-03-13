@@ -69,7 +69,7 @@ describe("Client app health check test", () => {
             expect(langAttribute).to.equal('pl');
         });
 
-        assertUrl('https://dev.beeoclock.biz/pl')
+        assertUrl('https://biz.dev.beeoclock.com/pl')
         verifyPlRedirectPage()
         cy.get('h1').should('contain.text', businessHeader);
         cy.contains('p', description)
@@ -100,6 +100,6 @@ describe("Client app health check test", () => {
 
     function verifyPlRedirectPage() {
         cy.get('.object-cover')
-            .should('have.prop', 'src', 'https://dev.beeoclock.biz/assets/iPad_Air_calenadr-with-specialist.png')
+            .should('have.prop', 'src', 'https://biz.dev.beeoclock.com/assets/iPad_Air_calenadr-with-specialist.png')
     }
 });
