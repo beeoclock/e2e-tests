@@ -57,6 +57,7 @@ describe("tariffs queries api test", () => {
         });
     });
 
+    ///api/v1/{id}
     it("should get professional tariff by its id and assert response", () => {
         cy.wrap(null).then(() => {
             expect(expectedTariffs).to.exist;
