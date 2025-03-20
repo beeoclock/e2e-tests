@@ -19,6 +19,8 @@ declare global {
             loginOnProductPanel(): void;
 
             setNetworkThrottle(speed: ThrottleEnum): void;
+
+            assertProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
         }
     }
 }
@@ -129,4 +131,8 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
                 }).as(`${method}-NoThrottle`);
         }
     });
+});
+
+Cypress.Commands.add('assertProperties', { prevSubject: true }, (subject, properties, expectedProperties) => {
+    cy.wrap(subject).should('have.prop', properties).and('include', expectedProperties);
 });

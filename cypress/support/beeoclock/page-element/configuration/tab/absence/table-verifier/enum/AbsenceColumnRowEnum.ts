@@ -1,11 +1,11 @@
 export enum AbsenceColumnRowEnum {
 
-    TYPE = 'type',
-    START = 'start',
-    END = 'end',
-    NOTE = 'note',
-    ATTENDEES = 'attendees',
-    PROGRESS_STATUS = 'progressStatus',
-    CREATED_AT = 'createdAt',
-    UPDATED_AT = 'updatedAt',
+    TYPE = 0,
+    STATUS = 1,
+    START = 2,
+    END = 3,
+    ATTENDEES = 4,
+    NOTE = 5,
+    CREATED_AT = 6,
+    UPDATED_AT = 7,
 }

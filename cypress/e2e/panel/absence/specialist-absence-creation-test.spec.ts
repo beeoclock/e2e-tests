@@ -12,6 +12,7 @@ import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/Spe
 import {CalendarTableTimeEnum} from "support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 import {AbsenceApi} from "support/beeoclock/backend/panel/absence/AbsenceApi";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
+import {TableCommonPage} from "../../../support/beeoclock/page-element/configuration/tab/common/table/TableCommonPage";
 
 describe('specialist absence creation test', () => {
 
@@ -55,7 +56,6 @@ describe('specialist absence creation test', () => {
                 .verifyAbsenceToTime(testData.absenceToTime)
                 .typeAbsenceNote(testData.absenceNote)
                 .clickSaveButton()
-            const createdAt: string = DateUtils.getHourWithAddedMinutes(0)
 
             CalendarPages.CalendarTablePage
                 .assertAbsenceOnTable(testData.assertTableAbsence)
@@ -65,18 +65,21 @@ describe('specialist absence creation test', () => {
 
             LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
+            TableCommonPage
+                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.TYPE, 'Przerwa')
+                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.STATUS, 'Zaplanowane')
+                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.ATTENDEES, '1')
+                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceFromTime)
+                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceToTime)
             AbsencePages.AbsenceTableVerifier
-                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.TYPE, 'Przerwa')
-                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.PROGRESS_STATUS, 'Zaplanowane')
-                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.ATTENDEES, '1')
-                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceFromTime)
-                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceToTime)
                 .verifyCreatedAtRow(testData.absenceNote)
-            AbsencePages.AbsenceActionPage
-                .clickActionButton()
-                .clickGivenAction(AbsenceActionEnum.DEACTIVATE)
-            AbsencePages.AbsenceTableVerifier
-                .verifyGivenRow(testData.absenceNote, AbsenceColumnRowEnum.PROGRESS_STATUS, 'Anulowana')
+
+            TableCommonPage
+                .clickActionButton(testData.absenceNote)
+                .clickGivenActionButton(AbsenceActionEnum.DEACTIVATE)
+
+            TableCommonPage
+                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.STATUS, 'Anulowana')
             AbsencePages.AbsenceActionPage
                 .clickGivenAction(AbsenceActionEnum.DELETE)
             AbsencePages.AbsenceTableVerifier
@@ -113,20 +116,18 @@ describe('specialist absence creation test', () => {
 
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
-        AbsencePages.AbsenceTableVerifier
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.TYPE, 'Przerwa')
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.PROGRESS_STATUS, 'W trakcie')
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.ATTENDEES, '1')
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataFrom)
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataTo)
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.CREATED_AT, DateUtils.getCurrentDate() + ', ' + DateUtils.getCurrentHour())
-        AbsencePages.AbsenceActionPage
-            .clickActionButton()
-            .clickGivenAction(AbsenceActionEnum.DEACTIVATE)
-        AbsencePages.AbsenceTableVerifier
-            .verifyGivenRow('SZYBKA PRZERWA', AbsenceColumnRowEnum.PROGRESS_STATUS, 'Anulowana')
-        AbsencePages.AbsenceActionPage
-            .clickGivenAction(AbsenceActionEnum.DELETE)
+        TableCommonPage
+            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.TYPE, 'Przerwa')
+            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.STATUS, 'W trakcie')
+            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.ATTENDEES, '1')
+            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataFrom)
+            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataTo)
+            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.CREATED_AT, DateUtils.getCurrentDate() + ', ' + DateUtils.getCurrentHour())
+            .clickActionButton('SZYBKA PRZERWA')
+            .clickGivenActionButton(AbsenceActionEnum.DEACTIVATE)
+
+            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.STATUS, 'Anulowana')
+            .clickGivenActionButton(AbsenceActionEnum.DELETE)
         AbsencePages.AbsenceTableVerifier
             .verifyGivenRowNotExist('SZYBKA PRZERWA')
         LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)

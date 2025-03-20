@@ -9,5 +9,12 @@ export class SearchInput {
     public static getSearchButton(): any {
         return cy.get('utility-search-input-component')
             .find('button').last()
+            .scrollIntoView().should('be.visible')
+    }
+
+    public static getClearButton(): any {
+        return cy.get('utility-search-input-component')
+            .find('button').first()
+            .scrollIntoView().should('be.visible')
     }
 }

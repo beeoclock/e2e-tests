@@ -8,6 +8,7 @@ import {CommonPropertiesEnum} from "../../../support/beeoclock/page-element/comm
 import {ClientCreationDataProvider} from "../../../fixtures/panel/client/ClientCreationDataProvider";
 import {ClientTabPages} from "../../../support/beeoclock/page-element/configuration/tab/client/ClientTabPages";
 import {ClientTableCellEnum} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
+import {TableCommonPage} from "../../../support/beeoclock/page-element/configuration/tab/common/table/TableCommonPage";
 
 describe('customer creation test', () => {
 
@@ -51,18 +52,12 @@ describe('customer creation test', () => {
                 .typeSearchValue(testData.lastName)
 
             cy.log('assert client table properties')
-            ClientTabPages.ClientTabTableAssertionPage
+            TableCommonPage
                 .verifyTableRowElement(testData.firstName, ClientTableCellEnum.FIRST_NAME, testData.firstName)
                 .verifyTableRowElement(testData.firstName, ClientTableCellEnum.LAST_NAME, testData.lastName)
                 .verifyTableRowElement(testData.firstName, ClientTableCellEnum.EMAIL, testData.email)
                 .verifyTableRowElement(testData.firstName, ClientTableCellEnum.PHONE, testData.phoneNumber)
                 .verifyTableRowElement(testData.firstName, ClientTableCellEnum.STATUS, 'Aktywny')
-                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.CLIENT_NAMES, testData.firstName + ' ' + testData.lastName)
-                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.EMAIL, testData.email)
-                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.PHONE, testData.phoneNumber)
-                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.NOTE, testData.description)
-                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.ACTIVE_STATUS, "Aktywny")
-
             ClientTabPages.ClientTabActionPage
                 .clickActionButton(testData.lastName)
                 .clickDeleteClient()
