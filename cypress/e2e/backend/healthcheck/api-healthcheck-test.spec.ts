@@ -12,7 +12,6 @@ import {ProductApi} from "../../../support/beeoclock/backend/panel/product/Produ
 import {ProductTagBuilder} from "../../../support/beeoclock/backend/panel/product/tag/ProductTagBuilder";
 import {NumericUtils} from "../../../support/beeoclock/backend/Utils/NumericUtils";
 import {faker} from "@faker-js/faker";
-
 describe("panel api healthcheck", () => {
     let token: string
 
@@ -77,7 +76,6 @@ describe("panel api healthcheck", () => {
             })
         })
     });
-
 
     function loginAndStoreToken() {
         cy.visit(ServiceEnum.CLIENT_PANEL, {
