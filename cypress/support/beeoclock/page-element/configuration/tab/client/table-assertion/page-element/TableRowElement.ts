@@ -1,7 +1,7 @@
 export class TableRowElement {
-    public getElement(cell: string): any {
-        return cy.get('customer-table-list-component')
-            .find('[tablerowflex="body"]')
-            .find(`[tablecolumnflex="${cell}"]`)
+    public getElement(keyValue: string, cell: number): any {
+        return cy.get('datatable-body-row').contains(keyValue)
+            .parents('datatable-body-row').first()
+            .find('datatable-body-cell').eq(cell)
     }
 }

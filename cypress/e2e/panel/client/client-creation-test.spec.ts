@@ -52,12 +52,16 @@ describe('customer creation test', () => {
 
             cy.log('assert client table properties')
             ClientTabPages.ClientTabTableAssertionPage
-                .verifyTableRowElement(ClientTableCellEnum.FIRST_NAME, testData.firstName)
-                .verifyTableRowElement(ClientTableCellEnum.LAST_NAME, testData.lastName)
-                .verifyTableRowElement(ClientTableCellEnum.PHONE, testData.phoneNumber)
-                .verifyTableRowElement(ClientTableCellEnum.NOTE, testData.description)
-                .verifyTableRowElement(ClientTableCellEnum.EMAIL, testData.email)
-                .verifyTableRowElement(ClientTableCellEnum.ACTIVE_STATUS, "Aktywny")
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.FIRST_NAME, testData.firstName)
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.LAST_NAME, testData.lastName)
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.EMAIL, testData.email)
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.PHONE, testData.phoneNumber)
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.STATUS, 'Aktywny')
+                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.CLIENT_NAMES, testData.firstName + ' ' + testData.lastName)
+                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.EMAIL, testData.email)
+                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.PHONE, testData.phoneNumber)
+                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.NOTE, testData.description)
+                // .verifyTableRowElement(testData.firstName + ' ' + testData.lastName, ClientTableCellEnum.ACTIVE_STATUS, "Aktywny")
 
             ClientTabPages.ClientTabActionPage
                 .clickActionButton(testData.lastName)

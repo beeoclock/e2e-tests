@@ -86,7 +86,7 @@ describe('specialist absence creation test', () => {
         })
     })
 
-    it.skip('should create absence science given time', function (): void {
+    it('should create absence science given time', function (): void {
         cy.log(`add absence on calendar panel`)
         CalendarPages.CalendarTablePage
             .clickOnGivenAndHour(SpecialistNameEnum.E2E_E2E, CalendarTableTimeEnum.Hour_15);

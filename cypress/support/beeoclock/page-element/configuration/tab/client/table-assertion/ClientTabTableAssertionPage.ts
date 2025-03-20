@@ -2,12 +2,12 @@ import {ClientTabTableAssertionElement} from "./ClientTabTableAssertionElement";
 
 export class ClientTabTableAssertionPage {
 
-    public verifyTableRowElement(cell: string, expectedValue: string): ClientTabTableAssertionPage {
+    public verifyTableRowElement(key: string, cell: number, expectedValue: string): ClientTabTableAssertionPage {
         if (expectedValue) {
-            ClientTabTableAssertionElement.TableRowElement.getElement(cell)
+            ClientTabTableAssertionElement.TableRowElement.getElement(key, cell)
                 .should('have.prop', 'innerText').and('include', expectedValue)
         } if (expectedValue == null) {
-            ClientTabTableAssertionElement.TableRowElement.getElement(cell)
+            ClientTabTableAssertionElement.TableRowElement.getElement(key, cell)
                 .should('have.prop', 'innerText').and('include', "-")
         }
         return this;
