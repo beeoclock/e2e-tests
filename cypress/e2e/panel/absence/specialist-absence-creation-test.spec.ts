@@ -57,9 +57,6 @@ describe('specialist absence creation test', () => {
             CalendarPages.CalendarTablePage
                 .assertAbsenceOnTable(testData.assertTableAbsence)
 
-            // RightPanelPages.RightPanelNavigationPage
-            //     .clickCloseRightPanel()
-
             LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
             TableCommonPage
