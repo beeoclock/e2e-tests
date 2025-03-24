@@ -105,20 +105,20 @@ export class SummaryAndPaymentServicePage {
 
         NotificationsPage.clickConfirmButton()
 
-        // cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
-        //     cy.wrap(interception.request.body._id).as('orderId');
-        //         })
-        //
-        // cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
-        //             const sendPaymentStatus = interception.request.body.status;
-        //             expect(sendPaymentStatus).to.equal(paymentStatus);
-        //         })
-        cy.wait(['@' + createOrder, '@' + createPayment], {timeout: 20000}).then(([orderInterception, paymentInterception]) => {
-            cy.wrap(orderInterception.request.body._id).as('orderId');
+        cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
+            cy.wrap(interception.request.body._id).as('orderId');
+                })
 
-            const sendPaymentStatus = paymentInterception.request.body.status;
-            expect(sendPaymentStatus).to.equal(paymentStatus);
-        });
+        cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
+                    const sendPaymentStatus = interception.request.body.status;
+                    expect(sendPaymentStatus).to.equal(paymentStatus);
+                })
+        // cy.wait(['@' + createOrder, '@' + createPayment], {timeout: 20000}).then(([orderInterception, paymentInterception]) => {
+        //     cy.wrap(orderInterception.request.body._id).as('orderId');
+        //
+        //     const sendPaymentStatus = paymentInterception.request.body.status;
+        //     expect(sendPaymentStatus).to.equal(paymentStatus);
+        // });
 
                 LeftMenuPage.assertIsSynchronized(true)
 
