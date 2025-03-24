@@ -23,7 +23,7 @@ describe('customer creation test', () => {
         cy.loginOnPanel()
         cy.log('assert login url');
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
-        LeftMenuPage.synchronizeWithInterception()
+        LeftMenuPage.assertIsSynchronized(true)
         cy.log('verify current date')
         CalendarPages.CalendarNavigationPage
             .verifyCurrenDate()
