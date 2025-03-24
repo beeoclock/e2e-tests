@@ -3,7 +3,7 @@ export class TableComponent {
     public getActionButton(keyValue: string): any {
         return cy.get('datatable-body-row').contains(keyValue)
             .parents('datatable-body-row').first()
-            .find(`customer-row-action-button-component`)
+            .find('button')
             .scrollIntoView().should('be.visible')
     }
 

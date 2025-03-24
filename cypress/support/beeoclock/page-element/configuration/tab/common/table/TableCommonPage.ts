@@ -1,17 +1,18 @@
-import {ClientTabActionPageElement} from "../../client/navigation/ClientTabActionPageElement";
 import {ClientTabTableAssertionElement} from "../../client/table-assertion/ClientTabTableAssertionElement";
+import {TableComponent} from "./TableComponent";
 
 export class TableCommonPage {
+    private static component = new TableComponent()
 
     public static clickActionButton(keyValue: string): typeof TableCommonPage {
-        ClientTabActionPageElement.ActionButtonElement.getElement(keyValue)
+        this.component.getActionButton(keyValue)
             .click()
         cy.wait(500)
         return this;
     }
 
     public static clickGivenActionButton(action: string): typeof TableCommonPage {
-        ClientTabActionPageElement.GivenActionButton.getElement(action)
+        this.component.getGivenAction(action)
             .click()
         return this;
     }
@@ -20,8 +21,7 @@ export class TableCommonPage {
         if (expectedValue) {
             ClientTabTableAssertionElement.TableRowElement.getElement(key, cell)
                 .should('have.prop', 'innerText').and('include', expectedValue)
-        }
-        else if (expectedValue == null) {
+        } else if (expectedValue == null) {
             ClientTabTableAssertionElement.TableRowElement.getElement(key, cell)
                 .should('have.prop', 'innerText').and('include', "")
         }

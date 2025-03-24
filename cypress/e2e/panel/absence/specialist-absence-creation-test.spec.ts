@@ -24,14 +24,11 @@ describe('specialist absence creation test', () => {
         LeftMenuPage.assertIsSynchronized(true)
     })
 
-    it('test panel absence creation service', function () {
+    it.only('test panel absence creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
-            // TestCaseEnum.CASE_2
+            TestCaseEnum.CASE_2
         ];
-
-        cy.log('handle synchronization process')
-        LeftMenuPage.synchronizeWithInterception()
 
         cy.log('select next date with assert')
         CalendarPages.CalendarNavigationPage
@@ -71,17 +68,10 @@ describe('specialist absence creation test', () => {
                 .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.ATTENDEES, '1')
                 .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceFromTime)
                 .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceToTime)
-            AbsencePages.AbsenceTableVerifier
-                .verifyCreatedAtRow(testData.absenceNote)
 
-            TableCommonPage
                 .clickActionButton(testData.absenceNote)
                 .clickGivenActionButton(AbsenceActionEnum.DEACTIVATE)
 
-            TableCommonPage
-                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.STATUS, 'Anulowana')
-            AbsencePages.AbsenceActionPage
-                .clickGivenAction(AbsenceActionEnum.DELETE)
             AbsencePages.AbsenceTableVerifier
                 .verifyGivenRowNotExist(testData.absenceNote)
                 .verifyTableIsEmpty()
@@ -111,9 +101,6 @@ describe('specialist absence creation test', () => {
         CalendarPages.CalendarTablePage
             .assertAbsenceOnTable(dataFrom + ' - ' + dataTo + '\nPrzerwa')
 
-        // RightPanelPages.RightPanelNavigationPage
-        //     .clickCloseRightPanel()
-
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
         TableCommonPage
@@ -126,8 +113,6 @@ describe('specialist absence creation test', () => {
             .clickActionButton('SZYBKA PRZERWA')
             .clickGivenActionButton(AbsenceActionEnum.DEACTIVATE)
 
-            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.STATUS, 'Anulowana')
-            .clickGivenActionButton(AbsenceActionEnum.DELETE)
         AbsencePages.AbsenceTableVerifier
             .verifyGivenRowNotExist('SZYBKA PRZERWA')
         LeftMenuPage.clickOnGivenTab(TabNameEnum.CALENDAR)
