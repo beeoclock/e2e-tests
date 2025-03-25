@@ -13,6 +13,7 @@ export class AuthApi {
                 "password": ClientPropertiesEnum.PASSWORD,
                 "returnSecureToken": true
             },
+            log: false
         }).then(response => {
             expect(response.status).to.equal(200);
             return response.body.idToken as string;
