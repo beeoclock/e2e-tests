@@ -23,4 +23,19 @@ export class TariffConfirmationModal {
         return this.getElement().contains('span', 'Wykorzystane dni:')
             .next('span')
     }
+
+    public getNextDay(): any {
+        return this.getElement().contains('span', 'Pozostałe dni:')
+            .next('span')
+    }
+
+    public getLeftCreditElement(): any {
+        return this.getElement().contains('span', 'Pozostały kredyt:')
+            .next('span')
+    }
+
+    public getDifferentToPay(): any {
+        return this.getElement().contains('span', 'Różnica do zapłaty:')
+            .next('span')
+    }
 }

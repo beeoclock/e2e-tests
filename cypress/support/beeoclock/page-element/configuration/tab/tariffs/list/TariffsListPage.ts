@@ -2,9 +2,11 @@ import {TariffsListPageElement} from "./TariffsListPageElement";
 import {TariffsNameEnum} from "../enum/TariffsNameEnum";
 import {TariffsApiInterceptionHelper} from "../../../../../common/Interception/tariffs/TariffsApiInterceptionHelper";
 import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
+import {Assertions} from "../../common/assertions/Assertions";
 
 export class TariffsListPage {
     private tariffsComponent = TariffsListPageElement.TariffsComponent
+    private confirmationComponent = TariffsListPageElement.TariffConfirmationModal
 
     public verifyTariffsPrize(name: string, prize: string): TariffsListPage {
         this.tariffsComponent.getTariffsPrice(name)
@@ -78,17 +80,25 @@ export class TariffsListPage {
             .contains('button', 'Zaktualizuj do ' + TariffsNameEnum.PROFESSIONAL).should('be.visible')
             .click()
             .then((): void => {
-            
+                Assertions.assertPropertiesByShould(this.confirmationComponent.getCurrentPlan(), TariffsNameEnum.BASIC)
+                Assertions.assertPropertiesByShould(this.confirmationComponent.getNewPlan(), TariffsNameEnum.PROFESSIONAL)
+                Assertions.assertPropertiesByShould(this.confirmationComponent.getUsedDayPlan(), '0')
+                Assertions.assertPropertiesByShould(this.confirmationComponent.getNextDay(), '30')
+                Assertions.assertPropertiesByShould(this.confirmationComponent.getLeftCreditElement(), '0')
+                Assertions.assertPropertiesByShould(this.confirmationComponent.getDifferentToPay(), '189,00 zł')
+                cy.contains('p', '✅ Twój plan zostanie natychmiast zaktualizowany.').should('be.visible')
+                cy.contains('p', '✅ Kolejna płatność zostanie odpowiednio dostosowana').should('be.visible')
             })
 
+        this.clickConfirmButton()
         cy.wait('@' + updateTariff).then(interception => {
             const request = interception.request
 
-            expect(request.body.features).to.have.length(10)
-            expect(request.body.type).to.equal(TariffsNameEnum.PROFESSIONAL)
-            expect(request.body._id).to.equal('66916aa0c5875b0caba6c440')
+            expect(request.body.tariffPlan.features).to.have.length(10)
+            expect(request.body.tariffPlan.type).to.equal(TariffsNameEnum.PROFESSIONAL)
+            expect(request.body.tariffPlan._id).to.equal('66916aa0c5875b0caba6c440')
 
-            expect(request.body).to.deep.include({
+            expect(request.body.tariffPlan).to.deep.include({
                 _id: '66916aa0c5875b0caba6c440',
                 type: TariffsNameEnum.PROFESSIONAL,
                 features: [
@@ -115,6 +125,15 @@ export class TariffsListPage {
         this.tariffsComponent.getTariffsByName(name)
             .contains('button', 'Zaktualizuj do ' + name).should('be.visible')
             .and('have.css', 'background-color', 'rgb(255, 212, 41)')
+        return this;
+    }
+
+    public clickConfirmButton(): TariffsListPage {
+        const element = cy.contains('button', 'Potwierdź')
+        element.should('be.visible')
+            .and('have.css', 'background-color', 'rgb(255, 212, 41)')
+
+        element.click();
         return this;
     }
 
