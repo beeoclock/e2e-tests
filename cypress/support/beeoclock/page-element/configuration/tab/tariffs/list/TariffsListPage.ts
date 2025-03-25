@@ -76,7 +76,11 @@ export class TariffsListPage {
         const updateTariff = TariffsApiInterceptionHelper.updateTariffs()
         this.tariffsComponent.getTariffsByName(TariffsNameEnum.PROFESSIONAL)
             .contains('button', 'Zaktualizuj do ' + TariffsNameEnum.PROFESSIONAL).should('be.visible')
-            .click();
+            .click()
+            .then((): void => {
+            
+            })
+
         cy.wait('@' + updateTariff).then(interception => {
             const request = interception.request
 
