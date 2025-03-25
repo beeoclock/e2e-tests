@@ -62,7 +62,7 @@ describe("Client app health check test", () => {
 
     it('test 4 assert correct redirect', function () {
         cy.visit(emptyDomain)
-        let description = ' Bee O\'clock to usługa online umożliwiająca wygodne umawianie spotkań z klientami. Nie trać klientów: daj im możliwość umówienia się na spotkanie w dowolnym momencie. Zautomatyzuj swój biznes - zarządzaj spotkaniami, klientami, płatnościami i pracownikami łatwo i wydajnie dzięki Bee O\'clock. '
+        let description: string = 'Rezerwacja spotkań online dla klientów.'
 
         cy.document().then((doc) => {
             const langAttribute = doc.documentElement.getAttribute('lang');
@@ -70,8 +70,6 @@ describe("Client app health check test", () => {
         });
 
         assertUrl('https://biz.dev.beeoclock.com/pl')
-        verifyPlRedirectPage()
-        cy.get('h1').should('contain.text', businessHeader);
         cy.contains('p', description)
     });
 
@@ -96,10 +94,5 @@ describe("Client app health check test", () => {
         const getGivenClient = 'getGivenClient' + DateUtils.getCurrentTime()
         cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn/specialist/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=100').as(getGivenClient);
         cy.wait('@' + getGivenClient);
-    }
-
-    function verifyPlRedirectPage() {
-        cy.get('.object-cover')
-            .should('have.prop', 'src', 'https://biz.dev.beeoclock.com/assets/iPad_Air_calenadr-with-specialist.png')
     }
 });

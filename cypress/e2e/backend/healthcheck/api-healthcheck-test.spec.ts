@@ -12,18 +12,16 @@ import {ProductApi} from "../../../support/beeoclock/backend/panel/product/Produ
 import {ProductTagBuilder} from "../../../support/beeoclock/backend/panel/product/tag/ProductTagBuilder";
 import {NumericUtils} from "../../../support/beeoclock/backend/Utils/NumericUtils";
 import {faker} from "@faker-js/faker";
+import {AuthApi} from "../../../support/beeoclock/backend/auth/AuthApi";
+
 describe("panel api healthcheck", () => {
     let token: string
 
-    it('login and get valid token', () => {
-        cy.log('visit');
-        loginAndStoreToken()
-
-        cy.get('@token').then(fetchedToken => {
-            token = fetchedToken.toString();
-            cy.log('Token:', token);
-        });
-    });
+    before('get token', () => {
+        AuthApi.getToken().then(bearer => {
+            token = bearer
+        })
+    })
 
     it('get business profile and assert unauthorized response', function (): void {
         BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.Unauthorized, BackendCommonEnum.INVALID_TOKEN, {
@@ -67,7 +65,7 @@ describe("panel api healthcheck", () => {
         })
     });
 
-    it.skip('create product tag and delete', function (): void {
+    it('create product tag and delete', function (): void {
         let id: string = NumericUtils.generateObjectId()
         const tag = new ProductTagBuilder().setId(id).setName('TAG NO ' + faker.finance.pin(6)).build();
         ProductApi.createProductTag(tag, token).then(() => {
@@ -76,22 +74,4 @@ describe("panel api healthcheck", () => {
             })
         })
     });
-
-    function loginAndStoreToken() {
-        cy.visit(ServiceEnum.CLIENT_PANEL, {
-            failOnStatusCode: false,
-            onBeforeLoad: (win) => {
-                win.sessionStorage.clear();
-                win.localStorage.clear();
-                win.sessionStorage.clear();
-                win.localStorage.setItem('language', 'pl');
-            }
-        });
-
-        cy.log('login');
-        PanelLoginPageElement.EmailInput.getElement();
-        PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
-        PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
-        PanelLoginPage.clickLoginButtonAndStoreToken();
-    }
 });
