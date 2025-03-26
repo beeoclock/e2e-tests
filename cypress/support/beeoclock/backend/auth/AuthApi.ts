@@ -15,8 +15,9 @@ export class AuthApi {
             },
         }).then(response => {
             expect(response.status).to.equal(200);
-            console.log(response);
-            return response.body.idToken as string;
+            const token = response.body.idToken as string;
+            Cypress.env('token', token);
+            return token;
         });
     }
 }

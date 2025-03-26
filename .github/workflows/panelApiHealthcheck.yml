@@ -24,6 +24,19 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Get Token
+        run: |
+          TOKEN=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "clientType": "CLIENT_TYPE_WEB",
+            "email": "${{ secrets.LOGIN }}",
+            "password": "${{ secrets.PASSWORD }}",
+            "returnSecureToken": true
+          }' | jq -r '.idToken')
+      
+          echo "TOKEN=$TOKEN" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: npm install
 
