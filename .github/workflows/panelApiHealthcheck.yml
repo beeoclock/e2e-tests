@@ -12,6 +12,8 @@ jobs:
       LOGIN: ${{ secrets.LOGIN }}
       PASSWORD: ${{ secrets.PASSWORD }}
       API_KEY: ${{ secrets.KEY }}
+      ACTIONS_RUNNER_DEBUG: true
+      ACTIONS_STEP_DEBUG: true
 
     steps:
       - name: Checkout code
