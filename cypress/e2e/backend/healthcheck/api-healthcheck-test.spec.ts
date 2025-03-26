@@ -1,9 +1,5 @@
 import {BusinessProfileApi} from "../../../support/beeoclock/backend/panel/business-profile/BusinessProfileApi";
 import {HTTPStatusCodeType} from "../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
-import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
-import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
-import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
-import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
 import {BackendCommonEnum} from "../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {IdentityApi} from "../../../support/beeoclock/backend/identity/IdentityApi";
 import {IdentityData} from "../../../support/beeoclock/backend/identity/enum/IdentityResponse";
@@ -23,7 +19,7 @@ describe("panel api healthcheck", () => {
         })
     })
 
-    it.skip('get business profile and assert unauthorized response', function (): void {
+    it('get business profile and assert unauthorized response', function (): void {
         BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.Unauthorized, BackendCommonEnum.INVALID_TOKEN, {
             failOnStatusCode: false
         });
@@ -31,7 +27,6 @@ describe("panel api healthcheck", () => {
 
     it('get identity profile and assert expected response', function (): void {
         IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
-            cy.log('response', JSON.stringify(response));
 
             expect(response).to.have.property('items').that.is.an('array');
             expect(response.items).to.have.length(IdentityData.DATA.items.length);

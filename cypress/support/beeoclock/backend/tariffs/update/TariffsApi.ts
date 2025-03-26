@@ -15,6 +15,9 @@ export class TariffsApi {
         return cy.request({
             method: 'PATCH',
             url: url,
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
             auth: {
                 bearer: token
             },

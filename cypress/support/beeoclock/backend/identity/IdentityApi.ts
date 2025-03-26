@@ -10,7 +10,8 @@ export class IdentityApi {
             method: 'GET',
             url: url,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                'Authorization': `Bearer ${tokenId}`
             },
             auth: {
                 bearer: tokenId

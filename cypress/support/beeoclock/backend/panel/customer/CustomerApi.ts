@@ -12,7 +12,8 @@ export class CustomerApi {
                 method: 'POST',
                 url: EntryPointEnum.API_ENTRY_POINT + '/customer',
                 headers: {
-                    'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                    'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                    'Authorization': `Bearer ${token}`
                 },
                 body: customer,
                 auth: {
