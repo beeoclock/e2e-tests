@@ -26,14 +26,20 @@ jobs:
 
       - name: Get and Print Token
         run: |
-          TOKEN=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.API_KEY }}" \
+          RESPONSE=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.API_KEY }}" \
           -H "Content-Type: application/json" \
           --data-raw '{
-           "clientType": "CLIENT_TYPE_WEB",
-           "email": "'"${{ secrets.LOGIN }}"'",
-           "password": "'"${{ secrets.PASSWORD }}"'",
-           "returnSecureToken": true
-          }' | jq -r '.idToken')
+            "clientType": "CLIENT_TYPE_WEB",
+            "email": "'"${{ secrets.LOGIN }}"'",
+            "password": "'"${{ secrets.PASSWORD }}"'",
+            "returnSecureToken": true
+          }')
 
+          STATUS_CODE=$(echo "$RESPONSE" | jq -r '.status')
+          echo "HTTP Status: $STATUS_CODE"
+          echo "API Response: $RESPONSE"
+
+          TOKEN=$(echo "$RESPONSE" | jq -r '.idToken')
           echo "TOKEN: $TOKEN"
         shell: bash
+
