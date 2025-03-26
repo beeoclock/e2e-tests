@@ -26,7 +26,7 @@ jobs:
 
       - name: Get and Print Token
         run: |
-          RESPONSE=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.API_KEY }}" \
+          RESPONSE=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.KEY }}" \
           -H "Content-Type: application/json" \
           --data-raw '{
             "clientType": "CLIENT_TYPE_WEB",
