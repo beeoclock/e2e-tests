@@ -9,7 +9,7 @@ export default defineConfig({
     apiBackendEntryPoint: 'https://api-dev.beeoclock.com/client/api/v1/',
     LOGIN: process.env.LOGIN,
     PASSWORD: process.env.PASSWORD,
-    MAIL_LOGIN: process.env.MAIL_PASSWORD,
+    // MAIL_LOGIN: process.env.MAIL_PASSWORD,
     API_KEY: process.env.API_KEY,
   },
 

@@ -2,13 +2,13 @@
   "items": [
     {
       "_id": "66916aa0c5875b0caba6c438",
-      "createdAt": "2025-03-08T23:01:03.064Z",
-      "updatedAt": "2025-03-08T23:01:03.064Z",
+      "createdAt": "2025-03-24T18:28:22.267Z",
+      "updatedAt": "2025-03-24T18:28:22.267Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-08T23:01:02.196Z"
+          "setAt": "2025-03-24T18:28:21.690Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -21,12 +21,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 0,
-              "afterDiscount": 0
+              "afterDiscount": 0,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 0,
-              "afterDiscount": 0
+              "afterDiscount": 0,
+              "discountPercentage": 0
             }
           ],
           "currency": "PLN",
@@ -52,8 +54,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:02.996Z",
-          "updatedAt": "2025-03-08T23:01:02.996Z"
+          "createdAt": "2025-03-24T18:28:22.216Z",
+          "updatedAt": "2025-03-24T18:28:22.216Z"
         },
         {
           "region": "EU",
@@ -61,12 +63,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 0,
-              "afterDiscount": 0
+              "afterDiscount": 0,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 0,
-              "afterDiscount": 0
+              "afterDiscount": 0,
+              "discountPercentage": 0
             }
           ],
           "currency": "EUR",
@@ -92,8 +96,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:03.062Z",
-          "updatedAt": "2025-03-08T23:01:03.062Z"
+          "createdAt": "2025-03-24T18:28:22.266Z",
+          "updatedAt": "2025-03-24T18:28:22.266Z"
         },
         {
           "region": "WORLD",
@@ -101,12 +105,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 0,
-              "afterDiscount": 0
+              "afterDiscount": 0,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 0,
-              "afterDiscount": 0
+              "afterDiscount": 0,
+              "discountPercentage": 0
             }
           ],
           "currency": "USD",
@@ -132,8 +138,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:03.063Z",
-          "updatedAt": "2025-03-08T23:01:03.063Z"
+          "createdAt": "2025-03-24T18:28:22.266Z",
+          "updatedAt": "2025-03-24T18:28:22.266Z"
         }
       ],
       "isPerSpecialist": false,
@@ -147,8 +153,8 @@
         "excludeList": [
           "assistantAI"
         ],
-        "createdAt": "2025-03-08T23:01:02.995Z",
-        "updatedAt": "2025-03-08T23:01:02.995Z"
+        "createdAt": "2025-03-24T18:28:22.216Z",
+        "updatedAt": "2025-03-24T18:28:22.216Z"
       },
       "features": [
         "emailNotification",
@@ -160,13 +166,13 @@
     },
     {
       "_id": "66916aa0c5875b0caba6c439",
-      "createdAt": "2025-03-08T23:01:03.515Z",
-      "updatedAt": "2025-03-08T23:01:03.515Z",
+      "createdAt": "2025-03-24T18:28:22.563Z",
+      "updatedAt": "2025-03-24T18:28:22.563Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-08T23:01:03.298Z"
+          "setAt": "2025-03-24T18:28:22.440Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -179,12 +185,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 59,
-              "afterDiscount": 59
+              "afterDiscount": 59,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 708,
-              "afterDiscount": 637.2
+              "afterDiscount": 496,
+              "discountPercentage": 30
             }
           ],
           "currency": "PLN",
@@ -210,8 +218,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:03.492Z",
-          "updatedAt": "2025-03-08T23:01:03.492Z"
+          "createdAt": "2025-03-24T18:28:22.562Z",
+          "updatedAt": "2025-03-24T18:28:22.562Z"
         },
         {
           "region": "EU",
@@ -219,12 +227,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 49,
-              "afterDiscount": 49
+              "afterDiscount": 49,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 588,
-              "afterDiscount": 529.2
+              "afterDiscount": 412,
+              "discountPercentage": 30
             }
           ],
           "currency": "EUR",
@@ -250,8 +260,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:03.492Z",
-          "updatedAt": "2025-03-08T23:01:03.492Z"
+          "createdAt": "2025-03-24T18:28:22.562Z",
+          "updatedAt": "2025-03-24T18:28:22.562Z"
         },
         {
           "region": "WORLD",
@@ -259,12 +269,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 55,
-              "afterDiscount": 55
+              "afterDiscount": 55,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 660,
-              "afterDiscount": 594
+              "afterDiscount": 462,
+              "discountPercentage": 30
             }
           ],
           "currency": "USD",
@@ -290,8 +302,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:03.492Z",
-          "updatedAt": "2025-03-08T23:01:03.492Z"
+          "createdAt": "2025-03-24T18:28:22.562Z",
+          "updatedAt": "2025-03-24T18:28:22.562Z"
         }
       ],
       "isPerSpecialist": false,
@@ -307,8 +319,8 @@
         "excludeList": [
           "assistantAI"
         ],
-        "createdAt": "2025-03-08T23:01:03.492Z",
-        "updatedAt": "2025-03-08T23:01:03.492Z"
+        "createdAt": "2025-03-24T18:28:22.561Z",
+        "updatedAt": "2025-03-24T18:28:22.561Z"
       },
       "features": [
         "unlimitedPlugins",
@@ -319,17 +331,23 @@
         "confirmationAfterUserPayment",
         "adminPanel",
         "publicPage"
-      ]
+      ],
+      "trialInfo": {
+        "days": 14,
+        "isAvailable": true,
+        "createdAt": "2025-03-24T18:28:22.562Z",
+        "updatedAt": "2025-03-24T18:28:22.562Z"
+      }
     },
     {
       "_id": "66916aa0c5875b0caba6c440",
-      "createdAt": "2025-03-08T23:01:04.096Z",
-      "updatedAt": "2025-03-08T23:01:04.096Z",
+      "createdAt": "2025-03-24T18:28:22.896Z",
+      "updatedAt": "2025-03-24T18:28:22.896Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-08T23:01:03.755Z"
+          "setAt": "2025-03-24T18:28:22.692Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -342,12 +360,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 189,
-              "afterDiscount": 189
+              "afterDiscount": 189,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 2268,
-              "afterDiscount": 2041.2
+              "afterDiscount": 1588,
+              "discountPercentage": 30
             }
           ],
           "currency": "PLN",
@@ -373,8 +393,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:04.049Z",
-          "updatedAt": "2025-03-08T23:01:04.049Z"
+          "createdAt": "2025-03-24T18:28:22.895Z",
+          "updatedAt": "2025-03-24T18:28:22.895Z"
         },
         {
           "region": "EU",
@@ -382,12 +402,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 89,
-              "afterDiscount": 89
+              "afterDiscount": 89,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 1068,
-              "afterDiscount": 961.2
+              "afterDiscount": 748,
+              "discountPercentage": 30
             }
           ],
           "currency": "EUR",
@@ -413,8 +435,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:04.096Z",
-          "updatedAt": "2025-03-08T23:01:04.096Z"
+          "createdAt": "2025-03-24T18:28:22.896Z",
+          "updatedAt": "2025-03-24T18:28:22.896Z"
         },
         {
           "region": "WORLD",
@@ -422,12 +444,14 @@
             {
               "billingCycle": "monthly",
               "beforeDiscount": 89,
-              "afterDiscount": 89
+              "afterDiscount": 89,
+              "discountPercentage": 0
             },
             {
               "billingCycle": "yearly",
               "beforeDiscount": 1068,
-              "afterDiscount": 961.2
+              "afterDiscount": 748,
+              "discountPercentage": 30
             }
           ],
           "currency": "USD",
@@ -453,8 +477,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-08T23:01:04.096Z",
-          "updatedAt": "2025-03-08T23:01:04.096Z"
+          "createdAt": "2025-03-24T18:28:22.896Z",
+          "updatedAt": "2025-03-24T18:28:22.896Z"
         }
       ],
       "isPerSpecialist": false,
@@ -464,8 +488,8 @@
         "excludeAll": false,
         "includeList": [],
         "excludeList": [],
-        "createdAt": "2025-03-08T23:01:04.048Z",
-        "updatedAt": "2025-03-08T23:01:04.048Z"
+        "createdAt": "2025-03-24T18:28:22.895Z",
+        "updatedAt": "2025-03-24T18:28:22.895Z"
       },
       "features": [
         "unlimitedPlugins",
@@ -478,7 +502,13 @@
         "publicPage",
         "assistantAI",
         "publicRestApi"
-      ]
+      ],
+      "trialInfo": {
+        "days": 14,
+        "isAvailable": true,
+        "createdAt": "2025-03-24T18:28:22.896Z",
+        "updatedAt": "2025-03-24T18:28:22.896Z"
+      }
     }
   ],
   "totalSize": 3
