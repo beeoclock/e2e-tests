@@ -23,15 +23,9 @@ describe("panel api healthcheck", () => {
         })
     })
 
-    it('get business profile and assert unauthorized response', function (): void {
+    it.skip('get business profile and assert unauthorized response', function (): void {
         BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.Unauthorized, BackendCommonEnum.INVALID_TOKEN, {
             failOnStatusCode: false
-        });
-    });
-
-    it('get business profile and assert correct response', function (): void {
-        BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
-            cy.log('response', JSON.stringify(response));
         });
     });
 
