@@ -14,9 +14,7 @@ describe("panel api healthcheck", () => {
     let token: string
 
     before('get token', () => {
-        AuthApi.getToken().then(bearer => {
-            token = bearer
-        })
+       token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjMwYjIyMWFiNjU2MTdiY2Y4N2VlMGY4NDYyZjc0ZTM2NTIyY2EyZTQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiUGlvdHIga293YWxza2kiLCJhY2NvdW50SWQiOiI2NjJhNDM2NGE0YjM3NmQyMGMwNjViMTIiLCJmcm9udGVuZFNldHRpbmdzIjp7ImJ1c2luZXNzUGFuZWwiOnsibGFuZ3VhZ2UiOiJlbiJ9fSwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2JlZW9jbG9jay1kZXZlbG9wIiwiYXVkIjoiYmVlb2Nsb2NrLWRldmVsb3AiLCJhdXRoX3RpbWUiOjE3NDMwMTEyNTIsInVzZXJfaWQiOiJ1bDVKSVdZVTdPWG9OTEwwajYxM0hBQVBoejkyIiwic3ViIjoidWw1SklXWVU3T1hvTkxMMGo2MTNIQUFQaHo5MiIsImlhdCI6MTc0MzAxMTI1MiwiZXhwIjoxNzQzMDE0ODUyLCJlbWFpbCI6ImUyZS50ZXN0aW5nQGRldi5iZWVvY2xvY2suY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBob25lX251bWJlciI6Iis0ODEyMzMzMzMzMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiZTJlLnRlc3RpbmdAZGV2LmJlZW9jbG9jay5jb20iXSwicGhvbmUiOlsiKzQ4MTIzMzMzMzMyIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.hezmvufO4MaFevgRxfqtYKuao_Jny7wVsJpLhD3XZPiW7sz5ud8UtIuyApEMu4iRz_sPdKmYJrpuHSbiBPPAbkcZaFsWgmhzwHNnrP9vOOeodiQfK-dgKw5S9qvPT3h7SipQSAyU_bSiT2E-RTlNpQVXCJQbPh5-8VKuvxUuOb4Kufw8jxSdSczSR9B1Ap74AhQJnTDeTdrFQtNu5Q0jceK2uGNo4HueEe7pwl5f_KW-58xZezV30Ye99MITaDuoHDEATiKE6ZKU1KK-Snzpxc2GV6-g5oKBwv7g1OYpDXoc15TGiKcpSznCMQCflePbAKutQotc4rOfV-NeMOPfZQ'
     })
 
     it('get business profile and assert unauthorized response', function (): void {
