@@ -28,6 +28,8 @@ describe("panel api healthcheck", () => {
     it('get identity profile and assert expected response', function (): void {
         IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
 
+            cy.log("TOKEN", token)
+            console.log("TOKEN", token)
             expect(response).to.have.property('items').that.is.an('array');
             expect(response.items).to.have.length(IdentityData.DATA.items.length);
 
