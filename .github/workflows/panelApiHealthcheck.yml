@@ -48,3 +48,6 @@ jobs:
             exit 1
           fi
         shell: bash
+
+      - name: Run Api test
+        run: npm run panel-app-api-health-check
