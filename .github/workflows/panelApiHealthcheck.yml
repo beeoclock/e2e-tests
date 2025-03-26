@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Get and Print Token
         run: |
           RESPONSE=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.KEY }}" \
