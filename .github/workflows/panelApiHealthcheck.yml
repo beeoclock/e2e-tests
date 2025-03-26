@@ -33,5 +33,5 @@ jobs:
           echo "TOKEN=$token" >> $GITHUB_ENV  # Zapisanie tokena w zmiennej środowiskowej GitHub Actions
 
 
-      - name: Run healthcheck
+      #- name: Run healthcheck
       # run: npm run panel-app-api-health-check
