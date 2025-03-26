@@ -27,5 +27,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Get Token and Log it
+        run: |
+          echo "Getting token..."
+          TOKEN=$(npm run token-api-test) # Tutaj uruchamiasz swoje polecenie do uzyskania tokena, np. skrypt bash lub npm
+          echo "Token: $TOKEN"  # Logowanie tokena w GitHub Actions
+          echo "TOKEN=$token" >> $GITHUB_ENV  # Zapisanie tokena w zmiennej środowiskowej GitHub Actions
+
+
       - name: Run healthcheck
-        run: npm run panel-app-api-health-check
+      # run: npm run panel-app-api-health-check

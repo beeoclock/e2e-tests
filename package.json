@@ -10,7 +10,8 @@
     "client-app-test": "npx cypress run --spec cypress/e2e/service/page --browser edge",
     "client-app-health-check": "npx cypress run --spec cypress/e2e/service/healtcheck/client-app-health-check-test-spec.ts",
     "panel-app-api-health-check": "npx cypress run --spec cypress/e2e/backend/healthcheck",
-    "panel-app-api-test": "npx cypress run --spec cypress/e2e/backend/customer"
+    "panel-app-api-test": "npx cypress run --spec cypress/e2e/backend/customer",
+    "token-api-test": "npx cypress run --spec cypress/e2e/backend/auth"
   },
   "author": "Jan Zadumiński",
   "license": "ISC",
