@@ -5,7 +5,7 @@ import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 export class ProductApi {
 
     public static createProductTag(tag: any, token: string): any {
-        console.log('token!: ' + token);
+        cy.log('token!: ' + token);
         return cy.request({
             method: 'POST',
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag',
