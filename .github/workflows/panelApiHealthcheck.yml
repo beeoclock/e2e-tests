@@ -28,4 +28,12 @@ jobs:
         run: |
           TOKEN=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.API_KEY }}" \
           -H "Content-Type: application/json" \
-          -d '{
+          --data-raw '{
+           "clientType": "CLIENT_TYPE_WEB",
+           "email": "'"${{ secrets.LOGIN }}"'",
+           "password": "'"${{ secrets.PASSWORD }}"'",
+           "returnSecureToken": true
+          }' | jq -r '.idToken')
+
+          echo "TOKEN: $TOKEN"
+        shell: bash
