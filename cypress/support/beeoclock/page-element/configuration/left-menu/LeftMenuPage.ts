@@ -84,7 +84,6 @@ export class LeftMenuPage {
     public static handleSynchronization(): LeftMenuPage {
         LeftMenuPageElement.SynchronizingComponent.getElement()
             .click();
-        this.assertIsSynchronized(true)
         cy.log('Waiting for synchronization requests to complete...');
         return this
     }

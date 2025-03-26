@@ -109,6 +109,7 @@ export class RightPanelServicesPage {
             .click({force: true})
         cy.wait(200)
         this.typePrice(price)
+        cy.wait(200)
         return this;
     }
 

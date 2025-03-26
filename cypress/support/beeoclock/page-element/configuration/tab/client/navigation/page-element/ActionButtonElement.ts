@@ -1,12 +1,8 @@
 export class ActionButtonElement {
-    public getElement(lastName: string): any {
-        return cy.get('customer-table-list-component')
-            .find('[tablerowflex="body"]')
-            .find(`[tablecolumnflex="lastName"]`).contains(lastName)
-            .parents('[tablerowflex="body"]').first()
+    public getElement(keyValue: string): any {
+        return cy.get('datatable-body-row').contains(keyValue)
+            .parents('datatable-body-row').first()
             .find(`customer-row-action-button-component`)
             .scrollIntoView().should('be.visible')
-
-
     }
 }

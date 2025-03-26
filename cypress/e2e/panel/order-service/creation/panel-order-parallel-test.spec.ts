@@ -42,8 +42,8 @@ describe('panel - order service', () => {
                 .selectMinute(testData.minute)
                 .clickSubmitSelectedTime()
                 .selectPriceOfService(testData.updatedPrice)
-                .selectSpecialist(testData.specialistFirstName);
 
+            // cy.wait(2000)
             RightPanelPages.SummaryAndPaymentServicePage
                 .verifyOrderService(testData.summary)
                 .verifyOrderSpecialist(testData.specialistFirstName)

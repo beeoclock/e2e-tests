@@ -1,6 +1,5 @@
 import {SummaryAndPaymentServicePageElement} from "./SummaryAndPaymentServicePageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
-import {NotificationsPage} from "../../../notiifcations/NotificationsPage";
 import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
 
 export class SummaryAndPaymentServicePage {
@@ -38,18 +37,18 @@ export class SummaryAndPaymentServicePage {
     public verifyOrderDate(date: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummaryDateElement.getElement()
             .invoke('prop', 'outerText').then(outerText => {
-                expect(outerText).to.include(date);
-            });
+            expect(outerText).to.include(date);
+        });
         return this;
     }
 
     public verifyOrderService(service: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummarySelectedServiceElement.getElement()
             .invoke('prop', 'innerText').then(innerText => {
-                const cleanedText = innerText.replace(/\s+/g, ' ').trim();
-                const cleanedService = service.replace(/\s+/g, ' ').trim();
-                expect(cleanedText).to.include(cleanedService);
-            });
+            const cleanedText = innerText.replace(/\s+/g, ' ').trim();
+            const cleanedService = service.replace(/\s+/g, ' ').trim();
+            expect(cleanedText).to.include(cleanedService);
+        });
         return this;
     }
 
@@ -95,33 +94,33 @@ export class SummaryAndPaymentServicePage {
     }
 
     public clickSaveButton(paymentStatus: string): SummaryAndPaymentServicePage {
-        const createOrder = ApiInterceptionHelper.createOrder()
-        const createPayment = ApiInterceptionHelper.createServicePayment()
-
+        const createOrder: string = ApiInterceptionHelper.createOrder()
+        const createPayment: string = ApiInterceptionHelper.createServicePayment()
 
         LeftMenuPage.assertIsSynchronized(true)
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
+        cy.wait(2000)
 
-        NotificationsPage.clickConfirmButton()
+        LeftMenuPage.handleSynchronization()//TODO talk with dev about this
 
-        // cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
-        //     cy.wrap(interception.request.body._id).as('orderId');
-        //         })
-        //
-        // cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
-        //             const sendPaymentStatus = interception.request.body.status;
-        //             expect(sendPaymentStatus).to.equal(paymentStatus);
-        //         })
-        cy.wait(['@' + createOrder, '@' + createPayment], {timeout: 20000}).then(([orderInterception, paymentInterception]) => {
-            cy.wrap(orderInterception.request.body._id).as('orderId');
+        cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
+            cy.wrap(interception.request.body._id).as('orderId');
+        })
 
-            const sendPaymentStatus = paymentInterception.request.body.status;
+        cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
+            const sendPaymentStatus = interception.request.body.status;
             expect(sendPaymentStatus).to.equal(paymentStatus);
-        });
+        })
 
-                LeftMenuPage.assertIsSynchronized(true)
+        // cy.wait(['@' + createOrder, '@' + createPayment], {timeout: 20000}).then(([orderInterception, paymentInterception]) => {
+        //     cy.wrap(orderInterception.request.body._id).as('orderId');
+        //
+        //     const sendPaymentStatus = paymentInterception.request.body.status;
+        //     expect(sendPaymentStatus).to.equal(paymentStatus);
+        // });
 
+        LeftMenuPage.assertIsSynchronized(true)
         return this;
     }
 

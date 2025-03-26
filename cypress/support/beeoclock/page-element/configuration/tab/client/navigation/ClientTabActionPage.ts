@@ -8,6 +8,7 @@ export class ClientTabActionPage {
     public clickActionButton(keyValue: string): ClientTabActionPage {
         ClientTabActionPageElement.ActionButtonElement.getElement(keyValue)
             .click()
+        cy.wait(500)
         return this
     }
 

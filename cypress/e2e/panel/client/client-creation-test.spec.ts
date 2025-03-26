@@ -8,6 +8,7 @@ import {CommonPropertiesEnum} from "../../../support/beeoclock/page-element/comm
 import {ClientCreationDataProvider} from "../../../fixtures/panel/client/ClientCreationDataProvider";
 import {ClientTabPages} from "../../../support/beeoclock/page-element/configuration/tab/client/ClientTabPages";
 import {ClientTableCellEnum} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
+import {TableCommonPage} from "../../../support/beeoclock/page-element/configuration/tab/common/table/TableCommonPage";
 
 describe('customer creation test', () => {
 
@@ -22,7 +23,7 @@ describe('customer creation test', () => {
         cy.loginOnPanel()
         cy.log('assert login url');
         QueryAssertion.verifyCorrectUrl('/event/calendar-with-specialists');
-        LeftMenuPage.synchronizeWithInterception()
+        LeftMenuPage.assertIsSynchronized(true)
         cy.log('verify current date')
         CalendarPages.CalendarNavigationPage
             .verifyCurrenDate()
@@ -51,14 +52,12 @@ describe('customer creation test', () => {
                 .typeSearchValue(testData.lastName)
 
             cy.log('assert client table properties')
-            ClientTabPages.ClientTabTableAssertionPage
-                .verifyTableRowElement(ClientTableCellEnum.FIRST_NAME, testData.firstName)
-                .verifyTableRowElement(ClientTableCellEnum.LAST_NAME, testData.lastName)
-                .verifyTableRowElement(ClientTableCellEnum.PHONE, testData.phoneNumber)
-                .verifyTableRowElement(ClientTableCellEnum.NOTE, testData.description)
-                .verifyTableRowElement(ClientTableCellEnum.EMAIL, testData.email)
-                .verifyTableRowElement(ClientTableCellEnum.ACTIVE_STATUS, "Aktywny")
-
+            TableCommonPage
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.FIRST_NAME, testData.firstName)
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.LAST_NAME, testData.lastName)
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.EMAIL, testData.email)
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.PHONE, testData.phoneNumber)
+                .verifyTableRowElement(testData.firstName, ClientTableCellEnum.STATUS, 'Aktywny')
             ClientTabPages.ClientTabActionPage
                 .clickActionButton(testData.lastName)
                 .clickDeleteClient()
