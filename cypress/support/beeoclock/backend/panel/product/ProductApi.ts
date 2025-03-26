@@ -9,7 +9,8 @@ export class ProductApi {
             method: 'POST',
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag',
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
             },
             body: tag,
             auth: {
@@ -26,7 +27,8 @@ export class ProductApi {
             method: 'DELETE',
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag/' + id,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
             },
             auth: {
                 bearer: token
@@ -43,7 +45,8 @@ export class ProductApi {
             url: EntryPointEnum.API_ENTRY_POINT +
                 '/product-tag/paged?orderBy=name&orderDir=asc&page=1&pageSize=20&updatedSince=2022-02-02T00%3A00%3A00Z&active=1',
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
             },
             auth: {
                 bearer: token
