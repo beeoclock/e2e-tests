@@ -24,9 +24,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install jq
-        run: sudo apt-get install jq
-
       - name: Get and Print Token
         run: |
           RESPONSE=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.KEY }}" \
@@ -38,17 +35,14 @@ jobs:
             "returnSecureToken": true
           }')
 
-          # Checking for response errors or success
-          ERROR_MESSAGE=$(echo "$RESPONSE" | jq -r '.error.message // "No Error Message"')
-          if [ "$ERROR_MESSAGE" != "No Error Message" ]; then
-            echo "Error: $ERROR_MESSAGE"
-            exit 1
-          fi
+          STATUS_CODE=$(echo "$RESPONSE" | jq -r '.status')
+          echo "HTTP Status: $STATUS_CODE"
+          echo "API Response: $RESPONSE"
 
           TOKEN=$(echo "$RESPONSE" | jq -r '.idToken')
-
+          
           if [ "$TOKEN" != "null" ]; then
-            echo "ID Token: $TOKEN"
+            echo "ID Token: \"$TOKEN\""
           else
             echo "Failed to retrieve ID token"
             exit 1
