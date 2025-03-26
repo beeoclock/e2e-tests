@@ -26,7 +26,8 @@ jobs:
       - name: Get Token and Log it
         run: |
           echo "Getting token..."
-          TOKEN=$(npm run token-api-test) # Uruchomienie testu Cypress do uzyskania tokena
+          TOKEN=$(npm run token-api-test) 
+          echo "Token: $TOKEN"
         
 
     
