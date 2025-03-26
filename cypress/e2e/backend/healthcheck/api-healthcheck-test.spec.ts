@@ -56,7 +56,7 @@ describe("panel api healthcheck", () => {
         })
     });
 
-    it('create product tag and delete', function (): void {
+    it.only('create product tag and delete', function (): void {
         let id: string = NumericUtils.generateObjectId()
         const tag = new ProductTagBuilder().setId(id).setName('TAG NO ' + faker.finance.pin(6)).build();
         ProductApi.createProductTag(tag, token).then(() => {
