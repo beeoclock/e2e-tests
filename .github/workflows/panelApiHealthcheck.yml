@@ -12,6 +12,8 @@ jobs:
       LOGIN: ${{ secrets.LOGIN }}
       PASSWORD: ${{ secrets.PASSWORD }}
       API_KEY: ${{ secrets.KEY }}
+      CYPRESS_DEBUG: 1
+      DEBUG: cypress:*
 
     steps:
       - name: Checkout code

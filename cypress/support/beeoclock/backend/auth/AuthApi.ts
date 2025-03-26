@@ -8,10 +8,10 @@ export class AuthApi {
             method: 'POST',
             url: url,
             body: {
-                "clientType": "CLIENT_TYPE_WEB",
-                "email": ClientPropertiesEnum.LOGIN,
-                "password": ClientPropertiesEnum.PASSWORD,
-                "returnSecureToken": true
+                clientType: "CLIENT_TYPE_WEB",
+                email: ClientPropertiesEnum.LOGIN,
+                password: ClientPropertiesEnum.PASSWORD,
+                returnSecureToken: true
             },
         }).then(response => {
             expect(response.status).to.equal(200);
