@@ -13,9 +13,9 @@ export class ProductApi {
                 'Authorization': `Bearer ${token}`
             },
             body: tag,
-            // auth: {
-            //     bearer: token
-            // }
+            auth: {
+                bearer: token
+            }
         }).then(response => {
             expect(response.status).to.equal(HTTPStatusCodeType.Created_201);
             return response.body;
@@ -30,9 +30,9 @@ export class ProductApi {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'Authorization': `Bearer ${token}`
             },
-            // auth: {
-            //     bearer: token
-            // }
+            auth: {
+                bearer: token
+            }
         }).then(response => {
             expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             return response.body;
