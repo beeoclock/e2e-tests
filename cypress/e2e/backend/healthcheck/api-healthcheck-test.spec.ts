@@ -46,7 +46,7 @@ describe("panel api healthcheck", () => {
         });
     });
 
-    it.skip('get analytic Info and assert all response keys', function (): void {
+    it('get analytic Info and assert all response keys', function (): void {
         AnalyticApi.getDateRangeReport(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
             expect(response).to.have.all.keys(
                 "startDateTime", "endDateTime", "totalOrderServices", "totalOrders", "totalRevenue", "specialistReports"
