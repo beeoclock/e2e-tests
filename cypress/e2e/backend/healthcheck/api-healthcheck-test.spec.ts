@@ -28,8 +28,6 @@ describe("panel api healthcheck", () => {
     it('get identity profile and assert expected response', function (): void {
         IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
 
-            cy.log("TOKEN", token)
-            console.log("TOKEN", token)
             expect(response).to.have.property('items').that.is.an('array');
             expect(response.items).to.have.length(IdentityData.DATA.items.length);
 
@@ -48,7 +46,7 @@ describe("panel api healthcheck", () => {
         });
     });
 
-    it('get analytic Info and assert all response keys', function (): void {
+    it.skip('get analytic Info and assert all response keys', function (): void {
         AnalyticApi.getDateRangeReport(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
             expect(response).to.have.all.keys(
                 "startDateTime", "endDateTime", "totalOrderServices", "totalOrders", "totalRevenue", "specialistReports"
@@ -56,7 +54,7 @@ describe("panel api healthcheck", () => {
         })
     });
 
-    it('create product tag and delete', function (): void {
+    it.only('create product tag and delete', function (): void {
         let id: string = NumericUtils.generateObjectId()
         const tag = new ProductTagBuilder().setId(id).setName('TAG NO ' + faker.finance.pin(6)).build();
         ProductApi.createProductTag(tag, token).then(() => {

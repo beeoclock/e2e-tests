@@ -5,12 +5,13 @@ import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 export class ProductApi {
 
     public static createProductTag(tag: any, token: string): any {
+        console.log('token!: ' + token);
         return cy.request({
             method: 'POST',
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                // 'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             },
             body: tag,
             auth: {
@@ -28,7 +29,7 @@ export class ProductApi {
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag/' + id,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                // 'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             },
             auth: {
                 bearer: token
@@ -46,7 +47,7 @@ export class ProductApi {
                 '/product-tag/paged?orderBy=name&orderDir=asc&page=1&pageSize=20&updatedSince=2022-02-02T00%3A00%3A00Z&active=1',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                // 'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             },
             auth: {
                 bearer: token
