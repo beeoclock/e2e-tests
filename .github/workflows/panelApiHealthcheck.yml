@@ -2,8 +2,6 @@ name: Panel App API Health Check Workflow
 
 on:
   workflow_dispatch:
-#  schedule:
-#    - cron: '0 * * * *'
 
 jobs:
   run-tests:
@@ -28,10 +26,12 @@ jobs:
       - name: Get Token and Log it
         run: |
           echo "Getting token..."
-          TOKEN=$(npm run token-api-test) # Tutaj uruchamiasz swoje polecenie do uzyskania tokena, np. skrypt bash lub npm
+          TOKEN=$(npm run token-api-test) # Uruchamiasz komendę do uzyskania tokena
           echo "Token: $TOKEN"  # Logowanie tokena w GitHub Actions
-          echo "TOKEN=$token" >> $GITHUB_ENV  # Zapisanie tokena w zmiennej środowiskowej GitHub Actions
+          echo "TOKEN=$TOKEN" >> $GITHUB_ENV  # Zapisanie tokena w zmiennej środowiskowej GitHub Actions
 
-
-      #- name: Run healthcheck
-      # run: npm run panel-app-api-health-check
+      - name: Run healthcheck
+        run: |
+          echo "Running healthcheck with Token: ${{ env.TOKEN }}"
+          # Tutaj możesz użyć tokena z zmiennej środowiskowej, np. w zapytaniu cURL:
+          curl -H "Authorization: Bearer ${{ env.TOKEN }}" https://api.yourservice.com/healthcheck
