@@ -19,6 +19,8 @@ export class IdentityApi {
             ...options
         }).then(response => {
             expect(response.status).to.equal(expectedCode);
+            console.log("Request Headers:", response.requestHeaders);
+            console.log("Request Authorization Header:", response.requestHeaders.Authorization);
             return response.body
         });
     }

@@ -20,6 +20,10 @@ export class BusinessProfileApi {
             ...options
         }).then(response => {
             expect(response.status).to.equal(expectedCode);
+            console.log("🔹 Request Headers:", response.requestHeaders);
+            console.log("🔹 Request Authorization Header:", response.requestHeaders.Authorization);
+            console.log("🔹 Response Status:", response.status);
+            console.log("🔹 Response Body:", response.body);
             return response.body
         });
     }

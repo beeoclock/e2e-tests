@@ -1,5 +1,6 @@
 import {defineConfig} from 'cypress';
 import * as dotenv from 'dotenv';
+import * as process from "node:process";
 
 dotenv.config();
 
@@ -9,8 +10,9 @@ export default defineConfig({
     apiBackendEntryPoint: 'https://api-dev.beeoclock.com/client/api/v1/',
     LOGIN: process.env.LOGIN,
     PASSWORD: process.env.PASSWORD,
-    // MAIL_LOGIN: process.env.MAIL_PASSWORD,
+    MAIL_LOGIN: process.env.MAIL_PASSWORD,
     API_KEY: process.env.API_KEY,
+    X_GITHUB_ACTION: process.env.X_GITHUB_ACTION,
   },
 
   e2e: {
