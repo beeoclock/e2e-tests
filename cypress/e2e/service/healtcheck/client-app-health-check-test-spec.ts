@@ -67,6 +67,8 @@ describe("Client app health check test", () => {
 
         cy.url().should('eq', 'https://biz.dev.beeoclock.com/pl/')
 
+        cy.get('.hidden > [alt="Bee O`clock service details image"]')
+
         cy.document().then((doc) => {
             const langAttribute = doc.documentElement.getAttribute('lang')
             expect(langAttribute).to.equal('pl')
