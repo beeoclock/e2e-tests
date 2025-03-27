@@ -12,6 +12,7 @@ jobs:
       LOGIN: ${{ secrets.LOGIN }}
       PASSWORD: ${{ secrets.PASSWORD }}
       API_KEY: ${{ secrets.KEY }}
+      X_GITHUB_ACTION: ${{ secrets.X_GITHUB_ACTION }}
 
     steps:
       - name: Checkout code

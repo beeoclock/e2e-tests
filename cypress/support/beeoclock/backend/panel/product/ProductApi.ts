@@ -1,6 +1,7 @@
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
+import {ClientPropertiesEnum} from "../../../common/enum/ClientPropertiesEnum";
 
 export class ProductApi {
 
@@ -10,7 +11,7 @@ export class ProductApi {
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                // 'Authorization': `Bearer ${token}`
+                'X-GITHUB-ACTION': ClientPropertiesEnum.X_GITHUB_ACTION
             },
             body: tag,
             auth: {
@@ -25,10 +26,10 @@ export class ProductApi {
     public static requestTestHeader(tag: any, token: string): any {
         return cy.request({
             method: 'POST',
-            url: 'https://mammoth-alarm-52.webhook.cool',
+            url: 'https://jolly-fireman-58.webhook.cool',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'Authorization': `Bearer ${token}`
+                'X-GITHUB-ACTION': ClientPropertiesEnum.X_GITHUB_ACTION
             },
             body: tag,
             auth: {
@@ -46,7 +47,7 @@ export class ProductApi {
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag/' + id,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'Authorization': `Bearer ${token}`
+                'X-GITHUB-ACTION': ClientPropertiesEnum.X_GITHUB_ACTION
             },
             auth: {
                 bearer: token
