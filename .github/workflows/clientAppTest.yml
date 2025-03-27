@@ -2,9 +2,9 @@ name: Client App Test Workflow
 
 on:
   workflow_dispatch:
-#  schedule:
-#    - cron: '0 5 * * *'
-#    - cron: '0 16 * * *'
+  schedule:
+    - cron: '0 5 * * *'
+    - cron: '0 16 * * *'
 
 jobs:
   client-app-test:

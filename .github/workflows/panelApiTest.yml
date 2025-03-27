@@ -2,9 +2,9 @@ name: Panel App API test Workflow
 
 on:
   workflow_dispatch:
-#  schedule:
-#    - cron: '0 5 * * *'
-#    - cron: '0 16 * * *'
+  schedule:
+    - cron: '0 5 * * *'
+    - cron: '0 16 * * *'
 
 jobs:
   run-tests:
