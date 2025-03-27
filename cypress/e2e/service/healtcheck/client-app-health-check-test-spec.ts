@@ -60,7 +60,7 @@ describe("Client app health check test", () => {
         });
     });
 
-    it.only('test 4 assert correct redirect', function () {
+    it('test 4 assert correct redirect', function () {
         cy.visit(emptyDomain, { failOnStatusCode: false })
 
         let description: string = 'Rezerwacja spotkań online dla klientów.'
@@ -71,7 +71,6 @@ describe("Client app health check test", () => {
             const langAttribute = doc.documentElement.getAttribute('lang')
             expect(langAttribute).to.equal('pl')
         })
-
         cy.contains('p', description)
     })
 
