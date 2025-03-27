@@ -65,7 +65,7 @@ describe("Client app health check test", () => {
 
         let description: string = 'Rezerwacja spotkań online dla klientów.'
 
-        cy.url().should('eq', 'https://biz.dev.beeoclock.com/pl/')
+        cy.url().should('eq', 'https://dev.beeoclock.biz/pl')
 
         cy.document().then((doc) => {
             const langAttribute = doc.documentElement.getAttribute('lang')
