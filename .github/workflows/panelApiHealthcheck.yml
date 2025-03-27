@@ -2,8 +2,8 @@ name: Panel App API Health Check Workflow
 
 on:
   workflow_dispatch:
-#  schedule:
-#    - cron: '0 * * * *'
+  schedule:
+    - cron: '0 * * * *'
 
 jobs:
   run-tests:
@@ -12,45 +12,18 @@ jobs:
       LOGIN: ${{ secrets.LOGIN }}
       PASSWORD: ${{ secrets.PASSWORD }}
       API_KEY: ${{ secrets.KEY }}
-      ACTIONS_RUNNER_DEBUG: true
-      ACTIONS_STEP_DEBUG: true
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20.11.1
 
       - name: Install dependencies
         run: npm install
 
-      - name: Get and Print Token
-        run: |
-          RESPONSE=$(curl -s -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${{ secrets.KEY }}" \
-          -H "Content-Type: application/json" \
-          --data-raw '{
-            "clientType": "CLIENT_TYPE_WEB",
-            "email": "'"${{ secrets.LOGIN }}"'",
-            "password": "'"${{ secrets.PASSWORD }}"'",
-            "returnSecureToken": true
-          }')
-
-          STATUS_CODE=$(echo "$RESPONSE" | jq -r '.status')
-          echo "HTTP Status: $STATUS_CODE"
-          echo "API Response: $RESPONSE"
-
-          TOKEN=$(echo "$RESPONSE" | jq -r '.idToken')
-          
-          if [ "$TOKEN" != "null" ]; then
-            echo "ID Token: \"$TOKEN\""
-          else
-            echo "Failed to retrieve ID token"
-            exit 1
-          fi
-        shell: bash
-
-      - name: Run Api test
+      - name: Run healthcheck
         run: npm run panel-app-api-health-check
