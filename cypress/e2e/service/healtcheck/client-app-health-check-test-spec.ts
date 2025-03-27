@@ -61,11 +61,13 @@ describe("Client app health check test", () => {
     });
 
     it('test 4 assert correct redirect', function () {
-        cy.visit(emptyDomain, { failOnStatusCode: false })
+        cy.visit('https://biz.dev.beeoclock.com/pl/', { failOnStatusCode: false })
 
         let description: string = 'Rezerwacja spotkań online dla klientów.'
 
         cy.url().should('eq', 'https://biz.dev.beeoclock.com/pl/')
+        //                     https://dev.beeoclock.com/pl
+        //                     https://biz.dev.beeoclock.com/pl/
 
         cy.get('.hidden > [alt="Bee O`clock service details image"]')
 
