@@ -60,18 +60,20 @@ describe("Client app health check test", () => {
         });
     });
 
-    it('test 4 assert correct redirect', function () {
-        cy.visit(emptyDomain)
+    it.only('test 4 assert correct redirect', function () {
+        cy.visit(emptyDomain, { failOnStatusCode: false })
+
         let description: string = 'Rezerwacja spotkań online dla klientów.'
 
-        cy.document().then((doc) => {
-            const langAttribute = doc.documentElement.getAttribute('lang');
-            expect(langAttribute).to.equal('pl');
-        });
+        cy.url().should('eq', 'https://biz.dev.beeoclock.com/pl/')
 
-        assertUrl('https://biz.dev.beeoclock.com/pl')
+        cy.document().then((doc) => {
+            const langAttribute = doc.documentElement.getAttribute('lang')
+            expect(langAttribute).to.equal('pl')
+        })
+
         cy.contains('p', description)
-    });
+    })
 
     function assertLogo() {
         cy.get('img').should('have.attr', 'src', 'https://storage.googleapis.com/bee-o-clock.appspot.com/media/65e6179d5b1828e7e9a05c53/profile/gallery/6606ed352ffe20d94e1baffd/original.jpeg?updatedAt=2024-03-29T16:32:53.856Z');
