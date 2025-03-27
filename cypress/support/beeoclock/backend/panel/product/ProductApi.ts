@@ -5,10 +5,27 @@ import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 export class ProductApi {
 
     public static createProductTag(tag: any, token: string): any {
-        cy.log('token!: ' + token);
         return cy.request({
             method: 'POST',
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag',
+            headers: {
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                // 'Authorization': `Bearer ${token}`
+            },
+            body: tag,
+            auth: {
+                bearer: token
+            }
+        }).then(response => {
+            expect(response.status).to.equal(HTTPStatusCodeType.Created_201);
+            return response.body;
+        })
+    }
+
+    public static requestTestHeader(tag: any, token: string): any {
+        return cy.request({
+            method: 'POST',
+            url: 'https://mammoth-alarm-52.webhook.cool',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'Authorization': `Bearer ${token}`
