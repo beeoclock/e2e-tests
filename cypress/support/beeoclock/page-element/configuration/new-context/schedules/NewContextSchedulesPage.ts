@@ -1,4 +1,5 @@
 import {NewContextSchedulesElement} from "./element/NewContextSchedulesElement";
+import {QueryAssertion} from "../../../../common/assertion/QueryAssertion";
 
 export class NewContextSchedulesPage {
     private element = new NewContextSchedulesElement()
@@ -24,6 +25,25 @@ export class NewContextSchedulesPage {
         return this;
     }
 
+    public typeTimeStart(start: string): NewContextSchedulesPage {
+        this.element.getTimeStartElement().clear().type(start);
+        return this;
+    }
+
+    public typeTimeEnd(end: string): NewContextSchedulesPage {
+        this.element.getTimeEndElement().clear().type(end);
+        return this;
+    }
+
+    public clickNextButton(): NewContextSchedulesPage {
+        cy.contains('button', 'Dalej').click();
+        return this;
+    }
+
+    public assertState(): NewContextSchedulesPage {
+        QueryAssertion.verifyCorrectUrl('https://crm.dev.beeoclock.com/identity/create-business/schedules')
+        return this
+    }
 
     public readonly dayIndex = {
         monday: 1,

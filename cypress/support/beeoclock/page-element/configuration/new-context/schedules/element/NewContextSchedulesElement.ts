@@ -9,4 +9,16 @@ export class NewContextSchedulesElement {
             .find('#service-form-workDays-' + index)
             .scrollIntoView().should('be.visible')
     }
+
+    public getTimeStartElement(): any {
+        return cy.get('time-input-component').first()
+            .find('input')
+            .should('be.visible')
+    }
+
+    public getTimeEndElement(): any {
+        return cy.get('time-input-component').last()
+            .find('input')
+            .should('be.visible')
+    }
 }

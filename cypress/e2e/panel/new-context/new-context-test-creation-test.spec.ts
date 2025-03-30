@@ -61,6 +61,7 @@ describe('new context test creation', () => {
 
         cy.log('assert page 6 & configure schedule of industry')
         NewContextPages.NewContextSchedulesPage
+            .assertState()
             .assertGivenDayIsSelected(schedulePage.dayIndex.monday)
             .assertGivenDayIsSelected(schedulePage.dayIndex.tuesday)
             .assertGivenDayIsSelected(schedulePage.dayIndex.wednesday)
@@ -82,6 +83,29 @@ describe('new context test creation', () => {
             .assertGivenDayIsSelected(schedulePage.dayIndex.thursday)
             .assertGivenDayIsSelected(schedulePage.dayIndex.friday)
 
+            .typeTimeStart('11:00')
+            .typeTimeEnd('20:00')
+            .clickNextButton()
+
+        cy.log('assert page 7 & fill language and timezone information')
+        NewContextPages.NewContextLanguagePage
+            .assertState()
+            .assertSelectedLanguage('Polski')
+            .selectGivenLanguage('English')
+            .selectMainEmailLanguage('English')
+            .assertMainEmailLanguage('English')
+            .assertTimezone("Europe/Warsaw")
+            .assertCurrency("PLN")
+            .clickNextButton()
+
+        NewContextPages.NewContextServicePage
+            .assertState()
+            .clickAddServiceButton()
+            .typeServiceTitle('New service')
+            .typeServiceDescription('description of the service')
+            .typeServicePrice('200')
+            .clickSaveButton()
+            .assertCreatedService('New service', '200 zł', '45min')
     });
 
     function login(): void {

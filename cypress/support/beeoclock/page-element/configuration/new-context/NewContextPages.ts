@@ -5,6 +5,8 @@ import {NewContextSelectIndustryPage} from "./select-industry-page/NewContextSel
 import {IndustryDetails} from "./industry-details/IndustryDetails";
 import {NewContextPointOfSalePage} from "./point-of-sale/NewContextPointOfSalePage";
 import {NewContextSchedulesPage} from "./schedules/NewContextSchedulesPage";
+import {NewContextLanguagePage} from "./languages/NewContextLanguagePage";
+import {NewContextServicePage} from "./services/NewContextServicePage";
 
 export class NewContextPages {
 
@@ -15,4 +17,6 @@ export class NewContextPages {
     public static industryDetails: IndustryDetails = new IndustryDetails();
     public static NewContextPointOfSalePage: NewContextPointOfSalePage = new NewContextPointOfSalePage();
     public static NewContextSchedulesPage: NewContextSchedulesPage = new NewContextSchedulesPage();
+    public static NewContextLanguagePage: NewContextLanguagePage = new NewContextLanguagePage();
+    public static NewContextServicePage: NewContextServicePage = new NewContextServicePage();
 }
