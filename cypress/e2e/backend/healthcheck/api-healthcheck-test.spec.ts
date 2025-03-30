@@ -3,7 +3,6 @@ import {HTTPStatusCodeType} from "../../../support/beeoclock/backend/enum/HTTPSt
 import {BackendCommonEnum} from "../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {IdentityApi} from "../../../support/beeoclock/backend/identity/IdentityApi";
 import {IdentityData} from "../../../support/beeoclock/backend/identity/enum/IdentityResponse";
-import {AnalyticApi} from "../../../support/beeoclock/backend/panel/analytic/AnalyticApi";
 import {ProductApi} from "../../../support/beeoclock/backend/panel/product/ProductApi";
 import {ProductTagBuilder} from "../../../support/beeoclock/backend/panel/product/tag/ProductTagBuilder";
 import {NumericUtils} from "../../../support/beeoclock/backend/Utils/NumericUtils";
@@ -27,8 +26,6 @@ describe("panel api healthcheck", () => {
 
     it('get identity profile and assert expected response', function (): void {
         IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
-
-            cy.log('AAAA', JSON.stringify(response));
             expect(response).to.have.property('items').that.is.an('array');
             expect(response.items).to.have.length(IdentityData.DATA.items.length);
 
@@ -39,7 +36,7 @@ describe("panel api healthcheck", () => {
                 expect(item.client).to.deep.equal(expectedItem.client);
                 expect(item).to.have.property('stateHistory').that.is.an('array');
 
-                item.stateHistory.forEach((history, historyIndex) => {
+                item.stateHistory.forEach((history, historyIndex): void => {
                     expect(history).to.have.property('state');
                     expect(history.state).to.equal(expectedItem.stateHistory[historyIndex].state);
                 });

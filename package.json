@@ -4,7 +4,7 @@
   "description": "bee O'clock e2e tests",
   "main": "index.js",
   "scripts": {
-    "cypress:open": "npx cypress open",
+    "cypress": "npx cypress open",
     "client-panel-app-test": "npx cypress run --spec cypress/e2e/panel --browser edge",
     "order-cleanup": "npx cypress run --spec cypress/e2e/backend/delete-order-api-test.spec.ts",
     "client-app-test": "npx cypress run --spec cypress/e2e/service/page --browser edge",

@@ -10,4 +10,7 @@ export class ElementHelper {
         return selector
     }
 
+    public static getElementById(id: string): any {
+        return cy.get('#' + id)
+    }
 }
