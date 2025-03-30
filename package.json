@@ -11,7 +11,9 @@
     "client-app-health-check": "npx cypress run --spec cypress/e2e/service/healtcheck/client-app-health-check-test-spec.ts --browser edge",
     "panel-app-api-health-check": "npx cypress run --spec cypress/e2e/backend/healthcheck",
     "panel-app-api-test": "npx cypress run --spec cypress/e2e/backend/customer",
-    "token-api-test": "npx cypress run --spec cypress/e2e/backend/auth"
+    "token-api-test": "npx cypress run --spec cypress/e2e/backend/auth",
+    "cypress-docker:open": "docker build -t cypress-runner . && docker run --name cypress-open cypress-runner"
+
   },
   "author": "Jan Zadumiński",
   "license": "ISC",
