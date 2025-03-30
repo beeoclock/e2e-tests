@@ -56,25 +56,7 @@ export class IdentityData {
                         "name": "test"
                     }
                 },
-                {
-                    "_id": "67ced82e16d9d9e5af148fa4",
-                    "stateHistory": [
-                        {
-                            "state": "active",
-                            "setAt": "2025-03-10T12:16:46.869Z"
-                        }
-                    ],
-                    "createdAt": "2025-03-10T12:16:46.873Z",
-                    "updatedAt": "2025-03-10T12:16:46.873Z",
-                    "account": {
-                        "_id": "662a4364a4b376d20c065b12"
-                    },
-                    "client": {
-                        "_id": "67ced82e16d9d9e5af148f9a",
-                        "name": "Delete me!"
-                    }
-                }
             ],
-            "totalSize": 4
+            "totalSize": 3
         }
 }
