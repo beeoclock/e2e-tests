@@ -6,11 +6,6 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    env:
-      LOGIN: ${{ secrets.LOGIN }}
-      PASSWORD: ${{ secrets.PASSWORD }}
-      API_KEY: ${{ secrets.KEY }}
-      X_GITHUB_ACTION: ${{ secrets.X_GITHUB_ACTION }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,68 +16,118 @@ jobs:
           node-version: '20.11.0'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Set locale to Polish
+      - name: Cache Cypress binary
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-cache-${{ runner.os }}-
+
+      - name: Install Cypress
+        run: npx cypress install
+
+  client-app-test:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.0'
+
+      - name: Restore Cypress cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-cache-${{ runner.os }}-
+
+      - name: Set locale and timezone
         run: |
           sudo apt-get update
           sudo apt-get install -y locales
           sudo locale-gen pl_PL.UTF-8
           sudo update-locale LANG=pl_PL.UTF-8
+          sudo timedatectl set-timezone Europe/Warsaw
         env:
           LANG: pl_PL.UTF-8
           LC_ALL: pl_PL.UTF-8
 
-      - name: Set timezone
-        run: sudo timedatectl set-timezone Europe/Warsaw
-
-      - name: Debug locale and timezone
-        run: |
-          echo "Current locale:"
-          locale
-          echo "Current timezone:"
-          timedatectl
-
-  client-app-test:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Run client app tests
-        env:
-          LANG: pl
-          LC_ALL: pl_PL.UTF-8
-          TZ: Europe/Warsaw
         run: npm run client-app-test
 
   healthcheck:
-    runs-on: ubuntu-latest
     needs: client-app-test
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.0'
+
+      - name: Restore Cypress cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-cache-${{ runner.os }}-
 
       - name: Run healthcheck
         run: npm run panel-app-api-health-check
 
   panel-api-test:
-    runs-on: ubuntu-latest
     needs: healthcheck
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.0'
+
+      - name: Restore Cypress cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-cache-${{ runner.os }}-
 
       - name: Run panel API test
         run: npm run panel-app-api-test
 
   panel-client-test:
-    runs-on: ubuntu-latest
     needs: panel-api-test
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.0'
+
+      - name: Restore Cypress cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-cache-${{ runner.os }}-
 
       - name: Run panel client test
         run: npm run panel-app-client-test
