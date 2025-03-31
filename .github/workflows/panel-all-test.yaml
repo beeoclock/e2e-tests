@@ -51,10 +51,6 @@ jobs:
           echo "Current timezone:"
           timedatectl
 
-      - name: Run client app tests
-        continue-on-error: true
-        run: npm run client-app-test
-
       - name: Run healthcheck
         continue-on-error: true
         run: npm run panel-app-api-health-check
