@@ -53,7 +53,7 @@ jobs:
 
       - name: Run client app tests
         continue-on-error: true
-        run: node --loader ts-node/esm npx cypress run --spec cypress/e2e/service/page --browser edge
+        run: npm run client-app-test
 
       - name: Run healthcheck
         continue-on-error: true
