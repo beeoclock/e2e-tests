@@ -44,7 +44,7 @@ export class NewContextServicePage {
     }
 
     public assertState(): NewContextServicePage {
-        QueryAssertion.verifyCorrectUrl('https://crm.dev.beeoclock.com/identity/create-business/services')
+        QueryAssertion.verifyCorrectUrl('/identity/create-business/services')
         return this;
     }
 }

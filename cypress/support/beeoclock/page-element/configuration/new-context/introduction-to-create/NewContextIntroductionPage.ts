@@ -8,7 +8,7 @@ export class NewContextIntroductionPage {
     public assertState(): NewContextIntroductionPage {
         Assertions.assertProperties(this.element.getTitleElement(), 'innerText', "Witamy w \nBee O’clock")
         this.element.getSubTitleElement()
-        QueryAssertion.verifyCorrectUrl('https://crm.dev.beeoclock.com/identity/create-business')
+        QueryAssertion.verifyCorrectUrl('/identity/create-business')
         return this;
     }
 

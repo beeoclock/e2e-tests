@@ -46,7 +46,7 @@ export class NewContextSelectIndustryPage {
     }
 
     public assertState(): NewContextSelectIndustryPage {
-        QueryAssertion.verifyCorrectUrl('https://crm.dev.beeoclock.com/identity/create-business/industry')
+        QueryAssertion.verifyCorrectUrl('/identity/create-business/industry')
         return this;
     }
 

@@ -38,7 +38,7 @@ export class NewContextPointOfSalePage {
 
     public assertState(): NewContextPointOfSalePage {
         cy.get('h1').contains('Gdzie klienci mogą do Ciebie dotrzeć?')
-        QueryAssertion.verifyCorrectUrl('https://crm.dev.beeoclock.com/identity/create-business/point-of-sale')
+        QueryAssertion.verifyCorrectUrl('/identity/create-business/point-of-sale')
         return this
     }
 

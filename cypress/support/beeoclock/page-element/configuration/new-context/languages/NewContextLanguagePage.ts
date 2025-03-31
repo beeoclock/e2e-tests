@@ -45,7 +45,7 @@ export class NewContextLanguagePage {
     }
 
     public assertState(): NewContextLanguagePage {
-        QueryAssertion.verifyCorrectUrl('https://crm.dev.beeoclock.com/identity/create-business/languages')
+        QueryAssertion.verifyCorrectUrl('/identity/create-business/languages')
         return this;
     }
 

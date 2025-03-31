@@ -6,7 +6,7 @@ export class NewContextCompanyNamePage {
     private element = new NewContextCompanyNameElement()
 
     public assertState(): NewContextCompanyNamePage {
-        QueryAssertion.verifyCorrectUrl('https://crm.dev.beeoclock.com/identity/create-business/names')
+        QueryAssertion.verifyCorrectUrl('/identity/create-business/names')
         Assertions.assertProperties(this.element.getTitle(), 'innerText', "Wpisz nazwę firmy")
         return this;
     }

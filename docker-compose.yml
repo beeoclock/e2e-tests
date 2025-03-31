@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  cypress:
+    build: .
+    image: cypress-gui
+    environment:
+      - DISPLAY=:99
+    volumes:
+      - .:/cypress-e2e
+    network_mode: "host"
+    stdin_open: true
+    tty: true

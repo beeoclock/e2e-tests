@@ -41,7 +41,7 @@ export class NewContextSchedulesPage {
     }
 
     public assertState(): NewContextSchedulesPage {
-        QueryAssertion.verifyCorrectUrl('https://crm.dev.beeoclock.com/identity/create-business/schedules')
+        QueryAssertion.verifyCorrectUrl('/identity/create-business/schedules')
         return this
     }
 

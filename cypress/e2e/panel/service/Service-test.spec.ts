@@ -14,14 +14,9 @@ describe('service test', () => {
 
         cy.loginOnPanel()
 
-        cy.log('get token')
-        cy.get('@token').then(token => {
-            cy.log('token: ' + token);
+        cy.log('get to given module')
+        LeftMenuPage.clickServiceTab();
 
-            cy.log('get to given module')
-            LeftMenuPage.clickServiceTab();
-
-            CommonElementPage.clickAddResourceButton();
-        });
+        CommonElementPage.clickAddResourceButton();
     });
 });
