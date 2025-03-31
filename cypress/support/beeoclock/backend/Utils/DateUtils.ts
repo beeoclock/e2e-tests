@@ -275,10 +275,8 @@ export class DateUtils {
         return nextDay.date();
     }
 
-    public static getNextGivenDayNumber(days: number): number {
-        const today = moment();
-        const nextDay = today.add(days, 'day');
-        return nextDay.date();
+    public static getNextGivenDayNumber(days: number): string {
+        return dayjs().add(days, 'day').format('DD');
     }
 
     public static getFirstThreeLettersOfNextDay(): string {

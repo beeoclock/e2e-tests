@@ -70,13 +70,10 @@ Cypress.Commands.add('loginOnProductPanel', () => {
 
 Cypress.Commands.add('loginOnPublicPage', () => {
     cy.log('visit')
-    const getService = ApiInterceptionHelper.getService()
     cy.visit(ServiceEnum.PUBLIC_PANEL).then(() => {
-        // cy.wait('@' + getService).then((interception) => {
-        //     const authorizationHeader = interception.request.headers['authorization'];
-        //     const token = (authorizationHeader as string).split(' ')[1];
-        //     cy.wrap(token).as('token');
-        // })
+        cy.get('h1').contains('Haircut&Barber').should('be.visible')
+        cy.contains('a', 'Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300')
+        cy.document().its('readyState').should('eq', 'complete');
     })
 });
 

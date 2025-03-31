@@ -32,6 +32,8 @@ describe('order next service', () => {
                 .clickSelectSpecialistAndOrder()
             ServicesPages.SelectSpecialistPage
                 .selectSpecificSpecialist(item.Specialist)
+
+            cy.log('select date and time')
             ServicesPages.SelectDayPage
                 .assertSelectedServiceSection(item.Service, item.serviceTime)
                 .selectNextDay()

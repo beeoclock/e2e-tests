@@ -4,7 +4,7 @@ import {SelectDayPageElement} from "./SelectDayPageElement";
 export class SelectDayPage {
 
     public selectNextDay(): SelectDayPage {
-        SelectDayPageElement.SelectDayButton.getElement(DateUtils.getNextDayNumber())
+        SelectDayPageElement.SelectDayButton.getElement(DateUtils.getNextGivenDayNumber(1))
             .click()
         return this;
     }
