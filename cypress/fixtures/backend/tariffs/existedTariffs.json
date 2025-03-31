@@ -2,13 +2,13 @@
   "items": [
     {
       "_id": "66916aa0c5875b0caba6c438",
-      "createdAt": "2025-03-24T18:28:22.267Z",
-      "updatedAt": "2025-03-24T18:28:22.267Z",
+      "createdAt": "2025-03-28T21:43:12.180Z",
+      "updatedAt": "2025-03-28T21:43:12.180Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-24T18:28:21.690Z"
+          "setAt": "2025-03-28T21:43:11.583Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -54,8 +54,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.216Z",
-          "updatedAt": "2025-03-24T18:28:22.216Z"
+          "createdAt": "2025-03-28T21:43:12.179Z",
+          "updatedAt": "2025-03-28T21:43:12.179Z"
         },
         {
           "region": "EU",
@@ -96,8 +96,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.266Z",
-          "updatedAt": "2025-03-24T18:28:22.266Z"
+          "createdAt": "2025-03-28T21:43:12.179Z",
+          "updatedAt": "2025-03-28T21:43:12.179Z"
         },
         {
           "region": "WORLD",
@@ -138,8 +138,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.266Z",
-          "updatedAt": "2025-03-24T18:28:22.266Z"
+          "createdAt": "2025-03-28T21:43:12.179Z",
+          "updatedAt": "2025-03-28T21:43:12.179Z"
         }
       ],
       "isPerSpecialist": false,
@@ -153,8 +153,8 @@
         "excludeList": [
           "assistantAI"
         ],
-        "createdAt": "2025-03-24T18:28:22.216Z",
-        "updatedAt": "2025-03-24T18:28:22.216Z"
+        "createdAt": "2025-03-28T21:43:12.178Z",
+        "updatedAt": "2025-03-28T21:43:12.178Z"
       },
       "features": [
         "emailNotification",
@@ -166,13 +166,13 @@
     },
     {
       "_id": "66916aa0c5875b0caba6c439",
-      "createdAt": "2025-03-24T18:28:22.563Z",
-      "updatedAt": "2025-03-24T18:28:22.563Z",
+      "createdAt": "2025-03-28T21:43:12.655Z",
+      "updatedAt": "2025-03-28T21:43:12.655Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-24T18:28:22.440Z"
+          "setAt": "2025-03-28T21:43:12.389Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -218,8 +218,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.562Z",
-          "updatedAt": "2025-03-24T18:28:22.562Z"
+          "createdAt": "2025-03-28T21:43:12.654Z",
+          "updatedAt": "2025-03-28T21:43:12.654Z"
         },
         {
           "region": "EU",
@@ -260,8 +260,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.562Z",
-          "updatedAt": "2025-03-24T18:28:22.562Z"
+          "createdAt": "2025-03-28T21:43:12.654Z",
+          "updatedAt": "2025-03-28T21:43:12.654Z"
         },
         {
           "region": "WORLD",
@@ -302,8 +302,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.562Z",
-          "updatedAt": "2025-03-24T18:28:22.562Z"
+          "createdAt": "2025-03-28T21:43:12.654Z",
+          "updatedAt": "2025-03-28T21:43:12.654Z"
         }
       ],
       "isPerSpecialist": false,
@@ -319,8 +319,8 @@
         "excludeList": [
           "assistantAI"
         ],
-        "createdAt": "2025-03-24T18:28:22.561Z",
-        "updatedAt": "2025-03-24T18:28:22.561Z"
+        "createdAt": "2025-03-28T21:43:12.620Z",
+        "updatedAt": "2025-03-28T21:43:12.620Z"
       },
       "features": [
         "unlimitedPlugins",
@@ -335,19 +335,19 @@
       "trialInfo": {
         "days": 14,
         "isAvailable": true,
-        "createdAt": "2025-03-24T18:28:22.562Z",
-        "updatedAt": "2025-03-24T18:28:22.562Z"
+        "createdAt": "2025-03-28T21:43:12.654Z",
+        "updatedAt": "2025-03-28T21:43:12.654Z"
       }
     },
     {
       "_id": "66916aa0c5875b0caba6c440",
-      "createdAt": "2025-03-24T18:28:22.896Z",
-      "updatedAt": "2025-03-24T18:28:22.896Z",
+      "createdAt": "2025-03-28T21:43:13.090Z",
+      "updatedAt": "2025-03-28T21:43:13.090Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-03-24T18:28:22.692Z"
+          "setAt": "2025-03-28T21:43:12.748Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -393,8 +393,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.895Z",
-          "updatedAt": "2025-03-24T18:28:22.895Z"
+          "createdAt": "2025-03-28T21:43:13.089Z",
+          "updatedAt": "2025-03-28T21:43:13.089Z"
         },
         {
           "region": "EU",
@@ -435,8 +435,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.896Z",
-          "updatedAt": "2025-03-24T18:28:22.896Z"
+          "createdAt": "2025-03-28T21:43:13.089Z",
+          "updatedAt": "2025-03-28T21:43:13.089Z"
         },
         {
           "region": "WORLD",
@@ -477,8 +477,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-03-24T18:28:22.896Z",
-          "updatedAt": "2025-03-24T18:28:22.896Z"
+          "createdAt": "2025-03-28T21:43:13.089Z",
+          "updatedAt": "2025-03-28T21:43:13.089Z"
         }
       ],
       "isPerSpecialist": false,
@@ -488,8 +488,8 @@
         "excludeAll": false,
         "includeList": [],
         "excludeList": [],
-        "createdAt": "2025-03-24T18:28:22.895Z",
-        "updatedAt": "2025-03-24T18:28:22.895Z"
+        "createdAt": "2025-03-28T21:43:13.089Z",
+        "updatedAt": "2025-03-28T21:43:13.089Z"
       },
       "features": [
         "unlimitedPlugins",
@@ -506,8 +506,8 @@
       "trialInfo": {
         "days": 14,
         "isAvailable": true,
-        "createdAt": "2025-03-24T18:28:22.896Z",
-        "updatedAt": "2025-03-24T18:28:22.896Z"
+        "createdAt": "2025-03-28T21:43:13.089Z",
+        "updatedAt": "2025-03-28T21:43:13.089Z"
       }
     }
   ],
