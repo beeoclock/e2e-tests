@@ -11,7 +11,10 @@ export class ClientFormPage {
 
     public typeGivenCustomerInput(label: CommonPropertiesEnum, value: string): ClientFormPage {
         if (value) {
-            CustomerInput.getElement(label).type(value).then(() => {
+            CustomerInput.getElement(label)
+                .click()
+                .type(value)
+                .then(() => {
                 this.verifyGivenCustomerInput(label, value)
             })
         }
@@ -20,14 +23,18 @@ export class ClientFormPage {
 
     public typeGivenCustomerPhone(value: string): ClientFormPage {
         if (value) {
-            ClientPhoneInput.getInput().type(value)
+            ClientPhoneInput.getInput()
+                .click()
+                .type(value)
         }
         return this
     }
 
     public typeClientDescription(description: string): ClientFormPage {
         if (description) {
-            ClientDescriptionInput.getElement().type(description).then(() => {
+            ClientDescriptionInput.getElement()
+                .click()
+                .type(description).then(() => {
                 this.verifyClientDescription(description)
             })
         }

@@ -1,4 +1,4 @@
-import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
+import {ServiceEnum} from "../../../support/ServiceEnum";
 import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";

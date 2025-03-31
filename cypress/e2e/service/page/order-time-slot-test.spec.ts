@@ -1,4 +1,4 @@
-import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
+import {ServiceEnum} from "../../../support/ServiceEnum";
 import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages";
 import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";

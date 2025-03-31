@@ -1,6 +1,6 @@
 import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages"
 import {CompanyEnum} from "../../../support/beeoclock/page-element/services/enum/CompanyEnum";
-import {ServiceEnum} from "../../../support/beeoclock/common/enum/ServiceEnum";
+import {ServiceEnum} from "../../../support/ServiceEnum";
 import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import {ServiceEnum} from "./beeoclock/common/enum/ServiceEnum";
+import {ServiceEnum} from "./ServiceEnum";
 import {PanelLoginPageElement} from "./beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {PanelLoginPage} from "./beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {ClientPropertiesEnum} from "./beeoclock/common/enum/ClientPropertiesEnum";
