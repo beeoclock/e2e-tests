@@ -4,32 +4,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  checkout:
+  setup:
     runs-on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+      X_GITHUB_ACTION: ${{ secrets.X_GITHUB_ACTION }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-  setup-node:
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.11.0'
 
-  install-dependencies:
-    runs-on: ubuntu-latest
-    needs: setup-node
-    steps:
       - name: Install dependencies
         run: npm install
 
-  set-locale:
-    runs-on: ubuntu-latest
-    needs: install-dependencies
-    steps:
       - name: Set locale to Polish
         run: |
           sudo apt-get update
@@ -40,17 +33,9 @@ jobs:
           LANG: pl_PL.UTF-8
           LC_ALL: pl_PL.UTF-8
 
-  set-timezone:
-    runs-on: ubuntu-latest
-    needs: set-locale
-    steps:
       - name: Set timezone
         run: sudo timedatectl set-timezone Europe/Warsaw
 
-  debug-locale-timezone:
-    runs-on: ubuntu-latest
-    needs: set-timezone
-    steps:
       - name: Debug locale and timezone
         run: |
           echo "Current locale:"
@@ -58,34 +43,46 @@ jobs:
           echo "Current timezone:"
           timedatectl
 
-  run-client-app-tests:
+  client-app-test:
     runs-on: ubuntu-latest
-    needs: debug-locale-timezone
-    env:
-      LANG: pl
-      LC_ALL: pl_PL.UTF-8
-      TZ: Europe/Warsaw
+    needs: setup
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Run client app tests
+        env:
+          LANG: pl
+          LC_ALL: pl_PL.UTF-8
+          TZ: Europe/Warsaw
         run: npm run client-app-test
 
-  run-healthcheck:
+  healthcheck:
     runs-on: ubuntu-latest
-    needs: run-client-app-tests
+    needs: client-app-test
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Run healthcheck
         run: npm run panel-app-api-health-check
 
-  run-panel-api-test:
+  panel-api-test:
     runs-on: ubuntu-latest
-    needs: run-healthcheck
+    needs: healthcheck
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Run panel API test
         run: npm run panel-app-api-test
 
-  run-panel-client-test:
+  panel-client-test:
     runs-on: ubuntu-latest
-    needs: run-panel-api-test
+    needs: panel-api-test
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Run panel client test
         run: npm run panel-app-client-test
