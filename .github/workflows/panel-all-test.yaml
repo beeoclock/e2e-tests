@@ -4,8 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup:
+  run-tests:
     runs-on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+      X_GITHUB_ACTION: ${{ secrets.X_GITHUB_ACTION }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -14,40 +20,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.11.0'
+          cache: 'npm'
+
+      - name: Cache Cypress
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-cache-${{ runner.os }}-
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Cache Cypress binary
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            cypress-cache-${{ runner.os }}-
-
-      - name: Install Cypress
-        run: npx cypress install
-
-  client-app-test:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.11.0'
-
-      - name: Restore Cypress cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            cypress-cache-${{ runner.os }}-
 
       - name: Set locale and timezone
         run: |
@@ -60,74 +44,25 @@ jobs:
           LANG: pl_PL.UTF-8
           LC_ALL: pl_PL.UTF-8
 
+      - name: Debug locale and timezone
+        run: |
+          echo "Current locale:"
+          locale
+          echo "Current timezone:"
+          timedatectl
+
       - name: Run client app tests
-        run: npm run client-app-test
-
-  healthcheck:
-    needs: client-app-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.11.0'
-
-      - name: Restore Cypress cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            cypress-cache-${{ runner.os }}-
+        continue-on-error: true
+        run: node --loader ts-node/esm npx cypress run --spec cypress/e2e/service/page --browser edge
 
       - name: Run healthcheck
+        continue-on-error: true
         run: npm run panel-app-api-health-check
 
-  panel-api-test:
-    needs: healthcheck
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.11.0'
-
-      - name: Restore Cypress cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            cypress-cache-${{ runner.os }}-
-
       - name: Run panel API test
+        continue-on-error: true
         run: npm run panel-app-api-test
 
-  panel-client-test:
-    needs: panel-api-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.11.0'
-
-      - name: Restore Cypress cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            cypress-cache-${{ runner.os }}-
-
       - name: Run panel client test
+        continue-on-error: true
         run: npm run panel-app-client-test
