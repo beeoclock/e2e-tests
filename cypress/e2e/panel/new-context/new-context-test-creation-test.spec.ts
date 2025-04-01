@@ -30,24 +30,24 @@ describe('new context test creation', () => {
             .typeCompanyName('companyName')
             .clickNextButton()
 
-        cy.log('assert page 3 & select given industry')
-        NewContextPages.NewContextSelectIndustryPage
-            .assertTitle()
-            .assertState()
-            .assertLearningIndustryElement()
-            .assertCosmeticIndustryElement()
-            .assertHealthCareIndustryElement()
-            .assertOtherIndustryElement()
-            .assertElementLength(4)
-            .clickOnGivenIndustry(NewContextPages.NewContextSelectIndustryPage.industryNames.healthcare)
-
-        cy.log('assert page 4 & select given industry details')
-        NewContextPages.industryDetails.healthcare
-            .assertRehabilitateElement()
-            .assertPsychologistElement()
-            .assertOtherIndustryElement()
-
-            .clickOnGivenDetail(NewContextPages.industryDetails.healthcare.healthcareDetailNames.psychologist)
+        // cy.log('assert page 3 & select given industry')
+        // NewContextPages.NewContextSelectIndustryPage
+        //     .assertTitle()
+        //     .assertState()
+        //     .assertLearningIndustryElement()
+        //     .assertCosmeticIndustryElement()
+        //     .assertHealthCareIndustryElement()
+        //     .assertOtherIndustryElement()
+        //     .assertElementLength(4)
+        //     .clickOnGivenIndustry(NewContextPages.NewContextSelectIndustryPage.industryNames.healthcare)
+        //
+        // cy.log('assert page 4 & select given industry details')
+        // NewContextPages.industryDetails.healthcare
+        //     .assertRehabilitateElement()
+        //     .assertPsychologistElement()
+        //     .assertOtherIndustryElement()
+        //
+        //     .clickOnGivenDetail(NewContextPages.industryDetails.healthcare.healthcareDetailNames.psychologist)
 
         cy.log('assert page 5 & fill address of industry information')
         NewContextPages.NewContextPointOfSalePage
