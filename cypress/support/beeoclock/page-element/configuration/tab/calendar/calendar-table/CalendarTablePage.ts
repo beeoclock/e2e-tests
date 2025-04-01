@@ -1,5 +1,8 @@
 import {CalendarTablePageElement} from "./CalendarTablePageElement";
 import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
+import {SpecialistNameEnum} from "../../../../common/enum/SpecialistNameEnum";
+import {QueryAssertion} from "../../../../../common/assertion/QueryAssertion";
+import {DateUtils} from "../../../../../backend/Utils/DateUtils";
 
 export class CalendarTablePage {
 
@@ -8,13 +11,33 @@ export class CalendarTablePage {
         return this;
     }
 
-    public clickOnGivenAndHour(specialist: string, index: number): CalendarTablePage {
+    public clickOnGivenAndHour(specialist: string, index: number, plusDays?: number): CalendarTablePage {
         CalendarTablePageElement.SpecificTableElement.getElement(specialist, index)
             .click({force: true})
             .then(() => {
-                cy.get('whac-a-mole').scrollIntoView().should('be.visible')
-            })
+                cy.get('app-additional-menu').scrollIntoView().should('be.visible')
+            }).then(() => {
+
+            if (specialist === SpecialistNameEnum.E2E_E2E) {
+                QueryAssertion.verifyCorrectUrl(`(second:additional-menu/${SpecialistNameEnum.E2E_ID}/${DateUtils.convertToUTC(index, plusDays)})`)
+            }
+
+            if (specialist === SpecialistNameEnum.ZALEWSKI) {
+                QueryAssertion.verifyCorrectUrl(`(second:additional-menu/${SpecialistNameEnum.ZALEWSKI_ID}/${DateUtils.convertToUTC(index, plusDays)})`)
+            }
+        })
         return this;
+    }
+
+    public assertUrlOnActionMenu(specialist: string, date: number, dayIndex): CalendarTablePage {
+        cy.get('app-additional-menu').should('be.visible')
+            .then(() => {
+                if (specialist === SpecialistNameEnum.E2E_E2E) {
+                    QueryAssertion.verifyCorrectUrl(SpecialistNameEnum.E2E_ID)
+                    QueryAssertion.verifyCorrectUrl(DateUtils.convertToUTC(dayIndex))
+                }
+            })
+        return this
     }
 
     public findAndVerifyOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
@@ -27,7 +50,7 @@ export class CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElementByOrderId(orderId)
             .click()
             .then(() => {
-                cy.get('whac-a-mole').scrollIntoView().should('be.visible')
+                cy.get('app-additional-menu').scrollIntoView().should('be.visible')
                 cy.get('app-item-list-v2-service-form-order-component').scrollIntoView().should('be.visible')
                 cy.get('event-container-details-component').scrollIntoView().should('be.visible')
                 cy.get('event-meta-details').scrollIntoView().should('be.visible')
@@ -52,7 +75,7 @@ export class CalendarTablePage {
     public clickOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
             .click({force: true}).then(() => {
-            cy.get('whac-a-mole-container').should('be.visible')
+            cy.get('app-additional-menu').should('be.visible')
         })
         return this;
     }

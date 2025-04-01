@@ -48,3 +48,4 @@ export enum CalendarTableTimeEnum {
     Hour_23 = 46,
     Hour_23_30 = 47,
 }
+
