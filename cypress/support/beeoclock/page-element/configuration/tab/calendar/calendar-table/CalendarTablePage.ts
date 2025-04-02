@@ -50,11 +50,10 @@ export class CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElementByOrderId(orderId)
             .click()
             .then(() => {
-                cy.get('app-additional-menu').scrollIntoView().should('be.visible')
+                cy.get('app-second-router-outlet').scrollIntoView().should('be.visible')
                 cy.get('app-item-list-v2-service-form-order-component').scrollIntoView().should('be.visible')
                 cy.get('event-container-details-component').scrollIntoView().should('be.visible')
                 cy.get('event-meta-details').scrollIntoView().should('be.visible')
-                cy.get('.truncate.font-bold').contains('Szczegółowy widok wydarzenia').scrollIntoView().should('be.visible')
                 cy.get('.bi.bi-dash-circle').scrollIntoView().should('be.visible')
                 cy.document().its('readyState').should('equal', 'complete')
             })

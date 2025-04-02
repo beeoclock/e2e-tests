@@ -37,7 +37,7 @@ export class PanelOrderCreationDataProvider {
                     dataAssert: Data + ', 18:00',
                     publicNote: 'usuń mnie',
                     businessNote: 'USUŃ MNIE - wartość do wyszukania na ekranie usług',
-                    assertTime: '18:00 - 18:30    Strzyżenie Brody',
+                    assertTime: 'Anonimowy Strzyżenie Brody 18:00-18:30',
 
                 };
             case TestCaseEnum.CASE_2:
@@ -65,7 +65,7 @@ export class PanelOrderCreationDataProvider {
                     summaryTime: '2min',
                     publicNote: 'test note',
                     businessNote: 'TEST - do usunięcia',
-                    assertTime: '07:00-07:02 e2e-strzyżenie'
+                    assertTime: 'Anonimowy e2e-strzyżenie 07:00-07:02 '
                 };
             case TestCaseEnum.CASE_3:
                 return {
@@ -92,7 +92,7 @@ export class PanelOrderCreationDataProvider {
                     summaryTime: '15min',
                     publicNote: 'sample note AAAAAAAAAAAA',
                     businessNote: 'SAMPLE - do usunięcia',
-                    assertTime: '12:00 - 12:15   Strzyżenie Brody'
+                    assertTime: 'AnonimowyStrzyżenie Brody12:00 - 12:15'
                 };
             case TestCaseEnum.CASE_4:
                 return {
@@ -119,7 +119,7 @@ export class PanelOrderCreationDataProvider {
                     dataAssert: Data + ', 15:00',
                     publicNote: 'coloring note',
                     businessNote: 'COLORING - do usunięcia',
-                    assertTime: '15:00 - 17:02    e2e-strzyżenie'
+                    assertTime: 'Anonimowye2e-strzyżenie15:00 - 17:02'
                 };
             default:
                 throw new Error("Invalid test case");

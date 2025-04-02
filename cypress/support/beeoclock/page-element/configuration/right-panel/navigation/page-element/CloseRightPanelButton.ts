@@ -1,7 +1,6 @@
 export class CloseRightPanelButton {
     public getElement(): any {
-        return cy.get('app-additional-menu')
-            .find('[title="Close"]').first()
+        return cy.get('[title="Close"]')
             .scrollIntoView().should('be.visible');
     }
 }
