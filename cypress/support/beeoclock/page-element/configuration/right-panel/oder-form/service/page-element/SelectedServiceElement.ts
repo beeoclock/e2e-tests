@@ -1,6 +1,6 @@
 export class SelectedServiceElement {
     public getComponent(): any {
-        return cy.get('whac-a-mole-container')
+        return cy.get('app-additional-menu')
             .find('.leading-tight.flex.gap-4').first()
             .scrollIntoView().should('be.visible')
     }

@@ -20,7 +20,7 @@ export class PanelAbsenceCreationDataProvider {
                     absenceToDate: DateUtils.formatDateDaysAhead(1),
                     absenceToTime: TimeEnum.Hour_12_30,
                     absenceNote: 'Jutrzejszy obiad Tomka',
-                    assertTableAbsence: '12:00 - 12:30\nPrzerwa'
+                    assertTableAbsence: 'Przerwa\n12:00 - 12:30'
                 }
             case TestCaseEnum.CASE_2:
                 return {
@@ -33,7 +33,7 @@ export class PanelAbsenceCreationDataProvider {
                     absenceToDate: DateUtils.formatDateDaysAhead(1),
                     absenceToTime: TimeEnum.Hour_15_30,
                     absenceNote: 'Jutrzejszy obiad e2e',
-                    assertTableAbsence: '15:00 - 15:30\nPrzerwa'
+                        assertTableAbsence: 'Przerwa\n15:00 - 15:30'
                 }
         }
     }

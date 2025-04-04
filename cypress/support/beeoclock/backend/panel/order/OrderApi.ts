@@ -32,7 +32,7 @@ export class OrderApi {
             }
         }).then(response => {
             expect(response.status).to.equal(200);
-            cy.log('not filtered items: ' + JSON.stringify(response.body.totalSize));
+            cy.log('not filtered items: ');
 
             const filteredItems = response.body.items.filter(({services}) => {
                 return services.some(({state, status}) => {
@@ -54,8 +54,6 @@ export class OrderApi {
     public static getAllOrderIds(): any {
         this.getToken()
         const tokenId = Cypress.env('token');
-        const start = DateUtils.getStartOfPreviousDays(100);
-        const end = DateUtils.getEndOfTomorrowUTC();
         const url = EntryPointEnum.API_ENTRY_POINT + '/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
         return cy.request({
             method: 'GET',
@@ -77,11 +75,9 @@ export class OrderApi {
                 return cy.wrap([]);
             }
         });
-        // });
     }
 
     public static deleteOrderWithGivenId(id: string): any {
-        // return cy.get<string>('@token').then(tokenId => {
         this.getToken()
         const tokenId = Cypress.env('token');
         return cy.request({
@@ -98,11 +94,9 @@ export class OrderApi {
             expect(response.status).to.equal(200);
             return response
         })
-        // });
     }
 
     public static getOrderWithGivenId(id: string): any {
-        // return cy.get<string>('@token').then(tokenId => {
         const tokenId = Cypress.env('token');
         return cy.request({
             method: 'GET',
@@ -117,7 +111,6 @@ export class OrderApi {
             expect(response.status).to.equal(200);
             return response.body;
         })
-        // });
     }
 
     public static deleteOrders(orderIds: string[]): any {

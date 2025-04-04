@@ -17,6 +17,7 @@ import {AuthApi} from "./beeoclock/backend/auth/AuthApi";
 import './commands';
 import 'cypress-file-upload';
 import {BackendCommonEnum} from "./beeoclock/backend/enum/BackendCommonEnum";
+import cypress from "cypress";
 
 require('cypress-xpath');
 
@@ -24,10 +25,9 @@ require('cypress-xpath');
  * clear all storage and assign to global env valid token before any test
  */
 before(() => {
-    clearAllData();
-    // deleteIndexDb();
+    clearAllData()
     Cypress.on('uncaught:exception', (err) => {
-        console.warn('Ignorowany błąd:', err.message);
+        console.error('!!!ignored exception!!!', err.message);
         return false;
     });
 
@@ -36,13 +36,17 @@ before(() => {
     })
 });
 
+beforeEach('clear environment', (): void => {
+    clearAllData()
+})
+
 function deleteIndexDb() {
     indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-order');
     indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-absence');
 }
 
 function clearAllData() {
-    cy.clearCookies();
+    cy.clearAllCookies();
     cy.clearLocalStorage();
     cy.clearAllSessionStorage();
 }

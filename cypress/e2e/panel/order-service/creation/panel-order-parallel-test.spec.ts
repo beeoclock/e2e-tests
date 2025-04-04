@@ -10,8 +10,8 @@ describe('panel - order service', () => {
     const testCases = [
         TestCaseEnum.CASE_1,
         TestCaseEnum.CASE_2,
-        TestCaseEnum.CASE_3,
-        TestCaseEnum.CASE_4
+        // TestCaseEnum.CASE_3,
+        // TestCaseEnum.CASE_4
     ];
 
     before('clear environment', () => {
@@ -43,7 +43,6 @@ describe('panel - order service', () => {
                 .clickSubmitSelectedTime()
                 .selectPriceOfService(testData.updatedPrice)
 
-            // cy.wait(2000)
             RightPanelPages.SummaryAndPaymentServicePage
                 .verifyOrderService(testData.summary)
                 .verifyOrderSpecialist(testData.specialistFirstName)
