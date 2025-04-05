@@ -1,6 +1,11 @@
 import {NewContextServiceElement} from "./element/NewContextServiceElement";
 import {Assertions} from "../../tab/common/assertions/Assertions";
 import {QueryAssertion} from "../../../../common/assertion/QueryAssertion";
+import {NewContextInterceptionHelper} from "../../../../common/Interception/new-context/NewContextInterceptionHelper";
+import {NewContextInterceptionAssertion} from "../../../../common/Interception/new-context/NewContextInterceptionAssertion";
+import {BusinessProfileInterception} from "../../../../common/Interception/business-profile/BusinessProfileInterception";
+import {ApiInterceptionHelper} from "../../../../common/Interception/ApiInterceptionHelper";
+import {LeftMenuPage} from "../../left-menu/LeftMenuPage";
 
 export class NewContextServicePage {
     private element = new NewContextServiceElement()
@@ -46,5 +51,18 @@ export class NewContextServicePage {
     public assertState(): NewContextServicePage {
         QueryAssertion.verifyCorrectUrl('/identity/create-business/services')
         return this;
+    }
+
+    public clickCreateButton(companyName: string, expect: any): NewContextServicePage {
+        const createNewContext: string = NewContextInterceptionHelper.createNewContext()
+        const updateBusinessProfile: string = NewContextInterceptionHelper.updateBusinessProfile()
+        const getBusinessProfile: string = BusinessProfileInterception.getBusinessProfile()
+        cy.contains('button', 'Utwórz').click()
+
+        NewContextInterceptionAssertion.createNewContextAlias(createNewContext, companyName)
+        NewContextInterceptionAssertion.updateContextAlias(updateBusinessProfile, expect)
+        ApiInterceptionHelper.waitForAlias(getBusinessProfile)
+        LeftMenuPage.assertIsSynchronized(true)
+        return this
     }
 }

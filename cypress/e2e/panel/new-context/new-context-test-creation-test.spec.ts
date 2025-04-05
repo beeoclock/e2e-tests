@@ -3,6 +3,10 @@ import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/con
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
 import {NewContextPages} from "support/beeoclock/page-element/configuration/new-context/NewContextPages";
+import { UpdateBusinessProfileBuilder } from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
+import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import {BusinessSettingsPages} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
 
 describe('new context test creation', () => {
     let schedulePage: any
@@ -30,26 +34,7 @@ describe('new context test creation', () => {
             .typeCompanyName('companyName')
             .clickNextButton()
 
-        // cy.log('assert page 3 & select given industry')
-        // NewContextPages.NewContextSelectIndustryPage
-        //     .assertTitle()
-        //     .assertState()
-        //     .assertLearningIndustryElement()
-        //     .assertCosmeticIndustryElement()
-        //     .assertHealthCareIndustryElement()
-        //     .assertOtherIndustryElement()
-        //     .assertElementLength(4)
-        //     .clickOnGivenIndustry(NewContextPages.NewContextSelectIndustryPage.industryNames.healthcare)
-        //
-        // cy.log('assert page 4 & select given industry details')
-        // NewContextPages.industryDetails.healthcare
-        //     .assertRehabilitateElement()
-        //     .assertPsychologistElement()
-        //     .assertOtherIndustryElement()
-        //
-        //     .clickOnGivenDetail(NewContextPages.industryDetails.healthcare.healthcareDetailNames.psychologist)
-
-        cy.log('assert page 5 & fill address of industry information')
+        cy.log('assert page 3 & fill address of industry information')
         NewContextPages.NewContextPointOfSalePage
             .assertState()
             .selectCountry('Polska')
@@ -59,7 +44,7 @@ describe('new context test creation', () => {
             .typeSecondAddress('Argentyńska 270B/490')
             .clickNextButton()
 
-        cy.log('assert page 6 & configure schedule of industry')
+        cy.log('assert page 4 & configure schedule of industry')
         NewContextPages.NewContextSchedulesPage
             .assertState()
             .assertGivenDayIsSelected(schedulePage.dayIndex.monday)
@@ -87,7 +72,7 @@ describe('new context test creation', () => {
             .typeTimeEnd('20:00')
             .clickNextButton()
 
-        cy.log('assert page 7 & fill language and timezone information')
+        cy.log('assert page 5 & fill language and timezone information')
         NewContextPages.NewContextLanguagePage
             .assertState()
             .assertSelectedLanguage('Polski')
@@ -106,6 +91,18 @@ describe('new context test creation', () => {
             .typeServicePrice('200')
             .clickSaveButton()
             .assertCreatedService('New service', '200 zł', '45min')
+
+        const expectedBody = buildBusinessUpdate();
+        NewContextPages.NewContextServicePage
+            .clickCreateButton('companyName', expectedBody)
+
+        cy.log('Delete business context')
+
+        LeftMenuPage.clickOnGivenTab(TabNameEnum.BUSINESS_SETTINGS, true);
+        BusinessSettingsPages.BusinessProfileDeletionPage
+            .clickDeleteButton()
+            .clickDeleteButtonOnModal('companyName')
+        PanelLoginPage.assertGivenBusinessLength(3)
     });
 
     function login(): void {
@@ -124,6 +121,26 @@ describe('new context test creation', () => {
         PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
         PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
         PanelLoginPage.clickLoginButton();
+    }
+
+    function buildBusinessUpdate(): any {
+      return new UpdateBusinessProfileBuilder()
+            .setPublished(1)
+            .addSchedule({
+                workDays: [2, 3, 4, 5, 7],
+                startInSeconds: 39600,
+                endInSeconds: 72000
+            })
+            .addAddress({
+                object: "Address",
+                country: "PL",
+                city: "Warszawa",
+                zipCode: "10-100",
+                streetAddressLineOne: "Krakowskie przedmieście 178/12A",
+                streetAddressLineTwo: "Argentyńska 270B/490",
+                customLink: null
+            })
+            .build();
     }
 });
 
