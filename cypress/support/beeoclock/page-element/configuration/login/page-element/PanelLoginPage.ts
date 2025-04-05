@@ -37,7 +37,17 @@ export class PanelLoginPage {
     public static selectGivenBusinessAndStoreToken(business: string): PanelLoginPage {
         PanelLoginPageElement.SelectBusinessOption.getElement(business)
             .click()
+        return this;
+    }
 
+    public static assertGivenBusiness(business: string): PanelLoginPage {
+        PanelLoginPageElement.SelectBusinessOption.getElement(business)
+        return this;
+    }
+
+    public static assertGivenBusinessLength(length: number): PanelLoginPage {
+        PanelLoginPageElement.SelectBusinessOption.getElementLength()
+            .should('eq', length)
         return this;
     }
 

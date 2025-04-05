@@ -18,6 +18,11 @@ export class NewContextCompanyNamePage {
         return this;
     }
 
+    public verifyTypedCompanyName(companyName: string): NewContextCompanyNamePage {
+            this.element.getCompanyNameInput().should('have.value', companyName)
+        return this;
+    }
+
     public clickNextButton(): NewContextCompanyNamePage {
         cy.contains('button', 'Dalej').click()
         return this;
