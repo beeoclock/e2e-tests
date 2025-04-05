@@ -62,11 +62,8 @@ export class AbsencePage {
     }
 
     public clickSaveButton(): AbsencePage {
-        // const createAbsence = ApiInterceptionHelper.createAbsence()
         CommonElementPage.clickSaveButton()
-        // ApiInterceptionHelper.waitForAlias(createAbsence)
         cy.document().its('readyState').should('equal', 'complete')
-        cy.get('whac-a-mole').should('not.contain', 'Przetwarzanie')
         LeftMenuPage.assertIsSynchronizationExecuted()
         LeftMenuPage.assertIsSynchronized(true)
         return this;

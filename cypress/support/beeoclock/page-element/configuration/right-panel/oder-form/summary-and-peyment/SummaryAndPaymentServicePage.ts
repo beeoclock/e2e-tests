@@ -95,31 +95,24 @@ export class SummaryAndPaymentServicePage {
 
     public clickSaveButton(paymentStatus: string): SummaryAndPaymentServicePage {
         const createOrder: string = ApiInterceptionHelper.createOrder()
-        const createPayment: string = ApiInterceptionHelper.createServicePayment()
+        const createServicePayment: string = ApiInterceptionHelper.createServicePayment()
 
         LeftMenuPage.assertIsSynchronized(true)
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
-        cy.wait(2000)
+            .then(() => {
+                cy.wait(100)
+            cy.wait('@' + createOrder, {timeout: 5000}).then((interception) => {
+                console.log('Intercepted request:', interception);
+                cy.wrap(interception.request.body._id).as('orderId');
+            })
 
-        LeftMenuPage.handleSynchronization()//TODO talk with dev about this
-
-        cy.wait('@' + createOrder, {timeout: 20000}).then((interception) => {
-            cy.wrap(interception.request.body._id).as('orderId');
+            cy.wait('@' + createServicePayment, {timeout: 5000}).then((interception) => {
+                const sendPaymentStatus = interception.request.body.status;
+                expect(sendPaymentStatus).to.equal(paymentStatus);
+            })
         })
-
-        cy.wait('@' + createPayment, {timeout: 20000}).then((interception) => {
-            const sendPaymentStatus = interception.request.body.status;
-            expect(sendPaymentStatus).to.equal(paymentStatus);
-        })
-
-        // cy.wait(['@' + createOrder, '@' + createPayment], {timeout: 20000}).then(([orderInterception, paymentInterception]) => {
-        //     cy.wrap(orderInterception.request.body._id).as('orderId');
-        //
-        //     const sendPaymentStatus = paymentInterception.request.body.status;
-        //     expect(sendPaymentStatus).to.equal(paymentStatus);
-        // });
-
+        //LeftMenuPage.handleSynchronization()//TODO talk with dev about this
         LeftMenuPage.assertIsSynchronized(true)
         return this;
     }

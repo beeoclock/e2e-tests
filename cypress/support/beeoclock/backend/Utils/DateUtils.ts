@@ -1,4 +1,5 @@
 import "moment-timezone/index";
+import { DateTime } from 'luxon';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pl';
 import moment = require('moment');
@@ -9,6 +10,18 @@ export class DateUtils {
         let currentDate = new Date();
         currentDate.setDate(currentDate.getDate() - minusDays);
         return currentDate.getFullYear() + "." + (currentDate.getMonth() + 1) + "." + currentDate.getDate();
+    }
+
+    public static convertToUTC(hourEnumValue: number, plusDays?: number): string {
+        const hour = Math.floor(hourEnumValue / 2);
+
+        let localTime = DateTime.local().set({ hour, minute: 0, second: 0, millisecond: 0 }).setZone("Europe/Warsaw", { keepLocalTime: true });
+
+        if (plusDays !== undefined) {
+            localTime = localTime.plus({ days: plusDays });
+        }
+
+        return localTime.toUTC().toISO();
     }
 
     public static setCurrentDatePlusDays(plusDays: number, format: string) {
@@ -138,7 +151,7 @@ export class DateUtils {
     public static getCurrentDate(): string {
         const currentDate = moment();
         const newDate = currentDate
-        return newDate.format("DD.MM.YYYY");
+        return newDate.format("D.MM.YYYY");
     }
 
     public static getCurrentHourFormatted(): string {

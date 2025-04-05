@@ -13,7 +13,6 @@
     "panel-app-api-test": "npx cypress run --spec cypress/e2e/backend",
     "panel-app-client-test": "npx cypress run --spec cypress/e2e/panel/client --browser edge",
     "cypress-docker:open": "docker build -t cypress-runner . && docker run --name cypress-open cypress-runner"
-
   },
   "author": "Jan Zadumiński",
   "license": "ISC",
@@ -23,6 +22,7 @@
     "cypress-file-upload": "5.0.8",
     "cypress-xpath": "2.0.1",
     "dayjs": "1.11.13",
+    "luxon": "^3.6.1",
     "moment-timezone": "0.5.47",
     "typescript": "5.4.5"
   },

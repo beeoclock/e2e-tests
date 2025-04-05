@@ -24,7 +24,7 @@ describe('specialist absence creation test', () => {
         LeftMenuPage.assertIsSynchronized(true)
     })
 
-    it.only('test panel absence creation service', function () {
+    it('test panel absence creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2
@@ -40,7 +40,7 @@ describe('specialist absence creation test', () => {
 
             cy.log(`add absence on calendar panel for ${testCase}`)
             CalendarPages.CalendarTablePage
-                .clickOnGivenAndHour(testData.specialist, testData.time);
+                .clickOnGivenAndHour(testData.specialist, testData.time, 1);
             RightPanelPages.BreakScienceGivenTimePage
                 .verifySelectedNextDayTimeLabel(testData.selectedTime)
                 .verifySelectedSpecialistLabel(testData.specialist)
@@ -96,7 +96,7 @@ describe('specialist absence creation test', () => {
             .clickSaveButton()
 
         CalendarPages.CalendarTablePage
-            .assertAbsenceOnTable(dataFrom + ' - ' + dataTo + '\nPrzerwa')
+            .assertAbsenceOnTable( 'Przerwa\n' +dataFrom + ' - ' + dataTo)
 
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 
@@ -106,7 +106,7 @@ describe('specialist absence creation test', () => {
             .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.ATTENDEES, '1')
             .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataFrom)
             .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(0) + ', ' + dataTo)
-            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.CREATED_AT, DateUtils.getCurrentDate() + ', ' + DateUtils.getCurrentHour())
+            .verifyTableRowElement('SZYBKA PRZERWA', AbsenceColumnRowEnum.CREATED_AT, DateUtils.getCurrentDate() + ', ' + DateUtils.getCurrentHourWithMinutes())
             .clickActionButton('SZYBKA PRZERWA')
             .clickGivenActionButton(AbsenceActionEnum.DEACTIVATE)
 
