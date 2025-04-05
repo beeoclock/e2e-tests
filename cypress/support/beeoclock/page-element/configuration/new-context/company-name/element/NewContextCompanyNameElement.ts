@@ -6,5 +6,6 @@ export class NewContextCompanyNameElement {
 
     public getCompanyNameInput(): any {
         return cy.get('#create-business-form-input-businessName')
+            .find('input')
     }
 }
