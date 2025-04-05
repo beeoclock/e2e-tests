@@ -12,4 +12,9 @@ export class LandingHeaderComponent {
     public getLogoText(): any {
         return this.getElement().find('img').last()
     }
+
+    public getGivenHeaderLink(link: string): any {
+        return this.getElement().find('a').contains(link)
+            .scrollIntoView().should('be.visible')
+    }
 }
