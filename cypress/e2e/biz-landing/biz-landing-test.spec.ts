@@ -1,6 +1,6 @@
 import {BizLandingPages} from "../../support/beeoclock/page-element/biz-landing/BizLandingPages";
 
-describe('biz-landing test', () => {
+describe('biz landing test presentation & header navigation tests', () => {
 
     beforeEach('login', () => {
         login()
