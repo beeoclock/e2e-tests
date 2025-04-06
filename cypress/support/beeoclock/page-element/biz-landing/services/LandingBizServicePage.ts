@@ -5,7 +5,7 @@ export class LandingBizServicePage {
     private element = new BizLandingServiceElement()
 
     public assertIsSectionVisible(): LandingBizServicePage {
-        this.element.getElement().should('be.visible')
+        this.element.getElement().isInViewport()
         return this
     }
 

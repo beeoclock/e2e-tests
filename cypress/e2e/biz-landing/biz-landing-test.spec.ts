@@ -6,6 +6,16 @@ describe('biz-landing', () => {
         login()
     })
 
+    it('assert appointment section is visible after visit', () => {
+        BizLandingPages.LandingBizAppointmentPage
+            .assertIsSectionVisible()
+            .assertTryForFreeButton()
+        BizLandingPages.LandingBizFaqPage
+            .assertIsSectionNotVisible()
+        BizLandingPages.LandingBizTariffsPage
+            .assertTariffsIsNotVisible()
+    })
+
     it('assert service header link works properly', () => {
         BizLandingPages.LandingBizHeaderPage
             .assertHtml()
