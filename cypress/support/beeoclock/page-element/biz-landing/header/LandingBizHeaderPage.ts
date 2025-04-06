@@ -67,7 +67,7 @@ export class LandingBizHeaderPage {
         tariffs: 'Taryfy',
         faq: 'FAQ',
         contact: 'Kontakt',
-        login: 'Załogować się',
+        login: 'Zaloguj się',
     }
 
 }
