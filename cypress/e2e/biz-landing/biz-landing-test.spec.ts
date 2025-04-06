@@ -8,6 +8,7 @@ describe('biz-landing', () => {
 
     it('assert service header link works properly', () => {
         BizLandingPages.LandingBizHeaderPage
+            .assertHtml()
             .assertLogo()
             .clickOnServiceLink()
         BizLandingPages.LandingBizTariffsPage
@@ -49,14 +50,15 @@ describe('biz-landing', () => {
             .assertLoginLink()
     })
 
-    // it('body HTML should match the expected HTML', () => {
-    //     cy.fixture('biz-landing/body.html').then((expectedHtml) => {
-    //         cy.get('body').then((body) => {
-    //             const actualHtml = body[0].outerHTML;
-    //             expect(actualHtml.trim()).to.equal(expectedHtml.trim());
-    //         });
-    //     });
-    // });
+    it('body HTML should match the expected HTML', () => {
+        BizLandingPages.BizLandingCommonPage
+            .assertMainState()
+    });
+
+    it('appointment body HTML should match the expected HTML', () => {
+        BizLandingPages.LandingBizAppointmentPage
+            .assertHtml()
+    });
 
     function login() {
         cy.visit("https://biz.dev.beeoclock.com/pl/")

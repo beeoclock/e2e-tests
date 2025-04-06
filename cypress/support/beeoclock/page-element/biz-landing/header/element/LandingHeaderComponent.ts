@@ -1,6 +1,6 @@
 export class LandingHeaderComponent {
 
-    private getElement(): any {
+    public getElement(): any {
         return cy.get('#header')
             .scrollIntoView().should('be.visible')
     }
@@ -15,6 +15,5 @@ export class LandingHeaderComponent {
 
     public getGivenHeaderLink(link: string): any {
         return this.getElement().find('a').contains(link)
-            .scrollIntoView().should('be.visible')
     }
 }

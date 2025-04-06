@@ -2,13 +2,22 @@ import {LandingHeaderComponent} from "./element/LandingHeaderComponent";
 import {Assertions} from "../../configuration/tab/common/assertions/Assertions";
 import {QueryAssertion} from "../../../common/assertion/QueryAssertion";
 import {BizLandingEnum} from "../common/BizLandingEnum";
+import { BizLandingOuterHTML } from "fixtures/biz-landing/BizLandingOuterHTML";
 
 export class LandingBizHeaderPage {
     private element = new LandingHeaderComponent()
+    protected outerHtml = new BizLandingOuterHTML()
 
     public assertLogo(): LandingBizHeaderPage {
         Assertions.assertProperties(this.element.getLogo(), 'src', "https://biz.dev.beeoclock.com/pl/assets/new_logo.svg")
         Assertions.assertProperties(this.element.getLogoText(), 'src', "https://biz.dev.beeoclock.com/pl/assets/logo_text.svg")
+        return this
+    }
+
+    public assertHtml(): LandingBizHeaderPage {
+        this.element.getElement().invoke('prop', 'outerHTML').then((html) => {
+            expect(html).to.equal(this.outerHtml.getHeaderOuterHTML())
+        })
         return this
     }
 
