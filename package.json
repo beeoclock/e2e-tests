@@ -12,6 +12,7 @@
     "panel-app-api-health-check": "npx cypress run --spec cypress/e2e/backend/healthcheck",
     "panel-app-api-test": "npx cypress run --spec cypress/e2e/backend",
     "panel-app-client-test": "npx cypress run --spec cypress/e2e/panel/client --browser edge",
+    "biz-landing-test": "npx cypress run --spec cypress/e2e/biz-landing --browser edge",
     "cypress-docker:open": "docker build -t cypress-runner . && docker run --name cypress-open cypress-runner"
   },
   "author": "Jan Zadumiński",

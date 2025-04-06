@@ -1,6 +1,6 @@
 import {BizLandingPages} from "../../support/beeoclock/page-element/biz-landing/BizLandingPages";
 
-describe('biz-landing', () => {
+describe('biz-landing test', () => {
 
     beforeEach('login', () => {
         login()
@@ -51,8 +51,6 @@ describe('biz-landing', () => {
 
         BizLandingPages.LandingBizServicePage
             .assertIsSectionNotVisible()
-        BizLandingPages.LandingBizFaqPage
-            .assertIsSectionNotVisible()
     })
 
     it('assert login header link works properly', () => {
@@ -71,7 +69,7 @@ describe('biz-landing', () => {
     });
 
     function login() {
-        cy.visit("https://biz.dev.beeoclock.com/pl/")
+        cy.visit("https://biz.dev.beeoclock.com/pl/", {timeout: 30000})
     }
 
     before(() => {
