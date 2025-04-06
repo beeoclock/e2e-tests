@@ -25,15 +25,17 @@ require('cypress-xpath');
  * clear all storage and assign to global env valid token before any test
  */
 before(() => {
-    clearAllData()
     Cypress.on('uncaught:exception', (err) => {
         console.error('!!!ignored exception!!!', err.message);
         return false;
     });
 
-    AuthApi.getToken().then(token => {
-        Cypress.env('token', token);
-    })
+    if (!Cypress.env('skipClear')) {
+        clearAllData()
+        AuthApi.getToken().then(token => {
+            Cypress.env('token', token);
+        })
+    }
 });
 
 beforeEach('clear environment', (): void => {
