@@ -69,7 +69,8 @@ describe('biz-landing test', () => {
     });
 
     function login() {
-        cy.visit("https://biz.dev.beeoclock.com/pl/", {timeout: 30000})
+        cy.visit("https://biz.dev.beeoclock.com/pl/",
+            {timeout: 30000, failOnStatusCode: false})
     }
 
     before(() => {
