@@ -29,7 +29,7 @@ export default defineConfig({
     viewportWidth: 1920,
     defaultCommandTimeout: 8000,
     experimentalRunAllSpecs: true,
-    numTestsKeptInMemory: 3,
+    numTestsKeptInMemory: 10,
     pageLoadTimeout: 20000,
     requestTimeout: 15000,
     chromeWebSecurity: false,

@@ -9,6 +9,11 @@ export class LandingBizServicePage {
         return this
     }
 
+    public assertIsSectionNotVisible(): LandingBizServicePage {
+        this.element.getElement().isNotInViewport()
+        return this
+    }
+
     public assertPhoto(): LandingBizServicePage {
         this.element.getPhoto().should('be.visible')
         Assertions.assertProperties(this.element.getPhoto(), 'src', "https://biz.dev.beeoclock.com/pl/assets/img/local_img/img_pl.webp")

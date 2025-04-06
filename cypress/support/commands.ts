@@ -21,6 +21,9 @@ declare global {
             setNetworkThrottle(speed: ThrottleEnum): void;
 
             assertProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
+
+            isNotInViewport(): Chainable<JQuery>;
+            isInViewport(): Chainable<JQuery>;
         }
     }
 }
@@ -132,4 +135,34 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
 
 Cypress.Commands.add('assertProperties', { prevSubject: true }, (subject, properties, expectedProperties) => {
     cy.wrap(subject).should('have.prop', properties).and('include', expectedProperties);
+});
+
+Cypress.Commands.add('isNotInViewport', { prevSubject: true }, (subject) => {
+    const bounding = subject[0].getBoundingClientRect();
+    const windowHeight = Cypress.config('viewportHeight');
+    const windowWidth = Cypress.config('viewportWidth');
+
+    const isAbove = bounding.bottom < 0;
+    const isBelow = bounding.top > windowHeight;
+    const isLeft = bounding.right < 0;
+    const isRight = bounding.left > windowWidth;
+
+    const notVisible = isAbove || isBelow || isLeft || isRight;
+
+    expect(notVisible).to.be.true;
+});
+
+Cypress.Commands.add('isInViewport', { prevSubject: true }, (subject) => {
+    const bounding = subject[0].getBoundingClientRect();
+    const windowHeight = Cypress.config('viewportHeight');
+    const windowWidth = Cypress.config('viewportWidth');
+
+    const isAbove = bounding.bottom < 0;
+    const isBelow = bounding.top > windowHeight;
+    const isLeft = bounding.right < 0;
+    const isRight = bounding.left > windowWidth;
+
+    const notVisible = isAbove || isBelow || isLeft || isRight;
+
+    expect(notVisible).to.be.false;
 });

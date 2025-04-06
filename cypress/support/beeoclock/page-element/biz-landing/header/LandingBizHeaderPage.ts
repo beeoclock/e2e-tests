@@ -1,6 +1,7 @@
 import {LandingHeaderComponent} from "./element/LandingHeaderComponent";
 import {Assertions} from "../../configuration/tab/common/assertions/Assertions";
 import {QueryAssertion} from "../../../common/assertion/QueryAssertion";
+import {BizLandingEnum} from "../common/BizLandingEnum";
 
 export class LandingBizHeaderPage {
     private element = new LandingHeaderComponent()
@@ -27,12 +28,37 @@ export class LandingBizHeaderPage {
         return this
     }
 
+    public clickOnFaqLink(): LandingBizHeaderPage {
+        this.element.getGivenHeaderLink(this.links.faq)
+            .click().then(() => {
+            QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/pl/#faq')
+        })
+        return this
+    }
+
+    public clickOnContactLink(): LandingBizHeaderPage {
+        this.element.getGivenHeaderLink(this.links.contact)
+            .click().then(() => {
+            QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/pl/#contact')
+        })
+        return this
+    }
+
+    public assertLoginLink(): LandingBizHeaderPage {
+        this.element.getGivenHeaderLink(this.links.login).should('have.attr', 'target', '_blank');
+        this.element.getGivenHeaderLink(this.links.login)
+            .should('have.attr', 'href', BizLandingEnum.IDENTITY_URL)
+        cy.request(BizLandingEnum.IDENTITY_URL).its('status').should('eq', 200);
+
+        return this;
+    }
+
     public readonly links = {
         services: 'Usługi',
         tariffs: 'Taryfy',
         faq: 'FAQ',
         contact: 'Kontakt',
-        login: 'Zalogować się',
+        login: 'Załogować się',
     }
 
 }

@@ -37,8 +37,10 @@ before(() => {
 });
 
 beforeEach('clear environment', (): void => {
-    clearAllData()
-})
+    if (!Cypress.env('skipClear')) {
+        clearAllData();
+    }
+});
 
 function deleteIndexDb() {
     indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-order');
@@ -50,3 +52,7 @@ function clearAllData() {
     cy.clearLocalStorage();
     cy.clearAllSessionStorage();
 }
+
+after(() => {
+    Cypress.env('skipClear', false);
+});

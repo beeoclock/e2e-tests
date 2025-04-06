@@ -7,4 +7,9 @@ export class LandingBizTariffsPage {
         this.element.getElement().should('be.visible')
         return this
     }
+
+    public assertTariffsIsNotVisible(): LandingBizTariffsPage {
+        this.element.getElement().isNotInViewport()
+        return this
+    }
 }
