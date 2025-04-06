@@ -1,0 +1,12 @@
+{
+  "esversion": 6,
+  "node": true,
+  "undef": true,
+  "unused": true,
+  "globals": {
+    "expect": false,
+    "cy": false,
+    "module": true
+  },
+  "extensions": [".ts"]
+}
