@@ -19,8 +19,6 @@ import 'cypress-file-upload';
 import {BackendCommonEnum} from "./beeoclock/backend/enum/BackendCommonEnum";
 import cypress from "cypress";
 
-require('cypress-xpath');
-
 /**
  * clear all storage and assign to global env valid token before any test
  */
