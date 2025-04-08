@@ -9,6 +9,6 @@ export class BizLandingElement {
     }
 
     public getFaqItem(index: number): any {
-        return cy.get(`faq-item-${index}`)
+        return cy.get(`#faq-item-${index}`)
     }
 }
