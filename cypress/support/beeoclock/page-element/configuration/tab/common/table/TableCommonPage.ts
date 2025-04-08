@@ -19,12 +19,20 @@ export class TableCommonPage {
 
     public static verifyTableRowElement(key: string, cell: number, expectedValue: string): typeof TableCommonPage {
         if (expectedValue) {
-            ClientTabTableAssertionElement.TableRowElement.getElement(key, cell)
+            this.component.getTableGivenRowElement(key, cell)
                 .should('have.prop', 'innerText').and('include', expectedValue)
+
+            // handle null value
         } else if (expectedValue == null) {
             ClientTabTableAssertionElement.TableRowElement.getElement(key, cell)
                 .should('have.prop', 'innerText').and('include', "")
         }
+        return this;
+    }
+
+    public static assertTableCount(count: number): typeof TableCommonPage {
+        this.component.getTableLengthCount().should('have.prop', 'innerText').and('include', count + ' total') //assert the total count info
+        this.component.getTableLength().should('eq', count) //assert table length
         return this;
     }
 }

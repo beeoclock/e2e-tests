@@ -6,4 +6,5 @@ export enum TabNameEnum {
     ABSENCE = 'Nieobecność',
     TARIFFS = 'Taryfy',
     BUSINESS_SETTINGS = 'Ustawienia firmy',
+    MEMBERS= 'Członkowie',
 }

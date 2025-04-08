@@ -6,6 +6,7 @@ import {CustomerApiInterceptionHelper} from "../../../common/Interception/custom
 import {MemberApiInterceptionHelper} from "../../../common/Interception/member/MemberApiInterceptionHelper";
 import {PaymentApiInterceptionHelper} from "../../../common/Interception/payment/PaymentApiInterceptionHelper";
 import {TariffsApiInterceptionHelper} from "../../../common/Interception/tariffs/TariffsApiInterceptionHelper";
+import { ClientsApiInterceptionHelper } from "support/beeoclock/common/Interception/clients/ClientsApiInterceptionHelper";
 
 export class LeftMenuPage {
 
@@ -36,10 +37,10 @@ export class LeftMenuPage {
     }
 
     public static clickClientTab(): LeftMenuPage {
-        // const getCustomers = ClientsApiInterceptionHelper.getCustomers()
+        const getCustomers: string = ClientsApiInterceptionHelper.getCustomers()
         LeftMenuPageElement.TabElement.getElement(TabNameEnum.CLIENTS)
             .click()
-        // ApiInterceptionHelper.waitForQueryAliasWithAssert(getCustomers)
+        ApiInterceptionHelper.waitForQueryAliasWithAssert(getCustomers)
         cy.get('customer-desktop-layout-list-component').should('be.visible')
         cy.get('customer-table-list-component').should('be.visible')
         return this;
@@ -50,6 +51,14 @@ export class LeftMenuPage {
             .click()
         cy.get('service-desktop-layout-list-component').should('be.visible')
         cy.get('service-table-list-component').should('be.visible')
+        return this;
+    }
+
+    public static clickMembersTab(): LeftMenuPage {
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.MEMBERS)
+            .click()
+        cy.get('member-table-list-component').should('be.visible')
+        cy.get('app-list-member-page').should('be.visible')
         return this;
     }
 
@@ -88,7 +97,7 @@ export class LeftMenuPage {
         return this
     }
 
-    public static assertIsSynchronized(isSynchronized: boolean): LeftMenuPage {
+    public static assertIsSynchronized(isSynchronized: boolean = true): LeftMenuPage {
         const expectedText = isSynchronized ? 'Zsynchronizowano' : 'Synchronizacja w toku…';
 
         LeftMenuPageElement.SynchronizingComponent.getElement()

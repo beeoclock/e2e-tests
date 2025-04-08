@@ -1,5 +1,3 @@
-import {ElementHelper} from "../../../../common/assertion/ElementHelper";
-
 export class TabElement {
     public getElement(tabName: string): any {
         return cy.get('utility-sidebar-menu-component', {includeShadowDom: false})
