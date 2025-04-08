@@ -23,6 +23,9 @@ describe('biz landing test presentation & header navigation tests', () => {
             .clickOnServiceLink()
         BizLandingPages.LandingBizTariffsPage
             .assertTariffsIsNotVisible()
+        BizLandingPages.LandingBizServicePage
+            .assertIsSectionVisible()
+            .assertHtml()
     })
 
     it('assert tariffs header link works properly', () => {

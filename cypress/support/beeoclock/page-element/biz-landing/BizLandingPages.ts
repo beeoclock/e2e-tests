@@ -5,6 +5,7 @@ import {LandingBizFaqPage} from "./faq/LandingBizFaqPage";
 import {LandingBizContactPage} from "./contact/LandingBizContactPage";
 import {BizLandingCommonPage} from "./common/BizLandingCommonPage";
 import {LandingBizAppointmentPage} from "./appointment/LandingBizAppointmentPage";
+import {LandingBizHowItWorks} from "./how-its-works/LandingBizHowItWorks";
 
 export class BizLandingPages {
 
@@ -15,4 +16,5 @@ export class BizLandingPages {
     public static LandingBizContactPage: LandingBizContactPage = new LandingBizContactPage()
     public static BizLandingCommonPage: BizLandingCommonPage = new BizLandingCommonPage()
     public static LandingBizAppointmentPage: LandingBizAppointmentPage = new LandingBizAppointmentPage()
+    public static LandingBizHowItWorks: LandingBizHowItWorks = new LandingBizHowItWorks()
 }
