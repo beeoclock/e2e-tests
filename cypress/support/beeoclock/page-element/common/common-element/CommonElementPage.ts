@@ -28,4 +28,9 @@ export class CommonElementPage {
             .type(value)
         return this;
     }
+
+    public static bodyEscape(): CommonElementPage {
+        cy.get('body').type('{esc}')
+        return this;
+    }
 }

@@ -25,7 +25,6 @@ describe('Members Test', () => {
         TableCommonPage.assertTableCount(3)
 
         CommonElementPage.clickAddResourceButton()
-
     })
     
     function assertTomaszZalewskiRow() {

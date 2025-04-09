@@ -12,4 +12,19 @@ export class MemberApiInterceptionHelper {
         }
         return getMember
     }
+
+    public static getGivenMember(): string {
+        const getMember = 'getMember' + DateUtils.getCurrentTime();
+        cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/member/*').as(getMember)
+        return getMember
+    }
+
+    public static updateMember(id?: string): string {
+        const updateMember = 'updateMember' + DateUtils.getCurrentTime();
+        if (id) {
+            cy.intercept('PUT', EntryPointEnum.API_ENTRY_POINT + '/member/' + id).as(updateMember)
+        }
+        cy.intercept('PUT', EntryPointEnum.API_ENTRY_POINT + '/member/*').as(updateMember)
+        return updateMember
+    }
 }

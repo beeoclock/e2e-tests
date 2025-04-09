@@ -47,4 +47,18 @@ export class MemberRightPanelElement {
     public getEyeElement(): any {
         return cy.get('.bi.bi-eye')
     }
+
+    public getSelectService(): any {
+        return cy.get('ion-select-service')
+    }
+
+    public getSelectedService(): any {
+        return this.getSelectService().find('#select-label')
+            .should('be.visible')
+    }
+
+    public getGivenServiceOption(service: string): any {
+        return cy.get('ion-list')
+            .find('ion-item').contains(service)
+    }
 }

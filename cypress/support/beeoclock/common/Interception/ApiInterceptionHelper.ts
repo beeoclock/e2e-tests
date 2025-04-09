@@ -8,8 +8,9 @@ export class ApiInterceptionHelper {
         cy.wait('@' + alias);
     }
 
-    public static waitForAliases(alias: string[]): void {
-        alias.forEach(a => cy.wait(`@${a}`, { timeout: 20000 }));
+    public static waitForAliases(aliases: string[]): void {
+        const formattedAliases = aliases.map(alias => `@${alias}`);
+        cy.wait(formattedAliases, { timeout: 20000 });
     }
 
     public static waitFor201Alias(alias: string): void {

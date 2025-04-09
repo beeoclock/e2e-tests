@@ -1,4 +1,7 @@
 import {MemberRightPanelElement} from "./element/MemberRightPanelElement";
+import {CommonPages} from "../../tab/common/CommonPages";
+import {MemberApiInterceptionHelper} from "../../../../common/Interception/member/MemberApiInterceptionHelper";
+import {ApiInterceptionHelper} from "../../../../common/Interception/ApiInterceptionHelper";
 
 export class MemberRightPanel {
     private element = new MemberRightPanelElement()
@@ -21,5 +24,39 @@ export class MemberRightPanel {
     public clickActiveStatus(): MemberRightPanel {
         this.element.getStatusToggle().click()
         return this;
+    }
+
+    public clickServiceStatus(): MemberRightPanel {
+        this.element.getServiceToggle().click()
+        return this;
+    }
+
+    public clickSelectService(): MemberRightPanel {
+        this.element.getSelectService().click()
+        return this;
+    }
+
+    public selectService(service: string): MemberRightPanel {
+        this.element.getGivenServiceOption(service).click()
+        return this;
+    }
+
+    public assertSelectedService(service: string | string[]): MemberRightPanel {
+        if (Array.isArray(service)) {
+            service.forEach((item) => {
+                this.element.getSelectedService().should('contain', item)
+            })
+        } else {
+            this.element.getSelectedService().should('contain', service)
+        }
+        return this;
+    }
+
+    public clickSaveButton(): MemberRightPanel {
+        const updateMember = MemberApiInterceptionHelper.updateMember()
+        const getMember = MemberApiInterceptionHelper.getGivenMember()
+        cy.contains('button', 'Zapisz').click()
+        ApiInterceptionHelper.waitForAliases([updateMember, getMember])
+        return this
     }
 }
