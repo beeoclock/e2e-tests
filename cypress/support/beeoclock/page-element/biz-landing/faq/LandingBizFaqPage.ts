@@ -22,12 +22,12 @@ export class LandingBizFaqPage {
     }
 
     public assertBoldText(index: number, expectedValue: string): LandingBizFaqPage {
-        Assertions.assertProperties(this.element.getFaqItemBoldContent(index), 'text', expectedValue)
-        return
+        Assertions.assertProperties(this.element.getFaqItemBoldContent(index), 'innerText', expectedValue)
+        return this
     }
 
     public asserFaqItemText(index: number, expectedValue: string): LandingBizFaqPage {
-        Assertions.assertProperties(this.element.getFaqItemContent(index), 'text', expectedValue)
+        Assertions.assertProperties(this.element.getFaqItemContent(index), 'innerText', expectedValue)
         return this;
     }
 }

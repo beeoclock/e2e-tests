@@ -14,8 +14,8 @@ export class FaqData {
             faq: [
                 {
                     question: "Jak szybko możesz rozpocząć korzystanie z Bee o’clock?",
-                    boldAnswer: "Rozpoczęcie korzystania z usługi jest bardzo proste: ",
-                    answer: " zarejestruj się na platformie, dodaj podstawowe informacje o swojej firmie i usługach, a system będzie gotowy do pracy. Masz możliwość skorzystania z bezpłatnego planu (Free) z podstawową funkcjonalnością, który pozwoli Ci natychmiast przetestować kluczowe funkcje Bee o’clock bez żadnych kosztów."
+                    boldAnswer: "Rozpoczęcie korzystania z usługi jest bardzo proste:",
+                    answer: "zarejestruj się na platformie, dodaj podstawowe informacje o swojej firmie i usługach, a system będzie gotowy do pracy. Masz możliwość skorzystania z bezpłatnego planu (Free) z podstawową funkcjonalnością, który pozwoli Ci natychmiast przetestować kluczowe funkcje Bee o’clock bez żadnych kosztów."
                 },
             ]
         };
