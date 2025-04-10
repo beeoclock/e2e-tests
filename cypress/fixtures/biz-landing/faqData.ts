@@ -15,6 +15,7 @@ interface FaqPlObject {
 }
 
 export class FaqData {
+
     public static getPlObject(): FaqPlObject {
         return {
             faq: [
@@ -54,6 +55,49 @@ export class FaqData {
                     liValue2: "Basic (59 PLN): 5 użytkowników, strona publiczna, panel administracyjny, pakiet SEO, JSON LD, powiadomienia e-mail, nieograniczona liczba wtyczek, potwierdzenie płatności i powiadomienia SMS. Rozwiązanie dla małych i średnich firm.",
                     liValue3: "Pro (189 PLN): nieograniczona liczba użytkowników, pełny dostęp do funkcji, w tym asystenta AI i Public REST API. Idealne dla zaawansowanych i skalowalnych projektów.",
                 },
+            ]
+        };
+    }
+
+    public static getEnObject(): FaqPlObject {
+        return {
+            faq: [
+                {
+                    question: "How quickly can you get started with Bee o’clock?",
+                    boldAnswer: "Starting to use the service is very simple:",
+                    answer: "Register on the platform, add basic information about your business and services, and the system will be ready to go. You have the option to use the free plan (Free) with basic functionality, which will allow you to immediately test the key features of Bee o’clock without any costs."
+                },
+                {
+                    question: "What features does Bee o’clock provide and how does it differ from other services?",
+                    boldAnswer: "Bee o’clock offers a comprehensive set of",
+                    answer: "tools for automating online bookings",
+                    liValue1: "Automation of bookings: The system automatically records new bookings and reserves time in the calendar.",
+                    liValue2: "Reminders to clients: SMS and e-mail notifications will help reduce the number of missed appointments.",
+                    liValue3: "Customization for your brand: You can change the appearance of your public page and customize the interface to suit your business.",
+                    liValue4: "Online booking management: The entire schedule is always at hand and can be accessed from a smartphone or computer.",
+                    liValue5: "Analytics and development: The service tracks statistics so you can improve customer interactions.",
+                    liValue6: "Various pricing plans: From free to advanced PRO, with the ability to connect an AI assistant and public REST API."
+                },
+                {
+                    question: "How to set up and manage online bookings in Bee o’clock?",
+                    boldAnswer: "Everything happens in a few simple steps",
+                    liValue1: "Register on the platform: Create an account and enter your business details.",
+                    liValue2: "Service settings: Add a list of services, set the duration and price.",
+                    liValue3: "Invite customers: Share a unique link to your profile via your website, social media, or email.",
+                    liValue4: "Online customer booking: Customers can book a service in a few clicks, and you will receive notifications about each new booking.",
+                    liValue5: "Manage your recordings: Conveniently change your schedule, track activity, and get notified about changes.",
+                    liValue6: "Analysis and development: View statistics to evaluate performance and improve your service."
+                },
+                {
+                    question: "Can I accept online payments and receive notifications about successful transactions?",
+                    answer: "Yes, the BASIC and PRO plans have a Payment Confirmation feature that allows you to track customer payments. The service also sends SMS and email notifications so that you and your customers are always up to date with booking and payment updates. All this ensures safe and transparent transactions."
+                },
+                {
+                    question: "What tariff plans are available and how do they differ?",
+                    liValue1: "Free (0 USD): 1 user, public page, admin panel, SEO Package, JSON LD, e-mail notifications. Suitable for small projects or testing.",
+                    liValue2: "Basic (55 USD): 5 users, public page, admin panel, SEO Package, JSON LD, email notifications, unlimited plugins, Payment Confirmation and SMS Notifications. Solution for small and medium businesses.",
+                    liValue3: "Pro (89 USD): Unlimited users, full access to features, including AI assistant and Public REST API. Ideal for advanced and scalable projects."
+                }
             ]
         };
     }
