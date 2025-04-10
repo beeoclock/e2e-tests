@@ -21,6 +21,16 @@ export class LandingBizFaqPage {
         return this;
     }
 
+    public assertIsSectionRollDown(index: number): LandingBizFaqPage {
+        this.element.getExpandButton(index).should('be.visible');
+        return this;
+    }
+
+    public assertQuestionText(index: number, expectedValue: string): LandingBizFaqPage {
+        Assertions.assertProperties(this.element.getFaqItem(index), 'innerText', expectedValue)
+        return this
+    }
+
     public assertBoldText(index: number, expectedValue: string): LandingBizFaqPage {
         Assertions.assertProperties(this.element.getFaqItemBoldContent(index), 'innerText', expectedValue)
         return this
@@ -28,6 +38,21 @@ export class LandingBizFaqPage {
 
     public asserFaqItemText(index: number, expectedValue: string): LandingBizFaqPage {
         Assertions.assertProperties(this.element.getFaqItemContent(index), 'innerText', expectedValue)
+        return this;
+    }
+
+    public assertFaqItemLiText(index: number, liIndex: number, expectedValue: string): LandingBizFaqPage {
+        Assertions.assertProperties(this.element.getFaqItemLi(index, liIndex), 'innerText', expectedValue)
+        return this;
+    }
+
+    public assertFaqItemPText(index: number, liIndex: number, expectedValue: string): LandingBizFaqPage {
+        Assertions.assertProperties(this.element.getFaqItemP(index, liIndex), 'innerText', expectedValue)
+        return this;
+    }
+
+    public assertFaqItemLiLength(index: number, expectedValue: number): LandingBizFaqPage {
+        this.element.getFaqItemLiLength(index).should('eq', expectedValue)
         return this;
     }
 }

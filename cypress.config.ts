@@ -38,5 +38,6 @@ export default defineConfig({
     experimentalModifyObstructiveThirdPartyCode: true,
     experimentalMemoryManagement: true,
     experimentalWebKitSupport: true,
+    scrollBehavior: 'center'
   },
 });

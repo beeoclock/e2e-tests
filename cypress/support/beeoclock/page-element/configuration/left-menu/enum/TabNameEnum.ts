@@ -7,4 +7,5 @@ export enum TabNameEnum {
     TARIFFS = 'Taryfy',
     BUSINESS_SETTINGS = 'Ustawienia firmy',
     MEMBERS= 'Członkowie',
+    PAYMENTS = 'Płatności',
 }

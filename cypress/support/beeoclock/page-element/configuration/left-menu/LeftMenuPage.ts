@@ -62,6 +62,14 @@ export class LeftMenuPage {
         return this;
     }
 
+    public static clickPaymentsTab(): LeftMenuPage {
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.PAYMENTS)
+            .click()
+        cy.get('payment-table-list-component').should('be.visible')
+        cy.get('payment-filter-component').should('be.visible')
+        return this;
+    }
+
     public static synchronizeWithInterception(): LeftMenuPage {
         cy.wrap(null).then(() => {
             cy.log('wait until synchronization is done');

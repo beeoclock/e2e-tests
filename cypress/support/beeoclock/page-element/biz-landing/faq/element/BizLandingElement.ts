@@ -2,18 +2,21 @@ export class BizLandingElement {
 
     public getElement(): any {
         return cy.get('#faq')
+            .scrollIntoView().should('be.visible')
     }
 
     public getFaqList(): any {
         return cy.get('#faq-list')
+            .scrollIntoView().should('be.visible')
     }
 
     public getFaqItem(index: number): any {
         return cy.get(`#faq-item-${index}`)
+            .scrollIntoView().should('be.visible')
     }
 
     public getFaqItemTitle(index: number): any {
-        return cy.get(`#faq-item-${index}`).find('.text-sm.font-bold ')
+        return cy.get(`#faq-item-${index}`).find('.text-sm.font-bold')
     }
 
     public getExpandButton(index: number): any {
@@ -22,6 +25,7 @@ export class BizLandingElement {
 
     public getRollUpButton(index: number): any {
         return this.getFaqItem(index).find('[name="bootstrapDashCircle"]')
+            .scrollIntoView().should('be.visible')
     }
 
     public getFaqItemBoldContent(index: number): any {
@@ -32,5 +36,24 @@ export class BizLandingElement {
         return this.getFaqItem(index).find('.mb-8')
             .find('.font-bold')
             .next('span')
+            .scrollIntoView({}).should('be.visible')
+    }
+
+    public getFaqItemLi(index: number, liIndex: number): any {
+        return this.getFaqItem(index)
+            .find('li').eq(liIndex)
+            .scrollIntoView().should('be.visible')
+    }
+
+    public getFaqItemP(index: number, pIndex: number): any {
+        return this.getFaqItem(index)
+            .find('p').eq(pIndex)
+            .scrollIntoView().should('be.visible')
+    }
+
+    public getFaqItemLiLength(index: number): any {
+        return this.getFaqItem(index)
+            .find('li')
+            .its('length')
     }
 }
