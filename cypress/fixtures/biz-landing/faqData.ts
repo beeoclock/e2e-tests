@@ -65,27 +65,27 @@ export class FaqData {
                 {
                     question: "How quickly can you get started with Bee o’clock?",
                     boldAnswer: "Starting to use the service is very simple:",
-                    answer: "Register on the platform, add basic information about your business and services, and the system will be ready to go. You have the option to use the free plan (Free) with basic functionality, which will allow you to immediately test the key features of Bee o’clock without any costs."
+                    answer: "register on the platform, add basic information about your business and services, and the system will be ready to go. You have the option to use the free plan (Free) with basic functionality, which will allow you to immediately test the key features of Bee o’clock without any costs."
                 },
                 {
                     question: "What features does Bee o’clock provide and how does it differ from other services?",
-                    boldAnswer: "Bee o’clock offers a comprehensive set of",
+                    boldAnswer: "Bee o’clock offers a comprehensive set",
                     answer: "tools for automating online bookings",
-                    liValue1: "Automation of bookings: The system automatically records new bookings and reserves time in the calendar.",
+                    liValue1: "Automation of bookings: the system automatically records new bookings and reserves time in the calendar.",
                     liValue2: "Reminders to clients: SMS and e-mail notifications will help reduce the number of missed appointments.",
-                    liValue3: "Customization for your brand: You can change the appearance of your public page and customize the interface to suit your business.",
-                    liValue4: "Online booking management: The entire schedule is always at hand and can be accessed from a smartphone or computer.",
-                    liValue5: "Analytics and development: The service tracks statistics so you can improve customer interactions.",
-                    liValue6: "Various pricing plans: From free to advanced PRO, with the ability to connect an AI assistant and public REST API."
+                    liValue3: "Customization for your brand: you can change the appearance of your public page and customize the interface to suit your business.",
+                    liValue4: "Online booking management: the entire schedule is always at hand and can be accessed from a smartphone or computer.",
+                    liValue5: "Analytics and development: the service tracks statistics so you can improve customer interactions.",
+                    liValue6: "Various pricing plans: from free to advanced PRO, with the ability to connect an AI assistant and public REST API."
                 },
                 {
                     question: "How to set up and manage online bookings in Bee o’clock?",
                     boldAnswer: "Everything happens in a few simple steps",
-                    liValue1: "Register on the platform: Create an account and enter your business details.",
-                    liValue2: "Service settings: Add a list of services, set the duration and price.",
-                    liValue3: "Invite customers: Share a unique link to your profile via your website, social media, or email.",
-                    liValue4: "Online customer booking: Customers can book a service in a few clicks, and you will receive notifications about each new booking.",
-                    liValue5: "Manage your recordings: Conveniently change your schedule, track activity, and get notified about changes.",
+                    liValue1: "Register on the platform: create an account and enter your business details.",
+                    liValue2: "Service settings: add a list of services, set the duration and price.",
+                    liValue3: "Invite customers: share a unique link to your profile via your website, social media, or email.",
+                    liValue4: "Online customer booking: customers can book a service in a few clicks, and you will receive notifications about each new booking.",
+                    liValue5: "Manage your recordings: Conveniently change your schedule, track activity, and get notified about changes.",//report mismatch of first big letter pattern
                     liValue6: "Analysis and development: View statistics to evaluate performance and improve your service."
                 },
                 {

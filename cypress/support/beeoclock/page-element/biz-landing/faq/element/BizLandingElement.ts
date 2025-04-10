@@ -36,7 +36,7 @@ export class BizLandingElement {
         return this.getFaqItem(index).find('.mb-8')
             .find('.font-bold')
             .next('span')
-            .scrollIntoView({}).should('be.visible')
+            .scrollIntoView().should('be.visible')
     }
 
     public getFaqItemLi(index: number, liIndex: number): any {

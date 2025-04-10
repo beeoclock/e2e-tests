@@ -21,6 +21,7 @@ declare global {
             setNetworkThrottle(speed: ThrottleEnum): void;
 
             assertProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
+            assertTrimmedProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
 
             isNotInViewport(): Chainable<JQuery>;
             isInViewport(): Chainable<JQuery>;
@@ -136,6 +137,15 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
 Cypress.Commands.add('assertProperties', { prevSubject: true }, (subject, properties, expectedProperties) => {
     cy.wrap(subject).should('have.prop', properties).and('include', expectedProperties);
 });
+
+Cypress.Commands.add('assertTrimmedProperties', { prevSubject: true }, function (subject, properties, expectedProperties) {
+    cy.wrap(subject)
+        .should('have.prop', properties)
+        .then((actualProp: any) => {
+            expect(actualProp.trim()).to.include(expectedProperties.trim());
+        });
+});
+
 
 Cypress.Commands.add('isNotInViewport', { prevSubject: true }, (subject) => {
     const bounding = subject[0].getBoundingClientRect();
