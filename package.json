@@ -18,7 +18,7 @@
   "author": "Jan Zadumiński",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "14.0.0",
+    "cypress": "14.3.0",
     "cypress-file-upload": "5.0.8",
     "dayjs": "1.11.13",
     "globals": "16.0.0",
