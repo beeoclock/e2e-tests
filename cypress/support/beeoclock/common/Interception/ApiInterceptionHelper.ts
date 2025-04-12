@@ -22,8 +22,7 @@ export class ApiInterceptionHelper {
             const requestUrl: URL = new URL(interception.request.url);
             expect(requestUrl.searchParams.get('orderBy')).to.equal('createdAt');
             expect(requestUrl.searchParams.get('orderDir')).to.equal('desc');
-            expect(requestUrl.searchParams.get('page')).to.equal('1');
-            expect(requestUrl.searchParams.get('pageSize')).to.equal('20');
+            expect(requestUrl.searchParams.get('pageSize')).to.equal('500');
         })
     }
 

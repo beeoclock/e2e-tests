@@ -18,9 +18,20 @@ export class LeftMenuPage {
         if (tab == TabNameEnum.CALENDAR) {
         }
         if (tab == TabNameEnum.ABSENCE) {
+            cy.get('absence-desktop-layout-list-component')
+            cy.get('app-absence-filter-component')
+            cy.get('app-table-ngx-datatable-smart-component')
         }
         if (tab == TabNameEnum.CLIENTS) {
             this.clickClientTab()
+        }
+        if (tab == TabNameEnum.TARIFFS) {
+            cy.get('tariff-plan-page')
+            cy.get('main-tariff-plan-smart-component')
+            cy.get('#tariffs')
+        }
+        if(tab == TabNameEnum.VISITS) {
+            cy.get('order-service-table-list-component')
         }
         if (waitForSynchronize) {
             LeftMenuPage.assertIsSynchronized(true)
