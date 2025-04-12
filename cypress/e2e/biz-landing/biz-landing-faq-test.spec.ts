@@ -58,7 +58,7 @@ describe('biz landing test faq', () => {
             .assertFaqItemPText(4, 2, getFaqPlObject(4).liValue3)
     })
 
-    it.only('verify faq en language', () => {
+    it('verify faq en language', () => {
         cy.visit('https://biz.dev.beeoclock.com/#faq')
 
         BizLandingPages.LandingBizFaqPage
