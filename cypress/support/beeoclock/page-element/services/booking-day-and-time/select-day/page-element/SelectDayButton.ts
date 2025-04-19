@@ -1,6 +1,7 @@
 export class SelectDayButton {
     public getElement(day: string): any {
-        return cy.get('.font-bold').contains(day)
+        return cy.get('event-select-slot-date-form-component')
+            .find('.relative').contains(day)
             .should('be.visible')
             .scrollIntoView()
     }

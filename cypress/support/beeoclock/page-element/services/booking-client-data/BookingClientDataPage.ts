@@ -78,7 +78,7 @@ export class BookingClientDataPage {
     }
 
     public verifySelectedService(service: string): BookingClientDataPage {
-        BookingClientDataPageElement.SelectedService.getElement(service)
+        BookingClientDataPageElement.SelectedService.getSelectedServiceName(service)
             .invoke('text')
             .then((text) => {
                 const normalizedText = text.replace(/\s/g, '');
@@ -89,7 +89,7 @@ export class BookingClientDataPage {
     }
 
     public verifySelectedServicePrice(price: string): BookingClientDataPage {
-        BookingClientDataPageElement.ServicePrice.getElement(price)
+        BookingClientDataPageElement.SelectedService.getSelectedServicePrice(price)
             .invoke('prop', 'outerText')
             .then((text) => {
                 const normalizedText = text.replace(/\s/g, '');
@@ -100,7 +100,7 @@ export class BookingClientDataPage {
     }
 
     public verifySelectedServiceTime(time: string): BookingClientDataPage {
-        BookingClientDataPageElement.ServiceTime.getElement(time)
+        BookingClientDataPageElement.SelectedService.getSelectedServiceTime(time)
             .invoke('prop', 'outerText')
             .then((text) => {
                 const normalizedText = text.replace(/\s/g, '');

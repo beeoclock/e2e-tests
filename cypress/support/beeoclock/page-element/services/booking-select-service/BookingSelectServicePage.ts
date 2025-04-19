@@ -33,12 +33,10 @@ export class BookingSelectServicePage {
     }
 
     public verifyCorrectForm(): BookingSelectServicePage {
-        const serviceTab = cy.get('.flex.justify-start').find('.me-2').first()
-        serviceTab.should('have.class', 'active').and('not.have.class', 'hover:text-gray-600')
-
-        const detailsTab = cy.get('.flex.justify-start').find('.me-2').last()
-        detailsTab.should('not.have.class', 'active').and('have.class', 'hover:text-gray-600')
-        cy.document().its('readyState').should('equal', 'complete')
+        const serviceTab = cy.get('tab-menu')
+        serviceTab.should('have.attr', 'ng-reflect-selected-tab').and('equal', 'services')
+        cy.get('tab-menu').find('li').contains('Produkty').scrollIntoView().should('be.visible')
+        cy.get('tab-menu').find('li').contains('O nas').scrollIntoView().should('be.visible')
         return this;
     }
 
