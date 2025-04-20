@@ -27,7 +27,7 @@ export class FaqData {
                 {
                     question: "Jakie funkcje oferuje Bee o’clock i czym różni się od innych usług?",
                     boldAnswer: "Bee o’clock oferuje kompleksowy zestaw",
-                    answer: "narzędzia do automatyzacji rezerwacji online",
+                    answer: "narzędzi do automatyzacji rezerwacji online",
                     liValue1: "Automatyzacja rezerwacji: system automatycznie rejestruje nowe rezerwacje i rezerwuje czas w kalendarzu.",
                     liValue2: "Przypomnienia dla klientów: powiadomienia SMS i e-mail pomogą ograniczyć liczbę pominiętych wizyt.",
                     liValue3: "Dostosowanie do Twojej marki: możesz zmienić wygląd swojej strony publicznej i dostosować interfejs do potrzeb swojej firmy.",
@@ -96,7 +96,7 @@ export class FaqData {
                     question: "What tariff plans are available and how do they differ?",
                     liValue1: "Free (0 USD): 1 user, public page, admin panel, SEO Package, JSON LD, e-mail notifications. Suitable for small projects or testing.",
                     liValue2: "Basic (55 USD): 5 users, public page, admin panel, SEO Package, JSON LD, email notifications, unlimited plugins, Payment Confirmation and SMS Notifications. Solution for small and medium businesses.",
-                    liValue3: "Pro (89 USD): Unlimited users, full access to features, including AI assistant and Public REST API. Ideal for advanced and scalable projects."
+                    liValue3: "Pro (89 USD): unlimited users, full access to features, including AI assistant and Public REST API. Ideal for advanced and scalable projects."
                 }
             ]
         };
