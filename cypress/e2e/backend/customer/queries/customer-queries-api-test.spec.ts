@@ -57,14 +57,25 @@ describe('customer queries api test', () => {
             CustomerApi.getCustomerPaged(criteria, {}).then(response => {
                 expect(response.items).to.have.lengthOf(20);
 
+                cy.log('page:', JSON.stringify(response.items));
                 response.items.forEach(item => {
-                    // duplicate e-mail assertion
                     let normalizedEmail = item.email?.trim();
-                    if (normalizedEmail) {
-                        expect(allEmails.has(normalizedEmail)).to.be.false;
-                        allEmails.add(normalizedEmail);
-                    }
 
+                    cy.wrap(null).then((): void => {
+
+                        if (normalizedEmail) {
+                            const alreadyExists: boolean = allEmails.has(normalizedEmail);
+                            if (alreadyExists) {
+                                cy.log(`🔁 Duplicate email found: ${normalizedEmail}`);
+                            } else {
+                                cy.log(`✅ Unique email: ${normalizedEmail}`);
+                            }
+
+                            expect(alreadyExists).to.be.false;
+                            allEmails.add(normalizedEmail);
+                        }
+                    })
+                    
                     // duplicate phone number assertion
                     let normalizedPhone = item.phoneNumber?.trim();
                     if (normalizedPhone) {
