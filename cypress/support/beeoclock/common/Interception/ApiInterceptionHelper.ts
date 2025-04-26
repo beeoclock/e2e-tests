@@ -1,6 +1,7 @@
 import {DateUtils} from "../../backend/Utils/DateUtils";
 import {EntryPointEnum} from "./EntryPointEnum";
 import {faker} from "@faker-js/faker";
+import {NumericUtils} from "../../backend/Utils/NumericUtils";
 
 export class ApiInterceptionHelper {
 
@@ -75,7 +76,7 @@ export class ApiInterceptionHelper {
     }
 
     public static getSlot(): string {
-        const getSlot = 'getSlot' + DateUtils.getCurrentTime();
+        const getSlot: string = 'getSlot' + NumericUtils.generateObjectId();
         cy.intercept('GET', EntryPointEnum.PUBLIC_PAGE_API_ENTRY_POINT + '/slot/busy?*').as(getSlot);
         return getSlot
     }

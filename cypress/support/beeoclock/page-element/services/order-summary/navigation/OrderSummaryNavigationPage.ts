@@ -10,10 +10,10 @@ export class OrderSummaryNavigationPage {
     }
 
     public clickBackArrow(): OrderSummaryNavigationPage {
-        cy.get('utility-back-link-component > .text-white > .bi')
+        cy.get('utility-back-link-component')
             .click()
         ServicesPages.BookingSelectServicePage.verifyHrefAddress()
-        // cy.url().should('include', 'dev.beeoclock.com/e2e') when swich into PR
+        ServicesPages.BookingSelectServicePage.verifyGivenHrefAddress('Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300')
         cy.window().its('document.readyState').should('equal', 'complete');
         cy.wait(1000)
         return this;

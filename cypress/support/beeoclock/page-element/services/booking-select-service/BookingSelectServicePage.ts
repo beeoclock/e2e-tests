@@ -41,22 +41,22 @@ export class BookingSelectServicePage {
     }
 
     public verifyHrefAddress(): BookingSelectServicePage {
-        cy.get('.flex.items-start > .text-xl')
+        cy.get('.self-stretch.text-xl')
             .should(($el) => {
                 const actualText = $el.prop('textContent').replace(/\s+/g, ' ').replace(/&nbsp;/g, ' ').trim();
-                const expectedText = 'Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300';
+                const expectedText = 'Haircut&Barber';
 
                 const cleanActualText = actualText.replace(/\s+/g, ' ');
                 const cleanExpectedText = expectedText.replace(/\s+/g, ' ');
 
                 expect(cleanActualText).to.include(cleanExpectedText);
             })
-            .should('be.visible');
+
         return this;
     }
 
     public verifyGivenHrefAddress(address: string): BookingSelectServicePage {
-        cy.get('.flex.items-start > .text-xl')
+        cy.get('.brake-all.w-full.text-sm.font-medium.leading-normal')
             .should(($el) => {
                 const actualText = $el.prop('textContent').replace(/\s+/g, ' ').replace(/&nbsp;/g, ' ').trim();
                 const expectedText = address;

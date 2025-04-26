@@ -1,7 +1,7 @@
 export class SelectedService {
     public getElement(service: string): any {
-        return cy.get('details').contains(service)
-            .parents('details')// <-- returns main component of given service
+        return cy.get('summary').contains(service)
+            .parents('summary')// <-- returns main component of given service
     }
 
     public getSelectedServiceName(service: string): any {

@@ -58,9 +58,10 @@ describe('order service', () => {
             ServicesPages.OrderSummaryPage
                 .verifyOrderSummaryValue("Nazwa firmy", BusinessNameEnum.HAIRCUT_AND_BARBER)
                 .verifyOrderSummaryValue("Adres", address)
-                .verifyOrderSummaryValue("Komentarz", item.comment)
-            ServicesPages.BookingClientDataPage
-                .verifySelectedService(item.Service)
+                .verifyOrderSummaryValue("Uwaga", item.comment)
+
+            ServicesPages.ServiceSummaryPage
+                .verifySelectedServiceOnSummary(item.Service)
                 .verifySelectedServicePrice(item.price)
                 .verifySelectedServiceTime(item.serviceTime)
                 .verifyServiceSpecialist(item.Specialist)
@@ -71,17 +72,26 @@ describe('order service', () => {
                 .clickCancelOrderButton()
             ServicesPages.OrderCancellationPage
                 .verifyCancelInformation()
+
+            cy.log("assert summary od cancellation page")
             ServicesPages.OrderSummaryPage
                 .verifyOrderSummaryValue("Nazwa firmy", BusinessNameEnum.HAIRCUT_AND_BARBER)
                 .verifyOrderSummaryValue("Adres", address)
-                .verifyOrderSummaryValue("Komentarz", item.comment)
-            ServicesPages.BookingClientDataPage
-                .verifySelectedService(item.Service)
+                .verifyOrderSummaryValue("Uwaga", item.comment)
+            ServicesPages.ServiceSummaryPage
+                .verifySelectedServiceOnSummary(item.Service)
                 .verifySelectedServicePrice(item.price)
                 .verifySelectedServiceTime(item.serviceTime)
                 .verifyServiceSpecialist(item.Specialist)
+            assertCancellationInformation()
             ServicesPages.OrderSummaryNavigationPage
                 .clickBackArrow()
         })
     })
+
+    function assertCancellationInformation(): void {
+        cy.get('.text-base.font-normal')
+            .contains('Wydarzenie zostało pomyślnie anulowane na prośbę użytkownika')
+            .scrollIntoView().should('be.visible')
+    }
 })

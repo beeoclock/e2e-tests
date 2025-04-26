@@ -10,7 +10,9 @@ export class OrderDetailsPage {
     }
 
     public verifyDetailsHeader(): OrderDetailsPage {
-        cy.get('.flex.w-full > .px-3').should('have.prop', 'outerText').and('include', 'Zamówione usługi')
+        cy.get('.text-3xl.font-bold').should('have.prop', 'outerText').and('include', 'Rezerwacja potwierdzona')
+        cy.get('.text-sm.font-regular.leading-tight.tracking-tight.flex')
+            .should('have.prop', 'outerText').and('include', 'Gratulacje! Specjalista potwierdził rezerwację. Dodaj ją do swojego kalendarza, aby być na bieżąco.')
         return this;
     }
 

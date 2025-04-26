@@ -88,6 +88,17 @@ export class BookingClientDataPage {
         return this;
     }
 
+    public verifySelectedServiceOnSummary(service: string): BookingClientDataPage {
+        BookingClientDataPageElement.SelectedService.getSelectedServiceName(service)
+            .invoke('text')
+            .then((text) => {
+                const normalizedText = text.replace(/\s/g, '');
+                const normalizedValue = service.replace(/\s/g, '');
+                expect(normalizedText).to.include(normalizedValue);
+            });
+        return this;
+    }
+
     public verifySelectedServicePrice(price: string): BookingClientDataPage {
         BookingClientDataPageElement.SelectedService.getSelectedServicePrice(price)
             .invoke('prop', 'outerText')

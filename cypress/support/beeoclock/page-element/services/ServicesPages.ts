@@ -9,6 +9,7 @@ import {OrderCancellationPage} from "./order-cancellation/OrderCancellationPage"
 import {OrderSummaryNavigationPage} from "./order-summary/navigation/OrderSummaryNavigationPage";
 import {OrderDetailsPage} from "./order-summary/order-details/OrderDetailsPage";
 import {OrderSummaryPage} from "./order-summary/order-summary/OrderSummaryPage";
+import {ServiceSummaryPage} from "./booking-client-data/summary/ServiceSummaryPage";
 
 
 export class ServicesPages {
@@ -24,5 +25,6 @@ export class ServicesPages {
     public static OrderDetailsPage: OrderDetailsPage = new OrderDetailsPage();
     public static OrderSummaryNavigationPage: OrderSummaryNavigationPage = new OrderSummaryNavigationPage();
     public static OrderCancellationPage: OrderCancellationPage = new OrderCancellationPage();
+    public static ServiceSummaryPage: ServiceSummaryPage = new ServiceSummaryPage();
 
 }
