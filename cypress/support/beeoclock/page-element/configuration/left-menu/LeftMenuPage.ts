@@ -135,4 +135,12 @@ export class LeftMenuPage {
         return this;
     }
 
+    public static clickOnVisitsTab(): LeftMenuPage {
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.VISITS)
+            .click().than((): void => {
+            cy.get('app-list-order-service-page').should('be.visible')
+        })
+        return this;
+    }
+
 }
