@@ -102,16 +102,16 @@ export class SummaryAndPaymentServicePage {
             .click()
             .then(() => {
                 cy.wait(100)
-            cy.wait('@' + createOrder, {timeout: 5000}).then((interception) => {
-                console.log('Intercepted request:', interception);
-                cy.wrap(interception.request.body._id).as('orderId');
-            })
+                cy.wait('@' + createOrder, {timeout: 5000}).then((interception) => {
+                    console.log('Intercepted request:', interception);
+                    cy.wrap(interception.request.body._id).as('orderId');
+                })
 
-            cy.wait('@' + createServicePayment, {timeout: 5000}).then((interception) => {
-                const sendPaymentStatus = interception.request.body.status;
-                expect(sendPaymentStatus).to.equal(paymentStatus);
+                cy.wait('@' + createServicePayment, {timeout: 5000}).then((interception) => {
+                    const sendPaymentStatus = interception.request.body.status;
+                    expect(sendPaymentStatus).to.equal(paymentStatus);
+                })
             })
-        })
         //LeftMenuPage.handleSynchronization()//TODO talk with dev about this
         LeftMenuPage.assertIsSynchronized(true)
         return this;

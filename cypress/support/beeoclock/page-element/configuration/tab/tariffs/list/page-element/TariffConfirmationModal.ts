@@ -1,10 +1,5 @@
 export class TariffConfirmationModal {
 
-    private getElement(): any {
-        return cy.get('app-confirm-change-tariff-plan-component')
-            .scrollIntoView().should('be.visible')
-    }
-
     public getHeader(): any {
         return this.getElement().find('h1')
     }
@@ -37,5 +32,10 @@ export class TariffConfirmationModal {
     public getDifferentToPay(): any {
         return this.getElement().contains('span', 'Różnica do zapłaty:')
             .next('span')
+    }
+
+    private getElement(): any {
+        return cy.get('app-confirm-change-tariff-plan-component')
+            .scrollIntoView().should('be.visible')
     }
 }

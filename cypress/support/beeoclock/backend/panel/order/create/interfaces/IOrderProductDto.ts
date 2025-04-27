@@ -1,6 +1,6 @@
-import { IProductDto } from "./IProductDto";
-import { IMetaDto } from "../../../state/interface/IMetaDto";
-import { IStateHistory } from "../../../state/interface/IStateHistory";
+import {IProductDto} from "./IProductDto";
+import {IMetaDto} from "../../../state/interface/IMetaDto";
+import {IStateHistory} from "../../../state/interface/IStateHistory";
 import {StateEnum} from "../../enum/StateEnum";
 
 export interface IOrderProductDto {

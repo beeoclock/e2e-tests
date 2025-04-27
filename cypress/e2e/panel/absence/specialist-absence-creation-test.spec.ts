@@ -96,7 +96,7 @@ describe('specialist absence creation test', () => {
             .clickSaveButton()
 
         CalendarPages.CalendarTablePage
-            .assertAbsenceOnTable( 'Przerwa\n' +dataFrom + ' - ' + dataTo)
+            .assertAbsenceOnTable('Przerwa\n' + dataFrom + ' - ' + dataTo)
 
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
 

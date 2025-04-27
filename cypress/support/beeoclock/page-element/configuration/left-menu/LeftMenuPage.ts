@@ -6,7 +6,7 @@ import {CustomerApiInterceptionHelper} from "../../../common/Interception/custom
 import {MemberApiInterceptionHelper} from "../../../common/Interception/member/MemberApiInterceptionHelper";
 import {PaymentApiInterceptionHelper} from "../../../common/Interception/payment/PaymentApiInterceptionHelper";
 import {TariffsApiInterceptionHelper} from "../../../common/Interception/tariffs/TariffsApiInterceptionHelper";
-import { ClientsApiInterceptionHelper } from "support/beeoclock/common/Interception/clients/ClientsApiInterceptionHelper";
+import {ClientsApiInterceptionHelper} from "support/beeoclock/common/Interception/clients/ClientsApiInterceptionHelper";
 
 export class LeftMenuPage {
 
@@ -30,20 +30,12 @@ export class LeftMenuPage {
             cy.get('main-tariff-plan-smart-component')
             cy.get('#tariffs')
         }
-        if(tab == TabNameEnum.VISITS) {
+        if (tab == TabNameEnum.VISITS) {
             cy.get('order-service-table-list-component')
         }
         if (waitForSynchronize) {
             LeftMenuPage.assertIsSynchronized(true)
         }
-        return this;
-    }
-
-    private static clickAbsenceTab(): LeftMenuPage {
-        const getAbsence = ApiInterceptionHelper.getAbsence()
-        LeftMenuPageElement.TabElement.getElement(TabNameEnum.ABSENCE)
-            .click()
-        ApiInterceptionHelper.waitForAlias(getAbsence)
         return this;
     }
 
@@ -89,7 +81,7 @@ export class LeftMenuPage {
             cy.log('handle synchronization');
             const getAbsence: string = ApiInterceptionHelper.getAbsence()
             const getCustomer: string = CustomerApiInterceptionHelper.getCustomer()
-            const getMember: string= MemberApiInterceptionHelper.getMember()
+            const getMember: string = MemberApiInterceptionHelper.getMember()
             const getOrder: string = ApiInterceptionHelper.getOrder()
             const getServices: string = ServiceApiInterceptionHelper.getServices()
             const getPayment: string = PaymentApiInterceptionHelper.getPayment()
@@ -120,7 +112,7 @@ export class LeftMenuPage {
         const expectedText = isSynchronized ? 'Zsynchronizowano' : 'Synchronizacja w toku…';
 
         LeftMenuPageElement.SynchronizingComponent.getElement()
-            .find('.text-xs', { timeout: 70000 })
+            .find('.text-xs', {timeout: 70000})
             .should('contain.text', expectedText);
         cy.wait(500) //wait for all request be compiled
         return this;
@@ -130,8 +122,16 @@ export class LeftMenuPage {
         const expectedText = 'Synchronizacja w toku…';
 
         LeftMenuPageElement.SynchronizingComponent.getElement()
-            .find('.text-xs',{ timeout: 10000 })
+            .find('.text-xs', {timeout: 10000})
             .should('contain.text', expectedText);
+        return this;
+    }
+
+    private static clickAbsenceTab(): LeftMenuPage {
+        const getAbsence = ApiInterceptionHelper.getAbsence()
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.ABSENCE)
+            .click()
+        ApiInterceptionHelper.waitForAlias(getAbsence)
         return this;
     }
 

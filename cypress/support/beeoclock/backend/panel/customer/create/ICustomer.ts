@@ -1,5 +1,5 @@
-import { StateEnum } from "../../order/enum/StateEnum";
-import { IStateHistory } from "../../state/interface/IStateHistory";
+import {StateEnum} from "../../order/enum/StateEnum";
+import {IStateHistory} from "../../state/interface/IStateHistory";
 import {CustomerTypeEnum} from "../enum/CustomerTypeEnum";
 
 export interface ICustomer {

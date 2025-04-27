@@ -7,7 +7,7 @@ import {ICustomer} from "support/beeoclock/backend/panel/customer/create/ICustom
 import {CustomerBuilder} from "support/beeoclock/backend/panel/customer/create/CustomerBuilder";
 import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
 import {faker} from "@faker-js/faker";
-import { StateEnum } from "support/beeoclock/backend/panel/order/enum/StateEnum";
+import {StateEnum} from "support/beeoclock/backend/panel/order/enum/StateEnum";
 
 describe('customer api test', () => {
     let customerData: ICustomer
@@ -76,7 +76,7 @@ describe('customer api test', () => {
             .setFirstName(customerData.firstName)
             .setLastName(customerData.lastName + '-Kulej')
             .setPhone(customerData.phone)
-            .setEmail(customerData.lastName + '-Kulej' + '.' + customerData.firstName + '@longmailcontentwithnumber123exaample.ue' )
+            .setEmail(customerData.lastName + '-Kulej' + '.' + customerData.firstName + '@longmailcontentwithnumber123exaample.ue')
             .setCustomerType(customerData.customerType)
             .setState(customerData.state)
             .setCreatedAt(customerData.createdAt)

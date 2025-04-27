@@ -1,4 +1,4 @@
-import { IMetaDto } from "../../../state/interface/IMetaDto";
+import {IMetaDto} from "../../../state/interface/IMetaDto";
 
 export interface IHistoryEntryDto {
     object: string;

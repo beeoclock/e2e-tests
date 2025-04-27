@@ -1,10 +1,9 @@
 import {OrderEditionFormPageElement} from "./OrderEditionFormPageElement";
 import {SpecialistNameEnum} from "../../../../common/enum/SpecialistNameEnum";
-import {NotificationsPage} from "../../../notiifcations/NotificationsPage";
 
 export class OrderEditionFormPage {
 
-   //specialist
+    //specialist
     public clickSpecialistButton(orderId: string): OrderEditionFormPage {
         OrderEditionFormPageElement.SelectSpecialistButton
             .getElement(orderId)
@@ -19,7 +18,7 @@ export class OrderEditionFormPage {
         return this;
     }
 
-    public clickSelectSpecialist(specialist: SpecialistNameEnum, sendEmail?: boolean ): OrderEditionFormPage {
+    public clickSelectSpecialist(specialist: SpecialistNameEnum, sendEmail?: boolean): OrderEditionFormPage {
         OrderEditionFormPageElement.SelectGivenSpecialist
             .getElement(specialist)
             .click().then(() => {

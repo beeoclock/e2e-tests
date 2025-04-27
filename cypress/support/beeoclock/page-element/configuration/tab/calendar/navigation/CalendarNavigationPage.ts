@@ -1,6 +1,5 @@
 import {CalendarNavigationPageElement} from "./CalendarNavigationPageElement";
 import {DateUtils} from "../../../../../backend/Utils/DateUtils";
-import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 
 export class CalendarNavigationPage {
 

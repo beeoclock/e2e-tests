@@ -6,6 +6,10 @@ import {IStateHistory} from "../../../state/interface/IStateHistory";
 
 export class OrderAppointmentBuilder {
     private appointment: IOrderAppointmentDetailsDto
+    private stateHistory: IStateHistory = new StateHistoryBuilder()
+        .setState(StateEnum.active)
+        .setSetAt(DateUtils.getCurrentDateIso())
+        .build()
 
     constructor() {
         this.appointment = {
@@ -108,11 +112,6 @@ export class OrderAppointmentBuilder {
             locations: []
         }
     }
-
-    private stateHistory: IStateHistory = new StateHistoryBuilder()
-        .setState(StateEnum.active)
-        .setSetAt(DateUtils.getCurrentDateIso())
-        .build()
 
     public getAppointment(): IOrderAppointmentDetailsDto {
         return this.appointment;

@@ -19,29 +19,29 @@ describe('Order form summary component test', () => {
 
         cy.loginOnPanel()
 
-            cy.log('delete orders before test')
-            OrderApi.deleteAllCurrentOrders()
+        cy.log('delete orders before test')
+        OrderApi.deleteAllCurrentOrders()
 
-            cy.log('verify calendar tab component');
-            ModuleAssertionPage.verifyCalendarTabModule()
+        cy.log('verify calendar tab component');
+        ModuleAssertionPage.verifyCalendarTabModule()
 
-                CalendarPages.CalendarTablePage
-                    .clickOnGivenAndHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
+        CalendarPages.CalendarTablePage
+            .clickOnGivenAndHour(SpecialistNameEnum.ZALEWSKI, CalendarTableTimeEnum.Hour_18)
 
-            testCases.forEach(testCase => {
-                const testData = OrderSummaryTestData.getPlusTestData(testCase);
+        testCases.forEach(testCase => {
+            const testData = OrderSummaryTestData.getPlusTestData(testCase);
 
-                RightPanelPages.RightPanelServicesPage
-                    .selectSpecificService(testData.service)
-                    .verifySelectedService(testData.amount, testData.price, testData.duration)
-            })
+            RightPanelPages.RightPanelServicesPage
+                .selectSpecificService(testData.service)
+                .verifySelectedService(testData.amount, testData.price, testData.duration)
+        })
 
-            testCases.forEach(testCase => {
-                const testData = OrderSummaryTestData.getMinusTestData(testCase);
+        testCases.forEach(testCase => {
+            const testData = OrderSummaryTestData.getMinusTestData(testCase);
 
-                RightPanelPages.RightPanelServicesPage
-                    .unSpecificService(testData.service)
-                    .verifySelectedService(testData.amount, testData.price, testData.duration)
-            })
-        });
+            RightPanelPages.RightPanelServicesPage
+                .unSpecificService(testData.service)
+                .verifySelectedService(testData.amount, testData.price, testData.duration)
+        })
+    });
 })

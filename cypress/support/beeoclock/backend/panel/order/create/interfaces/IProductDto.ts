@@ -1,6 +1,6 @@
-import { IStateHistory } from "../../../state/interface/IStateHistory";
-import { ILanguageVersionDto } from "./ILanguageVersionDto";
-import { IProductPriceDto } from "./IProductPriceDto";
+import {IStateHistory} from "../../../state/interface/IStateHistory";
+import {ILanguageVersionDto} from "./ILanguageVersionDto";
+import {IProductPriceDto} from "./IProductPriceDto";
 
 export interface IProductDto {
     _version: string;

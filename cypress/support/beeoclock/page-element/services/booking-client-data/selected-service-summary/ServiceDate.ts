@@ -3,6 +3,6 @@ export class ServiceDate {
         return cy.get('.flex.justify-start.gap-2.p-3')
             .find('.inline-flex.items-center')
             .should('be.visible')
-            // .scrollIntoView()
+        // .scrollIntoView()
     }
 }

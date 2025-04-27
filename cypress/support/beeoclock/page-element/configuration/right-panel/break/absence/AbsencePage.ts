@@ -1,7 +1,5 @@
 import {AbsencePageElement} from "./AbsencePageElement";
-import {SaveButton} from "../../../../common/common-element/element/SaveButton";
 import {CommonElementPage} from "../../../../common/common-element/CommonElementPage";
-import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import dayjs from "dayjs";
 import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
 

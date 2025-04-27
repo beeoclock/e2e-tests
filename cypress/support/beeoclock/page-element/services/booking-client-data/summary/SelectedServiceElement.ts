@@ -4,6 +4,7 @@ export class SelectedServiceElement {
         return cy.get('item-on-list-v2').contains(service)
             .parents('item-on-list-v2') //<-- return the parent element
     }
+
     public getSelectedServiceName(service: string): any {
         return this.getElement(service)
             .find('.text-sm').first()
@@ -22,5 +23,9 @@ export class SelectedServiceElement {
     public getSpecialistElement(specialist: string): any {
         return cy.get('.inline-flex.items-center.gap-2.rounded-md').contains(specialist)
             .should('be.visible')
+    }
+
+    public getSummaryTotalPrice(): any {
+        return cy.contains('Cena całkowita').next('div')
     }
 }

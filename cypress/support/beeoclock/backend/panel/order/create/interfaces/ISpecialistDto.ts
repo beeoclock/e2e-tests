@@ -1,4 +1,4 @@
-import { IMemberDto } from "./IMemberDto";
+import {IMemberDto} from "./IMemberDto";
 
 export interface ISpecialistDto {
     object: string;

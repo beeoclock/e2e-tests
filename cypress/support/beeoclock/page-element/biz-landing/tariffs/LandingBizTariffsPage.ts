@@ -1,4 +1,4 @@
-import { BizLandingTariffsElement } from "./element/BizLandingTariffsElement";
+import {BizLandingTariffsElement} from "./element/BizLandingTariffsElement";
 
 export class LandingBizTariffsPage {
     private element = new BizLandingTariffsElement()

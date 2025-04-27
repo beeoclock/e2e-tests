@@ -1,5 +1,5 @@
-import { IHistoryEntryDto } from "../interface/IHistoryEntryDto";
-import { IMetaDto } from "../interface/IMetaDto";
+import {IHistoryEntryDto} from "../interface/IHistoryEntryDto";
+import {IMetaDto} from "../interface/IMetaDto";
 
 export class MetaDtoBuilder {
     private meta: IMetaDto;

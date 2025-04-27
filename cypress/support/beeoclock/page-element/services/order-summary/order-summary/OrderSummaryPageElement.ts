@@ -1,4 +1,4 @@
-import { OrderSummaryElement } from "./page-element/OrderSummaryElement";
+import {OrderSummaryElement} from "./page-element/OrderSummaryElement";
 
 export class OrderSummaryPageElement {
 

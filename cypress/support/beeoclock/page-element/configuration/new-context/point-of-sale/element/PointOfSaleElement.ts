@@ -11,7 +11,7 @@ export class PointOfSaleElement {
     }
 
     public getGivenOption(option: string): any {
-       return cy.get('.ng-option').contains(option)
+        return cy.get('.ng-option').contains(option)
     }
 
     public getCityInput(): any {

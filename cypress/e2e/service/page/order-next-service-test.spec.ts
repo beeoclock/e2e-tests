@@ -35,7 +35,6 @@ describe('order next service', () => {
 
             cy.log('select date and time')
             ServicesPages.SelectDayPage
-                .assertSelectedServiceSection(item.Service, item.serviceTime)
                 .selectNextDay()
             ServicesPages.SelectTimePage
                 .selectSpecificTime(item.selectTime)
@@ -93,17 +92,16 @@ describe('order next service', () => {
             ServicesPages.OrderSummaryPage
                 .verifyOrderSummaryValue("Nazwa firmy", BusinessNameEnum.HAIRCUT_AND_BARBER)
                 .verifyOrderSummaryValue("Adres", address)
-                .verifyOrderSummaryValue("Komentarz", item.comment)
-            ServicesPages.BookingClientDataPage
-                .verifySelectedService(item.Service)
+                .verifyOrderSummaryValue("Uwaga", item.comment)
+
+            ServicesPages.ServiceSummaryPage
+                .verifySelectedServiceOnSummary(item.Service)
                 .verifySelectedServicePrice(item.price)
                 .verifySelectedServiceTime(item.serviceTime)
                 .verifyServiceSpecialist(item.Specialist)
 
-            cy.log('verify next service')
-            ServicesPages.BookingClientDataPage
-                .verifySelectServicesHeader()
-                .verifySelectedService(item.nextService)
+            ServicesPages.ServiceSummaryPage
+                .verifySelectedServiceOnSummary(item.nextService)
                 .verifySelectedServicePrice(item.nextPrice)
                 .verifySelectedServiceTime(item.nextServiceTime)
 
@@ -116,23 +114,22 @@ describe('order next service', () => {
             ServicesPages.OrderSummaryPage
                 .verifyOrderSummaryValue("Nazwa firmy", BusinessNameEnum.HAIRCUT_AND_BARBER)
                 .verifyOrderSummaryValue("Adres", address)
-                .verifyOrderSummaryValue("Komentarz", item.comment)
-            ServicesPages.BookingClientDataPage
-                .verifySelectedService(item.Service)
+                .verifyOrderSummaryValue("Uwaga", item.comment)
+            ServicesPages.ServiceSummaryPage
+                .verifySelectedServiceOnSummary(item.Service)
                 .verifySelectedServicePrice(item.price)
                 .verifySelectedServiceTime(item.serviceTime)
                 .verifyServiceSpecialist(item.Specialist)
 
-            cy.log('verify next service')
-            ServicesPages.BookingClientDataPage
-                .verifySelectServicesHeader()
-                .verifySelectedService(item.nextService)
+            ServicesPages.ServiceSummaryPage
+                .verifySelectedServiceOnSummary(item.nextService)
                 .verifySelectedServicePrice(item.nextPrice)
                 .verifySelectedServiceTime(item.nextServiceTime)
+                .verifyServiceSpecialist(item.Specialist)
+                .verifySummaryTotalPrice('70 zł')
 
             ServicesPages.OrderSummaryNavigationPage
                 .clickBackArrow()
-
         })
     })
 })

@@ -1,11 +1,11 @@
-import { ICustomer } from "./ICustomer";
+import {ICustomer} from "./ICustomer";
 
-import { CustomerTypeEnum } from "../enum/CustomerTypeEnum";
+import {CustomerTypeEnum} from "../enum/CustomerTypeEnum";
 
 import {faker} from "@faker-js/faker";
 import {NumericUtils} from "../../../Utils/NumericUtils";
-import { StateEnum } from "../../order/enum/StateEnum";
-import { IStateHistory } from "../../state/interface/IStateHistory";
+import {StateEnum} from "../../order/enum/StateEnum";
+import {IStateHistory} from "../../state/interface/IStateHistory";
 
 export class CustomerBuilder {
     private customer: ICustomer;

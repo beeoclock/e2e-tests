@@ -4,8 +4,8 @@ import {ClientDescriptionInput} from "./page-element/ClientDescriptionInput";
 import {SaveButton} from "../../../common/common-element/element/SaveButton";
 import {ClientPhoneInput} from "./page-element/ClientPhoneInput";
 import {LeftMenuPage} from "../../left-menu/LeftMenuPage";
-import { ClientsApiInterceptionHelper } from "support/beeoclock/common/Interception/clients/ClientsApiInterceptionHelper";
-import { ApiInterceptionHelper } from "support/beeoclock/common/Interception/ApiInterceptionHelper";
+import {ClientsApiInterceptionHelper} from "support/beeoclock/common/Interception/clients/ClientsApiInterceptionHelper";
+import {ApiInterceptionHelper} from "support/beeoclock/common/Interception/ApiInterceptionHelper";
 
 export class ClientFormPage {
 
@@ -15,8 +15,8 @@ export class ClientFormPage {
                 .click()
                 .type(value)
                 .then(() => {
-                this.verifyGivenCustomerInput(label, value)
-            })
+                    this.verifyGivenCustomerInput(label, value)
+                })
         }
         return this
     }

@@ -1,4 +1,4 @@
-import { IAssignedServiceDto } from "./IAssignedServiceDto";
+import {IAssignedServiceDto} from "./IAssignedServiceDto";
 
 interface IAssignmentServiceDto {
     object: string;

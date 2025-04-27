@@ -1,4 +1,4 @@
-export interface ILanguageVersionDto  {
+export interface ILanguageVersionDto {
     object: string;
     title: string;
     description: string;

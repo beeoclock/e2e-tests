@@ -1,4 +1,4 @@
-import { ICustomerDto } from "./ICustomerDto";
+import {ICustomerDto} from "./ICustomerDto";
 
 export interface IAttendeeDto {
     object: string;

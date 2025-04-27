@@ -3,7 +3,7 @@ import {BackendCommonEnum} from "../../../enum/BackendCommonEnum";
 
 export class OrderCreationApi {
 
-    public static createOrderWithBuilder(order: Object, options: Partial<Cypress.RequestOptions>, givenToken?: string ): any {
+    public static createOrderWithBuilder(order: Object, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');
         return cy.request({
             method: 'POST',

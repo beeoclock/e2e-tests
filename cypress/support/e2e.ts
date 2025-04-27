@@ -17,7 +17,6 @@ import {AuthApi} from "./beeoclock/backend/auth/AuthApi";
 import './commands';
 import 'cypress-file-upload';
 import {BackendCommonEnum} from "./beeoclock/backend/enum/BackendCommonEnum";
-import cypress from "cypress";
 
 /**
  * clear all storage and assign to global env valid token before any test

@@ -1,4 +1,4 @@
-import { ScheduleConfig } from "./builder/UpdateBusinessProfileBuilder";
+import {ScheduleConfig} from "./builder/UpdateBusinessProfileBuilder";
 
 export class NewContextInterceptionAssertion {
 

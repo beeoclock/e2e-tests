@@ -1,4 +1,4 @@
-import { BackendCommonEnum } from "../../../backend/enum/BackendCommonEnum";
+import {BackendCommonEnum} from "../../../backend/enum/BackendCommonEnum";
 
 export const indexDBNames = {
     order_db: `${BackendCommonEnum.X_Business_Tenant_Id}-order`,

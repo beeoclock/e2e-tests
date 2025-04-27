@@ -15,7 +15,7 @@ describe('order time slot test', () => {
         AbsenceApi.deleteAllAbsences()
     })
 
-    it  ('test 1 should test free slot visibility', () => {
+    it('test 1 should test free slot visibility', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
         ServicesPages.BookingSelectServicePage
             .verifyCorrectForm()
@@ -112,7 +112,7 @@ describe('order time slot test', () => {
             .clickSelectSpecialistAndOrder()
         ServicesPages.SelectTimePage
             .verifyGivenSlotNotExist(currentHour)
-            assertFirstFreeSlot()
+        assertFirstFreeSlot()
     });
 
 

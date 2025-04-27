@@ -11,16 +11,15 @@
     "price": "40 zł",
     "summaryPrice": "40 zł",
     "serviceTime": "30min",
-    "companyName":  "e2e",
+    "companyName": "e2e",
     "serviceDescription": "samo strzyżenie bez brody dla Pana Mbappe",
-
     "nextService": "Strzyżenie Brody",
     "nextSpecialist": "e2e",
     "nextSelectTime": "19:00",
     "nextPrice": "30 zł",
     "nextSummaryPrice": "70 zł",
     "nextServiceTime": "15min",
-    "nextCompanyName":  "e2e",
+    "nextCompanyName": "e2e",
     "nextServiceDescription": "Samo Strzyżenie Brody"
   }
 ]

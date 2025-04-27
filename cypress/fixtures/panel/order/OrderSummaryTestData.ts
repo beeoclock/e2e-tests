@@ -2,7 +2,7 @@ import {TestCaseEnum} from "../../enum/TestCaseEnum";
 import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 
 export class OrderSummaryTestData {
-   public static getPlusTestData(caseEnum: TestCaseEnum) {
+    public static getPlusTestData(caseEnum: TestCaseEnum) {
         switch (caseEnum) {
             case TestCaseEnum.CASE_1:
                 return {

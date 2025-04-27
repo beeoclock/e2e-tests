@@ -2,6 +2,15 @@ import {NewContextSchedulesElement} from "./element/NewContextSchedulesElement";
 import {QueryAssertion} from "../../../../common/assertion/QueryAssertion";
 
 export class NewContextSchedulesPage {
+    public readonly dayIndex = {
+        monday: 1,
+        tuesday: 2,
+        wednesday: 3,
+        thursday: 4,
+        friday: 5,
+        saturday: 6,
+        sunday: 7,
+    } as const;
     private element = new NewContextSchedulesElement()
 
     public clickOnGivenDay(index: number): NewContextSchedulesPage {
@@ -44,14 +53,4 @@ export class NewContextSchedulesPage {
         QueryAssertion.verifyCorrectUrl('/identity/create-business/schedules')
         return this
     }
-
-    public readonly dayIndex = {
-        monday: 1,
-        tuesday: 2,
-        wednesday: 3,
-        thursday: 4,
-        friday: 5,
-        saturday: 6,
-        sunday: 7,
-    } as const;
 }

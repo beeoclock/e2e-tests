@@ -6,7 +6,7 @@ export class OrderBuilder {
             _id: '',
             businessNote: '',
             createdAt: new Date().toISOString(),
-            meta: { object: 'OrderMetaDto', history: [] },
+            meta: {object: 'OrderMetaDto', history: []},
             object: 'OrderDto',
             products: [],
             services: [],
@@ -14,7 +14,7 @@ export class OrderBuilder {
             stateHistory: [],
             status: 'confirmed',
             updatedAt: new Date().toISOString(),
-            notificationSettings: { sendNotification: false, sendTypes: [], sendReceivers: ['business', 'client'] }
+            notificationSettings: {sendNotification: false, sendTypes: [], sendReceivers: ['business', 'client']}
         };
     }
 

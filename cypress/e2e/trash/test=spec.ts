@@ -5,7 +5,7 @@ import {faker} from "@faker-js/faker";
 import {AuthApi} from "../../support/beeoclock/backend/auth/AuthApi";
 
 describe('test', () => {
-let token: any;
+    let token: any;
 
     before('get token', () => {
         AuthApi.getToken().then(bearer => {
@@ -13,7 +13,7 @@ let token: any;
         })
     })
 
-    it ('should return the correct header', () => {
+    it('should return the correct header', () => {
         let id: string = NumericUtils.generateObjectId()
         const tag = new ProductTagBuilder().setId(id).setName('TAG NO ' + faker.finance.pin(6)).build();
         ProductApi.createProductTag(tag, token).then(() => {

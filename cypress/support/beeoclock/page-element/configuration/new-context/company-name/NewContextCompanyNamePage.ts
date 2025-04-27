@@ -19,7 +19,7 @@ export class NewContextCompanyNamePage {
     }
 
     public verifyTypedCompanyName(companyName: string): NewContextCompanyNamePage {
-            this.element.getCompanyNameInput().should('have.value', companyName)
+        this.element.getCompanyNameInput().should('have.value', companyName)
         return this;
     }
 

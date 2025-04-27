@@ -10,6 +10,6 @@ describe("delete all absences by API", (): void => {
 
     it('delete absence', function () {
         cy.log('delete all current absences');
-            AbsenceApi.deleteAllAbsences();
-        });
+        AbsenceApi.deleteAllAbsences();
     });
+});

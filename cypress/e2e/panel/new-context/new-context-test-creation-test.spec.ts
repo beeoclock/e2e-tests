@@ -3,8 +3,8 @@ import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/con
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
 import {NewContextPages} from "support/beeoclock/page-element/configuration/new-context/NewContextPages";
-import { UpdateBusinessProfileBuilder } from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
-import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import {UpdateBusinessProfileBuilder} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
+import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {BusinessSettingsPages} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
 
@@ -124,7 +124,7 @@ describe('new context test creation', () => {
     }
 
     function buildBusinessUpdate(): any {
-      return new UpdateBusinessProfileBuilder()
+        return new UpdateBusinessProfileBuilder()
             .setPublished(1)
             .addSchedule({
                 workDays: [2, 3, 4, 5, 7],

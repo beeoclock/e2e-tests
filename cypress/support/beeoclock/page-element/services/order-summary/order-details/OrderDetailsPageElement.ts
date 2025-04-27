@@ -1,5 +1,5 @@
-import { OrderDetailsElement } from "./page-element/OrderDetailsElement";
-import { OrderMainDetailsElement } from "./page-element/OrderMainDetailsElement";
+import {OrderDetailsElement} from "./page-element/OrderDetailsElement";
+import {OrderMainDetailsElement} from "./page-element/OrderMainDetailsElement";
 
 export class OrderDetailsPageElement {
 

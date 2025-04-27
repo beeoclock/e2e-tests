@@ -1,4 +1,4 @@
-import { IStateHistory } from "../../../state/interface/IStateHistory";
+import {IStateHistory} from "../../../state/interface/IStateHistory";
 
 export interface ICustomerDto {
     _version: string;

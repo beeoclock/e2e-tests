@@ -45,25 +45,6 @@ export class RightPanelServicesPage {
         return this;
     }
 
-    private verifyAmountOfTotalService(amount: string): RightPanelServicesPage {
-        RightPanelServicesPageElement.SelectedServiceElement.getAmountOfSelectedService()
-            .should('have.prop', 'outerText').and('include', amount)
-        return this
-    }
-
-    private verifyTotalPrice(price: string): RightPanelServicesPage {
-        RightPanelServicesPageElement.SelectedServiceElement.getTotalPrice()
-            .should('have.prop', 'textContent').and('include', price)
-        return this
-    }
-
-    private verifyTotalDuration(duration: string): RightPanelServicesPage {
-        RightPanelServicesPageElement.SelectedServiceElement.getTotalDuration()
-            .should('have.prop', 'textContent').and('include', duration)
-        return this
-    }
-
-
     public openSelectTime(): RightPanelServicesPage {
         cy.wait(500)
         cy.get('app-duration-chip-component').scrollIntoView().should('be.visible')
@@ -189,6 +170,24 @@ export class RightPanelServicesPage {
     public clickNextButton(): RightPanelServicesPage {
         RightPanelServicesPageElement.NextButton.getElement()
             .click({force: true})
+        return this
+    }
+
+    private verifyAmountOfTotalService(amount: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectedServiceElement.getAmountOfSelectedService()
+            .should('have.prop', 'outerText').and('include', amount)
+        return this
+    }
+
+    private verifyTotalPrice(price: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectedServiceElement.getTotalPrice()
+            .should('have.prop', 'textContent').and('include', price)
+        return this
+    }
+
+    private verifyTotalDuration(duration: string): RightPanelServicesPage {
+        RightPanelServicesPageElement.SelectedServiceElement.getTotalDuration()
+            .should('have.prop', 'textContent').and('include', duration)
         return this
     }
 }

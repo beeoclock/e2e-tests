@@ -315,7 +315,7 @@ describe('customer update api test', () => {
             .setNote(customerData.note)
             .build();
 
-        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, { failOnStatusCode: false })
+        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {failOnStatusCode: false})
             .then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             });
@@ -385,7 +385,7 @@ describe('customer update api test', () => {
             .setNote(customerData.note)
             .build();
 
-        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, { failOnStatusCode: false })
+        CustomerApi.updateCustomerWithBuilder(customer, customerData._id, {failOnStatusCode: false})
             .then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
 

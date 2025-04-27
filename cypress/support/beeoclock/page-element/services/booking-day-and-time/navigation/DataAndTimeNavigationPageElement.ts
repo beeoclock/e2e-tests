@@ -1,4 +1,4 @@
-import { BookButton } from "./page-element/BookButton";
+import {BookButton} from "./page-element/BookButton";
 
 export class DataAndTimeNavigationPageElement {
 

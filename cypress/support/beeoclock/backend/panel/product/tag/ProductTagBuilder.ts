@@ -1,4 +1,4 @@
-import { IProductTags } from "./IProductTags";
+import {IProductTags} from "./IProductTags";
 import {faker} from "@faker-js/faker";
 import {NumericUtils} from "../../../Utils/NumericUtils";
 

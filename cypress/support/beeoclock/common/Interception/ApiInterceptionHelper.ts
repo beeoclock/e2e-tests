@@ -11,7 +11,7 @@ export class ApiInterceptionHelper {
 
     public static waitForAliases(aliases: string[]): void {
         const formattedAliases = aliases.map(alias => `@${alias}`);
-        cy.wait(formattedAliases, { timeout: 20000 });
+        cy.wait(formattedAliases, {timeout: 20000});
     }
 
     public static waitFor201Alias(alias: string): void {
@@ -77,8 +77,8 @@ export class ApiInterceptionHelper {
 
     public static getSlot(): string {
         const getSlot: string = 'getSlot' + NumericUtils.generateObjectId();
-        cy.intercept('GET', EntryPointEnum.PUBLIC_PAGE_API_ENTRY_POINT + '/slot/busy?*').as(getSlot);
-        return getSlot
+        cy.intercept('GET', `${EntryPointEnum.PUBLIC_PAGE_API_ENTRY_POINT}/slot/busy?*`).as(getSlot);
+        return getSlot;
     }
 
     public static createAbsence(): string {
