@@ -76,9 +76,9 @@ export class ApiInterceptionHelper {
     }
 
     public static getSlot(): string {
-        const getSlot: string = 'getSlot' + NumericUtils.generateObjectId();
-        cy.intercept('GET', EntryPointEnum.PUBLIC_PAGE_API_ENTRY_POINT + '/slot/busy?*').as(getSlot);
-        return getSlot
+        const aliasBase = 'getSlot' + NumericUtils.generateObjectId();
+        cy.intercept('GET', `${EntryPointEnum.PUBLIC_PAGE_API_ENTRY_POINT}/slot/busy?*`).as(`${aliasBase}_e2e`);
+        return aliasBase;
     }
 
     public static createAbsence(): string {

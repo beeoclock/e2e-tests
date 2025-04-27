@@ -11,9 +11,9 @@ export class BookingClientNavigationFormPage {
         const createPayment = 'createPayment' + DateUtils.getCurrentTime();
         const getOrderDetails = 'getOrderDetails' + DateUtils.getCurrentTime();
         const apiEntryPoint = Cypress.env('apiBackendEntryPoint');
-        cy.intercept('POST', apiEntryPoint + 'client/e2e/order').as(bookVisit);
-        cy.intercept('POST', apiEntryPoint + 'client/e2e/payment').as(createPayment);
-        cy.intercept('GET', apiEntryPoint + 'client/e2e/order/*').as(getOrderDetails);
+        cy.intercept('POST', apiEntryPoint + 'client/*/order').as(bookVisit);
+        cy.intercept('POST', apiEntryPoint + 'client/*/payment').as(createPayment);
+        cy.intercept('GET', apiEntryPoint + 'client/*/order/*').as(getOrderDetails);
         BookingNavigationFormPageElement.SaveButton.getElement()
             .click()
         cy.wait('@' + bookVisit, {timeout:10000})
