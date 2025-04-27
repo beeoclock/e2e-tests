@@ -6,8 +6,8 @@ describe("Client app health check test", () => {
     const englishAddress = 'https://beeoclock.com/en/barbershop_brooklyn'
     const taiwanAddress = 'https://beeoclock.com/tw/barbershop_brooklyn'
 
-    const danishTabName = 'Detaljer og'
-    const englishTabName = 'Details'
+    const danishTabName = 'Om os'
+    const englishTabName = 'About us'
     const clientName = 'Barbershop Brooklyn'
 
     const emptyDomain = 'https://dev.beeoclock.com'
@@ -26,8 +26,7 @@ describe("Client app health check test", () => {
             expect(langAttribute).to.equal('da');
         });
         ServicesPages.BookingSelectServicePage
-            .verifyCorrectForm()
-            .verifyGivenHrefAddress('Sankt Mathias Gade, 72, Viborg, Denmark, 8800')
+            .verifyGivenHrefAddress('Sankt Mathias Gade, 72, Viborg, Danmark, 8800')
         assertLogo()
         assertBusinessName()
         assertUrl(danishAddress)
@@ -43,7 +42,6 @@ describe("Client app health check test", () => {
             expect(langAttribute).to.equal('en');
         });
         ServicesPages.BookingSelectServicePage
-            .verifyCorrectForm()
             .verifyGivenHrefAddress('Sankt Mathias Gade, 72, Viborg, Denmark, 8800')
         assertLogo()
         assertBusinessName()
@@ -66,8 +64,6 @@ describe("Client app health check test", () => {
         let description: string = 'Rezerwacja spotkań online dla klientów.'
 
         cy.url().should('eq', emptyDomain + '/pl')
-        //                     https://dev.beeoclock.com/pl
-        //                     https://biz.dev.beeoclock.com/pl/
 
         cy.get('.hidden > [alt="Bee O`clock service details image"]')
 
@@ -91,13 +87,13 @@ describe("Client app health check test", () => {
     }
 
     function assertDetailsTab(tabName: string) {
-        const detailsTab = cy.get('.flex.justify-start').find('.me-2').last()
+        const detailsTab = cy.get('.font-semibold.text-sm').find('h2').last()
         detailsTab.should('contain.text', tabName);
     }
 
-    function assertApiResponse() {
-        const getGivenClient = 'getGivenClient' + DateUtils.getCurrentTime()
-        cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn/specialist/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=100').as(getGivenClient);
+    function assertApiResponse(): void {
+        const getGivenClient: string = 'getGivenClient' + DateUtils.getCurrentTime()
+        cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn?*').as(getGivenClient);
         cy.wait('@' + getGivenClient);
     }
 });

@@ -18,10 +18,10 @@ export class BookingSelectServicePage {
     }
 
     public clickSelectSpecialistAndOrder(): BookingSelectServicePage {
-        const getSlot = ApiInterceptionHelper.getSlot()
+        const getSlot: string = ApiInterceptionHelper.getSlot()
         cy.get('service-list').contains('Wybierz specjalistę i datę')
             .click()
-        // ApiInterceptionHelper.waitForAlias(getSlot)
+        ApiInterceptionHelper.waitForAlias(getSlot)
         return this;
     }
 
