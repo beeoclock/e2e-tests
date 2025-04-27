@@ -1,7 +1,5 @@
 import {RightPanelServicesPageElement} from "../RightPanelServicesPageElement";
-import {CustomerApiInterceptionHelper} from "../../../../../../common/Interception/customer/CustomerApiInterceptionHelper";
-import {ApiInterceptionHelper} from "../../../../../../common/Interception/ApiInterceptionHelper";
-import { NotificationsPage } from "support/beeoclock/page-element/configuration/notiifcations/NotificationsPage";
+import {NotificationsPage} from "support/beeoclock/page-element/configuration/notiifcations/NotificationsPage";
 
 export class CustomerPage {
 
@@ -33,9 +31,9 @@ export class CustomerPage {
     public clickConfirmButton(sendEmail: boolean = false): CustomerPage {
         RightPanelServicesPageElement.ConfirmButton.getElement()
             .click({force: true}).then(() => {
-                if (sendEmail) {
-                    NotificationsPage.handleEmailNotificationsToggle(sendEmail)
-                }
+            if (sendEmail) {
+                NotificationsPage.handleEmailNotificationsToggle(sendEmail)
+            }
         })
         return this;
     }

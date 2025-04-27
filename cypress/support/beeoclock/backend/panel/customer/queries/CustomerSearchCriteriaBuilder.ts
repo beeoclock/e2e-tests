@@ -1,5 +1,5 @@
-import { CustomerStateEnum } from "../enum/CustomerStateEnum";
-import { ICustomerSearchCriteria } from "./ICustomerSearchCriteria";
+import {CustomerStateEnum} from "../enum/CustomerStateEnum";
+import {ICustomerSearchCriteria} from "./ICustomerSearchCriteria";
 
 export class CustomerSearchCriteriaBuilder {
     private criteria: Partial<ICustomerSearchCriteria> = {};

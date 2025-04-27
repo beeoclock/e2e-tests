@@ -1,4 +1,3 @@
-import {values} from "cypress/types/lodash";
 import {BookingClientDataPageElement} from "./BookingClientDataPageElement";
 
 
@@ -57,23 +56,8 @@ export class BookingClientDataPage {
     }
 
     public checkAgreement(): BookingClientDataPage {
-        BookingClientDataPageElement.Agreement0InputElement.getElement().check({ force: true })
+        BookingClientDataPageElement.Agreement0InputElement.getElement().check({force: true})
             .should('be.checked');
-        return this;
-    }
-
-    private verifyFirstNameLabel(): BookingClientDataPage {
-        BookingClientDataPageElement.FirstNameInput.getElement().parent().find('label').contains('Imię');
-        return this;
-    }
-
-    private verifyEmailLabel(): BookingClientDataPage {
-        BookingClientDataPageElement.EmailInput.getElement().parent().find('label').contains('E-mail');
-        return this;
-    }
-
-    private verifyPhoneNumberLabel(): BookingClientDataPage {
-        BookingClientDataPageElement.PhoneInput.getElement().parents('label').first().contains('Telefon');
         return this;
     }
 
@@ -145,19 +129,34 @@ export class BookingClientDataPage {
 
     public verifyPhonePrefix(prefix: string): BookingClientDataPage {
         const element = BookingClientDataPageElement.PhonePrefixElement
-            // if (!element.getElement().contains('+1')) {
-                element.getElement().click().then(() => {
-                    cy.get('[placeholder="Search"]').type('Poland')
-                    cy.contains('li', 'Poland').click()
-                })
-            // }
+        // if (!element.getElement().contains('+1')) {
+        element.getElement().click().then(() => {
+            cy.get('[placeholder="Search"]').type('Poland')
+            cy.contains('li', 'Poland').click()
+        })
+        // }
         cy.wait(100)
-            element.getElement().should('have.prop', 'textContent').and('include', prefix)
+        element.getElement().should('have.prop', 'textContent').and('include', prefix)
         return this;
     }
 
     public verifySelectServicesHeader(): BookingClientDataPage {
         cy.contains('div', 'Zamówione usługi').should('be.visible')
+        return this;
+    }
+
+    private verifyFirstNameLabel(): BookingClientDataPage {
+        BookingClientDataPageElement.FirstNameInput.getElement().parent().find('label').contains('Imię');
+        return this;
+    }
+
+    private verifyEmailLabel(): BookingClientDataPage {
+        BookingClientDataPageElement.EmailInput.getElement().parent().find('label').contains('E-mail');
+        return this;
+    }
+
+    private verifyPhoneNumberLabel(): BookingClientDataPage {
+        BookingClientDataPageElement.PhoneInput.getElement().parents('label').first().contains('Telefon');
         return this;
     }
 }

@@ -1,6 +1,6 @@
-import { IStateHistory } from "../../../state/interface/IStateHistory";
-import { IAssignmentsDto } from "./IAssignmentsDto";
-import { IImageDto } from "./IImageDto";
+import {IStateHistory} from "../../../state/interface/IStateHistory";
+import {IAssignmentsDto} from "./IAssignmentsDto";
+import {IImageDto} from "./IImageDto";
 
 export interface IMemberDto {
     _version: string;

@@ -1,14 +1,14 @@
-import { CommentInput } from "./page-element/CommentInput";
-import { EmailInput } from "./page-element/EmailInput";
-import { FirstNameInput } from "./page-element/FirstNameInput";
-import { PhoneInput } from "./page-element/PhoneInput";
+import {CommentInput} from "./page-element/CommentInput";
+import {EmailInput} from "./page-element/EmailInput";
+import {FirstNameInput} from "./page-element/FirstNameInput";
+import {PhoneInput} from "./page-element/PhoneInput";
 import {SelectedService} from "./selected-service-summary/SelectedService";
 import {ServicePrice} from "./selected-service-summary/ServicePrice";
 import {ServiceDate} from "./selected-service-summary/ServiceDate";
 import {ServiceSpecialist} from "./selected-service-summary/serviceSpecialist";
 import {ServiceTime} from "./selected-service-summary/ServiceTime";
 import {SummaryPriceValue} from "./page-element/SummaryPriceValue";
-import { Agreement0InputElement } from "./agreements/agreement.0.inpu.element";
+import {Agreement0InputElement} from "./agreements/agreement.0.inpu.element";
 import {PhonePrefixElement} from "./page-element/PhonePrefixElement";
 import {SelectedServiceElement} from "./summary/SelectedServiceElement";
 

@@ -1,5 +1,5 @@
 import {SpecificTableElement} from "./table-element/SpecificTableElement";
-import { OrderTableElement } from "./table-element/order/OrderTableElement";
+import {OrderTableElement} from "./table-element/order/OrderTableElement";
 import {AbsenceTableElement} from "./table-element/absence/AbsenceTableElement";
 
 export class CalendarTablePageElement {

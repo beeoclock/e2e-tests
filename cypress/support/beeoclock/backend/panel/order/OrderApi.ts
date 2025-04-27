@@ -7,10 +7,6 @@ import {StateEnum} from "./enum/StateEnum";
 import {OrderServiceStatusEnum} from "./enum/OrderServiceStatusEnum";
 
 export class OrderApi {
-    private static getToken(): Cypress.Chainable<string> {
-        return AuthApi.getToken();
-    }
-
     public static getOrderIds(): any {
         this.getToken()
         const tokenId = Cypress.env('token');
@@ -195,5 +191,9 @@ export class OrderApi {
         OrderApi.getOrderIds().then(orderIds => {
             OrderApi.deleteOrdersWithAssert(orderIds);
         });
+    }
+
+    private static getToken(): Cypress.Chainable<string> {
+        return AuthApi.getToken();
     }
 }

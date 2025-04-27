@@ -6,7 +6,8 @@ export class ClientTabTableAssertionPage {
         if (expectedValue) {
             ClientTabTableAssertionElement.TableRowElement.getElement(key, cell)
                 .should('have.prop', 'innerText').and('include', expectedValue)
-        } if (expectedValue == null) {
+        }
+        if (expectedValue == null) {
             ClientTabTableAssertionElement.TableRowElement.getElement(key, cell)
                 .should('have.prop', 'innerText').and('include', "-")
         }
@@ -14,8 +15,8 @@ export class ClientTabTableAssertionPage {
     }
 
     public clickAddOnNotFoundComponent(): ClientTabTableAssertionPage {
-      const element= cy.get('not-found-table-data-component')
-            element.should('be.visible')
+        const element = cy.get('not-found-table-data-component')
+        element.should('be.visible')
         element.find('button').contains('Dodaj klienta')
             .click()
         return this;

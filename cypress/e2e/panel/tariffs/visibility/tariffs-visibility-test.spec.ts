@@ -1,11 +1,8 @@
-
-import {faker} from "@faker-js/faker";
-import { LeftMenuPage } from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import { TabNameEnum } from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import { TariffsPages } from "support/beeoclock/page-element/configuration/tab/tariffs/TariffsPages";
-import { TariffsFeatureEnum } from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsFeatureEnum";
-import { TariffsNameEnum } from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
-import { TariffsFormPages } from "support/beeoclock/page-element/configuration/tab/tariffs/form/TariffsFormPages";
+import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
+import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
+import {TariffsPages} from "support/beeoclock/page-element/configuration/tab/tariffs/TariffsPages";
+import {TariffsFeatureEnum} from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsFeatureEnum";
+import {TariffsNameEnum} from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
 
 describe("tariffs visibility test", () => {
 

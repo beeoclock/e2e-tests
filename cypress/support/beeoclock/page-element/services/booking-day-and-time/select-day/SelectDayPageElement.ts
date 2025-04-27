@@ -1,5 +1,5 @@
-import { BookButton } from "../navigation/page-element/BookButton";
-import { SelectDayButton } from "./page-element/SelectDayButton";
+import {BookButton} from "../navigation/page-element/BookButton";
+import {SelectDayButton} from "./page-element/SelectDayButton";
 import {SelectedServiceComponent} from "./page-element/SelectedServiceComponent";
 
 export class SelectDayPageElement {

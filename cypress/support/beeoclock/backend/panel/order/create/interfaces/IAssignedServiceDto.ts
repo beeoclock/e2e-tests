@@ -1,4 +1,4 @@
-import { IServiceDto } from "./IServiceDto";
+import {IServiceDto} from "./IServiceDto";
 
 export interface IAssignedServiceDto {
     object: string;

@@ -4,6 +4,7 @@ export class SelectedServiceElement {
         return cy.get('item-on-list-v2').contains(service)
             .parents('item-on-list-v2') //<-- return the parent element
     }
+
     public getSelectedServiceName(service: string): any {
         return this.getElement(service)
             .find('.text-sm').first()

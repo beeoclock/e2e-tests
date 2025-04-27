@@ -5,7 +5,6 @@ import {PanelLoginPageElement} from "./beeoclock/page-element/configuration/logi
 import {PanelLoginPage} from "./beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {ClientPropertiesEnum} from "./beeoclock/common/enum/ClientPropertiesEnum";
 import {BusinessNameEnum} from "./beeoclock/page-element/common/enum/BusinessNameEnum";
-import {ApiInterceptionHelper} from "./beeoclock/common/Interception/ApiInterceptionHelper";
 import {ThrottleEnum} from "./beeoclock/common/enum/ThrottleEnum";
 
 declare global {
@@ -21,9 +20,11 @@ declare global {
             setNetworkThrottle(speed: ThrottleEnum): void;
 
             assertProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
+
             assertTrimmedProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
 
             isNotInViewport(): Chainable<JQuery>;
+
             isInViewport(): Chainable<JQuery>;
         }
     }
@@ -91,7 +92,7 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
                 url: '**/api/**',
             }, {
                 statusCode: 500,
-                body: { error: 'No network connection' },
+                body: {error: 'No network connection'},
             }).as(`offline-${method}`);
         });
         return;
@@ -134,11 +135,11 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
     });
 });
 
-Cypress.Commands.add('assertProperties', { prevSubject: true }, (subject, properties, expectedProperties) => {
+Cypress.Commands.add('assertProperties', {prevSubject: true}, (subject, properties, expectedProperties) => {
     cy.wrap(subject).should('have.prop', properties).and('include', expectedProperties);
 });
 
-Cypress.Commands.add('assertTrimmedProperties', { prevSubject: true }, function (subject, properties, expectedProperties) {
+Cypress.Commands.add('assertTrimmedProperties', {prevSubject: true}, function (subject, properties, expectedProperties) {
     cy.wrap(subject)
         .should('have.prop', properties)
         .then((actualProp: any) => {
@@ -147,7 +148,7 @@ Cypress.Commands.add('assertTrimmedProperties', { prevSubject: true }, function 
 });
 
 
-Cypress.Commands.add('isNotInViewport', { prevSubject: true }, (subject) => {
+Cypress.Commands.add('isNotInViewport', {prevSubject: true}, (subject) => {
     const bounding = subject[0].getBoundingClientRect();
     const windowHeight = Cypress.config('viewportHeight');
     const windowWidth = Cypress.config('viewportWidth');
@@ -162,7 +163,7 @@ Cypress.Commands.add('isNotInViewport', { prevSubject: true }, (subject) => {
     expect(notVisible).to.be.true;
 });
 
-Cypress.Commands.add('isInViewport', { prevSubject: true }, (subject) => {
+Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject) => {
     const bounding = subject[0].getBoundingClientRect();
     const windowHeight = Cypress.config('viewportHeight');
     const windowWidth = Cypress.config('viewportWidth');

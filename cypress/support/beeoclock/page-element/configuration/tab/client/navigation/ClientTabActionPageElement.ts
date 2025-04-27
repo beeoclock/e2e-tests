@@ -1,4 +1,4 @@
-import { ActionButtonElement } from "./page-element/ActionButtonElement";
+import {ActionButtonElement} from "./page-element/ActionButtonElement";
 import {GivenActionButton} from "./page-element/GivenActionButton";
 
 export class ClientTabActionPageElement {

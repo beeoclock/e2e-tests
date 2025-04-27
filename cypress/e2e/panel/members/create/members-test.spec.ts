@@ -2,13 +2,12 @@ import {LeftMenuPage} from "../../../../support/beeoclock/page-element/configura
 import {TableCommonPage} from "../../../../support/beeoclock/page-element/configuration/tab/common/table/TableCommonPage";
 import {SpecialistNameEnum} from "../../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {MemberTableCellEnum} from "../../../../support/beeoclock/page-element/configuration/tab/members/enum/MemberTableCellEnum";
-import {RightPanelPages} from "../../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {CommonElementPage} from "../../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
 
 describe('Members Test', () => {
 
     beforeEach('login', () => {
-    cy.loginOnPanel()
+        cy.loginOnPanel()
         LeftMenuPage.clickMembersTab()
     })
 
@@ -26,7 +25,7 @@ describe('Members Test', () => {
 
         CommonElementPage.clickAddResourceButton()
     })
-    
+
     function assertTomaszZalewskiRow() {
         TableCommonPage.verifyTableRowElement(SpecialistNameEnum.ZALEWSKI, MemberTableCellEnum.PHONE, null)
         TableCommonPage.verifyTableRowElement(SpecialistNameEnum.ZALEWSKI, MemberTableCellEnum.EMAIL, 'Fryzjer@example.com')

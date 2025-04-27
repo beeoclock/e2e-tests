@@ -1,4 +1,4 @@
-import { ClientPropertiesEnum } from "../../common/enum/ClientPropertiesEnum";
+import {ClientPropertiesEnum} from "../../common/enum/ClientPropertiesEnum";
 
 export class AuthApi {
 

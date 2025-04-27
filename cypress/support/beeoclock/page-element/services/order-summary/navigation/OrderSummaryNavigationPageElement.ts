@@ -1,4 +1,4 @@
-import { CancelOrderService } from "./page-element/CancelOrderService";
+import {CancelOrderService} from "./page-element/CancelOrderService";
 
 export class OrderSummaryNavigationPageElement {
 

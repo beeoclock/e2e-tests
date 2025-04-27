@@ -1,7 +1,7 @@
-import { IMetaDto } from "../../../state/interface/IMetaDto";
-import { IStateHistory } from "../../../state/interface/IStateHistory";
-import { IOrderAppointmentDetailsDto } from "./IOrderAppointmentDetailsDto";
-import { IServiceDto } from "./IServiceDto";
+import {IMetaDto} from "../../../state/interface/IMetaDto";
+import {IStateHistory} from "../../../state/interface/IStateHistory";
+import {IOrderAppointmentDetailsDto} from "./IOrderAppointmentDetailsDto";
+import {IServiceDto} from "./IServiceDto";
 
 export interface IOrderServiceDto {
     _version: string;

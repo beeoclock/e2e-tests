@@ -2,7 +2,7 @@ import {faker} from "@faker-js/faker";
 import {ICustomer} from "../create/ICustomer";
 import {CustomerTypeEnum} from "../enum/CustomerTypeEnum";
 import {NumericUtils} from "support/beeoclock/backend/Utils/NumericUtils";
-import { StateEnum } from "../../order/enum/StateEnum";
+import {StateEnum} from "../../order/enum/StateEnum";
 
 export class CustomerFactory {
 

@@ -1,4 +1,4 @@
-import { OptionElement } from "./page-element/OptionElement";
+import {OptionElement} from "./page-element/OptionElement";
 
 export class BookingSelectServicePageElement {
 

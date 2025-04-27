@@ -112,7 +112,7 @@ describe('order time slot test', () => {
             .clickSelectSpecialistAndOrder()
         ServicesPages.SelectTimePage
             .verifyGivenSlotNotExist(currentHour)
-            assertFirstFreeSlot()
+        assertFirstFreeSlot()
     });
 
 

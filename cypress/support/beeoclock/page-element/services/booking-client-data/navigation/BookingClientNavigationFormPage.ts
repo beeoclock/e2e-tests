@@ -1,7 +1,6 @@
 import {DateUtils} from "../../../../backend/Utils/DateUtils";
 import {BookingNavigationFormPageElement} from "./BookingNavigationFormPageElement";
 import {QueryAssertion} from "../../../../common/assertion/QueryAssertion";
-import {BackendCommonEnum} from "../../../../backend/enum/BackendCommonEnum";
 
 export class BookingClientNavigationFormPage {
 
@@ -15,9 +14,9 @@ export class BookingClientNavigationFormPage {
         cy.intercept('GET', apiEntryPoint + 'client/*/order/*').as(getOrderDetails);
         BookingNavigationFormPageElement.SaveButton.getElement()
             .click()
-        cy.wait('@' + bookVisit, {timeout:10000})
-        cy.wait('@' + createPayment, {timeout:10000})
-        cy.wait('@' + getOrderDetails, {timeout:10000})
+        cy.wait('@' + bookVisit, {timeout: 10000})
+        cy.wait('@' + createPayment, {timeout: 10000})
+        cy.wait('@' + getOrderDetails, {timeout: 10000})
         return this;
     }
 

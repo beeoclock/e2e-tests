@@ -17,6 +17,7 @@ export class NewContextServicePage {
         cy.get('bee-form-button-with-icon').contains('Dodaj usługę').click()
         return this
     }
+
     public typeServiceTitle(value: string): NewContextServicePage {
         this.element.getServiceTitle()
             .type(value)

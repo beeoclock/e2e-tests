@@ -8,24 +8,24 @@ export class CustomerApi {
 
     public static createCustomerWithBuilder(customer: ICustomer, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');
-            return cy.request({
-                method: 'POST',
-                url: EntryPointEnum.API_ENTRY_POINT + '/customer',
-                headers: {
-                    'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                    'Authorization': `Bearer ${token}`
-                },
-                body: customer,
-                auth: {
-                    bearer: token
-                },
-                ...options
-            }).then(response => {
-                return response;
-            })
+        return cy.request({
+            method: 'POST',
+            url: EntryPointEnum.API_ENTRY_POINT + '/customer',
+            headers: {
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                'Authorization': `Bearer ${token}`
+            },
+            body: customer,
+            auth: {
+                bearer: token
+            },
+            ...options
+        }).then(response => {
+            return response;
+        })
     }
 
-    public static updateCustomerWithBuilder(customer: ICustomer, customerId: string, options: Partial<Cypress.RequestOptions>, givenToken?: string, ): any {
+    public static updateCustomerWithBuilder(customer: ICustomer, customerId: string, options: Partial<Cypress.RequestOptions>, givenToken?: string,): any {
         const token = givenToken || Cypress.env('token');
         return cy.request({
             method: 'PUT',
@@ -43,7 +43,7 @@ export class CustomerApi {
         })
     }
 
-    public static deleteCustomer(customerId: string, options: Partial<Cypress.RequestOptions>, givenToken?: string, ): any {
+    public static deleteCustomer(customerId: string, options: Partial<Cypress.RequestOptions>, givenToken?: string,): any {
         const token = givenToken || Cypress.env('token');
         return cy.request({
             method: 'DELETE',
@@ -62,21 +62,21 @@ export class CustomerApi {
 
     public static getCustomerPaged(query: ICustomerSearchCriteria, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');
-            return cy.request({
-                method: 'GET',
-                url: EntryPointEnum.API_ENTRY_POINT + '/customer/paged',
-                headers: {
-                    'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
-                },
-                qs: query,
-                auth: {
-                    bearer: token
-                },
-                    ...options
-            }).then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
-                return response.body;
-            })
+        return cy.request({
+            method: 'GET',
+            url: EntryPointEnum.API_ENTRY_POINT + '/customer/paged',
+            headers: {
+                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+            },
+            qs: query,
+            auth: {
+                bearer: token
+            },
+            ...options
+        }).then(response => {
+            expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
+            return response.body;
+        })
     }
 
     public static getCustomerById(customerId: string, givenToken?: string): any {

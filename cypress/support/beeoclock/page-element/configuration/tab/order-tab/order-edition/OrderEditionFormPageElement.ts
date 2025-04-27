@@ -5,13 +5,13 @@ import {OrderPriceComponent} from "./order-price/OrderPriceComponent";
 
 export class OrderEditionFormPageElement {
 
- //specialist
- public static SelectGivenSpecialist: SelectGivenSpecialist = new SelectGivenSpecialist()
- public static SelectSpecialistButton: SelectSpecialistButton = new SelectSpecialistButton()
+    //specialist
+    public static SelectGivenSpecialist: SelectGivenSpecialist = new SelectGivenSpecialist()
+    public static SelectSpecialistButton: SelectSpecialistButton = new SelectSpecialistButton()
 
- //customer
- public static OrderCustomerButton: OrderCustomerButton = new OrderCustomerButton()
+    //customer
+    public static OrderCustomerButton: OrderCustomerButton = new OrderCustomerButton()
 
- //price
- public static OrderPriceComponent: OrderPriceComponent = new OrderPriceComponent()
+    //price
+    public static OrderPriceComponent: OrderPriceComponent = new OrderPriceComponent()
 }

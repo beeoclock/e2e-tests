@@ -1,5 +1,5 @@
-import { IStateHistory } from "../../../state/interface/IStateHistory";
-import { IImageMetadataDto } from "./IImageMetadataDto";
+import {IStateHistory} from "../../../state/interface/IStateHistory";
+import {IImageMetadataDto} from "./IImageMetadataDto";
 
 export interface IImageDto {
     _version: string;

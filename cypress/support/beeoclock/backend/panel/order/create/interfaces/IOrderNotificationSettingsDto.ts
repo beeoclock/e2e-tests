@@ -1,4 +1,4 @@
-export interface IOrderNotificationSettingsDto  {
+export interface IOrderNotificationSettingsDto {
     object: string;
     sendNotification: boolean;
     sendTypes: string[];

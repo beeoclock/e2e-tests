@@ -75,7 +75,7 @@ describe('customer queries api test', () => {
                             allEmails.add(normalizedEmail);
                         }
                     })
-                    
+
                     // duplicate phone number assertion
                     let normalizedPhone = item.phoneNumber?.trim();
                     if (normalizedPhone) {

@@ -1,7 +1,5 @@
 import {AbsenceActionPageElement} from "./AbsenceActionPageElement";
 import {AbsenceActionEnum} from "./enum/AbsenceActionEnum";
-import {AbsenceApiInterceptionHelper} from "../../../../../common/Interception/absence/AbsenceApiInterceptionHelper";
-import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 
 export class AbsenceActionPage {
 
@@ -14,7 +12,8 @@ export class AbsenceActionPage {
     public clickGivenAction(action: AbsenceActionEnum): AbsenceActionPage {
         if (action == AbsenceActionEnum.DEACTIVATE) {
             this.clickDeactivateAction()
-        } if (action == AbsenceActionEnum.DELETE) {
+        }
+        if (action == AbsenceActionEnum.DELETE) {
             this.deleteActionButton()
         }
         return this;

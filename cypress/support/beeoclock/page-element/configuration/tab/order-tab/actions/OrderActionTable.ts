@@ -19,7 +19,7 @@ export class OrderActionTable {
         OrderActionTableElement.OrderGivenActionButton.getElement(orderId, action).scrollIntoView()
             .click({force: true})
         if (action == OrderActionsEnum.DELETE) {
-           cy.wait('@' + deleteAction).then((interception) => {
+            cy.wait('@' + deleteAction).then((interception) => {
                 expect(interception.request.body.state).to.equal(StateEnum.deleted)
             })
         }

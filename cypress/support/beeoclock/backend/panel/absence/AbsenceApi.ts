@@ -6,10 +6,6 @@ import {StateEnum} from "../order/enum/StateEnum";
 
 export class AbsenceApi {
 
-    private static getToken(): Cypress.Chainable<string> {
-        return AuthApi.getToken();
-    }
-
     public static getAllAbsenceIds(): any {
         this.getToken()
         const tokenId = Cypress.env('token');
@@ -74,5 +70,9 @@ export class AbsenceApi {
                 cy.log('No absences found');
             }
         });
+    }
+
+    private static getToken(): Cypress.Chainable<string> {
+        return AuthApi.getToken();
     }
 }

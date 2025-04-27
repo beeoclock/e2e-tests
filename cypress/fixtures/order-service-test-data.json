@@ -1,32 +1,32 @@
 [
-    {
-        "case": 1,
-        "Service": "e2e - strzyżenie",
-        "Specialist": "Tomasz",
-        "firstName": "Grażyna Trzebiatowska-kąs",
-        "email": "Grazyna.Trzebiatowska-kas@gmail.pl",
-        "phone": "544255989",
-        "comment": "poprosze o szybko wykonaną usułgę, wyjątkowa okazja rodzinna, z góry dziękuję",
-        "selectTime": "15:30",
-        "price": "40 zł",
-        "summaryPrice": "40 zł",
-        "serviceTime": "30min",
-        "companyName":  "e2e",
-        "serviceDescription": "samo strzyżenie bez brody"
-    },
-    {
-        "case": 2,
-        "Service": "Strzyżenie Brody",
-        "Specialist": "e2e",
-        "firstName": "Marian Kapuściński",
-        "email": "marian.kapuscinski@onet.pl",
-        "phone": "665442458",
-        "comment": "",
-        "selectTime": "19:00",
-        "price": "30 zł",
-        "summaryPrice": "30 zł",
-        "serviceTime": "15min",
-        "companyName":  "e2e",
-        "serviceDescription": "Samo Strzyżenie Brody"
-    }
+  {
+    "case": 1,
+    "Service": "e2e - strzyżenie",
+    "Specialist": "Tomasz",
+    "firstName": "Grażyna Trzebiatowska-kąs",
+    "email": "Grazyna.Trzebiatowska-kas@gmail.pl",
+    "phone": "544255989",
+    "comment": "poprosze o szybko wykonaną usułgę, wyjątkowa okazja rodzinna, z góry dziękuję",
+    "selectTime": "15:30",
+    "price": "40 zł",
+    "summaryPrice": "40 zł",
+    "serviceTime": "30min",
+    "companyName": "e2e",
+    "serviceDescription": "samo strzyżenie bez brody"
+  },
+  {
+    "case": 2,
+    "Service": "Strzyżenie Brody",
+    "Specialist": "e2e",
+    "firstName": "Marian Kapuściński",
+    "email": "marian.kapuscinski@onet.pl",
+    "phone": "665442458",
+    "comment": "",
+    "selectTime": "19:00",
+    "price": "30 zł",
+    "summaryPrice": "30 zł",
+    "serviceTime": "15min",
+    "companyName": "e2e",
+    "serviceDescription": "Samo Strzyżenie Brody"
+  }
 ]

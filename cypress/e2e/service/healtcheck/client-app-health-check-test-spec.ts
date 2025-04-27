@@ -59,7 +59,7 @@ describe("Client app health check test", () => {
     });
 
     it.skip('test 4 assert correct redirect //TODO BUG', function () {
-        cy.visit(emptyDomain, { failOnStatusCode: false })
+        cy.visit(emptyDomain, {failOnStatusCode: false})
 
         let description: string = 'Rezerwacja spotkań online dla klientów.'
 

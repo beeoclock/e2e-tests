@@ -3,7 +3,7 @@ export class IndexDbHandler {
     /**
      * Otwiera bazę IndexedDB i zwraca jej instancję.
      */
-    public static openDatabase(dbName: string, ): Promise<IDBDatabase> {
+    public static openDatabase(dbName: string,): Promise<IDBDatabase> {
         return new Promise((resolve, reject) => {
             const request = indexedDB.open(dbName);
 

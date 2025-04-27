@@ -1,5 +1,5 @@
 import "moment-timezone/index";
-import { DateTime } from 'luxon';
+import {DateTime} from 'luxon';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pl';
 import moment = require('moment');
@@ -15,10 +15,10 @@ export class DateUtils {
     public static convertToUTC(hourEnumValue: number, plusDays?: number): string {
         const hour = Math.floor(hourEnumValue / 2);
 
-        let localTime = DateTime.local().set({ hour, minute: 0, second: 0, millisecond: 0 }).setZone("Europe/Warsaw", { keepLocalTime: true });
+        let localTime = DateTime.local().set({hour, minute: 0, second: 0, millisecond: 0}).setZone("Europe/Warsaw", {keepLocalTime: true});
 
         if (plusDays !== undefined) {
-            localTime = localTime.plus({ days: plusDays });
+            localTime = localTime.plus({days: plusDays});
         }
 
         return localTime.toUTC().toISO();
@@ -333,7 +333,7 @@ export class DateUtils {
     //
     public static getStartOfTomorrowUTC(): string {
         const date = this.getCurrentDateFormatted()
-        return  moment.utc().tz('Europe/Warsaw').add(1, 'days').startOf('day').toISOString();
+        return moment.utc().tz('Europe/Warsaw').add(1, 'days').startOf('day').toISOString();
     }
 
     public static getEndOfTomorrowUTC(): string {

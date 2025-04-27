@@ -4,7 +4,7 @@ import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration
 describe('panel navigation test', () => {
 
     beforeEach('setup', () => {
-    cy.loginOnPanel()
+        cy.loginOnPanel()
     })
 
     it('panel navigation test', function () {

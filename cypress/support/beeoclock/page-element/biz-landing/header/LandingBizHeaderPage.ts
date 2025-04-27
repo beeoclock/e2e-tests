@@ -2,11 +2,18 @@ import {LandingHeaderComponent} from "./element/LandingHeaderComponent";
 import {Assertions} from "../../configuration/tab/common/assertions/Assertions";
 import {QueryAssertion} from "../../../common/assertion/QueryAssertion";
 import {BizLandingEnum} from "../common/BizLandingEnum";
-import { BizLandingOuterHTML } from "fixtures/biz-landing/BizLandingOuterHTML";
+import {BizLandingOuterHTML} from "fixtures/biz-landing/BizLandingOuterHTML";
 
 export class LandingBizHeaderPage {
-    private element = new LandingHeaderComponent()
+    public readonly links = {
+        services: 'Usługi',
+        tariffs: 'Taryfy',
+        faq: 'FAQ',
+        contact: 'Kontakt',
+        login: 'Zaloguj się',
+    }
     protected outerHtml = new BizLandingOuterHTML()
+    private element = new LandingHeaderComponent()
 
     public assertLogo(): LandingBizHeaderPage {
         Assertions.assertProperties(this.element.getLogo(), 'src', "https://biz.dev.beeoclock.com/pl/assets/new_logo.svg")
@@ -60,14 +67,6 @@ export class LandingBizHeaderPage {
         cy.request(BizLandingEnum.IDENTITY_URL).its('status').should('eq', 200);
 
         return this;
-    }
-
-    public readonly links = {
-        services: 'Usługi',
-        tariffs: 'Taryfy',
-        faq: 'FAQ',
-        contact: 'Kontakt',
-        login: 'Zaloguj się',
     }
 
 }

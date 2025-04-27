@@ -4,7 +4,7 @@ import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {ClientPropertiesEnum} from "../../../common/enum/ClientPropertiesEnum";
 
 export class BusinessProfileApi {
- private static token = Cypress.env('token');
+    private static token = Cypress.env('token');
 
     public static getBusinessProfileDetails(expectedCode: HTTPStatusCodeType, tokenId: string, options: Partial<Cypress.RequestOptions>): any {
         const url = EntryPointEnum.API_ENTRY_POINT + `/business-profile`;

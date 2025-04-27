@@ -3,7 +3,6 @@ import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common
 import {CalendarTableTimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {TimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
-import {faker} from "@faker-js/faker";
 
 export class PanelAbsenceCreationDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {
@@ -33,7 +32,7 @@ export class PanelAbsenceCreationDataProvider {
                     absenceToDate: DateUtils.formatDateDaysAhead(1),
                     absenceToTime: TimeEnum.Hour_15_30,
                     absenceNote: 'Jutrzejszy obiad e2e',
-                        assertTableAbsence: 'Przerwa\n15:00 - 15:30'
+                    assertTableAbsence: 'Przerwa\n15:00 - 15:30'
                 }
         }
     }

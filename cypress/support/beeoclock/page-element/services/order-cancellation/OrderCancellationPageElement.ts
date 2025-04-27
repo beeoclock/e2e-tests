@@ -1,6 +1,6 @@
-import { CancellationOrderDetailsElement } from "./page-element/CancellationOrderDetailsElement";
-import { CancelledOrderMainDetailsElement } from "./page-element/CancelledOrderMainDetailsElement";
-import { CancelledOrderSummaryElement } from "./page-element/CancelledOrderSummaryElement";
+import {CancellationOrderDetailsElement} from "./page-element/CancellationOrderDetailsElement";
+import {CancelledOrderMainDetailsElement} from "./page-element/CancelledOrderMainDetailsElement";
+import {CancelledOrderSummaryElement} from "./page-element/CancelledOrderSummaryElement";
 
 export class OrderCancellationPageElement {
 

@@ -1,4 +1,4 @@
-import { TariffsQueries } from "./TariffPlanBuilder";
+import {TariffsQueries} from "./TariffPlanBuilder";
 
 export class TariffPlanBuilder {
     private readonly tariffPlan: TariffsQueries.TariffPlanDto;
@@ -68,16 +68,16 @@ export class TariffPlanBuilder {
     }
 
     setPluginAttachment(pluginAttachment: TariffsQueries.PluginAttachment): this {
-        this.tariffPlan.pluginAttachment = { ...pluginAttachment };
+        this.tariffPlan.pluginAttachment = {...pluginAttachment};
         return this;
     }
 
     addStateHistory(state: string, setAt: string): this {
-        this.tariffPlan.stateHistory.push({ state, setAt });
+        this.tariffPlan.stateHistory.push({state, setAt});
         return this;
     }
 
     build(): TariffsQueries.TariffPlanDto {
-        return { ...this.tariffPlan };
+        return {...this.tariffPlan};
     }
 }

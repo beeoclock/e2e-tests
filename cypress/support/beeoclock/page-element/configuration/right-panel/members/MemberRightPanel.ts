@@ -1,5 +1,4 @@
 import {MemberRightPanelElement} from "./element/MemberRightPanelElement";
-import {CommonPages} from "../../tab/common/CommonPages";
 import {MemberApiInterceptionHelper} from "../../../../common/Interception/member/MemberApiInterceptionHelper";
 import {ApiInterceptionHelper} from "../../../../common/Interception/ApiInterceptionHelper";
 

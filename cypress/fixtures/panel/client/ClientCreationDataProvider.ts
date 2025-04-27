@@ -21,7 +21,7 @@ export class ClientCreationDataProvider {
                     lastName: faker.name.lastName() + "-" + faker.name.lastName(),
                     email: faker.internet.email(),
                     phoneNumber: faker.finance.account(9),
-                        //+ "-" + faker.finance.account(3) + "-" + faker.finance.account(3),
+                    //+ "-" + faker.finance.account(3) + "-" + faker.finance.account(3),
                     description: null
                 };
             case TestCaseEnum.CASE_3:

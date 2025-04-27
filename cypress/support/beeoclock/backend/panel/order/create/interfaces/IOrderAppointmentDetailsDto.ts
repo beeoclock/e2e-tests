@@ -1,7 +1,7 @@
-import { IAttachmentDto } from "./IAttachmentDto";
-import { IAttendeeDto } from "./IAttendeeDto";
-import { ILocationDto } from "./ILocationDto";
-import { ISpecialistDto } from "./ISpecialistDto";
+import {IAttachmentDto} from "./IAttachmentDto";
+import {IAttendeeDto} from "./IAttendeeDto";
+import {ILocationDto} from "./ILocationDto";
+import {ISpecialistDto} from "./ISpecialistDto";
 
 export interface IOrderAppointmentDetailsDto {
     object: string;
