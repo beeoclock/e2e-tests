@@ -1,8 +1,7 @@
-import { DateUtils } from "../../../../backend/Utils/DateUtils";
-import { BookingNavigationFormPageElement } from "./BookingNavigationFormPageElement";
-import {SaveButton} from "./page-element/SeveButton";
-import {BookingSelectServicePageElement} from "../../booking-select-service/BookingSelectServicePageElement";
-import {should} from "chai";
+import {DateUtils} from "../../../../backend/Utils/DateUtils";
+import {BookingNavigationFormPageElement} from "./BookingNavigationFormPageElement";
+import {QueryAssertion} from "../../../../common/assertion/QueryAssertion";
+import {BackendCommonEnum} from "../../../../backend/enum/BackendCommonEnum";
 
 export class BookingClientNavigationFormPage {
 
@@ -25,7 +24,8 @@ export class BookingClientNavigationFormPage {
     public clickAddNextService(): BookingClientNavigationFormPage {
         BookingNavigationFormPageElement.NextServiceLink.getElement()
             .click();
-        cy.contains('div', 'Rezerwacja').should('be.visible')
+        QueryAssertion.verifyCorrectUrl(`/order/form`)
+        cy.get('app-order-container-form').should('be.visible')
         return this;
     }
 }

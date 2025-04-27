@@ -1,5 +1,4 @@
 import {SelectedServiceElement} from "./SelectedServiceElement";
-import {BookingClientDataPageElement} from "../BookingClientDataPageElement";
 
 export class ServiceSummaryPage {
     private SelectedServiceElement = new SelectedServiceElement();
@@ -45,6 +44,17 @@ export class ServiceSummaryPage {
                 const normalizedPrice = specialist.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
             });
+        return this;
+    }
+
+    public verifySummaryTotalPrice(totalPrice: string): ServiceSummaryPage {
+        this.SelectedServiceElement.getSummaryTotalPrice()
+            .invoke('prop', 'outerText').then((outerText: string): void => {
+            const formattedOuterText: string = outerText.trim().replace(/\s+/g, ' ');
+            const formattedTotalPrice: string = totalPrice.trim().replace(/\s+/g, ' ');
+
+            expect(formattedOuterText).to.include(formattedTotalPrice);
+        })
         return this;
     }
 

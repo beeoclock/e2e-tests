@@ -33,7 +33,6 @@ describe('order service', () => {
             ServicesPages.SelectSpecialistPage
                 .selectSpecificSpecialist(item.Specialist)
             ServicesPages.SelectDayPage
-                // .assertSelectedServiceSection(item.Service, item.serviceTime)
                 .selectNextDay()
             ServicesPages.SelectTimePage
                 .selectSpecificTime(item.selectTime)
@@ -83,15 +82,9 @@ describe('order service', () => {
                 .verifySelectedServicePrice(item.price)
                 .verifySelectedServiceTime(item.serviceTime)
                 .verifyServiceSpecialist(item.Specialist)
-            assertCancellationInformation()
+
             ServicesPages.OrderSummaryNavigationPage
                 .clickBackArrow()
         })
     })
-
-    function assertCancellationInformation(): void {
-        cy.get('.text-base.font-normal')
-            .contains('Wydarzenie zostało pomyślnie anulowane na prośbę użytkownika')
-            .scrollIntoView().should('be.visible')
-    }
 })

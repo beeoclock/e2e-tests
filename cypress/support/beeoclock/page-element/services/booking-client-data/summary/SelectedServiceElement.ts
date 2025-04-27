@@ -23,4 +23,8 @@ export class SelectedServiceElement {
         return cy.get('.inline-flex.items-center.gap-2.rounded-md').contains(specialist)
             .should('be.visible')
     }
+
+    public getSummaryTotalPrice(): any {
+        return cy.contains('Cena całkowita').next('div')
+    }
 }
