@@ -10,7 +10,8 @@
     ],
     "types": [
       "cypress",
-      "node"
+      "node",
+      "cypress-wait-until"
     ]
   },
   "include": [

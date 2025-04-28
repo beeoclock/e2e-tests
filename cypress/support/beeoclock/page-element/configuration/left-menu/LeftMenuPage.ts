@@ -7,6 +7,7 @@ import {MemberApiInterceptionHelper} from "../../../common/Interception/member/M
 import {PaymentApiInterceptionHelper} from "../../../common/Interception/payment/PaymentApiInterceptionHelper";
 import {TariffsApiInterceptionHelper} from "../../../common/Interception/tariffs/TariffsApiInterceptionHelper";
 import {ClientsApiInterceptionHelper} from "support/beeoclock/common/Interception/clients/ClientsApiInterceptionHelper";
+import {Assertions} from "../tab/common/assertions/Assertions";
 
 export class LeftMenuPage {
 
@@ -62,6 +63,30 @@ export class LeftMenuPage {
             .click()
         cy.get('member-table-list-component').should('be.visible')
         cy.get('app-list-member-page').should('be.visible')
+        return this;
+    }
+
+    public static clickOnBusinessProfile(): LeftMenuPage {
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.BUSINESS_PROFILE)
+            .click()
+        cy.get('client-business-profile-form-component').should('be.visible')
+        cy.get('client-address-business-profile-component').should('be.visible')
+        return this;
+    }
+
+    public static clickOnStatisticsTab(): LeftMenuPage {
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.STATISTICS)
+            .click()
+        cy.get('orders-counter-statistic-component').should('be.visible')
+        cy.get('total-revenue-diagram').should('be.visible')
+        return this;
+    }
+
+    public static clickOnProfileSettings(): LeftMenuPage {
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.BUSINESS_SETTINGS)
+            .click()
+        cy.get('client-business-settings-page').should('be.visible')
+        cy.get('client-business-profile-booking-settings-component').should('be.visible')
         return this;
     }
 
@@ -137,8 +162,9 @@ export class LeftMenuPage {
 
     public static clickOnVisitsTab(): LeftMenuPage {
         LeftMenuPageElement.TabElement.getElement(TabNameEnum.VISITS)
-            .click().than((): void => {
+            .click().then((): void => {
             cy.get('app-list-order-service-page').should('be.visible')
+            Assertions.waitUntilDomAndAppIsReady()
         })
         return this;
     }
