@@ -11,7 +11,6 @@ describe("Client app health check test", () => {
     const clientName = 'Barbershop Brooklyn'
 
     const emptyDomain = 'https://dev.beeoclock.com'
-    const businessHeader = 'Rejestrowanie klientów online - automatyzacja biznesu!'
 
     before('clear', () => {
         cy.clearAllLocalStorage()
