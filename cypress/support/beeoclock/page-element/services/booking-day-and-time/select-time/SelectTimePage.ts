@@ -54,6 +54,12 @@ export class SelectTimePage {
         return this;
     }
 
+    public verifySlotLength(length: number): SelectTimePage {
+        SelectTimePageElement.SelectSpecificTime.getElements()
+            .should('have.length', length)
+        return this
+    }
+
     public clickBackByButton(): SelectTimePage {
         const element = cy.get('utility-header-component').find('.bi.bi-x-lg').scrollIntoView().should('be.visible')
         element.click();

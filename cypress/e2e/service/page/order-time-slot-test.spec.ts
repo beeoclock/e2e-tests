@@ -119,6 +119,60 @@ describe('order time slot test', () => {
         }
     });
 
+    it('test 5 - check all slot visibility in the next days for 1h service', (): void => {
+        ServicesPages.BookingSelectServicePage
+            .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
+            .clickSelectSpecialistAndOrder()
+        ServicesPages.SelectSpecialistPage
+            .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+        ServicesPages.SelectDayPage
+            .selectGivenNextDay(2)
+
+        ServicesPages.SelectTimePage.verifyGivenSlotByActualTime(currentHour);
+
+        expectedHairDyeingHours.forEach((hour: TimeEnum): void => {
+            ServicesPages.SelectTimePage.assertSpecificTime(hour);
+        });
+
+        ServicesPages.SelectTimePage.verifySlotLength(expectedHairDyeingHours.length);
+    })
+
+    it('test 6 - check all slot visibility in the next days for 30m service', (): void => {
+        ServicesPages.BookingSelectServicePage
+            .selectSpecificOrder(ServiceNameEnum.E2E_HAIRCUT.toLowerCase())
+            .clickSelectSpecialistAndOrder()
+        ServicesPages.SelectSpecialistPage
+            .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+        ServicesPages.SelectDayPage
+            .selectGivenNextDay(2)
+
+        ServicesPages.SelectTimePage.verifyGivenSlotByActualTime(currentHour);
+
+        expectedHaircutHours.forEach((hour: TimeEnum): void => {
+            ServicesPages.SelectTimePage.assertSpecificTime(hour);
+        });
+
+        ServicesPages.SelectTimePage.verifySlotLength(expectedHaircutHours.length);
+    })
+
+    it('test 7 - check all slot visibility in the next days for 15m service', (): void => {
+        ServicesPages.BookingSelectServicePage
+            .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
+            .clickSelectSpecialistAndOrder()
+        ServicesPages.SelectSpecialistPage
+            .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+        ServicesPages.SelectDayPage
+            .selectGivenNextDay(2)
+
+        ServicesPages.SelectTimePage.verifyGivenSlotByActualTime(currentHour);
+
+        expectedE2EBreadTrimHours.forEach((hour: TimeEnum): void => {
+            ServicesPages.SelectTimePage.assertSpecificTime(hour);
+        });
+
+        ServicesPages.SelectTimePage.verifySlotLength(expectedE2EBreadTrimHours.length);
+    })
+
     beforeEach('login', (): void => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
     })
@@ -130,32 +184,76 @@ describe('order time slot test', () => {
         return time < 12 ? "12" : `${time + 1}:00`;
     }
 
-    function assertFirstFreeSlotForBreadTrim(): string {
-        const now = new Date();
-        const hour = now.getHours();
-        const minute = now.getMinutes();
+    const expectedHairDyeingHours: TimeEnum[] = [
+        TimeEnum.Hour_12,
+        TimeEnum.Hour_13,
+        TimeEnum.Hour_14,
+        TimeEnum.Hour_15,
+        TimeEnum.Hour_16,
+        TimeEnum.Hour_17,
+        TimeEnum.Hour_18,
+        TimeEnum.Hour_19,
+        TimeEnum.Hour_20,
+    ];
 
-        // All available slot minutes
-        const slotMinutes = [0, 15, 30, 45];
+    const expectedHaircutHours: TimeEnum[] = [
+        TimeEnum.Hour_12,
+        TimeEnum.Hour_12_30,
+        TimeEnum.Hour_13,
+        TimeEnum.Hour_13_30,
+        TimeEnum.Hour_14,
+        TimeEnum.Hour_14_30,
+        TimeEnum.Hour_15,
+        TimeEnum.Hour_15_30,
+        TimeEnum.Hour_16,
+        TimeEnum.Hour_16_30,
+        TimeEnum.Hour_17,
+        TimeEnum.Hour_17_30,
+        TimeEnum.Hour_18,
+        TimeEnum.Hour_18_30,
+        TimeEnum.Hour_19,
+        TimeEnum.Hour_19_30,
+        TimeEnum.Hour_20,
+        TimeEnum.Hour_20_30,
+    ];
 
-        // Find the next slot after current time
-        let nextSlotMinute = slotMinutes.find(min => min > minute);
-        let nextSlotHour = hour;
-
-        if (nextSlotMinute === undefined) {
-            // If no slot minutes left this hour, go to next hour
-            nextSlotMinute = 0;
-            nextSlotHour++;
-        }
-
-        // If next slot would be after 20:45 (inclusive), return nothing
-        if (nextSlotHour > 20 || (nextSlotHour === 20 && nextSlotMinute > 45)) {
-            return '';
-        }
-
-        const paddedHour = nextSlotHour.toString().padStart(2, '0');
-        const paddedMinute = nextSlotMinute.toString().padStart(2, '0');
-        return `${paddedHour}:${paddedMinute}`;
-    }
+    const expectedE2EBreadTrimHours: (TimeEnum | string)[] = [
+        TimeEnum.Hour_12,
+        '12:15',
+        TimeEnum.Hour_12_30,
+        '12:45',
+        TimeEnum.Hour_13,
+        '13:15',
+        TimeEnum.Hour_13_30,
+        '13:45',
+        TimeEnum.Hour_14,
+        '14:15',
+        TimeEnum.Hour_14_30,
+        '14:45',
+        TimeEnum.Hour_15,
+        '15:15',
+        TimeEnum.Hour_15_30,
+        '15:45',
+        TimeEnum.Hour_16,
+        '16:15',
+        TimeEnum.Hour_16_30,
+        '16:45',
+        TimeEnum.Hour_17,
+        '17:15',
+        TimeEnum.Hour_17_30,
+        '17:45',
+        TimeEnum.Hour_18,
+        '18:15',
+        TimeEnum.Hour_18_30,
+        '18:45',
+        TimeEnum.Hour_19,
+        '19:15',
+        TimeEnum.Hour_19_30,
+        '19:45',
+        TimeEnum.Hour_20,
+        '20:15',
+        TimeEnum.Hour_20_30,
+        '20:45',
+    ];
 
 });
