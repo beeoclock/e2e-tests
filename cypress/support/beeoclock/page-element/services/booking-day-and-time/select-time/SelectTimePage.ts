@@ -49,6 +49,11 @@ export class SelectTimePage {
         return this;
     }
 
+    public verifyGivenSlotNotExisting(time: string): SelectTimePage {
+        SelectTimePageElement.SelectSpecificTime.getNotExistingElement(time);
+        return this;
+    }
+
     public clickBackByButton(): SelectTimePage {
         const element = cy.get('utility-header-component').find('.bi.bi-x-lg').scrollIntoView().should('be.visible')
         element.click();
