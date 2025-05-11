@@ -152,20 +152,20 @@ export class LeftMenuPage {
         return this;
     }
 
-    private static clickAbsenceTab(): LeftMenuPage {
-        const getAbsence = ApiInterceptionHelper.getAbsence()
-        LeftMenuPageElement.TabElement.getElement(TabNameEnum.ABSENCE)
-            .click()
-        ApiInterceptionHelper.waitForAlias(getAbsence)
-        return this;
-    }
-
     public static clickOnVisitsTab(): LeftMenuPage {
         LeftMenuPageElement.TabElement.getElement(TabNameEnum.VISITS)
             .click().then((): void => {
             cy.get('app-list-order-service-page').should('be.visible')
             Assertions.waitUntilDomAndAppIsReady()
         })
+        return this;
+    }
+
+    private static clickAbsenceTab(): LeftMenuPage {
+        const getAbsence = ApiInterceptionHelper.getAbsence()
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.ABSENCE)
+            .click()
+        ApiInterceptionHelper.waitForAlias(getAbsence)
         return this;
     }
 

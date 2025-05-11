@@ -19,7 +19,7 @@ export class Assertions {
             });
 
         cy.log('Waiting for application main container to be visible');
-        cy.get('tenant-router-outlet-component', { timeout: 10000 }).should('be.visible');
+        cy.get('tenant-router-outlet-component', {timeout: 10000}).should('be.visible');
 
         cy.log('DOM and Application are ready.');
     }

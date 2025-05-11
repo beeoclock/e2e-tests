@@ -137,6 +137,7 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage.verifySlotLength(expectedHairDyeingHours.length);
     })
 
+    //it's stabilized because we assert date in next two days, so current hour is not important
     it('test 6 - check all slot visibility in the next days for 30m service', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.E2E_HAIRCUT.toLowerCase())
@@ -155,6 +156,7 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage.verifySlotLength(expectedHaircutHours.length);
     })
 
+    //it's stabilized because we assert date in next two days, so current hour is not important
     it('test 7 - check all slot visibility in the next days for 15m service', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
@@ -255,5 +257,4 @@ describe('order time slot test', () => {
         TimeEnum.Hour_20_30,
         '20:45',
     ];
-
 });
