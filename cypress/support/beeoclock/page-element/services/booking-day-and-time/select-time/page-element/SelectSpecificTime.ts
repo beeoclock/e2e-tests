@@ -1,5 +1,9 @@
 export class SelectSpecificTime {
 
+    public getElements(): any {
+        return cy.get('.grid.w-full.grid-cols-3').find('.border-2')
+    }
+
     public getComponent(time: string): any {
         return cy.get('.border-2').contains(time)
     }

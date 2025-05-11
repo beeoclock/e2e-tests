@@ -9,4 +9,6 @@ export enum TabNameEnum {
     MEMBERS = 'Członkowie',
     PAYMENTS = 'Płatności',
     VISITS = 'Wizyty',
+    STATISTICS = 'Statystyki',
+    BUSINESS_PROFILE = 'Profil biznesowy',
 }

@@ -8,15 +8,14 @@ import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi"
 import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('order time slot test', () => {
-    let currentHour = DateUtils.getCurrentHourWithMinutes()
+    let currentHour: string = DateUtils.getCurrentHourWithMinutes()
 
     before('clean orders & absences', () => {
         OrderApi.deleteAllCurrentOrders()
         AbsenceApi.deleteAllAbsences()
     })
 
-    it('test 1 should test free slot visibility', () => {
-        cy.visit(ServiceEnum.PUBLIC_PANEL)
+    it('test 1 - check last free slot visibility for 30 min service last service is on 20:30', (): void => {
         ServicesPages.BookingSelectServicePage
             .verifyCorrectForm()
 
@@ -28,7 +27,7 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20_30)
 
-        cy.log('NEXT 1')
+        cy.log('NEXT day')
         ServicesPages.SelectDayPage
             .selectGivenNextDay(1)
         ServicesPages.SelectSpecialistPage
@@ -36,7 +35,7 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20_30)
 
-        cy.log('NEXT 2')
+        cy.log('two days later')
         ServicesPages.SelectDayPage
             .selectGivenNextDay(2)
         ServicesPages.SelectSpecialistPage
@@ -46,9 +45,8 @@ describe('order time slot test', () => {
             .clickBackByButton()
     })
 
-    it('test 2 should test free slot visibility', () => {
-        cy.visit(ServiceEnum.PUBLIC_PANEL)
-
+    it('test 2 - check last free slot visibility for 1h service last service is on 20:30', (): void => {
+        //TODO: discuss with dev (when the time is 15:28 the first slot is 15:30 ..-> 19:30 so test will fail
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
             .clickSelectSpecialistAndOrder()
@@ -57,6 +55,7 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20)
 
+        //INFO: this will be always pass cause next day is always 20:00
         cy.log('NEXT 1')
         ServicesPages.SelectDayPage
             .selectGivenNextDay(1)
@@ -75,9 +74,7 @@ describe('order time slot test', () => {
             .clickBackByButton()
     })
 
-    it('test 3 should test free slot visibility', () => {
-        cy.visit(ServiceEnum.PUBLIC_PANEL)
-
+    it('test 3 - check last free slot visibility for 15m service last service is on 20:45', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
             .clickSelectSpecialistAndOrder()
@@ -85,6 +82,7 @@ describe('order time slot test', () => {
             .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20_30)
+            .assertSpecificTime('20:45')
 
         cy.log('NEXT 1')
         ServicesPages.SelectDayPage
@@ -93,6 +91,7 @@ describe('order time slot test', () => {
             .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20_30)
+            .assertSpecificTime('20:45')
 
         cy.log('NEXT 2')
         ServicesPages.SelectDayPage
@@ -101,24 +100,160 @@ describe('order time slot test', () => {
             .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
         ServicesPages.SelectTimePage
             .assertSpecificTime(TimeEnum.Hour_20_30)
+            .assertSpecificTime('20:45')
             .clickBackByButton()
     });
 
-    it('test 4 should test free slot visibility', () => {
-        cy.visit(ServiceEnum.PUBLIC_PANEL)
-
+    it('test 4 - check that there is no current hour slot', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
             .clickSelectSpecialistAndOrder()
         ServicesPages.SelectTimePage
-            .verifyGivenSlotNotExist(currentHour)
-        assertFirstFreeSlot()
+            .verifyGivenSlotByActualTime(currentHour)
+
+        if (currentHour <= '20:00') {
+            ServicesPages.SelectTimePage
+                .assertSpecificTime(assertFirstFreeSlotForHairDyeing())
+        } else {
+            cy.log('no free slot')
+        }
     });
 
+    it('test 5 - check all slot visibility in the next days for 1h service', (): void => {
+        ServicesPages.BookingSelectServicePage
+            .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
+            .clickSelectSpecialistAndOrder()
+        ServicesPages.SelectSpecialistPage
+            .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+        ServicesPages.SelectDayPage
+            .selectGivenNextDay(2)
 
-    function assertFirstFreeSlot(): string {
+        ServicesPages.SelectTimePage.verifyGivenSlotByActualTime(currentHour);
+
+        expectedHairDyeingHours.forEach((hour: TimeEnum): void => {
+            ServicesPages.SelectTimePage.assertSpecificTime(hour);
+        });
+
+        ServicesPages.SelectTimePage.verifySlotLength(expectedHairDyeingHours.length);
+    })
+
+    it('test 6 - check all slot visibility in the next days for 30m service', (): void => {
+        ServicesPages.BookingSelectServicePage
+            .selectSpecificOrder(ServiceNameEnum.E2E_HAIRCUT.toLowerCase())
+            .clickSelectSpecialistAndOrder()
+        ServicesPages.SelectSpecialistPage
+            .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+        ServicesPages.SelectDayPage
+            .selectGivenNextDay(2)
+
+        ServicesPages.SelectTimePage.verifyGivenSlotByActualTime(currentHour);
+
+        expectedHaircutHours.forEach((hour: TimeEnum): void => {
+            ServicesPages.SelectTimePage.assertSpecificTime(hour);
+        });
+
+        ServicesPages.SelectTimePage.verifySlotLength(expectedHaircutHours.length);
+    })
+
+    it('test 7 - check all slot visibility in the next days for 15m service', (): void => {
+        ServicesPages.BookingSelectServicePage
+            .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
+            .clickSelectSpecialistAndOrder()
+        ServicesPages.SelectSpecialistPage
+            .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
+        ServicesPages.SelectDayPage
+            .selectGivenNextDay(2)
+
+        ServicesPages.SelectTimePage.verifyGivenSlotByActualTime(currentHour);
+
+        expectedE2EBreadTrimHours.forEach((hour: TimeEnum): void => {
+            ServicesPages.SelectTimePage.assertSpecificTime(hour);
+        });
+
+        ServicesPages.SelectTimePage.verifySlotLength(expectedE2EBreadTrimHours.length);
+    })
+
+    beforeEach('login', (): void => {
+        cy.visit(ServiceEnum.PUBLIC_PANEL)
+    })
+
+    function assertFirstFreeSlotForHairDyeing(): string {
+        // 1h duration
         let time: number = parseInt(DateUtils.getCurrentHour(), 10);
 
         return time < 12 ? "12" : `${time + 1}:00`;
     }
+
+    const expectedHairDyeingHours: TimeEnum[] = [
+        TimeEnum.Hour_12,
+        TimeEnum.Hour_13,
+        TimeEnum.Hour_14,
+        TimeEnum.Hour_15,
+        TimeEnum.Hour_16,
+        TimeEnum.Hour_17,
+        TimeEnum.Hour_18,
+        TimeEnum.Hour_19,
+        TimeEnum.Hour_20,
+    ];
+
+    const expectedHaircutHours: TimeEnum[] = [
+        TimeEnum.Hour_12,
+        TimeEnum.Hour_12_30,
+        TimeEnum.Hour_13,
+        TimeEnum.Hour_13_30,
+        TimeEnum.Hour_14,
+        TimeEnum.Hour_14_30,
+        TimeEnum.Hour_15,
+        TimeEnum.Hour_15_30,
+        TimeEnum.Hour_16,
+        TimeEnum.Hour_16_30,
+        TimeEnum.Hour_17,
+        TimeEnum.Hour_17_30,
+        TimeEnum.Hour_18,
+        TimeEnum.Hour_18_30,
+        TimeEnum.Hour_19,
+        TimeEnum.Hour_19_30,
+        TimeEnum.Hour_20,
+        TimeEnum.Hour_20_30,
+    ];
+
+    const expectedE2EBreadTrimHours: (TimeEnum | string)[] = [
+        TimeEnum.Hour_12,
+        '12:15',
+        TimeEnum.Hour_12_30,
+        '12:45',
+        TimeEnum.Hour_13,
+        '13:15',
+        TimeEnum.Hour_13_30,
+        '13:45',
+        TimeEnum.Hour_14,
+        '14:15',
+        TimeEnum.Hour_14_30,
+        '14:45',
+        TimeEnum.Hour_15,
+        '15:15',
+        TimeEnum.Hour_15_30,
+        '15:45',
+        TimeEnum.Hour_16,
+        '16:15',
+        TimeEnum.Hour_16_30,
+        '16:45',
+        TimeEnum.Hour_17,
+        '17:15',
+        TimeEnum.Hour_17_30,
+        '17:45',
+        TimeEnum.Hour_18,
+        '18:15',
+        TimeEnum.Hour_18_30,
+        '18:45',
+        TimeEnum.Hour_19,
+        '19:15',
+        TimeEnum.Hour_19_30,
+        '19:45',
+        TimeEnum.Hour_20,
+        '20:15',
+        TimeEnum.Hour_20_30,
+        '20:45',
+    ];
+
 });

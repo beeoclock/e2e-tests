@@ -15,5 +15,8 @@ describe('panel navigation test', () => {
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)
         LeftMenuPage.clickOnGivenTab(TabNameEnum.TARIFFS)
         LeftMenuPage.clickOnGivenTab(TabNameEnum.VISITS)
+        LeftMenuPage.clickOnBusinessProfile()
+        LeftMenuPage.clickOnStatisticsTab()
+        LeftMenuPage.clickOnProfileSettings()
     })
 })

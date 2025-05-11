@@ -6,6 +6,7 @@ import {PanelLoginPage} from "./beeoclock/page-element/configuration/login/page-
 import {ClientPropertiesEnum} from "./beeoclock/common/enum/ClientPropertiesEnum";
 import {BusinessNameEnum} from "./beeoclock/page-element/common/enum/BusinessNameEnum";
 import {ThrottleEnum} from "./beeoclock/common/enum/ThrottleEnum";
+import 'cypress-wait-until';
 
 declare global {
     namespace Cypress {
