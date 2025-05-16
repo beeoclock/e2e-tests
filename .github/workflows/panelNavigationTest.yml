@@ -1,0 +1,51 @@
+name: Client App Test Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  client-app-test:
+    runs-on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set locale to Polish
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales
+          sudo locale-gen pl_PL.UTF-8
+          sudo update-locale LANG=pl_PL.UTF-8
+        env:
+          LANG: pl_PL.UTF-8
+          LC_ALL: pl_PL.UTF-8
+
+      - name: Set timezone
+        run: sudo timedatectl set-timezone Europe/Warsaw
+
+      - name: Debug locale and timezone
+        run: |
+          echo "Current locale:"
+          locale
+          echo "Current timezone:"
+          timedatectl
+
+      - name: Run client app tests
+        env:
+          LANG: pl
+          LC_ALL: pl_PL.UTF-8
+          TZ: Europe/Warsaw
+        run: npm run panel-navigation-test
