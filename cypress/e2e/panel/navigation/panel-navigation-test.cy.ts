@@ -10,6 +10,7 @@ describe('panel navigation test', (): void => {
     it('panel navigation test', function (): void {
         LeftMenuPage.clickServiceTab()
         LeftMenuPage.clickMembersTab()
+        LeftMenuPage.clickOnCalendarTab()
         LeftMenuPage.clickClientTab()
         LeftMenuPage.clickPaymentsTab()
         LeftMenuPage.clickOnGivenTab(TabNameEnum.ABSENCE)

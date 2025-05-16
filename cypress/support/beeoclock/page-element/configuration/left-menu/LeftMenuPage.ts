@@ -23,9 +23,11 @@ export class LeftMenuPage {
             cy.get('absence-desktop-layout-list-component')
             cy.get('app-absence-filter-component')
             cy.get('app-table-ngx-datatable-smart-component')
+            QueryAssertion.verifyCorrectUrl(BackendCommonEnum.X_Business_Tenant_Id + '/absence/list?')
         }
         if (tab == TabNameEnum.CLIENTS) {
             this.clickClientTab()
+            QueryAssertion.verifyCorrectUrl(BackendCommonEnum.X_Business_Tenant_Id + '/customer/list?page=1&pageSize=11&orderBy=createdAt&orderDir=desc&state.0=active')
         }
         if (tab == TabNameEnum.TARIFFS) {
             cy.get('tariff-plan-page')
@@ -83,6 +85,16 @@ export class LeftMenuPage {
         return this;
     }
 
+    public static clickOnCalendarTab(): LeftMenuPage {
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.CALENDAR)
+            .click()
+        cy.get('app-event-calendar-with-specialists-page').should('be.visible')
+        cy.get('app-calendar-with-specialists-widget-component').should('be.visible')
+        QueryAssertion.verifyCorrectUrl(BackendCommonEnum.X_Business_Tenant_Id + '/event/calendar-with-specialists')
+
+        return this;
+    }
+
     public static clickOnProfileSettings(): LeftMenuPage {
         LeftMenuPageElement.TabElement.getElement(TabNameEnum.BUSINESS_SETTINGS)
             .click()
@@ -106,6 +118,7 @@ export class LeftMenuPage {
             .click()
         cy.get('payment-table-list-component').should('be.visible')
         cy.get('payment-filter-component').should('be.visible')
+        QueryAssertion.verifyCorrectUrl(BackendCommonEnum.X_Business_Tenant_Id + '/payment/list?')
         return this;
     }
 
