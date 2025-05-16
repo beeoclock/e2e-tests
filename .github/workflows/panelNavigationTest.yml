@@ -1,4 +1,4 @@
-name: Client App Test Workflow
+name: Panel App Navigation Test Workflow
 
 on:
   workflow_dispatch:
