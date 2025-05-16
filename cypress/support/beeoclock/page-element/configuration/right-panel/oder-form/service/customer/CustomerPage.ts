@@ -39,7 +39,6 @@ export class CustomerPage {
     }
 
     //existing customer
-
     public searchExistingCustomer(customer: string): CustomerPage {
         RightPanelServicesPageElement.ExistingCustomerInput.getElement()
             .type(customer)

@@ -103,7 +103,6 @@ export class SummaryAndPaymentServicePage {
             .then(() => {
                 cy.wait(100)
                 cy.wait('@' + createOrder, {timeout: 5000}).then((interception) => {
-                    console.log('Intercepted request:', interception);
                     cy.wrap(interception.request.body._id).as('orderId');
                 })
 
@@ -148,6 +147,12 @@ export class SummaryAndPaymentServicePage {
             .click();
 
         LeftMenuPage.assertIsSynchronized(true)
+        return this;
+    }
+
+    public clickSaveNoAssert(): SummaryAndPaymentServicePage {
+        SummaryAndPaymentServicePageElement.SaveButton.getElement()
+            .click()
         return this;
     }
 }
