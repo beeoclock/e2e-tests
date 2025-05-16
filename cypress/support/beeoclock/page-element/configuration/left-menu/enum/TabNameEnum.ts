@@ -11,4 +11,5 @@ export enum TabNameEnum {
     VISITS = 'Wizyty',
     STATISTICS = 'Statystyki',
     BUSINESS_PROFILE = 'Profil biznesowy',
+    BALANCE = 'Saldo',
 }

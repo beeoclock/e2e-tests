@@ -6,8 +6,9 @@ import {CustomerApiInterceptionHelper} from "../../../common/Interception/custom
 import {MemberApiInterceptionHelper} from "../../../common/Interception/member/MemberApiInterceptionHelper";
 import {PaymentApiInterceptionHelper} from "../../../common/Interception/payment/PaymentApiInterceptionHelper";
 import {TariffsApiInterceptionHelper} from "../../../common/Interception/tariffs/TariffsApiInterceptionHelper";
-import {ClientsApiInterceptionHelper} from "support/beeoclock/common/Interception/clients/ClientsApiInterceptionHelper";
 import {Assertions} from "../tab/common/assertions/Assertions";
+import {QueryAssertion} from "../../../common/assertion/QueryAssertion";
+import {BackendCommonEnum} from "../../../backend/enum/BackendCommonEnum";
 
 export class LeftMenuPage {
 
@@ -41,10 +42,10 @@ export class LeftMenuPage {
     }
 
     public static clickClientTab(): LeftMenuPage {
-        const getCustomers: string = ClientsApiInterceptionHelper.getCustomers()
+        // const getCustomers: string = ClientsApiInterceptionHelper.getCustomers()
         LeftMenuPageElement.TabElement.getElement(TabNameEnum.CLIENTS)
             .click()
-        ApiInterceptionHelper.waitForQueryAliasWithAssert(getCustomers)
+        // ApiInterceptionHelper.waitForQueryAliasWithAssert(getCustomers)//offline first
         cy.get('customer-desktop-layout-list-component').should('be.visible')
         cy.get('customer-table-list-component').should('be.visible')
         return this;
@@ -87,6 +88,16 @@ export class LeftMenuPage {
             .click()
         cy.get('client-business-settings-page').should('be.visible')
         cy.get('client-business-profile-booking-settings-component').should('be.visible')
+        return this;
+    }
+
+    public static clickOnBalancePage(): LeftMenuPage {
+        LeftMenuPageElement.TabElement.getElement(TabNameEnum.BALANCE)
+            .click()
+        cy.get('balance-organizm').should('be.visible')
+        cy.get('balance-desktop-layout-list-component').should('be.visible')
+        cy.contains('Historia rozliczeń i powiązane karty płatnicze').scrollIntoView().should('be.visible')
+        QueryAssertion.verifyCorrectUrl(BackendCommonEnum.X_Business_Tenant_Id + '/balance/overview?page=1')
         return this;
     }
 

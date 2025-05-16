@@ -1,13 +1,13 @@
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 
-describe('panel navigation test', () => {
+describe('panel navigation test', (): void => {
 
-    beforeEach('setup', () => {
+    beforeEach('setup', (): void => {
         cy.loginOnPanel()
     })
 
-    it('panel navigation test', function () {
+    it('panel navigation test', function (): void {
         LeftMenuPage.clickServiceTab()
         LeftMenuPage.clickMembersTab()
         LeftMenuPage.clickClientTab()
@@ -18,5 +18,6 @@ describe('panel navigation test', () => {
         LeftMenuPage.clickOnBusinessProfile()
         LeftMenuPage.clickOnStatisticsTab()
         LeftMenuPage.clickOnProfileSettings()
+        LeftMenuPage.clickOnBalancePage()
     })
 })
