@@ -179,6 +179,10 @@ export class DateUtils {
         return currentTime.format("HH");
     }
 
+    public static getCurrentMinutes(): string {
+        return dayjs().format("mm");
+    }
+
     public static getCurrentPlusGivenHour(hours: number): string {
         const currentTime = moment().add(hours, 'hours')
         return currentTime.format("HH:00");

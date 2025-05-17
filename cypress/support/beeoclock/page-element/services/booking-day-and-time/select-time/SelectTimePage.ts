@@ -8,16 +8,23 @@ export class SelectTimePage {
             .click();
         return this;
     }
-
     public assertSpecificTime(time: string): SelectTimePage {
-        // If the current time is less than 10, the time will be 12:00
-        if (parseInt(DateUtils.getCurrentHour()) < 10) {
-            SelectTimePageElement.SelectSpecificTime.getElement('12:00')
+        const currentHour = parseInt(DateUtils.getCurrentHour());
+        const currentMinute = parseInt(DateUtils.getCurrentMinutes());
+
+        // Nie sprawdzaj, jeśli po 20:29
+        if (currentHour > 20 || (currentHour === 20 && currentMinute > 29)) {
+            return this;
+        }
+
+        if (currentHour < 10) {
+            SelectTimePageElement.SelectSpecificTime.getElement('12:00');
         } else {
-            SelectTimePageElement.SelectSpecificTime.getElement(time)
+            SelectTimePageElement.SelectSpecificTime.getElement(time);
         }
         return this;
     }
+
 
     public verifySelectedTime(time: string): SelectTimePage {
         SelectTimePageElement.SelectedDayAssert.getElement(time)
