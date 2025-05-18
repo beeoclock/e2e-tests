@@ -148,33 +148,31 @@ Cypress.Commands.add('assertTrimmedProperties', {prevSubject: true}, function (s
         });
 });
 
-
-Cypress.Commands.add('isNotInViewport', {prevSubject: true}, (subject) => {
+Cypress.Commands.add('isNotInViewport', { prevSubject: true }, (subject) => {
     const bounding = subject[0].getBoundingClientRect();
     const windowHeight = Cypress.config('viewportHeight');
     const windowWidth = Cypress.config('viewportWidth');
 
-    const isAbove = bounding.bottom < 0;
-    const isBelow = bounding.top > windowHeight;
-    const isLeft = bounding.right < 0;
-    const isRight = bounding.left > windowWidth;
+    const completelyOutOfView =
+        bounding.bottom < 0 ||
+        bounding.top > windowHeight ||
+        bounding.right < 0 ||
+        bounding.left > windowWidth;
 
-    const notVisible = isAbove || isBelow || isLeft || isRight;
-
-    expect(notVisible).to.be.true;
+    expect(completelyOutOfView).to.be.true;
 });
 
-Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject) => {
+Cypress.Commands.add('isInViewport', { prevSubject: true }, (subject) => {
     const bounding = subject[0].getBoundingClientRect();
     const windowHeight = Cypress.config('viewportHeight');
     const windowWidth = Cypress.config('viewportWidth');
 
-    const isAbove = bounding.bottom < 0;
-    const isBelow = bounding.top > windowHeight;
-    const isLeft = bounding.right < 0;
-    const isRight = bounding.left > windowWidth;
+    const partiallyVisible =
+        bounding.top < windowHeight &&
+        bounding.bottom > 0 &&
+        bounding.left < windowWidth &&
+        bounding.right > 0;
 
-    const notVisible = isAbove || isBelow || isLeft || isRight;
-
-    expect(notVisible).to.be.false;
+    expect(partiallyVisible).to.be.true;
 });
+

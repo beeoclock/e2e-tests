@@ -1,10 +1,14 @@
 import {BizLandingPages} from "../../support/beeoclock/page-element/biz-landing/BizLandingPages";
 import {FaqData} from "../../fixtures/biz-landing/faqData";
+import {QueryAssertion} from "../../support/beeoclock/common/assertion/QueryAssertion";
+import {Assertions} from "../../support/beeoclock/page-element/configuration/tab/common/assertions/Assertions";
 
 describe('biz landing test faq', () => {
 
     it('verify faq pl language', () => {
         cy.visit('https://biz.dev.beeoclock.com/pl/#faq')
+        QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/pl/#faq')
+        cy.wait(1000)
 
         BizLandingPages.LandingBizFaqPage
             .assertIsSectionVisible()
@@ -60,6 +64,8 @@ describe('biz landing test faq', () => {
 
     it('verify faq en language', () => {
         cy.visit('https://biz.dev.beeoclock.com/#faq')
+        QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/#faq')
+        cy.wait(1000)
 
         BizLandingPages.LandingBizFaqPage
             .assertIsSectionVisible()
