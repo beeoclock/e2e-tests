@@ -12,8 +12,7 @@ export class SelectTimePage {
         const currentHour = parseInt(DateUtils.getCurrentHour());
         const currentMinute = parseInt(DateUtils.getCurrentMinutes());
 
-        // Nie sprawdzaj, jeśli po 20:29
-        if (currentHour > 20 || (currentHour === 20 && currentMinute > 29)) {
+        if ((currentHour === 19 && currentMinute > 0)) {
             return this;
         }
 
@@ -24,7 +23,6 @@ export class SelectTimePage {
         }
         return this;
     }
-
 
     public verifySelectedTime(time: string): SelectTimePage {
         SelectTimePageElement.SelectedDayAssert.getElement(time)

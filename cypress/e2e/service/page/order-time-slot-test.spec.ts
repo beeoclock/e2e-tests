@@ -45,7 +45,7 @@ describe('order time slot test', () => {
             .clickBackByButton()
     })
 
-    it('test 2 - check last free slot visibility for 1h service last service is on 20:30', (): void => {
+    it('test 2 - check last free slot visibility for 1h service last service is on 20:00', (): void => {
         //TODO: discuss with dev (when the time is 15:28 the first slot is 15:30 ..-> 19:30 so test will fail
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
