@@ -1,10 +1,10 @@
 import {CalendarPages} from "../../../support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {PanelEmailTest} from "../../../fixtures/panel/order/PanelEmailTest";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {CustomerTypeEnum} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {NotificationsPage} from "../../../support/beeoclock/page-element/configuration/notiifcations/NotificationsPage";
+import {MiroHostHelper} from "../../../support/beeoclock/notifications/mirohost/MiroHostHelper";
 
 describe('email test', () => {
 
@@ -33,36 +33,9 @@ describe('email test', () => {
             .clickSaveNoAssert();
         NotificationsPage.clickEmailNotificationsToggle()
         NotificationsPage.clickConfirmButton(true);
+    });
 
-        //
-        // cy.get('@orderId').then((orderId) => {
-        //     cy.log('Order ID is: ' + orderId);
-        //     let orderID: string = orderId.toString();
-        //
-        //     cy.log('Verify order on table');
-        //     CalendarPages.CalendarTablePage
-        //         .verifyTimeOrderOnTable(orderID, testData.assertTime);
-        //
-        //     cy.log('Click, delete and verify deletion on table');
-        //     CalendarPages.CalendarTablePage
-        //         .clickOnGivenOrderByItsId(orderID);
-        //
-        //     RightPanelPages.SummaryAndPaymentServicePage
-        //         .verifyOrderDate(testData.dataAssert)
-        //         .verifyOrderPrice(testData.priceAssert)
-        //         .verifyOrderTime(testData.summaryTime)
-        //         .verifyPaymentStatus(1, testData.payment.PaymentStatus)
-        //
-        //     RightPanelPages.RightPanelNavigationPage
-        //         .clickCloseRightPanel()
-        //
-        //     OrderApi.deleteOrderWithGivenId(orderID)
-
-            //     .clickDeleteByDashIcon()
-            //     .clickDeleteByIcon();
-            // LeftMenuPage.assertIsSynchronized(true);
-            // RightPanelPages.RightPanelNavigationPage
-            //     .clickCloseRightPanel();
-        });
-    // });
+    it(`assert send email`, function () {
+        MiroHostHelper.visitAndLoginOnMiroHost()
+    });
 })
