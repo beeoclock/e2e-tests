@@ -20,4 +20,21 @@ export class AuthApi {
             return token;
         });
     }
+
+    public static getAuth(): Cypress.Chainable<any> {
+        const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ClientPropertiesEnum.API_KEY}`;
+        return cy.request({
+            method: 'POST',
+            url: url,
+            body: {
+                clientType: "CLIENT_TYPE_WEB",
+                email: ClientPropertiesEnum.LOGIN,
+                password: ClientPropertiesEnum.PASSWORD,
+                returnSecureToken: true
+            },
+        }).then(response => {
+            expect(response.status).to.equal(200);
+            return response.body
+        });
+    }
 }

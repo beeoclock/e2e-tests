@@ -7,6 +7,7 @@ import {ClientPropertiesEnum} from "./beeoclock/common/enum/ClientPropertiesEnum
 import {BusinessNameEnum} from "./beeoclock/page-element/common/enum/BusinessNameEnum";
 import {ThrottleEnum} from "./beeoclock/common/enum/ThrottleEnum";
 import 'cypress-wait-until';
+import {AuthApi} from "./beeoclock/backend/auth/AuthApi";
 
 declare global {
     namespace Cypress {
@@ -27,6 +28,8 @@ declare global {
             isNotInViewport(): Chainable<JQuery>;
 
             isInViewport(): Chainable<JQuery>;
+
+            token()
         }
     }
 }
@@ -148,7 +151,7 @@ Cypress.Commands.add('assertTrimmedProperties', {prevSubject: true}, function (s
         });
 });
 
-Cypress.Commands.add('isNotInViewport', { prevSubject: true }, (subject) => {
+Cypress.Commands.add('isNotInViewport', {prevSubject: true}, (subject) => {
     const bounding = subject[0].getBoundingClientRect();
     const windowHeight = Cypress.config('viewportHeight');
     const windowWidth = Cypress.config('viewportWidth');
@@ -162,7 +165,7 @@ Cypress.Commands.add('isNotInViewport', { prevSubject: true }, (subject) => {
     expect(completelyOutOfView).to.be.true;
 });
 
-Cypress.Commands.add('isInViewport', { prevSubject: true }, (subject) => {
+Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject) => {
     const bounding = subject[0].getBoundingClientRect();
     const windowHeight = Cypress.config('viewportHeight');
     const windowWidth = Cypress.config('viewportWidth');
@@ -174,5 +177,27 @@ Cypress.Commands.add('isInViewport', { prevSubject: true }, (subject) => {
         bounding.right > 0;
 
     expect(partiallyVisible).to.be.true;
+});
+
+Cypress.Commands.add('token', (): any => {
+    cy.wait(50);
+    const currentTime: number = Date.now();
+    const storedToken: string = Cypress.env('storedToken');
+    const tokenValidTo: string = Cypress.env('tokenValidTo');
+    const bufferTime: number = 60000;
+
+    if (storedToken && tokenValidTo && currentTime < new Date(tokenValidTo).getTime() - bufferTime) {
+        Cypress.env('token', storedToken);
+    } else {
+        AuthApi.getAuth().then(function (resp) {
+            const token: string = resp.idToken;
+            const expiresIn: number = Number(resp.expiresIn) * 1000;
+            const tokenValidTo: string = new Date(Date.now() + expiresIn).toISOString();
+
+            Cypress.env('storedToken', token);
+            Cypress.env('tokenValidTo', tokenValidTo);
+            Cypress.env('token', token);
+        })
+    }
 });
 
