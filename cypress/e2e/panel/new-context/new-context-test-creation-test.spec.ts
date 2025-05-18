@@ -1,7 +1,7 @@
 import {ServiceEnum} from "../../../support/ServiceEnum";
 import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
-import {ClientPropertiesEnum} from "../../../support/beeoclock/common/enum/ClientPropertiesEnum";
+import {EnvEnum} from "../../../support/beeoclock/common/enum/EnvEnum";
 import {NewContextPages} from "support/beeoclock/page-element/configuration/new-context/NewContextPages";
 import {UpdateBusinessProfileBuilder} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
@@ -118,8 +118,8 @@ describe('new context test creation', () => {
 
         cy.get('.text-start', {timeout: 30000}).scrollIntoView().should('be.visible')
         PanelLoginPageElement.EmailInput.getElement();
-        PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
-        PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
+        PanelLoginPage.typeEmail(EnvEnum.LOGIN);
+        PanelLoginPage.typePassword(EnvEnum.PASSWORD);
         PanelLoginPage.clickLoginButton();
     }
 

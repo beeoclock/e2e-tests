@@ -1,16 +1,16 @@
-import {ClientPropertiesEnum} from "../../common/enum/ClientPropertiesEnum";
+import {EnvEnum} from "../../common/enum/EnvEnum";
 
 export class AuthApi {
 
     public static getToken(): Cypress.Chainable<string> {
-        const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ClientPropertiesEnum.API_KEY}`;
+        const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${EnvEnum.API_KEY}`;
         return cy.request({
             method: 'POST',
             url: url,
             body: {
                 clientType: "CLIENT_TYPE_WEB",
-                email: ClientPropertiesEnum.LOGIN,
-                password: ClientPropertiesEnum.PASSWORD,
+                email: EnvEnum.LOGIN,
+                password: EnvEnum.PASSWORD,
                 returnSecureToken: true
             },
         }).then(response => {
@@ -22,14 +22,14 @@ export class AuthApi {
     }
 
     public static getAuth(): Cypress.Chainable<any> {
-        const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ClientPropertiesEnum.API_KEY}`;
+        const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${EnvEnum.API_KEY}`;
         return cy.request({
             method: 'POST',
             url: url,
             body: {
                 clientType: "CLIENT_TYPE_WEB",
-                email: ClientPropertiesEnum.LOGIN,
-                password: ClientPropertiesEnum.PASSWORD,
+                email: EnvEnum.LOGIN,
+                password: EnvEnum.PASSWORD,
                 returnSecureToken: true
             },
         }).then(response => {

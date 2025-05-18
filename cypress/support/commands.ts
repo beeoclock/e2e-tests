@@ -3,7 +3,7 @@
 import {ServiceEnum} from "./ServiceEnum";
 import {PanelLoginPageElement} from "./beeoclock/page-element/configuration/login/PanelLoginPageElement";
 import {PanelLoginPage} from "./beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
-import {ClientPropertiesEnum} from "./beeoclock/common/enum/ClientPropertiesEnum";
+import {EnvEnum} from "./beeoclock/common/enum/EnvEnum";
 import {BusinessNameEnum} from "./beeoclock/page-element/common/enum/BusinessNameEnum";
 import {ThrottleEnum} from "./beeoclock/common/enum/ThrottleEnum";
 import 'cypress-wait-until';
@@ -22,6 +22,7 @@ declare global {
             setNetworkThrottle(speed: ThrottleEnum): void;
 
             assertProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
+            assertElementTextNormalized(expectedProperties: string): Chainable<JQuery>;
 
             assertTrimmedProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
 
@@ -49,8 +50,8 @@ Cypress.Commands.add('loginOnPanel', () => {
     cy.log('login');
     cy.get('.text-start', {timeout: 30000}).scrollIntoView().should('be.visible')
     PanelLoginPageElement.EmailInput.getElement();
-    PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
-    PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
+    PanelLoginPage.typeEmail(EnvEnum.LOGIN);
+    PanelLoginPage.typePassword(EnvEnum.PASSWORD);
     PanelLoginPage.clickLoginButton();
     PanelLoginPage.selectGivenBusinessAndStoreToken(BusinessNameEnum.HAIRCUT_AND_BARBER);
     cy.document().its('readyState').should('eq', 'complete');
@@ -70,8 +71,8 @@ Cypress.Commands.add('loginOnProductPanel', () => {
 
     cy.log('login');
     PanelLoginPageElement.EmailInput.getElement();
-    PanelLoginPage.typeEmail(ClientPropertiesEnum.LOGIN);
-    PanelLoginPage.typePassword(ClientPropertiesEnum.PASSWORD);
+    PanelLoginPage.typeEmail(EnvEnum.LOGIN);
+    PanelLoginPage.typePassword(EnvEnum.PASSWORD);
     PanelLoginPage.clickLoginButton();
     PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER);
     cy.document().its('readyState').should('eq', 'complete');
@@ -142,6 +143,19 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
 Cypress.Commands.add('assertProperties', {prevSubject: true}, (subject, properties, expectedProperties) => {
     cy.wrap(subject).should('have.prop', properties).and('include', expectedProperties);
 });
+
+Cypress.Commands.add(
+    'assertElementTextNormalized',
+    { prevSubject: true },
+    (subject: any, expectedValue: string) => {
+        cy.wrap(subject)
+            .invoke('text')
+            .then((text: string) => {
+                const normalized = text.replace(/\s+/g, ' ').trim();
+                expect(normalized).to.eq(expectedValue);
+            });
+    }
+);
 
 Cypress.Commands.add('assertTrimmedProperties', {prevSubject: true}, function (subject, properties, expectedProperties) {
     cy.wrap(subject)

@@ -39,6 +39,11 @@ export class CustomerSearchCriteriaBuilder {
         return this;
     }
 
+    public withUpdatedScience(updatedScience: string): this {
+        this.criteria.updatedSince = updatedScience;
+        return this;
+    }
+
     public build(): ICustomerSearchCriteria {
         return this.criteria as ICustomerSearchCriteria;
     }

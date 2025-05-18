@@ -31,7 +31,7 @@ export class ClientFilterPage {
             .should('not.be.disabled')
             .click();
 
-        cy.wait(500)//TODO offline first
+        cy.wait(500)
         return this
     }
 

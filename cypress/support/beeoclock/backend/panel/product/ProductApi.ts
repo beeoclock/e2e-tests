@@ -1,7 +1,7 @@
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
-import {ClientPropertiesEnum} from "../../../common/enum/ClientPropertiesEnum";
+import {EnvEnum} from "../../../common/enum/EnvEnum";
 
 export class ProductApi {
 
@@ -11,7 +11,7 @@ export class ProductApi {
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'x-github-action': ClientPropertiesEnum.X_GITHUB_ACTION
+                'x-github-action': EnvEnum.X_GITHUB_ACTION
             },
             body: tag,
             auth: {
@@ -29,7 +29,7 @@ export class ProductApi {
             url: 'https://jolly-fireman-58.webhook.cool',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'x-github-action': ClientPropertiesEnum.X_GITHUB_ACTION
+                'x-github-action': EnvEnum.X_GITHUB_ACTION
             },
             body: tag,
             auth: {
@@ -47,7 +47,7 @@ export class ProductApi {
             url: EntryPointEnum.API_ENTRY_POINT + '/product-tag/' + id,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'x-github-action': ClientPropertiesEnum.X_GITHUB_ACTION
+                'x-github-action': EnvEnum.X_GITHUB_ACTION
             },
             auth: {
                 bearer: token
@@ -65,7 +65,7 @@ export class ProductApi {
                 '/product-tag/paged?orderBy=name&orderDir=asc&page=1&pageSize=20&updatedSince=2022-02-02T00%3A00%3A00Z&active=1',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'x-github-action': ClientPropertiesEnum.X_GITHUB_ACTION
+                'x-github-action': EnvEnum.X_GITHUB_ACTION
             },
             auth: {
                 bearer: token

@@ -53,4 +53,11 @@ describe('Balance queries API test', () => {
             });
         });
     });
+
+    it('getLastBalance', () => {
+        BalanceApi.getActualBalance().then((balance: number): void => {
+         cy.log('Balance: ' + balance);
+         expect(balance).to.be.a('number');
+        });
+    })
 });

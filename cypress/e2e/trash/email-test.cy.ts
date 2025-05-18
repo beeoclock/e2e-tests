@@ -1,12 +1,12 @@
-import {ClientPropertiesEnum} from "../../support/beeoclock/common/enum/ClientPropertiesEnum";
+import {EnvEnum} from "../../support/beeoclock/common/enum/EnvEnum";
 
 //POC
 describe('email test', (): void => {
 
     it('should send an email', (): void => {
         cy.visit('https://mail.mirohost.net')
-        cy.get('#form_login').type(ClientPropertiesEnum.MAIL_LOGIN)
-        cy.get('#form_password').type(ClientPropertiesEnum.MAIL_PASSWORD)
+        cy.get('#form_login').type(EnvEnum.MAIL_LOGIN)
+        cy.get('#form_password').type(EnvEnum.MAIL_PASSWORD)
         cy.get('#form_submit').click()
     })
 })

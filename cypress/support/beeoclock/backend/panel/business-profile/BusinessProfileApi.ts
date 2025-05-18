@@ -1,7 +1,7 @@
 import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
-import {ClientPropertiesEnum} from "../../../common/enum/ClientPropertiesEnum";
+import {EnvEnum} from "../../../common/enum/EnvEnum";
 
 export class BusinessProfileApi {
     private static token = Cypress.env('token');
@@ -14,7 +14,7 @@ export class BusinessProfileApi {
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'Authorization': `Bearer ${tokenId}`,
-                'x-github-action': ClientPropertiesEnum.X_GITHUB_ACTION
+                'x-github-action': EnvEnum.X_GITHUB_ACTION
             },
             auth: {
                 bearer: tokenId

@@ -1,6 +1,6 @@
 import {HTTPStatusCodeType} from "../enum/HTTPStatusCodeType";
 import {BackendCommonEnum} from "../enum/BackendCommonEnum";
-import {ClientPropertiesEnum} from "../../common/enum/ClientPropertiesEnum";
+import {EnvEnum} from "../../common/enum/EnvEnum";
 
 export class IdentityApi {
 
@@ -13,7 +13,7 @@ export class IdentityApi {
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'Authorization': `Bearer ${tokenId}`,
-                'x-github-action': ClientPropertiesEnum.X_GITHUB_ACTION
+                'x-github-action': EnvEnum.X_GITHUB_ACTION
             },
             auth: {
                 bearer: tokenId

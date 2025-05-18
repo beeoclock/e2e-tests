@@ -7,5 +7,6 @@ export interface ICustomerSearchCriteria {
     page: number,
     phrase: string,
     pageSize: number,
-    state: CustomerStateEnum
+    state: CustomerStateEnum,
+    updatedSince?: string,
 }

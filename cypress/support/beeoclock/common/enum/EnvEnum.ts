@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-export const ClientPropertiesEnum = {
+export const EnvEnum = {
     LOGIN: Cypress.env('LOGIN'),
     PASSWORD: Cypress.env('PASSWORD'),
     API_KEY: Cypress.env('API_KEY'),

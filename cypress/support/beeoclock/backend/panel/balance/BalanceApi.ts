@@ -18,4 +18,9 @@ export class BalanceApi {
         });
     }
 
+    public static getActualBalance(): Cypress.Chainable<number> {
+       return BalanceApi.getBalancePaged().then((body: any): any => {
+            return body.items[0].amountAfterAction;
+        });
+    }
 }
