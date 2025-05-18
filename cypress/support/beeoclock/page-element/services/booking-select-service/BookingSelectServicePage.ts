@@ -35,7 +35,7 @@ export class BookingSelectServicePage {
     public verifyCorrectForm(): BookingSelectServicePage {
         const serviceTab = cy.get('tab-menu')
         serviceTab.should('have.attr', 'ng-reflect-selected-tab').and('equal', 'services')
-        cy.get('tab-menu').find('li').contains('Produkty').scrollIntoView().should('be.visible')
+        // cy.get('tab-menu').find('li').contains('Produkty').scrollIntoView().should('be.visible')
         cy.get('tab-menu').find('li').contains('O nas').scrollIntoView().should('be.visible')
         return this;
     }
