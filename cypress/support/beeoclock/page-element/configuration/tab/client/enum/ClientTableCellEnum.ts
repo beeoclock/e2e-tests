@@ -5,5 +5,6 @@ export enum ClientTableCellEnum {
     PHONE = 3,
     NOTE = 4,
     STATUS = 5,
-    CREATED_AT = 6
+    CREATED_AT = 6,
+    UPDATED_AT = 7
 }

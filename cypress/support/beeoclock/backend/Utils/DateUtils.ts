@@ -30,6 +30,25 @@ export class DateUtils {
         return moment(currentDate).format(format)
     }
 
+    public static formatDateToPolishStyle(isoDate: string): string {
+        const date = new Date(isoDate);
+
+        const formatter = new Intl.DateTimeFormat('pl-PL', {
+            timeZone: 'Europe/Warsaw',
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+
+        const parts = formatter.formatToParts(date);
+        const get = (type: string) => parts.find(p => p.type === type)?.value || '';
+
+        return `${get('day')}.${get('month')}.${get('year')}, ${get('hour')}:${get('minute')}`;
+    }
+
     public static setCurrentDatePlusDaysAndHours(plusDays: number, format: string, plusHours: number): string {
         let currentDate = new Date();
         currentDate.setDate(currentDate.getDate() + plusDays);
