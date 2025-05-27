@@ -52,11 +52,16 @@ describe('balance test', (): void => {
         cy.log('assert is synchronized')
         LeftMenuPage.handleSynchronization()
         cy.log('balance after: ' + balanceAfter.toString())
+        LeftMenuPage.assertIsSynchronized()
+
+        cy.reload()
+        cy.wait(3000)
+        LeftMenuPage.assertIsSynchronized()
 
         LeftMenuPage.clickMembersTab()
         LeftMenuPage.clickOnBalancePage()
 
-        LeftMenuPage.assertIsSynchronized()
+        BalanceListPage.verifyActualBalance()
         BalanceListPage.verifyBalance(balanceAfter)
     })
 
