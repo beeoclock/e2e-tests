@@ -3,8 +3,11 @@ import {TableCommonPage} from "../../../../support/beeoclock/page-element/config
 import {SpecialistNameEnum} from "../../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {MemberTableCellEnum} from "../../../../support/beeoclock/page-element/configuration/tab/members/enum/MemberTableCellEnum";
 import {CommonElementPage} from "../../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
+import {RightPanelPages} from "../../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
+import {faker} from "@faker-js/faker";
 
 describe('Members Test', () => {
+    let phone: string = faker.finance.account(9)
 
     beforeEach('login', () => {
         cy.loginOnPanel()
@@ -13,17 +16,23 @@ describe('Members Test', () => {
 
     it('Members Test', function (): void {
         LeftMenuPage.assertIsSynchronized()
-        TableCommonPage.assertTableCount(3)
+        TableCommonPage.assertTableCount(5)
 
         assertTomaszZalewskiRow()
         assertEndToEndRow()
     })
 
-    it('create new member', function (): void {
+    it.only('create new member', function (): void {
         LeftMenuPage.assertIsSynchronized()
-        TableCommonPage.assertTableCount(3)
+        TableCommonPage.assertTableCount(5)
 
         CommonElementPage.clickAddResourceButton()
+        RightPanelPages.MemberRightPanel
+            .typeEmail(faker.internet.email())
+            .typeFirsName(faker.name.firstName())
+            .typeLastName(faker.name.lastName())
+            .typePhone(phone)
+            .clickSaveButton()
     })
 
     function assertTomaszZalewskiRow() {
@@ -42,5 +51,12 @@ describe('Members Test', () => {
         TableCommonPage.verifyTableRowElement(SpecialistNameEnum.E2E_E2E, MemberTableCellEnum.ROLE, 'Właściciel')
         TableCommonPage.verifyTableRowElement(SpecialistNameEnum.E2E_E2E, MemberTableCellEnum.STATUS, 'Aktywny')
         TableCommonPage.verifyTableRowElement(SpecialistNameEnum.E2E_E2E, MemberTableCellEnum.CREATED_AT, '25.04.2024, 14:02')
+    }
+
+    const testData = {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        email: faker.internet.email(),
+        phone: faker.finance.account(9)
     }
 })

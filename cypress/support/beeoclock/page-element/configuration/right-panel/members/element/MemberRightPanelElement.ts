@@ -12,6 +12,15 @@ export class MemberRightPanelElement {
         return cy.get('#member-form-firstName')
     }
 
+    public getPhoneElement(): any {
+        return cy.get('#member-form-phone')
+    }
+
+    public getPhoneInput(): any {
+        return this.getPhoneElement().find('input')
+            .last()
+    }
+
     public getFirstNameInput(): any {
         return this.getFirstNameElement().find('input')
     }

@@ -20,6 +20,11 @@ export class MemberRightPanel {
         return this;
     }
 
+    public typePhone(phone: string): MemberRightPanel {
+        this.element.getPhoneInput().type(phone)
+        return this;
+    }
+
     public clickActiveStatus(): MemberRightPanel {
         this.element.getStatusToggle().click()
         return this;
@@ -52,10 +57,10 @@ export class MemberRightPanel {
     }
 
     public clickSaveButton(): MemberRightPanel {
-        const updateMember = MemberApiInterceptionHelper.updateMember()
+        // const updateMember = MemberApiInterceptionHelper.updateMember()
         const getMember = MemberApiInterceptionHelper.getGivenMember()
         cy.contains('button', 'Zapisz').click()
-        ApiInterceptionHelper.waitForAliases([updateMember, getMember])
+        ApiInterceptionHelper.waitForAlias(getMember)
         return this
     }
 }
