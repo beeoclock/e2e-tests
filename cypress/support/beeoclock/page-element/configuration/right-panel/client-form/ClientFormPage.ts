@@ -52,6 +52,7 @@ export class ClientFormPage {
     }
 
     public clickSaveButton(): ClientFormPage {
+        LeftMenuPage.assertIsSynchronized()
         const createCustomer: string = ClientsApiInterceptionHelper.createCustomer()
         SaveButton.getElement()
             .click()
