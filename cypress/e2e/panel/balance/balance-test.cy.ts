@@ -11,20 +11,26 @@ describe('balance test', (): void => {
 
     beforeEach('login', (): void => {
         cy.loginOnPanel()
+    })
+
+    it('should check actual presented balance', (): void => {
+
         LeftMenuPage.handleSynchronization()
 
         LeftMenuPage.clickOnBalancePage()
         BalanceApi.getActualBalance().then(actualBalance => {
-           balanceBefore = actualBalance
+            balanceBefore = actualBalance
         })
-    })
 
-    it.only('should check actual presented balance', (): void => {
         BalanceListPage.verifyActualBalance()
-        balanceAfter = balanceBefore + 10
     })
 
     it('should add balance with assert', (): void => {
+        balanceAfter = balanceBefore + 10
+        cy.log('balance after: ' + balanceAfter.toString())
+        LeftMenuPage.handleSynchronization()
+        LeftMenuPage.clickOnBalancePage()
+
         CommonElementPage.clickAddResourceButton()
         InputHelper.typeInputValue('#utility-base-input-input', '10')
         CommonElementPage.clickSaveButton()
@@ -45,9 +51,12 @@ describe('balance test', (): void => {
 
         cy.log('assert is synchronized')
         LeftMenuPage.handleSynchronization()
-        cy.log('balance after: ' + balanceAfter)
-        cy.reload()
-        cy.wait(1000)
+        cy.log('balance after: ' + balanceAfter.toString())
+
+        LeftMenuPage.clickMembersTab()
+        LeftMenuPage.clickOnBalancePage()
+
+        LeftMenuPage.assertIsSynchronized()
         BalanceListPage.verifyBalance(balanceAfter)
     })
 

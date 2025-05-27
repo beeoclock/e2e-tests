@@ -9,7 +9,6 @@ export class BalanceListPage {
             const actualBalance: number = Number(actualBalanceRaw)
             const formatted: string = this.formatBalance(actualBalance)
             const expectedSaldo = `Saldo ${formatted} Historia rozliczeń i powiązane karty płatnicze`
-            cy.log("EXPECT: " + expectedSaldo)
 
             this.balanceComponent.getActualBalance().invoke('prop', 'innerText').then((innerText: string) => {
                 const normalize = (text: string): string =>
@@ -26,8 +25,18 @@ export class BalanceListPage {
 
 
     public static verifyBalance(balance: number): BalanceListPage {
-        const formatted = this.formatBalance(balance)
-        this.balanceComponent.getActualBalance().assertElementText(`Saldo ${formatted} Historia rozliczeń i powiązane karty płatnicze`)
+        const formatted: string = this.formatBalance(balance)
+        const expectedSaldo = `Saldo ${formatted} Historia rozliczeń i powiązane karty płatnicze`
+
+        this.balanceComponent.getActualBalance().invoke('prop', 'innerText').then((innerText: string) => {
+            const normalize = (text: string): string =>
+                text
+                    .replace(/\u00A0/g, '')
+                    .replace(/\s/g, '')
+                    .trim();
+
+            expect(normalize(innerText)).to.include(normalize(expectedSaldo))
+        })
         return this
     }
 
