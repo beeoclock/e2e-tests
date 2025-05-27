@@ -1,4 +1,5 @@
 import {StripePageElement} from "./StripePageElement";
+import {Assertions} from "../../../common/assertions/Assertions";
 
 export class StripePage {
     private inputs = StripePageElement.StripeInputComponent;
@@ -46,6 +47,12 @@ export class StripePage {
     public clickSubmitButton(): StripePage {
         StripePageElement.SubmitButton.getElement()
             .click();
+        return this;
+    }
+
+    public assertAmount(amount: string): StripePage {
+        const element: Cypress.Chainable = StripePageElement.StripeSummary.getElement()
+        Assertions.assertTrimmedProperties(element, 'innerText', amount)
         return this;
     }
 }

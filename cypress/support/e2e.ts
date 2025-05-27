@@ -1,5 +1,4 @@
 import {AuthApi} from "./beeoclock/backend/auth/AuthApi";
-// Import commands.js using ES2015 syntax:
 import './commands';
 import 'cypress-file-upload';
 import {BackendCommonEnum} from "./beeoclock/backend/enum/BackendCommonEnum";

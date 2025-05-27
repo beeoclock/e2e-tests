@@ -24,6 +24,8 @@ declare global {
             assertProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
             assertElementTextNormalized(expectedProperties: string): Chainable<JQuery>;
 
+            assertElementText(expectedProperties: string): Chainable<JQuery>;
+
             assertTrimmedProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
 
             isNotInViewport(): Chainable<JQuery>;
@@ -157,11 +159,24 @@ Cypress.Commands.add(
     }
 );
 
+Cypress.Commands.add(
+    'assertElementText',
+    {prevSubject: true},
+    (subject: any, expectedValue: string) => {
+        cy.wrap(subject)
+            .invoke('text')
+            .then((text: string) => {
+                expect(text).to.eq(expectedValue);
+            });
+    }
+);
+
 Cypress.Commands.add('assertTrimmedProperties', {prevSubject: true}, function (subject, properties, expectedProperties) {
     cy.wrap(subject)
         .should('have.prop', properties)
         .then((actualProp: any) => {
-            expect(actualProp.trim()).to.include(expectedProperties.trim());
+            const clean = (s: string) => s.replace(/\u00A0/g, ' ').trim();
+            expect(clean(actualProp)).to.include(clean(expectedProperties));
         });
 });
 
