@@ -1,6 +1,5 @@
-import {defineConfig} from 'cypress';
-import * as dotenv from 'dotenv';
-import * as process from "node:process";
+import { defineConfig } from "cypress";
+import dotenv from 'dotenv';
 
 dotenv.config();
 
