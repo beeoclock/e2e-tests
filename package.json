@@ -19,20 +19,20 @@
   "author": "Jan Zadumiński",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "14.3.0",
+    "cypress": "14.4.0",
     "cypress-file-upload": "5.0.8",
     "dayjs": "1.11.13",
     "globals": "16.0.0",
     "luxon": "3.6.1",
     "moment-timezone": "0.5.47",
-    "typescript": "5.4.5"
+    "typescript": "5.4.5",
+    "dotenv": "16.4.7"
   },
   "dependencies": {
     "@faker-js/faker": "8.4.1",
     "@types/imap-simple": "4.2.9",
     "@types/mailparser": "3.4.5",
-    "cypress-wait-until": "^3.0.2",
-    "dotenv": "16.4.7",
+    "cypress-wait-until": "3.0.2",
     "http-status-codes": "2.3.0",
     "imap-simple": "5.1.0",
     "mailparser": "3.7.2",

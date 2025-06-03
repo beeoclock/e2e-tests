@@ -7,7 +7,7 @@ export class ApiRequestFactory {
         return cy.request({
             method: 'GET',
             url: EntryPointEnum.API_ENTRY_POINT + path,
-            headers: ApiHeaderFactory.getHeader(),
+            headers: ApiHeaderFactory.getHeaders(),
         }).then(response => {
             expect(response.status).to.equal(200);
             return response.body;

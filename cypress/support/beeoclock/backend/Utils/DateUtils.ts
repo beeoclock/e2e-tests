@@ -2,7 +2,7 @@ import "moment-timezone/index";
 import {DateTime} from 'luxon';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pl';
-import moment = require('moment');
+import moment from "moment";
 
 export class DateUtils {
 

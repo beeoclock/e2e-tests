@@ -148,7 +148,8 @@
         "includeAll": false,
         "excludeAll": false,
         "includeList": [
-          "emailNotification"
+          "emailNotification",
+          "reminderNotification"
         ],
         "excludeList": [
           "assistantAI"
@@ -314,7 +315,8 @@
         "includeList": [
           "emailNotification",
           "smsNotification",
-          "chat"
+          "chat",
+          "reminderNotification"
         ],
         "excludeList": [
           "assistantAI"

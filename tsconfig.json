@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
-    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "target": "es5",
+    "target": "ESNext",
     "baseUrl": "./cypress",
     "lib": [
-      "es5",
+      "ESNext",
       "dom"
     ],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "noEmit": true,
     "types": [
       "cypress",
       "node",

@@ -23,15 +23,6 @@ describe('client filter test', () => {
         cy.visit('https://crm.dev.beeoclock.com/662a4637a4b376d20c065b1d/customer/list')
     })
 
-    // it.only('test data', () => {
-    //     cy.log('crated at: ' + createdAt)
-    //     cy.log('updated at: ' + updatedAt)
-    //     const parsedCreatedAt = DateUtils.formatDateToPolishStyle(createdAt)
-    //     const parsedUpdatedAt = DateUtils.formatDateToPolishStyle(updatedAt)
-    //     expect(parsedCreatedAt).to.equal('3.11.2024, 20:03')
-    //     expect(parsedUpdatedAt).to.equal('20.05.2025, 20:59')
-    // })
-
     it('should filter clients by first name', (): void => {
         cy.log('wait for synchronization - only once')
 

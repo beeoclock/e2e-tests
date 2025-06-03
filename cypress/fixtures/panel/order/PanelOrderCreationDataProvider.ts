@@ -5,7 +5,6 @@ import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/en
 import {TestCaseEnum} from "../../enum/TestCaseEnum";
 import {PaymentOptionEnum} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/summary-and-peyment/enum/PaymentOptionEnum";
 
-
 export class PanelOrderCreationDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {
         let Data: string = DateUtils.getCurrentDateWithGivenFormat("D.MM.YYYY")
