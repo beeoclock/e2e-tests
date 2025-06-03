@@ -57,7 +57,6 @@ export class MemberRightPanel {
     }
 
     public clickSaveButton(): MemberRightPanel {
-        // const updateMember = MemberApiInterceptionHelper.updateMember()
         const getMember = MemberApiInterceptionHelper.getGivenMember()
         cy.contains('button', 'Zapisz').click()
         ApiInterceptionHelper.waitForAlias(getMember)
