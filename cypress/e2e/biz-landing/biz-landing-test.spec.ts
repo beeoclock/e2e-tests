@@ -3,7 +3,7 @@ import {BizLandingPages} from "../../support/beeoclock/page-element/biz-landing/
 describe('biz landing test presentation & header navigation tests', () => {
 
     beforeEach('login', () => {
-        login()
+        visit()
     })
 
     it('assert appointment section is visible after visit', () => {
@@ -71,12 +71,18 @@ describe('biz landing test presentation & header navigation tests', () => {
             .assertHtml()
     });
 
-    function login() {
+    it('assert demo body HTML match the expected HTML', ()=> {
+        BizLandingPages.LandingBizDemoSection
+            .verifyOuterHtmlElement()
+    })
+
+    function visit() {
         cy.visit("https://biz.dev.beeoclock.com/pl/",
             {timeout: 30000, failOnStatusCode: false})
     }
 
     before(() => {
+        cy.clearAllLocalStorage()
         Cypress.env('skipClear', true);
     });
 })
