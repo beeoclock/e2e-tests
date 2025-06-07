@@ -209,9 +209,8 @@ Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject) => {
 });
 
 Cypress.Commands.add('token', (): any => {
-    cy.wait(50);
     const currentTime: number = Date.now();
-    const storedToken: string = Cypress.env('storedToken');
+    const storedToken: string = Cypress.env('token');
     const tokenValidTo: string = Cypress.env('tokenValidTo');
     const bufferTime: number = 60000;
 
@@ -222,8 +221,10 @@ Cypress.Commands.add('token', (): any => {
             const token: string = resp.idToken;
             const expiresIn: number = Number(resp.expiresIn) * 1000;
             const tokenValidTo: string = new Date(Date.now() + expiresIn).toISOString();
-
-            Cypress.env('storedToken', token);
+            Cypress.log({
+                name: 'Token',
+                message: `Token valid until: ${tokenValidTo}, expires in: ${expiresIn} ms`
+            });
             Cypress.env('tokenValidTo', tokenValidTo);
             Cypress.env('token', token);
         })

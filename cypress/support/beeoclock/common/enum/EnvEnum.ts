@@ -7,4 +7,5 @@ export const EnvEnum = {
     X_GITHUB_ACTION: Cypress.env('X_GITHUB_ACTION'),
     MAIL_PASSWORD: Cypress.env('MAIL_PASSWORD'),
     MAIL_LOGIN: Cypress.env('MAIL_LOGIN'),
+    token: Cypress.env('token'),
 };

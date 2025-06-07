@@ -11,8 +11,9 @@ export class NewContextInterceptionAssertion {
 
     public static updateContextAlias(alias: string, expectedBody: Partial<ScheduleConfig>): void {
         cy.wait('@' + alias).then(interception => {
-            const requestBody = interception.request.body;
+            const requestBody: any = interception.request.body;
 
+            cy.log('Request body:', requestBody);
             if (expectedBody.published !== undefined) {
                 expect(requestBody.published).to.equal(expectedBody.published);
             }
