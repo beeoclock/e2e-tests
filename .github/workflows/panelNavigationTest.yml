@@ -6,7 +6,7 @@ on:
       - cron: '0 4 * * *'
 
 jobs:
-  client-app-test:
+  Panel-navigation-test:
     runs-on: ubuntu-latest
     env:
       LOGIN: ${{ secrets.LOGIN }}
