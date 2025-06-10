@@ -30,11 +30,15 @@ jobs:
         id: run_healthcheck
         run: |
           npm run panel-app-api-health-check
-          echo "exit_code=$?" >> $GITHUB_OUTPUT
-          exit 0
+          echo "exit_code=$?" >> $GITHUB_ENV
+        continue-on-error: true
 
-      - name: Notify on failure
-        if: steps.run_healthcheck.outputs.exit_code != '0'
-        run: |
-          TEXT=$(echo "❌ Panel App Health Check failed, details: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" | jq -s -R -r @uri)
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=$TEXT"
+  notify:
+      needs: run-tests
+      if: failure()
+      runs-on: ubuntu-latest
+      steps:
+          - name: Send failure notification
+            run: |
+              TEXT=$(echo "❌ Panel App Health Check failed, details: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" | jq -s -R -r @uri)
+              curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=$TEXT"
