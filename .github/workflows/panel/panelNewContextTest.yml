@@ -1,4 +1,4 @@
-name: Panel App new context
+name: Panel App new context test
 
 on:
   workflow_dispatch:
