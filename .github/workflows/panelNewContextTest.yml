@@ -1,4 +1,4 @@
-name: Panel App Navigation Test Workflow
+name: Panel App new context test
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
       - cron: '0 4 * * *'
 
 jobs:
-  Panel-navigation-test:
+  client-app-test:
     runs-on: ubuntu-latest
     env:
       LOGIN: ${{ secrets.LOGIN }}
@@ -50,4 +50,4 @@ jobs:
           LANG: pl
           LC_ALL: pl_PL.UTF-8
           TZ: Europe/Warsaw
-        run: npm run panel-navigation-test
+        run: npm run panel-new-context-test

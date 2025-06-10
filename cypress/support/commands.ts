@@ -32,7 +32,9 @@ declare global {
 
             isInViewport(): Chainable<JQuery>;
 
-            token()
+            token();
+
+            assertOuterHtmlProperties(subject: any, expectedHtml: string);
         }
     }
 }
@@ -55,7 +57,7 @@ Cypress.Commands.add('loginOnPanel', () => {
     PanelLoginPage.typeEmail(EnvEnum.LOGIN);
     PanelLoginPage.typePassword(EnvEnum.PASSWORD);
     PanelLoginPage.clickLoginButton();
-    PanelLoginPage.selectGivenBusinessAndStoreToken(BusinessNameEnum.HAIRCUT_AND_BARBER);
+    PanelLoginPage.selectGivenBusiness(BusinessNameEnum.HAIRCUT_AND_BARBER);
     cy.document().its('readyState').should('eq', 'complete');
 });
 
@@ -144,6 +146,10 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
 
 Cypress.Commands.add('assertProperties', {prevSubject: true}, (subject, properties, expectedProperties) => {
     cy.wrap(subject).should('have.prop', properties).and('include', expectedProperties);
+});
+
+Cypress.Commands.add('assertOuterHtmlProperties', {prevSubject: true}, (subject: any, expectedHtml: string) => {
+    cy.wrap(subject).should('have.prop', 'outerHTML').and('include', expectedHtml);
 });
 
 Cypress.Commands.add(

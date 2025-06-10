@@ -30,4 +30,27 @@ export class Assertions {
             expect(cleanedText).to.include(expectedProperties);
         })
     }
+
+    public static assertNoErrors(): void {
+        const checkInterval = 200
+        const totalTime = 2000
+        const attempts = totalTime / checkInterval
+        let count = 0
+
+        function check() {
+            cy.get('body').then($body => {
+                if ($body.find('.toast-header:contains("Error")').length > 0) {
+                    throw new Error('Error toast appeared on the page')
+                } else {
+                    count++
+                    if (count < attempts) {
+                        cy.wait(checkInterval).then(check)
+                    }
+                }
+            })
+        }
+
+        check()
+    }
+
 }

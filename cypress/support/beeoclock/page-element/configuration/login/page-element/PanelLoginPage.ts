@@ -1,5 +1,6 @@
 import {PanelLoginPageElement} from "../PanelLoginPageElement";
-import {ApiInterceptionHelper} from "../../../../common/Interception/ApiInterceptionHelper";
+import {Assertions} from "../../tab/common/assertions/Assertions";
+import {LoginOuterHtmlStorage} from "../html/LoginOuterHtmlStorage";
 
 export class PanelLoginPage {
 
@@ -7,6 +8,11 @@ export class PanelLoginPage {
         PanelLoginPageElement.EmailInput.getElement()
             .type(email)
         return this;
+    }
+
+    public static assertEmail(email: string): PanelLoginPage {
+        Assertions.assertTrimmedProperties(PanelLoginPageElement.EmailInput.getElement(), 'value', email)
+        return this
     }
 
     public static typePassword(password: string): PanelLoginPage {
@@ -21,22 +27,17 @@ export class PanelLoginPage {
         return this;
     }
 
-    public static clickLoginButtonAndStoreToken(): PanelLoginPage {
-        const getIdentityProfile = ApiInterceptionHelper.getIdentityProfile()
-        PanelLoginPageElement.LoginButton.getElement()
-            .click().then(() => {
-            cy.wait('@' + getIdentityProfile).then((interception) => {
-                const authorizationHeader = interception.request.headers['authorization'];
-                const token = (authorizationHeader as string).split(' ')[1];
-                cy.wrap(token).as('token');
-            })
-        });
-        return this;
+    public static assertOuterHtml(): PanelLoginPage {
+        const selector = cy.get('app-sign-in-identity-page')
+        cy.assertOuterHtmlProperties(selector, LoginOuterHtmlStorage.getLoginComponentOuterHtml())
+        return this
     }
 
-    public static selectGivenBusinessAndStoreToken(business: string): PanelLoginPage {
+    public static selectGivenBusiness(business: string): PanelLoginPage {
         PanelLoginPageElement.SelectBusinessOption.getElement(business)
-            .click()
+            .click().then(() => {
+            Assertions.assertNoErrors()
+        })
         return this;
     }
 
@@ -51,9 +52,12 @@ export class PanelLoginPage {
         return this;
     }
 
-    public static selectGivenBusiness(business: string): PanelLoginPage {
-        PanelLoginPageElement.SelectBusinessOption.getElement(business)
-            .click();
-        return this;
+    public static assertPasswordInput(): PanelLoginPage {
+        PanelLoginPageElement.PasswordInput.getElement().should('have.attr', 'type', 'password')
+        PanelLoginPageElement.PasswordInput.getElement().find('button').click();
+        PanelLoginPageElement.PasswordInput.getElement().should('have.attr', 'type', 'text')
+        PanelLoginPageElement.PasswordInput.getElement().find('button').click();
+        PanelLoginPageElement.PasswordInput.getElement().should('have.attr', 'type', 'password')
+        return this
     }
 }

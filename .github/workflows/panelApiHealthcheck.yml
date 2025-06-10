@@ -26,5 +26,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run healthcheck
-        run: npm run panel-app-api-health-check
+      - name: Run panel app healthcheck
+        id: run_healthcheck
+        run: |
+          npm run panel-app-api-health-check || EXIT_CODE=$?
+          echo "EXIT_CODE=$EXIT_CODE" >> $GITHUB_ENV
+          if [ "$EXIT_CODE" -ne 0 ]; then exit 1; fi
+
+  notify:
+    needs: run-tests
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send failure notification
+        run: |
+          TEXT="❌ Panel App Health Check failed, details: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" -d "text=$TEXT"

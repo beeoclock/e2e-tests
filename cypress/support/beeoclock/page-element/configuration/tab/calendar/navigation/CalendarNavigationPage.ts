@@ -14,26 +14,13 @@ export class CalendarNavigationPage {
     }
 
     public clickNextDayArrow(): CalendarNavigationPage {
-        // const getOrder: string = ApiInterceptionHelper.getOrder()
         CalendarNavigationPageElement.NextDayArrow.getElement()
             .click()
-        // cy.wait('@' + getOrder).then((interception) => {
-        //     const requestUrl: URL = new URL(interception.request.url);
-        //
-        //     const start: string = requestUrl.searchParams.get('start');
-        //     const end: string = requestUrl.searchParams.get('end');
-        //
-        //     expect(start).to.equal(DateUtils.getStartOfTomorrowUTC());
-        //     expect(end).to.equal(DateUtils.getEndOfTomorrowUTC());
-        // });
         return this;
     }
 
     public clickPreviousDayArrow(): CalendarNavigationPage {
-        // const getOrder: string = ApiInterceptionHelper.getOrder()
         CalendarNavigationPageElement.PreviousDayArrow.getElement()
-        //     .click()
-        // cy.wait('@' + getOrder)
         return this;
     }
 

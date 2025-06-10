@@ -71,7 +71,7 @@ describe('biz landing test presentation & header navigation tests', () => {
             .assertHtml()
     });
 
-    it('assert demo body HTML match the expected HTML', ()=> {
+    it('assert demo body HTML match the expected HTML', () => {
         BizLandingPages.LandingBizDemoSection
             .verifyOuterHtmlElement()
     })
