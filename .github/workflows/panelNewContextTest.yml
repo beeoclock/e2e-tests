@@ -45,7 +45,7 @@ jobs:
           echo "Current timezone:"
           timedatectl
 
-      - name: Run panel app navigation tests
+      - name: Run panel app new context tests
         env:
           LANG: pl
           LC_ALL: pl_PL.UTF-8
