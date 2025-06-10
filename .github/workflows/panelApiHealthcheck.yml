@@ -35,10 +35,11 @@ jobs:
 
   notify:
       needs: run-tests
-      if: failure()
+      if: always()
       runs-on: ubuntu-latest
       steps:
           - name: Send failure notification
+            if: env.EXIT_CODE != '0'
             run: |
               TEXT=$(echo "❌ Panel App Health Check failed, details: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" | jq -s -R -r @uri)
               curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=$TEXT"
