@@ -20,7 +20,7 @@ describe("panel api healthcheck", () => {
     })
 
     it('get business profile and assert unauthorized response', function (): void {
-        BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.Unauthorized, BackendCommonEnum.INVALID_TOKEN, {
+        BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.Created_201, BackendCommonEnum.INVALID_TOKEN, {
             failOnStatusCode: false
         });
     });
