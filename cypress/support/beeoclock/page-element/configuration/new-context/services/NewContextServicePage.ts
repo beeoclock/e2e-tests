@@ -4,11 +4,10 @@ import {QueryAssertion} from "../../../../common/assertion/QueryAssertion";
 import {NewContextInterceptionHelper} from "../../../../common/Interception/new-context/NewContextInterceptionHelper";
 import {NewContextInterceptionAssertion} from "../../../../common/Interception/new-context/NewContextInterceptionAssertion";
 import {BusinessProfileInterception} from "../../../../common/Interception/business-profile/BusinessProfileInterception";
-import {ApiInterceptionHelper} from "../../../../common/Interception/ApiInterceptionHelper";
 import {LeftMenuPage} from "../../left-menu/LeftMenuPage";
 
 export class NewContextServicePage {
-    private element = new NewContextServiceElement()
+    private element: NewContextServiceElement = new NewContextServiceElement()
 
     public clickAddServiceButton(): NewContextServicePage {
         cy.get('bee-form-button-with-icon')
@@ -60,9 +59,10 @@ export class NewContextServicePage {
         const getBusinessProfile: string = BusinessProfileInterception.getBusinessProfile()
         cy.contains('button', 'Utwórz').click()
 
+        cy.log('business', JSON.stringify(expect))
         NewContextInterceptionAssertion.createNewContextAlias(createNewContext, companyName)
         NewContextInterceptionAssertion.updateContextAlias(updateBusinessProfile, expect)
-        ApiInterceptionHelper.waitForAlias(getBusinessProfile)
+        NewContextInterceptionAssertion.waitForGetBusiness(getBusinessProfile, expect)
         LeftMenuPage.assertIsSynchronized(true)
         return this
     }
