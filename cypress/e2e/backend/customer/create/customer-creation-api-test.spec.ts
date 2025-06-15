@@ -50,7 +50,6 @@ describe('customer api test', () => {
 
         CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
-                cy.log('Response:', JSON.stringify(response));
                 expect(response).to.have.property('items').that.is.an('array').with.length.greaterThan(0);
 
                 const customerResponse: any = response.items[0];
@@ -69,7 +68,7 @@ describe('customer api test', () => {
     })
 
     it('should create customer with maximal properties and assert its properties', () => {
-        let note = faker.finance.account(70)
+        let note: string = faker.finance.account(70)
 
         const customer: ICustomer = new CustomerBuilder()
             .setId(customerData._id)

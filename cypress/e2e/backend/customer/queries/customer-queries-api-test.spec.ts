@@ -33,7 +33,6 @@ describe('customer queries api test', () => {
 
             CustomerApi.getCustomerPaged(criteria, {})
                 .then(response => {
-                    cy.log('total:', response.totalSize)
                     expect(response.items).to.have.lengthOf(Number(size))
                 })
         })
@@ -44,8 +43,8 @@ describe('customer queries api test', () => {
         let allEmails = new Set<string>();
         let allPhoneNumbers = new Set<string>();
 
-        pageSize.forEach(size => {
-            cy.log('size:', size);
+        pageSize.forEach((size: string): void => {
+            cy.log('test for size:', size);
             const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
                 .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
                 .withOrderBy('name')
@@ -57,7 +56,6 @@ describe('customer queries api test', () => {
             CustomerApi.getCustomerPaged(criteria, {}).then(response => {
                 expect(response.items).to.have.lengthOf(20);
 
-                cy.log('page:', JSON.stringify(response.items));
                 response.items.forEach(item => {
                     let normalizedEmail = item.email?.trim();
 
@@ -86,7 +84,6 @@ describe('customer queries api test', () => {
             });
         });
     });
-
 
     it('get paged customer with given state and assert', () => {
         Object.values(CustomerStateEnum).forEach(state => {

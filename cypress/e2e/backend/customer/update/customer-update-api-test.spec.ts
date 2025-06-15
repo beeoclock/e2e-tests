@@ -53,7 +53,6 @@ describe('customer update api test', () => {
 
         CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
-                cy.log('Response:', JSON.stringify(response));
                 expect(response).to.have.property('items').that.is.an('array').with.length.greaterThan(0);
 
                 const customerResponse: any = response.items[0];
@@ -101,7 +100,6 @@ describe('customer update api test', () => {
 
         CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
-                cy.log('Response:', JSON.stringify(response));
                 expect(response).to.have.property('items').that.is.an('array').with.length.greaterThan(0);
 
                 const customerResponse: any = response.items[0];
@@ -150,7 +148,6 @@ describe('customer update api test', () => {
 
         CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
-                cy.log('Response:', JSON.stringify(response));
                 const customerResponse: any = response.items[0];
 
                 expect(customerResponse).to.have.property('firstName', customerData.firstName);
@@ -268,7 +265,6 @@ describe('customer update api test', () => {
 
         CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
-                cy.log('Response:', JSON.stringify(response));
                 const customerResponse: any = response.items[0];
 
                 expect(customerResponse).to.have.property('firstName', customerData.firstName);
@@ -320,10 +316,6 @@ describe('customer update api test', () => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             });
 
-        CustomerApi.getCustomerById(customerData._id).then(response => {
-            cy.log('Customer Response:', JSON.stringify(response));
-        });
-
         const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
             .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
             .withOrderBy('name')
@@ -336,7 +328,6 @@ describe('customer update api test', () => {
         CustomerApi.getCustomerPaged(criteria, {})
             .then(response => {
                 const customerResponse: any = response.items[0];
-                cy.log('Response:', JSON.stringify(customerResponse));
 
                 expect(customerResponse).to.have.property('firstName', customerData.firstName);
                 expect(customerResponse).to.have.property('lastName', customerData.lastName);
@@ -358,8 +349,8 @@ describe('customer update api test', () => {
         let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
 
         const now = new Date();
-        const activeStateTime = now.toISOString();
-        const deletedStateTime = new Date(now.getTime() + 5000).toISOString();
+        const activeStateTime: string = now.toISOString();
+        const deletedStateTime: string = new Date(now.getTime() + 5000).toISOString();
 
         const activeStateHistory: IStateHistory = new StateHistoryBuilder()
             .setState(StateEnum.active)
@@ -390,7 +381,6 @@ describe('customer update api test', () => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
 
                 const updatedCustomer = response.body;
-                cy.log('Updated Customer (Preview):', JSON.stringify(updatedCustomer));
 
                 expect(updatedCustomer).to.have.property('firstName', customerData.firstName);
                 expect(updatedCustomer).to.have.property('lastName', customerData.lastName);
@@ -407,10 +397,6 @@ describe('customer update api test', () => {
                 expect(updatedCustomer.stateHistory[1]).to.have.property('setAt', deletedStateTime);
             });
 
-        CustomerApi.getCustomerById(customerData._id).then(response => {
-            cy.log('Customer Response:', JSON.stringify(response));
-        });
-
         const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()
             .withTenantId(BackendCommonEnum.X_Business_Tenant_Id)
             .withOrderBy('name')
@@ -421,9 +407,8 @@ describe('customer update api test', () => {
             .build();
 
         CustomerApi.getCustomerPaged(criteria, {})
-            .then(response => {
+            .then((response: any) => {
                 const customerResponse: any = response.items[0];
-                cy.log('Response:', JSON.stringify(customerResponse));
 
                 expect(customerResponse).to.have.property('firstName', customerData.firstName);
                 expect(customerResponse).to.have.property('lastName', customerData.lastName);
