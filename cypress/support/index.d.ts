@@ -11,7 +11,9 @@ declare namespace Cypress {
         setNetworkThrottle(speed: ThrottleEnum): void;
 
         assertProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
+
         assertElementTextNormalized(expectedProperties: string): Chainable<JQuery>;
+
         assertElementText(expectedProperties: string): Chainable<JQuery>;
 
         assertTrimmedProperties(properties: string, expectedProperties: string): Chainable<JQuery>;

@@ -1,7 +1,6 @@
 import {BizLandingPages} from "../../support/beeoclock/page-element/biz-landing/BizLandingPages";
 import {FaqData} from "../../fixtures/biz-landing/faqData";
 import {QueryAssertion} from "../../support/beeoclock/common/assertion/QueryAssertion";
-import {Assertions} from "../../support/beeoclock/page-element/configuration/tab/common/assertions/Assertions";
 
 describe('biz landing test faq', () => {
 

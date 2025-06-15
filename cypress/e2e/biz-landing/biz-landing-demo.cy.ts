@@ -19,9 +19,9 @@ describe('biz-landing-demo', (): void => {
         PanelLoginPage.clickLoginButton()
         PanelLoginPage.selectGivenBusiness(`John's Barber Shop`)
 
-      QueryAssertion.verifyCorrectUrl(`https://crm.dev.beeoclock.com/${BackendCommonEnum.DEMO_TENANT_ID}/event/calendar-with-specialists`)
-      CalendarPages.CalendarNavigationPage
-          .verifyCurrenDate()
+        QueryAssertion.verifyCorrectUrl(`https://crm.dev.beeoclock.com/${BackendCommonEnum.DEMO_TENANT_ID}/event/calendar-with-specialists`)
+        CalendarPages.CalendarNavigationPage
+            .verifyCurrenDate()
     })
 
     function visit(): void {

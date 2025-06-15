@@ -16,7 +16,6 @@
     "panel-navigation-test": "npx cypress run --spec cypress/e2e/panel/navigation --browser edge",
     "panel-new-context-test": "npx cypress run --spec cypress/e2e/panel/new-context --browser edge",
     "panel-client-test": "npx cypress run --spec cypress/e2e/panel/client --browser edge",
-
     "cypress-docker:open": "docker build -t cypress-runner . && docker run --name cypress-open cypress-runner"
   },
   "author": "Jan Zadumiński",

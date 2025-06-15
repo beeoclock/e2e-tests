@@ -22,6 +22,7 @@ declare global {
             setNetworkThrottle(speed: ThrottleEnum): void;
 
             assertProperties(properties: string, expectedProperties: string): Chainable<JQuery>;
+
             assertElementTextNormalized(expectedProperties: string): Chainable<JQuery>;
 
             assertElementText(expectedProperties: string): Chainable<JQuery>;
@@ -154,7 +155,7 @@ Cypress.Commands.add('assertOuterHtmlProperties', {prevSubject: true}, (subject:
 
 Cypress.Commands.add(
     'assertElementTextNormalized',
-    { prevSubject: true },
+    {prevSubject: true},
     (subject: any, expectedValue: string) => {
         cy.wrap(subject)
             .invoke('text')

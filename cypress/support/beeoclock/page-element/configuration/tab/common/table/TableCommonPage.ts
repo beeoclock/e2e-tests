@@ -31,7 +31,7 @@ export class TableCommonPage {
     }
 
     public static assertTableCount(count: number): typeof TableCommonPage {
-        this.component.getTableLengthCount().should('have.prop', 'innerText').and('include','Razem: ' + count) //assert the total count info
+        this.component.getTableLengthCount().should('have.prop', 'innerText').and('include', 'Razem: ' + count) //assert the total count info
         this.component.getTableLength().should('eq', count) //assert table length
         return this;
     }

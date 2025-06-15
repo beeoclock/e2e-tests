@@ -47,7 +47,7 @@ describe('balance test', (): void => {
             .clickSubmitButton()
 
         cy.log('assert redirect on balance page')
-        cy.url({ timeout: 15000 }).should('include', '/balance/overview')
+        cy.url({timeout: 15000}).should('include', '/balance/overview')
 
         cy.log('assert is synchronized')
         LeftMenuPage.handleSynchronization()

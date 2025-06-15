@@ -1,4 +1,4 @@
-import { BalanceApi } from "support/beeoclock/backend/panel/balance/BalanceApi";
+import {BalanceApi} from "support/beeoclock/backend/panel/balance/BalanceApi";
 
 describe('Balance queries API test', () => {
     it('get balance paged', () => {
@@ -56,8 +56,8 @@ describe('Balance queries API test', () => {
 
     it('getLastBalance', () => {
         BalanceApi.getActualBalance().then((balance: number): void => {
-         cy.log('Balance: ' + balance);
-         expect(balance).to.be.a('number');
+            cy.log('Balance: ' + balance);
+            expect(balance).to.be.a('number');
         });
     })
 });

@@ -8,6 +8,7 @@ export class SelectTimePage {
             .click();
         return this;
     }
+
     public assertSpecificTime(time: string): SelectTimePage {
         const currentHour = parseInt(DateUtils.getCurrentHour());
         const currentMinute = parseInt(DateUtils.getCurrentMinutes());

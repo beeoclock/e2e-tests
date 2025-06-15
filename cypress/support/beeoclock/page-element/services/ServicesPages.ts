@@ -26,5 +26,4 @@ export class ServicesPages {
     public static OrderSummaryNavigationPage: OrderSummaryNavigationPage = new OrderSummaryNavigationPage();
     public static OrderCancellationPage: OrderCancellationPage = new OrderCancellationPage();
     public static ServiceSummaryPage: ServiceSummaryPage = new ServiceSummaryPage();
-
 }
