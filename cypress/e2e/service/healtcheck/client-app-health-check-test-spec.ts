@@ -57,7 +57,19 @@ describe("Client app health check test", () => {
         });
     });
 
-    it.skip('test 4 assert correct redirect //TODO BUG', function () {
+    it('test 4 assert corrected lang on the unsupported language', function () {
+        cy.visit('https://beeoclock.com/pl/e2e');
+
+        cy.document().then((doc) => {
+            const langAttribute = doc.documentElement.getAttribute('lang');
+            expect(langAttribute).to.equal('pl');
+        });
+
+        cy.get('h1').contains('Haircut&Barber').should('be.visible')
+        cy.contains('a', 'Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300')
+    });
+
+    it.skip('test 5 assert correct redirect //TODO BUG', function () {
         cy.visit(emptyDomain, {failOnStatusCode: false})
 
         let description: string = 'Rezerwacja spotkań online dla klientów.'
