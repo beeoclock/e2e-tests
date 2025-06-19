@@ -83,7 +83,7 @@ jobs:
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Cypress verify
-        run: npx cypress verify --silent
+        run: npx cypress verify
 
       - name: Run test script
         run: npm run ${{ matrix.job.script }}
