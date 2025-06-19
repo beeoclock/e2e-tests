@@ -46,27 +46,9 @@ jobs:
           locale
           timedatectl
 
-  run-tests:
+  run-tests-panel_new_context:
     needs: setup
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        job:
-          - name: panel_new_context
-            script: panel-new-context-test
-          - name: biz_landing
-            script: biz-landing-test
-          - name: client_app
-            script: client-app-test
-          - name: healthcheck
-            script: client-app-health-check
-          - name: panel_api
-            script: panel-app-api-test
-          - name: panel_navigation
-            script: panel-navigation-test
-    name: Run ${{ matrix.job.name }} tests
-    continue-on-error: true
     env:
       LANG: pl
       LC_ALL: pl_PL.UTF-8
@@ -84,14 +66,12 @@ jobs:
           node-version: '20'
 
       - name: Restore node_modules cache
-        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Restore Cypress binary cache
-        id: cache-cypress
         uses: actions/cache@v3
         with:
           path: /home/runner/.cache/Cypress
@@ -101,7 +81,207 @@ jobs:
         run: npx cypress install
 
       - name: Cypress verify
-        run: npx cypress verify --silent
+        run: npx cypress verify
 
-      - name: Run test script
-        run: npm run ${{ matrix.job.script }}
+      - name: Run panel_new_context tests
+        run: npm run panel-new-context-test
+
+  run-tests-biz_landing:
+    needs: run-tests-panel_new_context
+    runs-on: ubuntu-latest
+    env:
+      LANG: pl
+      LC_ALL: pl_PL.UTF-8
+      TZ: Europe/Warsaw
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Restore Cypress binary cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/Cypress
+          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Cypress binary if missing
+        run: npx cypress install
+
+      - name: Cypress verify
+        run: npx cypress verify
+
+      - name: Run biz_landing tests
+        run: npm run biz-landing-test
+
+  run-tests-client_app:
+    needs: run-tests-biz_landing
+    runs-on: ubuntu-latest
+    env:
+      LANG: pl
+      LC_ALL: pl_PL.UTF-8
+      TZ: Europe/Warsaw
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Restore Cypress binary cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/Cypress
+          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Cypress binary if missing
+        run: npx cypress install
+
+      - name: Cypress verify
+        run: npx cypress verify
+
+      - name: Run client_app tests
+        run: npm run client-app-test
+
+  run-tests-healthcheck:
+    needs: run-tests-client_app
+    runs-on: ubuntu-latest
+    env:
+      LANG: pl
+      LC_ALL: pl_PL.UTF-8
+      TZ: Europe/Warsaw
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Restore Cypress binary cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/Cypress
+          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Cypress binary if missing
+        run: npx cypress install
+
+      - name: Cypress verify
+        run: npx cypress verify
+
+      - name: Run healthcheck tests
+        run: npm run client-app-health-check
+
+  run-tests-panel_api:
+    needs: run-tests-healthcheck
+    runs-on: ubuntu-latest
+    env:
+      LANG: pl
+      LC_ALL: pl_PL.UTF-8
+      TZ: Europe/Warsaw
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Restore Cypress binary cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/Cypress
+          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Cypress binary if missing
+        run: npx cypress install
+
+      - name: Cypress verify
+        run: npx cypress verify
+
+      - name: Run panel_api tests
+        run: npm run panel-app-api-test
+
+  run-tests-panel_navigation:
+    needs: run-tests-panel_api
+    runs-on: ubuntu-latest
+    env:
+      LANG: pl
+      LC_ALL: pl_PL.UTF-8
+      TZ: Europe/Warsaw
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Restore Cypress binary cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/Cypress
+          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Cypress binary if missing
+        run: npx cypress install
+
+      - name: Cypress verify
+        run: npx cypress verify
+
+      - name: Run panel_navigation tests
+        run: npm run panel-navigation-test
