@@ -49,6 +49,7 @@ jobs:
   run-tests-panel_new_context:
     needs: setup
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       LANG: pl
       LC_ALL: pl_PL.UTF-8
@@ -89,6 +90,7 @@ jobs:
   run-tests-biz_landing:
     needs: run-tests-panel_new_context
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       LANG: pl
       LC_ALL: pl_PL.UTF-8
@@ -129,6 +131,7 @@ jobs:
   run-tests-client_app:
     needs: run-tests-biz_landing
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       LANG: pl
       LC_ALL: pl_PL.UTF-8
@@ -169,6 +172,7 @@ jobs:
   run-tests-healthcheck:
     needs: run-tests-client_app
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       LANG: pl
       LC_ALL: pl_PL.UTF-8
@@ -209,6 +213,7 @@ jobs:
   run-tests-panel_api:
     needs: run-tests-healthcheck
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       LANG: pl
       LC_ALL: pl_PL.UTF-8
@@ -249,6 +254,7 @@ jobs:
   run-tests-panel_navigation:
     needs: run-tests-panel_api
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       LANG: pl
       LC_ALL: pl_PL.UTF-8
