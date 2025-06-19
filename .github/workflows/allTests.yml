@@ -7,7 +7,8 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      cache-hit: ${{ steps.cache.outputs.cache-hit }}
+      cache-hit: ${{ steps.cache-node-modules.outputs.cache-hit }}
+      cache-cypress-hit: ${{ steps.cache-cypress.outputs.cache-hit }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,14 +19,21 @@ jobs:
           node-version: '20'
 
       - name: Cache node_modules
-        id: cache
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
+      - name: Cache Cypress binary
+        id: cache-cypress
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/Cypress
+          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Set locale and timezone
@@ -75,15 +83,25 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Restore node_modules from cache
-        id: cache
+      - name: Restore node_modules cache
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
+      - name: Restore Cypress binary cache
+        id: cache-cypress
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/Cypress
+          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Cypress binary if missing
+        run: npx cypress install
+
       - name: Cypress verify
-        run: npx cypress verify
+        run: npx cypress verify --silent
 
       - name: Run test script
         run: npm run ${{ matrix.job.script }}
