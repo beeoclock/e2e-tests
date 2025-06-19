@@ -1,0 +1,91 @@
+name: Bee o`clock all tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      cache-hit: ${{ steps.cache.outputs.cache-hit }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Cache node_modules
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Upload node_modules as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-modules
+          path: node_modules
+
+      - name: Set locale and timezone
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales
+          sudo locale-gen pl_PL.UTF-8
+          sudo update-locale LANG=pl_PL.UTF-8
+          sudo timedatectl set-timezone Europe/Warsaw
+          locale
+          timedatectl
+
+  run-tests:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - name: panel_new_context
+            script: panel-new-context-test
+          - name: biz_landing
+            script: biz-landing-test
+          - name: client_app
+            script: client-app-test
+          - name: healthcheck
+            script: client-app-health-check
+          - name: panel_api
+            script: panel-app-api-test
+          - name: panel_navigation
+            script: panel-navigation-test
+    name: Run ${{ matrix.job.name }} tests
+    continue-on-error: true
+    env:
+      LANG: pl
+      LC_ALL: pl_PL.UTF-8
+      TZ: Europe/Warsaw
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      API_KEY: ${{ secrets.KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Download node_modules artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: node-modules
+          path: node_modules
+
+      - name: Run test script
+        run: npm run ${{ matrix.job.script }}
