@@ -1,4 +1,4 @@
-import {EntryPointEnum} from "../../common/Interception/EntryPointEnum";
+import {DevEntryPointEnum} from "../../common/Interception/DevEntryPointEnum";
 import {ApiHeaderFactory} from "../auth/ApiHeaderFactory";
 
 export class ApiRequestFactory {
@@ -6,7 +6,7 @@ export class ApiRequestFactory {
     public static getRequest(path: string): Cypress.Chainable<any> {
         return cy.request({
             method: 'GET',
-            url: EntryPointEnum.API_ENTRY_POINT + path,
+            url: DevEntryPointEnum.API_ENTRY_POINT + path,
             headers: ApiHeaderFactory.getHeaders(),
         }).then(response => {
             expect(response.status).to.equal(200);

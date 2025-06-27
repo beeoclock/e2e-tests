@@ -1,6 +1,6 @@
 import {DateUtils} from "../../Utils/DateUtils";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
-import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
+import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 import {AuthApi} from "../../auth/AuthApi";
 import {OrderStatusEnum} from "./enum/OrderStatusEnum";
 import {StateEnum} from "./enum/StateEnum";
@@ -12,7 +12,7 @@ export class OrderApi {
         const tokenId = Cypress.env('token');
         const start = DateUtils.getStartOfPreviousDays(5);
         const end = DateUtils.getEndOfTomorrowUTC();
-        const url = EntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedScience&orderDir=desc&statuses=done&statuses=accepted&statuses=requested`;
+        const url = DevEntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedScience&orderDir=desc&statuses=done&statuses=accepted&statuses=requested`;
         return cy.request({
             method: 'GET',
             url: url,
@@ -50,7 +50,7 @@ export class OrderApi {
     public static getAllOrderIds(): any {
         this.getToken()
         const tokenId = Cypress.env('token');
-        const url = EntryPointEnum.API_ENTRY_POINT + '/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
+        const url = DevEntryPointEnum.API_ENTRY_POINT + '/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
         return cy.request({
             method: 'GET',
             url: url,
@@ -78,7 +78,7 @@ export class OrderApi {
         const tokenId = Cypress.env('token');
         return cy.request({
             method: 'DELETE',
-            url: EntryPointEnum.API_ENTRY_POINT + '/order/' + id,
+            url: DevEntryPointEnum.API_ENTRY_POINT + '/order/' + id,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
@@ -96,7 +96,7 @@ export class OrderApi {
         const tokenId = Cypress.env('token');
         return cy.request({
             method: 'GET',
-            url: EntryPointEnum.API_ENTRY_POINT + '/order/' + id,
+            url: DevEntryPointEnum.API_ENTRY_POINT + '/order/' + id,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
             },
@@ -134,7 +134,7 @@ export class OrderApi {
 
     public static assertSuccessfulDeletion(orderId: string): any {
         const tokenId = Cypress.env('token');
-        const url = EntryPointEnum.API_ENTRY_POINT + '/order/' + orderId;
+        const url = DevEntryPointEnum.API_ENTRY_POINT + '/order/' + orderId;
         return cy.request({
             method: 'GET',
             url: url,

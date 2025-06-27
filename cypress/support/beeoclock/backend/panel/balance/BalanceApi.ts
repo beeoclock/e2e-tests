@@ -1,4 +1,4 @@
-import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
+import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 import {ApiHeaderFactory} from "../../auth/ApiHeaderFactory";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 
@@ -8,7 +8,7 @@ export class BalanceApi {
         return ApiHeaderFactory.getHeaders().then(headers => {
             return cy.request({
                 method: 'GET',
-                url: EntryPointEnum.API_ENTRY_POINT + '/balance/paged',
+                url: DevEntryPointEnum.API_ENTRY_POINT + '/balance/paged',
                 headers,
                 qs: ApiHeaderFactory.getDefaultQueryParams()
             }).then(response => {

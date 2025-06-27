@@ -1,4 +1,4 @@
-import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
+import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {ICustomer} from "./create/ICustomer";
@@ -10,7 +10,7 @@ export class CustomerApi {
         const token = givenToken || Cypress.env('token');
         return cy.request({
             method: 'POST',
-            url: EntryPointEnum.API_ENTRY_POINT + '/customer',
+            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'Authorization': `Bearer ${token}`
@@ -29,7 +29,7 @@ export class CustomerApi {
         const token = givenToken || Cypress.env('token');
         return cy.request({
             method: 'PUT',
-            url: EntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
+            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
             },
@@ -47,7 +47,7 @@ export class CustomerApi {
         const token = givenToken || Cypress.env('token');
         return cy.request({
             method: 'DELETE',
-            url: EntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
+            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
             },
@@ -64,7 +64,7 @@ export class CustomerApi {
         const token = givenToken || Cypress.env('token');
         return cy.request({
             method: 'GET',
-            url: EntryPointEnum.API_ENTRY_POINT + '/customer/paged',
+            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer/paged',
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
             },
@@ -83,7 +83,7 @@ export class CustomerApi {
         const token = givenToken || Cypress.env('token');
         return cy.request({
             method: 'GET',
-            url: EntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
+            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'

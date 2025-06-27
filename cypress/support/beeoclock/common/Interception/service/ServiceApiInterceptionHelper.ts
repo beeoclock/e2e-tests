@@ -1,11 +1,11 @@
 import {DateUtils} from "../../../backend/Utils/DateUtils";
-import {EntryPointEnum} from "../EntryPointEnum";
+import {DevEntryPointEnum} from "../DevEntryPointEnum";
 
 export class ServiceApiInterceptionHelper {
 
     public static getServices(): string {
         const getServices: string = 'getServices' + DateUtils.getCurrentTime();
-        cy.intercept('GET', EntryPointEnum.API_ENTRY_POINT + '/service/paged?*').as(getServices);
+        cy.intercept('GET', DevEntryPointEnum.API_ENTRY_POINT + '/service/paged?*').as(getServices);
         return getServices
     }
 }

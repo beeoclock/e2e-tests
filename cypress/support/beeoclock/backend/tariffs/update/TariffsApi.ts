@@ -1,8 +1,8 @@
 import {AuthApi} from "../../auth/AuthApi";
-import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
+import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 
 export class TariffsApi {
-    private static BASE_URL: string = EntryPointEnum.TARIFFS_ENTRY_POINT;
+    private static BASE_URL: string = DevEntryPointEnum.TARIFFS_ENTRY_POINT;
 
     static patchToBasic(): any {
         const token = Cypress.env('token');

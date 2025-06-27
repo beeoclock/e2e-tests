@@ -1,4 +1,4 @@
-import {EntryPointEnum} from "../../../common/Interception/EntryPointEnum";
+import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {EnvEnum} from "../../../common/enum/EnvEnum";
@@ -6,7 +6,7 @@ import {EnvEnum} from "../../../common/enum/EnvEnum";
 export class BusinessProfileApi {
 
     public static getBusinessProfileDetails(expectedCode: HTTPStatusCodeType, tokenId: string, options: Partial<Cypress.RequestOptions>): any {
-        const url: string = EntryPointEnum.API_ENTRY_POINT + `/business-profile`;
+        const url: string = DevEntryPointEnum.API_ENTRY_POINT + `/business-profile`;
 
         return cy.request({
             method: 'GET',
@@ -29,7 +29,7 @@ export class BusinessProfileApi {
     public static getBusinessProfile(): Cypress.Chainable<object> {
         cy.token();
 
-        const url: string = EntryPointEnum.API_ENTRY_POINT + `/business-profile`;
+        const url: string = DevEntryPointEnum.API_ENTRY_POINT + `/business-profile`;
 
         return cy.then(() => {
             const token: string = Cypress.env('token');
