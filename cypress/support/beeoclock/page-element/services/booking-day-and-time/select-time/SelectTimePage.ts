@@ -10,15 +10,15 @@ export class SelectTimePage {
     }
 
     public assertSpecificTime(time: string): SelectTimePage {
-        const currentHour = parseInt(DateUtils.getCurrentHour());
-        const currentMinute = parseInt(DateUtils.getCurrentMinutes());
-
-        if ((currentHour === 19 && currentMinute > 0)) {
-            return this;
-        }
+        const currentHour = parseInt(DateUtils.getCurrentHour(), 10);
+        const currentMinute = parseInt(DateUtils.getCurrentMinutes(), 10);
 
         if (currentHour < 10) {
+            cy.log('Current time is before 10:00 – forcing slot to 12:00');
             SelectTimePageElement.SelectSpecificTime.getElement('12:00');
+        } else if (currentHour < 20 && currentMinute > 0) {
+            cy.log('Time is before 20:00 and minutes > 0 – forcing 20:00 slot');
+            SelectTimePageElement.SelectSpecificTime.getElement('20:00');
         } else {
             SelectTimePageElement.SelectSpecificTime.getElement(time);
         }
@@ -38,18 +38,13 @@ export class SelectTimePage {
 
         const validMinutes = ['00', '15', '30', '45'];
 
-        // Check if the given time is after 20:00, if so, no available slots
         if (slotHour > 20 || (slotHour === 20 && slotMinute > 0)) {
-            cy.log(`${time} is after 20:00, no available slots`);
+            cy.log(`${time} is after 20:00 – no available slots`);
             SelectTimePageElement.SelectSpecificTime.getNotExistingElement(time);
-        }
-        // Check if the time is not a valid slot (not 00, 15, 30, or 45)
-        else if (!validMinutes.includes(minuteStr)) {
-            cy.log(`${time} is not a valid time slot. Valid time slots are 00, 15, 30, 45`);
+        } else if (!validMinutes.includes(minuteStr)) {
+            cy.log(`${time} has invalid minutes – valid are: 00, 15, 30, 45`);
             SelectTimePageElement.SelectSpecificTime.getNotExistingElement(time);
-        }
-        // Otherwise, check for the available slot
-        else {
+        } else {
             SelectTimePageElement.SelectSpecificTime.getElement(time);
         }
         return this;
