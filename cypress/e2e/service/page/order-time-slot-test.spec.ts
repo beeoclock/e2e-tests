@@ -7,6 +7,7 @@ import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
+
 describe('order time slot test', () => {
     let currentHour: string = DateUtils.getCurrentHourWithMinutes()
 
@@ -50,12 +51,7 @@ describe('order time slot test', () => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
             .clickSelectSpecialistAndOrder()
-        // ServicesPages.SelectSpecialistPage
-        //     .selectSpecificSpecialist(SpecialistNameEnum.ZALEWSKI_FIRST_NAME)
-        // ServicesPages.SelectTimePage
-        //     .assertSpecificTime(TimeEnum.Hour_20)
 
-        //INFO: this will be always pass cause next day is always 20:00
         cy.log('NEXT 1')
         ServicesPages.SelectDayPage
             .selectGivenNextDay(1)
@@ -111,12 +107,11 @@ describe('order time slot test', () => {
         ServicesPages.SelectTimePage
             .verifyGivenSlotByActualTime(currentHour)
 
-        if (currentHour <= '20:00') {
-            ServicesPages.SelectTimePage
-                .assertSpecificTime(assertFirstFreeSlotForHairDyeing())
-        } else {
-            cy.log('no free slot')
-        }
+        const expectedSlots: string[] = assertFirstFreeSlotForHairDyeing();
+
+        expectedSlots.forEach(slot => {
+            ServicesPages.SelectTimePage.assertSpecificTime(slot);
+        });
     });
 
     it('test 5 - check all slot visibility in the next days for 1h service', (): void => {
@@ -179,19 +174,23 @@ describe('order time slot test', () => {
         cy.visit(ServiceEnum.PUBLIC_PANEL)
     })
 
-    function assertFirstFreeSlotForHairDyeing(): string {
-        const currentHour = parseInt(DateUtils.getCurrentHour(), 10); // np. 17, 18, itd.
+    function assertFirstFreeSlotForHairDyeing(): string[] {
+        const now = new Date();
+        let hour: number = now.getHours();
+        const minute: number = now.getMinutes();
 
-        if (currentHour >= 20) {
-            return "No available slots today";
+        if (minute > 0) {
+            hour += 1;
         }
 
-        const nextSlot = Math.max(currentHour + 1, 12); // slot musi być co najmniej od 12:00
-        if (nextSlot > 20) {
-            return "No available slots today";
-        }
+        const result: string[] = [];
 
-        return `${nextSlot}:00`;
+        for (let h = hour; h <= 20; h++) {
+            if (h >= 0 && h <= 20) {
+                result.push(`${h.toString().padStart(2, '0')}:00`);
+            }
+        }
+        return result;
     }
 
     const expectedHairDyeingHours: TimeEnum[] = [
