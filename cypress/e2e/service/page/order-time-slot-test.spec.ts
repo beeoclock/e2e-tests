@@ -171,7 +171,7 @@ describe('order time slot test', () => {
     })
 
     beforeEach('login', (): void => {
-        cy.visit(ServiceEnum.PUBLIC_PANEL)
+        cy.visit(ServiceEnum.PUBLIC_PANEL_DEV)
     })
 
     function assertFirstFreeSlotForHairDyeing(): string[] {

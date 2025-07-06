@@ -212,7 +212,7 @@ describe('new context navigation', () => {
     })
 
     function login(): void {
-        cy.visit(ServiceEnum.CLIENT_PANEL, {
+        cy.visit(ServiceEnum.CLIENT_PANEL_dev, {
             failOnStatusCode: false,
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();

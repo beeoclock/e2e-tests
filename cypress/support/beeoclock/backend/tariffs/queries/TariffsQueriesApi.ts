@@ -30,7 +30,7 @@ export class TariffsQueriesApi {
 
     static getTariffsByIds(id: string, expectedCode: HTTPStatusCodeType, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');
-        const url = `${this.BASE_URL}/${id}`;
+        const url: string = `${this.BASE_URL}/${id}`;
 
         return cy.request({
             method: 'GET',
