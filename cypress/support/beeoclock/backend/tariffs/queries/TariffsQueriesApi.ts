@@ -7,7 +7,7 @@ export class TariffsQueriesApi extends ApiRequestHelper {
 
     static getTariffsPaged(expectedCode: HTTPStatusCodeType, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');
-        const url = `${this.BASE_URL}/paged`;
+        const url: string = `${this.BASE_URL}/paged`;
 
         return cy.request({
             method: 'GET',
