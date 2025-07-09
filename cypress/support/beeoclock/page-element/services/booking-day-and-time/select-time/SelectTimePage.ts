@@ -38,7 +38,7 @@ export class SelectTimePage {
 
         const validMinutes = ['00', '15', '30', '45'];
 
-        if (slotHour > 20 || (slotHour === 20 && slotMinute > 0)) {
+        if ((slotHour === 20 && slotMinute > 0)) {
             cy.log(`${time} is after 20:00 – no available slots`);
             SelectTimePageElement.SelectSpecificTime.getNotExistingElement(time);
         } else if (!validMinutes.includes(minuteStr)) {

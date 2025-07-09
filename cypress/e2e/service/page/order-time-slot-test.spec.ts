@@ -109,7 +109,7 @@ describe('order time slot test', () => {
 
         const expectedSlots: string[] = assertFirstFreeSlotForHairDyeing();
 
-        expectedSlots.forEach(slot => {
+        expectedSlots.forEach((slot: string): void => {
             ServicesPages.SelectTimePage.assertSpecificTime(slot);
         });
     });
