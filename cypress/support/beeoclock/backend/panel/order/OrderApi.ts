@@ -10,10 +10,10 @@ export class OrderApi {
 
     public static getOrderIds(): any {
         this.getToken()
-        const tokenId = Cypress.env('token');
-        const start = DateUtils.getStartOfPreviousDays(5);
-        const end = DateUtils.getEndOfTomorrowUTC();
-        const url = DevEntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedScience&orderDir=desc&statuses=done&statuses=accepted&statuses=requested`;
+        const tokenId: string = Cypress.env('token');
+        const start: string = DateUtils.getStartOfPreviousDays(5);
+        const end: string = DateUtils.getEndOfGivenDayUTC(3);
+        const url: string = DevEntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedScience&orderDir=desc`;
         return cy.request({
             method: 'GET',
             url: url,
@@ -30,7 +30,6 @@ export class OrderApi {
         }).then(response => {
             expect(response.status).to.equal(200);
             cy.log('not filtered items: ');
-
             const filteredItems = response.body.items.filter(({services}) => {
                 return services.some(({state, status}) => {
                     return state === StateEnum.active && [OrderServiceStatusEnum.done, OrderServiceStatusEnum.accepted].includes(status);

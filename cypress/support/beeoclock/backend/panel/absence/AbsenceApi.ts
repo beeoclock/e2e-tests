@@ -19,7 +19,7 @@ export class AbsenceApi extends ApiRequestHelper {
             },
             qs: {
                 start: DateUtils.getStartOfPreviousDays(1),
-                end: DateUtils.getEndOfTomorrowUTC()
+                end: DateUtils.getEndOfGivenDayUTC(3)
             },
             auth: {
                 bearer: tokenId
