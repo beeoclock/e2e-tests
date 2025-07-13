@@ -1,12 +1,12 @@
 import {BizLandingPages} from "../../support/beeoclock/page-element/biz-landing/BizLandingPages";
 
-describe('biz landing test presentation & header navigation tests', () => {
+describe('biz landing test presentation & header navigation tests', (): void => {
 
-    beforeEach('login', () => {
+    beforeEach('login', (): void => {
         visit()
     })
 
-    it('assert appointment section is visible after visit', () => {
+    it('assert appointment section is visible after visit', (): void => {
         BizLandingPages.LandingBizAppointmentPage
             .assertIsSectionVisible()
             .assertTryForFreeButton()
@@ -16,7 +16,7 @@ describe('biz landing test presentation & header navigation tests', () => {
             .assertTariffsIsNotVisible()
     })
 
-    it('assert service header link works properly', () => {
+    it('assert service header link works properly', (): void => {
         BizLandingPages.LandingBizHeaderPage
             .assertHtml()
             .assertLogo()
@@ -28,7 +28,7 @@ describe('biz landing test presentation & header navigation tests', () => {
             .assertHtml()
     })
 
-    it('assert tariffs header link works properly', () => {
+    it('assert tariffs header link works properly', (): void => {
         BizLandingPages.LandingBizHeaderPage
             .clickOnTariffsLink()
         BizLandingPages.LandingBizTariffsPage
@@ -37,7 +37,7 @@ describe('biz landing test presentation & header navigation tests', () => {
             .assertIsSectionNotVisible()
     })
 
-    it('assert faq header link works properly', () => {
+    it('assert faq header link works properly', (): void => {
         BizLandingPages.LandingBizHeaderPage
             .clickOnFaqLink()
         BizLandingPages.LandingBizFaqPage
@@ -46,7 +46,7 @@ describe('biz landing test presentation & header navigation tests', () => {
             .assertIsSectionNotVisible()
     })
 
-    it('assert contact header link works properly', () => {
+    it('assert contact header link works properly', (): void => {
         BizLandingPages.LandingBizHeaderPage
             .clickOnContactLink()
         BizLandingPages.LandingBizContactPage
@@ -56,22 +56,22 @@ describe('biz landing test presentation & header navigation tests', () => {
             .assertIsSectionNotVisible()
     })
 
-    it('assert login header link works properly', () => {
+    it('assert login header link works properly', (): void => {
         BizLandingPages.LandingBizHeaderPage
             .assertLoginLink()
     })
 
-    it('body HTML should match the expected HTML', () => {
+    it('body HTML should match the expected HTML', (): void => {
         BizLandingPages.BizLandingCommonPage
             .assertMainState()
     });
 
-    it('appointment body HTML should match the expected HTML', () => {
+    it('appointment body HTML should match the expected HTML', (): void => {
         BizLandingPages.LandingBizAppointmentPage
             .assertHtml()
     });
 
-    it('assert demo body HTML match the expected HTML', () => {
+    it('assert demo body HTML match the expected HTML', (): void => {
         BizLandingPages.LandingBizDemoSection
             .verifyOuterHtmlElement()
     })
@@ -81,7 +81,7 @@ describe('biz landing test presentation & header navigation tests', () => {
             {timeout: 30000, failOnStatusCode: false})
     }
 
-    before(() => {
+    before((): void => {
         cy.clearAllLocalStorage()
         Cypress.env('skipClear', true);
     });

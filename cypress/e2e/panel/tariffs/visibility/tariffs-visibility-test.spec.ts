@@ -4,19 +4,19 @@ import {TariffsPages} from "support/beeoclock/page-element/configuration/tab/tar
 import {TariffsFeatureEnum} from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsFeatureEnum";
 import {TariffsNameEnum} from "support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
 
-describe("tariffs visibility test", () => {
+describe("tariffs visibility test", (): void => {
 
-    before(() => {
+    before((): void => {
         Cypress.on('uncaught:exception', () => false);
     });
 
-    beforeEach('login', () => {
+    beforeEach('login', (): void => {
         Cypress.on('uncaught:exception', () => false);
         cy.loginOnPanel()
         LeftMenuPage.clickOnGivenTab(TabNameEnum.TARIFFS, false)
     })
 
-    it('should assert free slot tariff', () => {
+    it('should assert free slot tariff', (): void => {
         TariffsPages.TariffsListPage
             .verifyTariffsPrize(TariffsNameEnum.FREE, '0 zł')
             .verifyTariffFeature(TariffsNameEnum.FREE, TariffsFeatureEnum.EMAIL_NOTIFICATION)
@@ -27,7 +27,7 @@ describe("tariffs visibility test", () => {
             .verifyGivenSlotIsOpenToDowngrade(TariffsNameEnum.FREE)
     })
 
-    it('should assert Basic slot tariff', () => {
+    it('should assert Basic slot tariff', (): void => {
         TariffsPages.TariffsListPage
             .verifyTariffsPrize(TariffsNameEnum.BASIC, '59 zł')
             .verifyTariffFeature(TariffsNameEnum.BASIC, TariffsFeatureEnum.EMAIL_NOTIFICATION)
@@ -41,7 +41,7 @@ describe("tariffs visibility test", () => {
             .verifyGivenSlotIsSelected(TariffsNameEnum.BASIC)
     })
 
-    it('should assert Professional slot tariff', () => {
+    it('should assert Professional slot tariff', (): void => {
         TariffsPages.TariffsListPage
             .verifyTariffsPrize(TariffsNameEnum.PROFESSIONAL, '189 zł')
             .verifyTariffFeature(TariffsNameEnum.PROFESSIONAL, TariffsFeatureEnum.EMAIL_NOTIFICATION)

@@ -1,13 +1,13 @@
 import {BalanceApi} from "support/beeoclock/backend/panel/balance/BalanceApi";
 
-describe('Balance queries API test', () => {
-    it('get balance paged', () => {
-        BalanceApi.getBalancePaged().then((body) => {
+describe('Balance queries API test', (): void => {
+    it('get balance paged', (): void => {
+        BalanceApi.getBalancePaged().then((body: any): void => {
 
             expect(body).to.have.property('items').that.is.an('array').with.length.greaterThan(0);
             expect(body).to.have.property('totalSize').that.is.a('number');
 
-            body.items.forEach((item: any) => {
+            body.items.forEach((item: any): void => {
                 expect(item).to.have.all.keys(
                     'currency',
                     'amountBeforeAction',
@@ -46,7 +46,7 @@ describe('Balance queries API test', () => {
 
                 // stateHistory
                 expect(item.stateHistory).to.be.an('array').with.length.greaterThan(0);
-                item.stateHistory.forEach((state: any) => {
+                item.stateHistory.forEach((state: any): void => {
                     expect(state).to.have.property('state', 'active');
                     expect(state).to.have.property('setAt').that.is.a('string');
                 });
@@ -54,7 +54,7 @@ describe('Balance queries API test', () => {
         });
     });
 
-    it('getLastBalance', () => {
+    it('getLastBalance', (): void => {
         BalanceApi.getActualBalance().then((balance: number): void => {
             cy.log('Balance: ' + balance);
             expect(balance).to.be.a('number');

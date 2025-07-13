@@ -1,5 +1,5 @@
-describe('Environment Variables Test', () => {
-    it('should log environment variables', () => {
+describe('Environment Variables Test', (): void => {
+    it('should log environment variables', (): void => {
         // Logowanie do konsoli w celach debugowania
         cy.log('LOGIN:', Cypress.env('LOGIN'));
         cy.log('PASSWORD:', Cypress.env('PASSWORD'));

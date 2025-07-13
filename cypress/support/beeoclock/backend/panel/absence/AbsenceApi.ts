@@ -1,5 +1,4 @@
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
-import {AuthApi} from "../../auth/AuthApi";
 import {DateUtils} from "../../Utils/DateUtils";
 import {StateEnum} from "../order/enum/StateEnum";
 import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiRequestHelper";
@@ -61,11 +60,11 @@ export class AbsenceApi extends ApiRequestHelper {
     }
 
     public static deleteAllAbsences(): void {
-        this.getAllAbsenceIds().then((absenceids: string[]) => {
+        this.getAllAbsenceIds().then((absenceids: string[]): void => {
             if (absenceids.length > 0) {
-                cy.wrap(absenceids).each((id: string) => {
+                cy.wrap(absenceids).each((id: string): void => {
                     this.deleteAbsenceWithGivenId(id);
-                }).then(() => {
+                }).then((): void => {
                     cy.reload();
                 });
             } else {

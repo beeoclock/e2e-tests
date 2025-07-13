@@ -1,18 +1,18 @@
 import {TariffsQueriesApi} from "../../../../support/beeoclock/backend/tariffs/queries/TariffsQueriesApi";
 import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
 
-describe("tariffs queries api test", () => {
+describe("tariffs queries api test", (): void => {
     let expectedTariffs: any;
 
-    before(() => {
-        cy.fixture("backend/tariffs/existedTariffs.json").then((existedTariffs) => {
+    before((): void => {
+        cy.fixture("backend/tariffs/existedTariffs.json").then((existedTariffs): void => {
             expectedTariffs = existedTariffs;
         });
     });
 
     ///api/v1/paged
-    it("should get tariffs, and assert its response", () => {
-        cy.wrap(null).then(() => {
+    it("should get tariffs, and assert its response", (): void => {
+        cy.wrap(null).then((): void => {
             expect(expectedTariffs).to.exist;
 
             TariffsQueriesApi.getTariffsPaged(HTTPStatusCodeType.OK_200, {}).then((response): void => {
@@ -30,7 +30,7 @@ describe("tariffs queries api test", () => {
     });
 
     ///api/v1/{id}
-    it("should get free tariff by its id and assert response", () => {
+    it("should get free tariff by its id and assert response", (): void => {
         cy.wrap(null).then((): void => {
             expect(expectedTariffs).to.exist;
 
@@ -38,7 +38,7 @@ describe("tariffs queries api test", () => {
                 expectedTariffs.items[0]._id,
                 HTTPStatusCodeType.OK_200,
                 {}
-            ).then((response) => {
+            ).then((response): void => {
                 cy.log('RESP: ' + response)
                 // assertTariffResponse(response, 0);
             });
@@ -46,7 +46,7 @@ describe("tariffs queries api test", () => {
     });
 
     ///api/v1/{id}
-    it("should get basic tariff by its id and assert response", () => {
+    it("should get basic tariff by its id and assert response", (): void => {
         cy.wrap(null).then((): void => {
             expect(expectedTariffs).to.exist;
 
@@ -54,22 +54,22 @@ describe("tariffs queries api test", () => {
                 expectedTariffs.items[1]._id,
                 HTTPStatusCodeType.OK_200,
                 {}
-            ).then((response) => {
+            ).then((response): void => {
                 assertTariffResponse(response, 1);
             });
         });
     });
 
     ///api/v1/{id}
-    it("should get professional tariff by its id and assert response", () => {
-        cy.wrap(null).then(() => {
+    it("should get professional tariff by its id and assert response", (): void => {
+        cy.wrap(null).then((): void => {
             expect(expectedTariffs).to.exist;
 
             TariffsQueriesApi.getTariffsByIds(
                 expectedTariffs.items[2]._id,
                 HTTPStatusCodeType.OK_200,
                 {}
-            ).then((response) => {
+            ).then((response): void => {
                 assertTariffResponse(response, 2);
             });
         });
@@ -88,7 +88,7 @@ describe("tariffs queries api test", () => {
         expect(item.specialistLimit).to.equal(expected.specialistLimit);
 
         expect(item.prices.length).to.equal(expected.prices.length);
-        item.prices.forEach((price: any, i: number) => {
+        item.prices.forEach((price: any, i: number): void => {
             const expectedPrice = expected.prices[i];
             expect(price.currency).to.equal(expectedPrice.currency);
             expect(price.region).to.equal(expectedPrice.region);
@@ -118,7 +118,7 @@ describe("tariffs queries api test", () => {
         expect(response.type).to.equal(expectedTariffs.items[index].type);
 
         expect(response.prices.length).to.equal(expectedTariffs.items[index].prices.length);
-        response.prices.forEach((price: any, i: number) => {
+        response.prices.forEach((price: any, i: number): void => {
             const expectedPrice = expectedTariffs.items[index].prices[i];
             expect(price.currency).to.equal(expectedPrice.currency);
             expect(price.region).to.equal(expectedPrice.region);

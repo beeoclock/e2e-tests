@@ -2,8 +2,12 @@ import {CustomerApi} from "../../../../support/beeoclock/backend/panel/customer/
 import {CustomerFactory} from "../../../../support/beeoclock/backend/panel/customer/factory/CustomerFactory";
 import {ICustomer} from "../../../../support/beeoclock/backend/panel/customer/create/ICustomer";
 import {CustomerBuilder} from "../../../../support/beeoclock/backend/panel/customer/create/CustomerBuilder";
-import {ICustomerSearchCriteria} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
-import {CustomerSearchCriteriaBuilder} from "../../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
+import {
+    ICustomerSearchCriteria
+} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
+import {
+    CustomerSearchCriteriaBuilder
+} from "../../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
 import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTTPStatusCodeType";
 import {NumericUtils} from "../../../../support/beeoclock/backend/Utils/NumericUtils";
@@ -11,19 +15,19 @@ import {StateEnum} from "support/beeoclock/backend/panel/order/enum/StateEnum";
 import {StateHistoryBuilder} from "../../../../support/beeoclock/backend/panel/state/builder/StateHistoryBuilder";
 import {IStateHistory} from "../../../../support/beeoclock/backend/panel/state/interface/IStateHistory";
 
-describe('customer update api test', () => {
+describe('customer update api test', (): void => {
     let customerData: ICustomer;
 
-    beforeEach('create customer to edit', () => {
+    beforeEach('create customer to edit', (): void => {
         customerData = CustomerFactory.createCustomer()
         CustomerApi.createCustomerWithBuilder(customerData, {})
     })
 
-    afterEach('delete customer after each test', () => {
+    afterEach('delete customer after each test', (): void => {
         CustomerApi.deleteCustomer(customerData._id, {})
     })
 
-    it('update customer names', () => {
+    it('update customer names', (): void => {
         const customer: ICustomer = new CustomerBuilder()
             .setId(customerData._id)
             .setFirstName('Tom')
@@ -70,7 +74,7 @@ describe('customer update api test', () => {
             });
     })
 
-    it('update customer mail', () => {
+    it('update customer mail', (): void => {
         const customer: ICustomer = new CustomerBuilder()
             .setId(customerData._id)
             .setFirstName(customerData.firstName)
@@ -117,7 +121,7 @@ describe('customer update api test', () => {
             });
     })
 
-    it('update customer phone', () => {
+    it('update customer phone', (): void => {
         let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
         const customer: ICustomer = new CustomerBuilder()
             .setId(customerData._id)
@@ -163,7 +167,7 @@ describe('customer update api test', () => {
             });
     })
 
-    it('should try update customer on incorrect email', () => {
+    it('should try update customer on incorrect email', (): void => {
         const customer: ICustomer = new CustomerBuilder()
             .setId(customerData._id)
             .setFirstName(customerData.firstName)
@@ -197,7 +201,7 @@ describe('customer update api test', () => {
             });
     })
 
-    it.skip('should try update customer on incorrect phone TODO BUG', () => {
+    it.skip('should try update customer on incorrect phone TODO BUG', (): void => {
         let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(3)
 
         const customer: ICustomer = new CustomerBuilder()
@@ -233,7 +237,7 @@ describe('customer update api test', () => {
             });
     })
 
-    it('should update customer phone prefix', () => {
+    it('should update customer phone prefix', (): void => {
         let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
 
         const customer: ICustomer = new CustomerBuilder()
@@ -280,7 +284,7 @@ describe('customer update api test', () => {
             });
     })
 
-    it('should set customer as inactive, then assert it whole state history', () => {
+    it('should set customer as inactive, then assert it whole state history', (): void => {
         let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
 
         const now = new Date();
@@ -345,7 +349,7 @@ describe('customer update api test', () => {
             });
     });
 
-    it('should set customer as deleted, then assert it whole state history', () => {
+    it('should set customer as deleted, then assert it whole state history', (): void => {
         let number: string = NumericUtils.generateRandomValueWithoutZeroPrefix(9)
 
         const now = new Date();
@@ -407,7 +411,7 @@ describe('customer update api test', () => {
             .build();
 
         CustomerApi.getCustomerPaged(criteria, {})
-            .then((response: any) => {
+            .then((response: any): void => {
                 const customerResponse: any = response.items[0];
 
                 expect(customerResponse).to.have.property('firstName', customerData.firstName);

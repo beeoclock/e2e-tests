@@ -35,7 +35,7 @@ export class PanelLoginPage {
 
     public static selectGivenBusiness(business: string): PanelLoginPage {
         PanelLoginPageElement.SelectBusinessOption.getElement(business)
-            .click().then(() => {
+            .click().then((): void => {
             Assertions.assertNoErrors()
         })
         return this;

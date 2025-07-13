@@ -12,7 +12,7 @@ export class NewContextCompanyNamePage {
     }
 
     public typeCompanyName(companyName: string): NewContextCompanyNamePage {
-        this.element.getCompanyNameInput().click().then(() => {
+        this.element.getCompanyNameInput().click().then((): void => {
             this.element.getCompanyNameInput().type(companyName)
         })
         return this;

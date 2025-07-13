@@ -14,9 +14,9 @@ export class CalendarTablePage {
     public clickOnGivenAndHour(specialist: string, index: number, plusDays?: number): CalendarTablePage {
         CalendarTablePageElement.SpecificTableElement.getElement(specialist, index)
             .click({force: true})
-            .then(() => {
+            .then((): void => {
                 cy.get('app-additional-menu').scrollIntoView().should('be.visible')
-            }).then(() => {
+            }).then((): void => {
 
             if (specialist === SpecialistNameEnum.E2E_E2E) {
                 QueryAssertion.verifyCorrectUrl(`(second:additional-menu/${SpecialistNameEnum.E2E_ID}/${DateUtils.convertToUTC(index, plusDays)})`)
@@ -31,7 +31,7 @@ export class CalendarTablePage {
 
     public assertUrlOnActionMenu(specialist: string, date: number, dayIndex): CalendarTablePage {
         cy.get('app-additional-menu').should('be.visible')
-            .then(() => {
+            .then((): void => {
                 if (specialist === SpecialistNameEnum.E2E_E2E) {
                     QueryAssertion.verifyCorrectUrl(SpecialistNameEnum.E2E_ID)
                     QueryAssertion.verifyCorrectUrl(DateUtils.convertToUTC(dayIndex))
@@ -49,7 +49,7 @@ export class CalendarTablePage {
         LeftMenuPage.assertIsSynchronized(true)
         CalendarTablePageElement.OrderTableElement.getElementByOrderId(orderId)
             .click()
-            .then(() => {
+            .then((): void => {
                 cy.get('app-second-router-outlet').scrollIntoView().should('be.visible')
                 cy.get('app-item-list-v2-service-form-order-component').scrollIntoView().should('be.visible')
                 cy.get('event-container-details-component').scrollIntoView().should('be.visible')
@@ -63,7 +63,7 @@ export class CalendarTablePage {
     public verifyTimeOrderOnTable(orderId: string, value: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElementByOrderId(orderId)
             .invoke('prop', 'textContent')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = value.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
@@ -73,7 +73,7 @@ export class CalendarTablePage {
 
     public clickOrderTableElement(specialistFirstName: string, specialistLastName: string): CalendarTablePage {
         CalendarTablePageElement.OrderTableElement.getElement(specialistFirstName, specialistLastName)
-            .click({force: true}).then(() => {
+            .click({force: true}).then((): void => {
             cy.get('app-additional-menu').should('be.visible')
         })
         return this;

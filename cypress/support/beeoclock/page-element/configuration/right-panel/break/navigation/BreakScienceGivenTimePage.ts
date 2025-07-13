@@ -5,14 +5,14 @@ export class BreakScienceGivenTimePage {
 
     //by science values
     public verifySelectedNextDayTimeLabel(hour: string): BreakScienceGivenTimePage {
-        BreakNavigationElement.GivenTimeBreakLabel.getSelectedTime().invoke('prop', 'innerText').then(innerText => {
+        BreakNavigationElement.GivenTimeBreakLabel.getSelectedTime().invoke('prop', 'innerText').then((innerText: string): void => {
             expect(innerText).to.contain(DateUtils.getCurrentDatePlusDays(1) + ', ' + hour + ':00')
         });
         return this;
     }
 
     public verifySelectedSpecialistLabel(specialist: string): BreakScienceGivenTimePage {
-        BreakNavigationElement.GivenTimeBreakLabel.getSpecialist().invoke('prop', 'innerText').then(innerText => {
+        BreakNavigationElement.GivenTimeBreakLabel.getSpecialist().invoke('prop', 'innerText').then((innerText: string): void => {
             const cleanedInnerText = innerText.replace(/\u00A0/g, ' ').trim();
             const cleanedSpecialist = specialist.replace(/\u00A0/g, ' ').trim();
             expect(cleanedInnerText).to.contain(cleanedSpecialist);

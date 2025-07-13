@@ -4,7 +4,7 @@ export class SelectSpecificHour {
             .find('ion-datetime').shadow()
             .find('ion-picker-column').first()
         // .find('ion-picker-column-option')
-        // .filter((index, element) => {
+        // .filter((index, element): void => {
         //     const innerText = Cypress.$(element).prop('textContent').trim();
         //     return innerText === hourText;
         // }).scrollIntoView({offset: {top: 100, left: 0}})

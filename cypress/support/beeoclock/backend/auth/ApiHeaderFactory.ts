@@ -3,7 +3,7 @@ import {BackendCommonEnum} from "../enum/BackendCommonEnum";
 export class ApiHeaderFactory {
 
     public static getHeaders(): Cypress.Chainable<Record<string, any>> {
-        return cy.token().then(() => {
+        return cy.token().then((): any => {
             return {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 Authorization: `Bearer ${Cypress.env('token')}`,
@@ -25,7 +25,7 @@ export class ApiHeaderFactory {
     }
 
     public static getHeaderWithInvalidToken(): Cypress.Chainable<any> {
-        return cy.token().then(() => {
+        return cy.token().then((): any => {
             return {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'Authorization': `Bearer ${Cypress.env('INVALID_TOKEN')}`

@@ -1,7 +1,7 @@
 import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 
-describe("Client app health check test", () => {
+describe("Client app health check test", (): void => {
     const danishAddress = 'https://beeoclock.com/da/barbershop_brooklyn'
     const englishAddress = 'https://beeoclock.com/en/barbershop_brooklyn'
     const taiwanAddress = 'https://beeoclock.com/tw/barbershop_brooklyn'
@@ -12,15 +12,15 @@ describe("Client app health check test", () => {
 
     const emptyDomain = 'https://dev.beeoclock.com'
 
-    before('clear', () => {
+    before('clear', (): void => {
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage()
     })
 
-    it('test 1 assert corrected danish page', function () {
+    it('test 1 assert corrected danish page', function (): void {
         cy.visit(danishAddress)
 
-        cy.document().then((doc) => {
+        cy.document().then((doc): void => {
             const langAttribute = doc.documentElement.getAttribute('lang');
             expect(langAttribute).to.equal('da');
         });
@@ -32,11 +32,11 @@ describe("Client app health check test", () => {
         assertDetailsTab(danishTabName)
     });
 
-    it('test 2 assert corrected english page', function () {
+    it('test 2 assert corrected english page', function (): void {
         cy.visit(englishAddress);
         assertApiResponse()
 
-        cy.document().then((doc) => {
+        cy.document().then((doc): void => {
             const langAttribute = doc.documentElement.getAttribute('lang');
             expect(langAttribute).to.equal('en');
         });
@@ -48,19 +48,19 @@ describe("Client app health check test", () => {
         assertDetailsTab(englishTabName)
     });
 
-    it('test 3 assert corrected lang on the unsupported language', function () {
+    it('test 3 assert corrected lang on the unsupported language', function (): void {
         cy.visit(taiwanAddress);
 
-        cy.document().then((doc) => {
+        cy.document().then((doc): void => {
             const langAttribute = doc.documentElement.getAttribute('lang');
             expect(langAttribute).to.equal('en-US');
         });
     });
 
-    it('test 4 assert corrected lang on the unsupported language', function () {
+    it('test 4 assert corrected lang on the unsupported language', function (): void {
         cy.visit('https://beeoclock.com/pl/e2e');
 
-        cy.document().then((doc) => {
+        cy.document().then((doc): void => {
             const langAttribute = doc.documentElement.getAttribute('lang');
             expect(langAttribute).to.equal('pl');
         });
@@ -69,7 +69,7 @@ describe("Client app health check test", () => {
         cy.contains('a', 'Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300')
     });
 
-    it.skip('test 5 assert correct redirect //TODO BUG', function () {
+    it.skip('test 5 assert correct redirect //TODO BUG', function (): void {
         cy.visit(emptyDomain, {failOnStatusCode: false})
 
         let description: string = 'Rezerwacja spotkań online dla klientów.'
@@ -78,7 +78,7 @@ describe("Client app health check test", () => {
 
         cy.get('.hidden > [alt="Bee O`clock service details image"]')
 
-        cy.document().then((doc) => {
+        cy.document().then((doc): void => {
             const langAttribute = doc.documentElement.getAttribute('lang')
             expect(langAttribute).to.equal('pl')
         })

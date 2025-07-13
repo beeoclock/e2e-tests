@@ -8,7 +8,7 @@ export class ClientFilterPage {
 
         //click clear button if input has value
         element.getElement()
-            .then(($input) => {
+            .then(($input): void => {
                 if ($input.val()?.toString().trim().length) {
                     SearchInput.getClearButton().click();
                 }
@@ -17,7 +17,7 @@ export class ClientFilterPage {
         element.getElement()
             .type(value)
             .type('{enter}')
-            .then(() => {
+            .then((): void => {
                 Assertions.assertProperties(SearchInput.getElement(), 'value', value);
 
                 this.clickSearchButton()

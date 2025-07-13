@@ -3,19 +3,24 @@ import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/con
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {EnvEnum} from "../../../support/beeoclock/common/enum/EnvEnum";
 import {NewContextPages} from "support/beeoclock/page-element/configuration/new-context/NewContextPages";
-import {Address, UpdateBusinessProfileBuilder} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
+import {
+    Address,
+    UpdateBusinessProfileBuilder
+} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {BusinessSettingsPages} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
+import {
+    BusinessSettingsPages
+} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
 
-describe('new context test creation', () => {
+describe('new context test creation', (): void => {
     let schedulePage: any
 
     before('setup environment', (): void => {
         schedulePage = NewContextPages.NewContextSchedulesPage
     })
 
-    beforeEach('login', () => {
+    beforeEach('login', (): void => {
         login()
     })
 
@@ -104,7 +109,7 @@ describe('new context test creation', () => {
         PanelLoginPage.assertGivenBusinessLength(3)
     });
 
-    it.skip('test', function () {
+    it.skip('test', function (): void {
         expect({
                 "object": "BusinessProfileDto",
                 "_id": "684eb58cdd446a858873909f",
@@ -140,9 +145,9 @@ describe('new context test creation', () => {
     })
 
     function login(): void {
-        cy.visit(ServiceEnum.CLIENT_PANEL_dev, {
+        cy.visit(ServiceEnum.PUBLIC_PANEL_DEV, {
             failOnStatusCode: false,
-            onBeforeLoad: (win) => {
+            onBeforeLoad: (win): void => {
                 win.sessionStorage.clear();
                 win.localStorage.clear();
                 win.sessionStorage.clear();

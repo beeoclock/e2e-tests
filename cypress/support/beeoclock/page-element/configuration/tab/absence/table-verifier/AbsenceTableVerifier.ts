@@ -13,7 +13,7 @@ export class AbsenceTableVerifier {
     public verifyCreatedAtRow(keyValue: string): AbsenceTableVerifier {
         this.TableElementComponent.getGivenRow(keyValue, AbsenceColumnRowEnum.CREATED_AT)
             .invoke('prop', 'textContent')
-            .then((actualText) => {
+            .then((actualText): void => {
                 const cleanedText = actualText.replace(/\u00a0/g, '').trim();
                 const match = cleanedText.match(/^(\d{1,2})\.(\d{2})\.(\d{4}), (\d{2}):(\d{2})$/);
 

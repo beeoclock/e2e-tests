@@ -4,13 +4,13 @@ import {PanelLoginPage} from "../../../support/beeoclock/page-element/configurat
 import {EnvEnum} from "../../../support/beeoclock/common/enum/EnvEnum";
 import {NewContextPages} from "../../../support/beeoclock/page-element/configuration/new-context/NewContextPages";
 
-describe('new context navigation', () => {
+describe('new context navigation', (): void => {
 
-    beforeEach(() => {
+    beforeEach((): void => {
         login()
     })
 
-    it('Should be able to create a new context navigation', () => {
+    it('Should be able to create a new context navigation', (): void => {
         cy.log('assert page 1 & click on start button')
         NewContextPages.SelectNewContextPage.clickSelectNewContextLink()
 
@@ -22,7 +22,7 @@ describe('new context navigation', () => {
         PanelLoginPage.assertGivenBusinessLength(3)
     })
 
-    it('Should be able to create a new context navigation', () => {
+    it('Should be able to create a new context navigation', (): void => {
         cy.log('assert page 1 & click on start button')
         NewContextPages.SelectNewContextPage.clickSelectNewContextLink()
 
@@ -37,7 +37,7 @@ describe('new context navigation', () => {
             .assertState()
     })
 
-    it('Should be able to create a new context navigation', () => {
+    it('Should be able to create a new context navigation', (): void => {
         cy.log('assert page 1 & click on start button')
         NewContextPages.SelectNewContextPage.clickSelectNewContextLink()
 
@@ -58,7 +58,7 @@ describe('new context navigation', () => {
             .verifyTypedCompanyName('1234')
     })
 
-    it('Should be able to create a new context navigation', () => {
+    it('Should be able to create a new context navigation', (): void => {
         cy.log('assert page 1 & click on start button')
         NewContextPages.SelectNewContextPage.clickSelectNewContextLink()
 
@@ -79,7 +79,7 @@ describe('new context navigation', () => {
             .assertState()
     })
 
-    it('Should be able to create a new context navigation', () => {
+    it('Should be able to create a new context navigation', (): void => {
         cy.log('assert page 1 & click on start button')
         NewContextPages.SelectNewContextPage.clickSelectNewContextLink()
 
@@ -104,7 +104,7 @@ describe('new context navigation', () => {
             .assertState()
     })
 
-    it('Should be able to create a new context navigation', () => {
+    it('Should be able to create a new context navigation', (): void => {
         cy.log('assert page 1 & click on start button')
         NewContextPages.SelectNewContextPage.clickSelectNewContextLink()
 
@@ -131,7 +131,7 @@ describe('new context navigation', () => {
             .assertState()
     })
 
-    it('Should be able to create a new context navigation', () => {
+    it('Should be able to create a new context navigation', (): void => {
         cy.log('assert page 1 & click on start button')
         NewContextPages.SelectNewContextPage.clickSelectNewContextLink()
 
@@ -161,7 +161,7 @@ describe('new context navigation', () => {
             .assertState()
     })
 
-    it('Should be able to create a new context navigation', () => {
+    it('Should be able to create a new context navigation', (): void => {
         cy.log('assert page 1 & click on start button')
         NewContextPages.SelectNewContextPage.clickSelectNewContextLink()
 
@@ -212,9 +212,9 @@ describe('new context navigation', () => {
     })
 
     function login(): void {
-        cy.visit(ServiceEnum.CLIENT_PANEL_dev, {
+        cy.visit(ServiceEnum.PUBLIC_PANEL_DEV, {
             failOnStatusCode: false,
-            onBeforeLoad: (win) => {
+            onBeforeLoad: (win): void => {
                 win.sessionStorage.clear();
                 win.localStorage.clear();
                 win.sessionStorage.clear();

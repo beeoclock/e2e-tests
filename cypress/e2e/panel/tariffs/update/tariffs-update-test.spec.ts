@@ -1,11 +1,13 @@
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {TariffsPages} from "support/beeoclock/page-element/configuration/tab/tariffs/TariffsPages";
-import {TariffsNameEnum} from "../../../../support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
+import {
+    TariffsNameEnum
+} from "../../../../support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
 
-describe("tariffs visibility test", () => {
+describe("tariffs visibility test", (): void => {
 
-    before(() => {
+    before((): void => {
         Cypress.on('uncaught:exception', () => false);
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage()
@@ -14,13 +16,13 @@ describe("tariffs visibility test", () => {
         Cypress.on('uncaught:exception', () => false);
     });
 
-    beforeEach('login', () => {
+    beforeEach('login', (): void => {
         cy.loginOnPanel()
         LeftMenuPage.assertIsSynchronized(true)
         LeftMenuPage.clickOnGivenTab(TabNameEnum.TARIFFS)
     })
 
-    it('should update slot to professional', () => {
+    it('should update slot to professional', (): void => {
         TariffsPages.TariffsListPage
             .clickUpdateToProfessional()
             .verifyGivenSlotIsSelected(TariffsNameEnum.PROFESSIONAL)

@@ -19,7 +19,7 @@ export class ApiInterceptionHelper {
     }
 
     public static waitForQueryAliasWithAssert(alias: string): void {
-        cy.wait('@' + alias).then((interception) => {
+        cy.wait('@' + alias).then((interception): void => {
             const requestUrl: URL = new URL(interception.request.url);
             expect(requestUrl.searchParams.get('orderBy')).to.equal('createdAt');
             expect(requestUrl.searchParams.get('orderDir')).to.equal('desc');

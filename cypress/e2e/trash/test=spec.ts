@@ -4,20 +4,20 @@ import {ProductTagBuilder} from "../../support/beeoclock/backend/panel/product/t
 import {faker} from "@faker-js/faker";
 import {AuthApi} from "../../support/beeoclock/backend/auth/AuthApi";
 
-describe('test', () => {
+describe('test', (): void => {
     let token: any;
 
-    before('get token', () => {
+    before('get token', (): void => {
         AuthApi.getToken().then(bearer => {
             token = bearer
         })
     })
 
-    it('should return the correct header', () => {
+    it('should return the correct header', (): void => {
         let id: string = NumericUtils.generateObjectId()
         const tag = new ProductTagBuilder().setId(id).setName('TAG NO ' + faker.finance.pin(6)).build();
-        ProductApi.createProductTag(tag, token).then(() => {
-            ProductApi.deleteProductTag(id, token).then(() => {
+        ProductApi.createProductTag(tag, token).then((): void => {
+            ProductApi.deleteProductTag(id, token).then((): void => {
                 cy.log('product tag deleted');
             })
         })

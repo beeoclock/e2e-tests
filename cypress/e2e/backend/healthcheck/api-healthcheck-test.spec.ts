@@ -10,10 +10,10 @@ import {faker} from "@faker-js/faker";
 import {AuthApi} from "../../../support/beeoclock/backend/auth/AuthApi";
 import {IProductTags} from "../../../support/beeoclock/backend/panel/product/tag/IProductTags";
 
-describe("panel api healthcheck", () => {
+describe("panel api healthcheck", (): void => {
     let token: string
 
-    before('get token', () => {
+    before('get token', (): void => {
         AuthApi.getToken().then(bearer => {
             token = bearer
         })
@@ -30,7 +30,7 @@ describe("panel api healthcheck", () => {
             expect(response).to.have.property('items').that.is.an('array');
             expect(response.items).to.have.length(IdentityData.DATA.items.length);
 
-            response.items.forEach((item, index) => {
+            response.items.forEach((item, index): void => {
                 const expectedItem = IdentityData.DATA.items[index];
 
                 expect(item.account).to.have.property('_id', expectedItem.account._id);

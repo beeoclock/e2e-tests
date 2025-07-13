@@ -31,7 +31,7 @@ export class SelectDayPage {
 
     private assertSelectedServiceName(selectedService: string): SelectDayPage {
         SelectDayPageElement.SelectedServiceComponent.getSelectedServiceName()
-            .invoke('prop', 'innerText').then(innerText => {
+            .invoke('prop', 'innerText').then((innerText: string): void => {
             expect(innerText).to.equals(selectedService)
         })
         return this
@@ -39,7 +39,7 @@ export class SelectDayPage {
 
     private assertServiceTime(time: string): SelectDayPage {
         SelectDayPageElement.SelectedServiceComponent.getSelectedServiceTime()
-            .invoke('prop', 'innerText').then(innerText => {
+            .invoke('prop', 'innerText').then((innerText: string): void => {
             expect(innerText).to.equals(time)
         })
         return this

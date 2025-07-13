@@ -30,7 +30,7 @@ export class AbsenceActionPage {
     private deleteActionButton(): AbsenceActionPage {
         // const deleteAbsence = AbsenceApiInterceptionHelper.deleteAbsence();
 
-        cy.on('window:confirm', (text) => {
+        cy.on('window:confirm', (text): boolean => {
             expect(text).to.contain('Czy na pewno chcesz usunąć nieobecność?');
             return true;
         });

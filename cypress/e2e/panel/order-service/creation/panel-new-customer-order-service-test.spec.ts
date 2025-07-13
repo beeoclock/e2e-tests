@@ -12,9 +12,9 @@
 // import {OrderTabPages} from "support/beeoclock/page-element/configuration/tab/order-tab/OrderTabPages";
 // import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 //
-// describe('panel new customer order service', () => {
+// describe('panel new customer order service', (): void => {
 //
-//     it('clear environment', () => {
+//     it('clear environment', (): void => {
 //         OrderApi.deleteAllCurrentOrdersWithAssertion()
 //         AbsenceApi.deleteAllAbsences()
 //         cy.window().its('localStorage').invoke('clear')
@@ -26,7 +26,7 @@
 //         LeftMenuPage.synchronizeWithInterception()
 //     })
 //
-//     it('test panel new customer order service', function () {
+//     it('test panel new customer order service', function (): void {
 //         cy.loginOnPanel()
 //         const testCases = [
 //             TestCaseEnum.CASE_1,
@@ -67,7 +67,7 @@
 //                 .typeBusinessNote(testData.businessNote)
 //                 .clickSaveButton('accepted');
 //
-//             cy.get('@orderId').then((orderId) => {
+//             cy.get('@orderId').then((orderId): void => {
 //                 cy.log('Order ID is: ' + orderId);
 //                 let orderID: string = orderId.toString()
 //
@@ -120,7 +120,7 @@
 //                 .typeBusinessNote(testData.businessNote)
 //                 .clickSaveButton();
 //
-//             cy.get('@orderId').then((orderId) => {
+//             cy.get('@orderId').then((orderId): void => {
 //                 cy.log('Order ID is: ' + orderId);
 //                 let orderID: string = orderId.toString()
 //

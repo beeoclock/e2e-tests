@@ -2,9 +2,9 @@ import {BizLandingPages} from "../../support/beeoclock/page-element/biz-landing/
 import {FaqData} from "../../fixtures/biz-landing/faqData";
 import {QueryAssertion} from "../../support/beeoclock/common/assertion/QueryAssertion";
 
-describe('biz landing test faq', () => {
+describe('biz landing test faq', (): void => {
 
-    it('verify faq pl language', () => {
+    it('verify faq pl language', (): void => {
         cy.visit('https://biz.dev.beeoclock.com/pl/#faq')
         QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/pl/#faq')
         cy.wait(1000)
@@ -61,7 +61,7 @@ describe('biz landing test faq', () => {
             .assertFaqItemPText(4, 2, getFaqPlObject(4).liValue3)
     })
 
-    it('verify faq en language', () => {
+    it('verify faq en language', (): void => {
         cy.visit('https://biz.dev.beeoclock.com/#faq')
         QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/#faq')
         cy.wait(1000)

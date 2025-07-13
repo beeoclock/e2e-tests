@@ -6,7 +6,7 @@ import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-me
 import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
-describe('panel - order service', () => {
+describe('panel - order service', (): void => {
     const testCases = [
         TestCaseEnum.CASE_1,
         TestCaseEnum.CASE_2,
@@ -14,18 +14,18 @@ describe('panel - order service', () => {
         // TestCaseEnum.CASE_4
     ];
 
-    before('clear environment', () => {
+    before('clear environment', (): void => {
         OrderApi.deleteAllCurrentOrdersWithAssertion()
         AbsenceApi.deleteAllAbsences()
     })
 
-    beforeEach('login and wait till synchronization ended', () => {
+    beforeEach('login and wait till synchronization ended', (): void => {
         cy.loginOnPanel()
         LeftMenuPage.assertIsSynchronized(true);
     })
 
     testCases.forEach(testCase => {
-        it(`should add and delete order for ${testCase}`, function () {
+        it(`should add and delete order for ${testCase}`, function (): void {
             const testData = PanelOrderCreationDataProvider.getTestData(testCase);
 
             cy.log(`Add order on calendar panel for ${testCase}`);
@@ -51,7 +51,7 @@ describe('panel - order service', () => {
                 .typeBusinessNote(testData.businessNote)
                 .clickSaveButton(testData.payment.requestedPayment);
 
-            cy.get('@orderId').then((orderId) => {
+            cy.get('@orderId').then((orderId): void => {
                 cy.log('Order ID is: ' + orderId);
                 let orderID: string = orderId.toString();
 

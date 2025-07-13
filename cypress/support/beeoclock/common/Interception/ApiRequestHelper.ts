@@ -1,4 +1,3 @@
-import {AuthApi} from "../../backend/auth/AuthApi";
 import {BackendCommonEnum} from "../../backend/enum/BackendCommonEnum";
 
 export enum Environment {
@@ -30,7 +29,7 @@ export class ApiRequestHelper {
     }
 
     protected static getToken(): Cypress.Chainable<string> {
-        return AuthApi.getToken()
+        return cy.token()
     }
 
     protected static getTenantId(env: Environment): BackendCommonEnum {

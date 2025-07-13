@@ -5,22 +5,22 @@ import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/e
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
-describe('order service', () => {
+describe('order service', (): void => {
     const address: string = CompanyEnum.COMPANY_ADDRESS
 
-    before('clear environment', () => {
+    before('clear environment', (): void => {
         OrderApi.deleteAllCurrentOrdersWithAssertion()
         AbsenceApi.deleteAllAbsences()
     })
 
-    beforeEach(function () {
+    beforeEach(function (): void {
         cy.fixture('order-service-test-data.json').as('orderServiceCreation');
     });
 
-    it('order service form test', function () {
+    it('order service form test', function (): void {
         cy.visit(ServiceEnum.PUBLIC_PANEL_DEV)
 
-        cy.document().then((doc) => {
+        cy.document().then((doc): void => {
             doc.documentElement.lang = 'pl';
         });
 

@@ -25,7 +25,7 @@ export class Assertions {
     }
 
     public static assertPropertiesByShould(element: any, expectedProperties: string): void {
-        element.invoke('text').then((text: string) => {
+        element.invoke('text').then((text: string): void => {
             const cleanedText = text.replace(/&nbsp;/g, '').replace(/\s+/g, ' ').trim();
             expect(cleanedText).to.include(expectedProperties);
         })

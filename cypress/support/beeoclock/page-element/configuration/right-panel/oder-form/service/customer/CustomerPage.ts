@@ -30,7 +30,7 @@ export class CustomerPage {
 
     public clickConfirmButton(sendEmail: boolean = false): CustomerPage {
         RightPanelServicesPageElement.ConfirmButton.getElement()
-            .click({force: true}).then(() => {
+            .click({force: true}).then((): void => {
             if (sendEmail) {
                 NotificationsPage.handleEmailNotificationsToggle(sendEmail)
             }

@@ -2,13 +2,15 @@ import {CalendarPages} from "../../../support/beeoclock/page-element/configurati
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {PanelEmailTest} from "../../../fixtures/panel/order/PanelEmailTest";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
-import {CustomerTypeEnum} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
+import {
+    CustomerTypeEnum
+} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {NotificationsPage} from "../../../support/beeoclock/page-element/configuration/notiifcations/NotificationsPage";
 import {MiroHostHelper} from "../../../support/beeoclock/notifications/mirohost/MiroHostHelper";
 
-describe('email test', () => {
+describe('email test', (): void => {
 
-    it(`should create order`, function () {
+    it(`should create order`, function (): void {
         const testData = PanelEmailTest.getTestData(TestCaseEnum.CASE_1);
 
         cy.loginOnPanel()
@@ -35,7 +37,7 @@ describe('email test', () => {
         NotificationsPage.clickConfirmButton(true);
     });
 
-    it(`assert send email`, function () {
+    it(`assert send email`, function (): void {
         MiroHostHelper.visitAndLoginOnMiroHost()
     });
 })

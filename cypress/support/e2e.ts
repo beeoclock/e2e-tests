@@ -7,15 +7,15 @@ import 'cypress-wait-until';
 /**
  * clear all storage and assign to global env valid token before any test
  */
-before(() => {
-    Cypress.on('uncaught:exception', (err) => {
+before((): void => {
+    Cypress.on('uncaught:exception', (err: Error): boolean => {
         console.error('!!!ignored exception!!!', err.message);
         return false;
     });
 
     if (!Cypress.env('skipClear')) {
         clearAllData()
-        AuthApi.getToken().then(token => {
+        AuthApi.getToken().then((token: string): any => {
             Cypress.env('token', token);
         })
     }
@@ -39,6 +39,6 @@ function clearAllData(): void {
     cy.clearAllSessionStorage();
 }
 
-after(() => {
+after((): void => {
     Cypress.env('skipClear', false);
 });

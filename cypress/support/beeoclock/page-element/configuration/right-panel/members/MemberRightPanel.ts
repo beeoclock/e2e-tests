@@ -47,7 +47,7 @@ export class MemberRightPanel {
 
     public assertSelectedService(service: string | string[]): MemberRightPanel {
         if (Array.isArray(service)) {
-            service.forEach((item) => {
+            service.forEach((item): void => {
                 this.element.getSelectedService().should('contain', item)
             })
         } else {
