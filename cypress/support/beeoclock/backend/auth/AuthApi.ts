@@ -1,7 +1,6 @@
 import {EnvEnum} from "../../common/enum/EnvEnum";
-import {ApiRequestHelper} from "../../common/Interception/ApiRequestHelper";
 
-export class AuthApi extends ApiRequestHelper {
+export class AuthApi {
 
     public static getToken(): Cypress.Chainable<string> {
         const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${EnvEnum.API_KEY}`;

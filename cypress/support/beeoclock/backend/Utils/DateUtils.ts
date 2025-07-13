@@ -359,8 +359,8 @@ export class DateUtils {
         return moment.utc().tz('Europe/Warsaw').add(1, 'days').startOf('day').toISOString();
     }
 
-    public static getEndOfTomorrowUTC(): string {
-        return moment.utc().tz('Europe/Warsaw').add(1, 'days').endOf('day').toISOString();
+    public static getEndOfGivenDayUTC(givenDay: number): string {
+        return moment.utc().tz('Europe/Warsaw').add(givenDay, 'days').endOf('day').toISOString();
     }
 
     public static formatDateDaysAhead(daysAhead: number): string {

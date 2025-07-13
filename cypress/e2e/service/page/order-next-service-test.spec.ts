@@ -10,6 +10,10 @@ describe('order next service', () => {
 
     beforeEach(function () {
         cy.fixture('order-next-service-test-data.json').as('orderNextServiceCreation');
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
+        cy.clearAllCookies()
+
     });
 
     before('clear environment', () => {
@@ -17,7 +21,7 @@ describe('order next service', () => {
         AbsenceApi.deleteAllAbsences()
     })
 
-    it('order next service form test', function () {
+    it('order next service form test', function (): void {
         cy.loginOnPublicPage()
 
         cy.document().then((doc) => {

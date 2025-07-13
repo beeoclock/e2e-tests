@@ -1,62 +1,56 @@
 import {DateUtils} from "../../Utils/DateUtils";
-import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
-import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
-import {AuthApi} from "../../auth/AuthApi";
-import {OrderStatusEnum} from "./enum/OrderStatusEnum";
-import {StateEnum} from "./enum/StateEnum";
-import {OrderServiceStatusEnum} from "./enum/OrderServiceStatusEnum";
+import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiRequestHelper";
 
-export class OrderApi {
+export class OrderApi extends ApiRequestHelper {
 
-    public static getOrderIds(): any {
-        this.getToken()
-        const tokenId = Cypress.env('token');
-        const start = DateUtils.getStartOfPreviousDays(5);
-        const end = DateUtils.getEndOfTomorrowUTC();
-        const url = DevEntryPointEnum.API_ENTRY_POINT + `/order/paged?start=${start}&end=${end}&page=1&pageSize=100&orderBy=updatedScience&orderDir=desc&statuses=done&statuses=accepted&statuses=requested`;
-        return cy.request({
-            method: 'GET',
-            url: url,
-            headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
-            },
-            qs: {
-                state: StateEnum.active,
-                statuses: [OrderStatusEnum.done, OrderStatusEnum.confirmed],
-            },
-            auth: {
-                bearer: tokenId
-            }
-        }).then(response => {
-            expect(response.status).to.equal(200);
-            cy.log('not filtered items: ');
+    public static getOrderIds(env?: Environment): any {
+        let environment: Environment = env ?? Environment.dev
 
-            const filteredItems = response.body.items.filter(({services}) => {
-                return services.some(({state, status}) => {
-                    return state === StateEnum.active && [OrderServiceStatusEnum.done, OrderServiceStatusEnum.accepted].includes(status);
-                })
-            });
-            cy.log('filtered items: ', JSON.stringify(filteredItems.length));
-            if (Array.isArray(filteredItems)) {
-                const orderIds = filteredItems.map((order: any) => order._id);
-                cy.log('Order IDs:', orderIds.join(', '));
+        return this.getToken().then(() => {
+            const tokenId = Cypress.env('token');
+            const start = DateUtils.getStartOfPreviousDays(5);
+            const end = DateUtils.getEndOfGivenDayUTC(3);
+
+            const url: string = this.getApiEntryPoint(environment) + '/order/paged'
+                + `?start=${start}&end=${end}`
+                + `&page=1&pageSize=100`
+                + `&orderBy=updatedScience&orderDir=desc`;
+
+            return cy.request({
+                method: 'GET',
+                url,
+                headers: {
+                    'X-Business-Tenant-Id': this.getTenantId(environment),
+                },
+                auth: {bearer: tokenId}
+            }).then(({status, body}) => {
+                expect(status).to.equal(200);
+                const {items} = body;
+
+                const activeCurrent = items.filter(
+                    ({state, status}) => state === 'active' && status === 'requested'
+                );
+
+                cy.log(`Active & current orders found: ${activeCurrent.length}`);
+
+                const orderIds = activeCurrent.map(({_id}) => _id);
+                cy.log(`Order IDs: ${orderIds.join(', ')}`);
+
                 return cy.wrap(orderIds);
-            } else {
-                cy.log('No orders found');
-                return cy.wrap('no filtered order found');
-            }
+            });
         });
     }
 
-    public static getAllOrderIds(): any {
+    public static getAllOrderIds(env?: Environment): any {
+        let environment: Environment = env ?? Environment.dev
         this.getToken()
         const tokenId = Cypress.env('token');
-        const url = DevEntryPointEnum.API_ENTRY_POINT + '/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
+        const url: string = this.getApiEntryPoint(environment) + '/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
         return cy.request({
             method: 'GET',
             url: url,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': this.getTenantId(environment),
             },
             auth: {
                 bearer: tokenId
@@ -74,14 +68,16 @@ export class OrderApi {
         });
     }
 
-    public static deleteOrderWithGivenId(id: string): any {
+    public static deleteOrderWithGivenId(id: string, env?: Environment): any {
+        let environment: Environment = env ?? Environment.dev
+
         this.getToken()
         const tokenId = Cypress.env('token');
         return cy.request({
             method: 'DELETE',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/order/' + id,
+            url: this.getApiEntryPoint(environment) + '/order/' + id,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                'X-Business-Tenant-Id': this.getTenantId(environment),
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
             },
             auth: {
@@ -93,13 +89,14 @@ export class OrderApi {
         })
     }
 
-    public static getOrderWithGivenId(id: string): any {
+    public static getOrderWithGivenId(id: string, env?: Environment): any {
+        let environment: Environment = env ?? Environment.dev
         const tokenId = Cypress.env('token');
         return cy.request({
             method: 'GET',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/order/' + id,
+            url: this.getApiEntryPoint(environment) + '/order/' + id,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': this.getTenantId(environment),
             },
             auth: {
                 bearer: tokenId
@@ -133,14 +130,15 @@ export class OrderApi {
         });
     }
 
-    public static assertSuccessfulDeletion(orderId: string): any {
+    public static assertSuccessfulDeletion(orderId: string, env?: Environment): any {
+        let environment: Environment = env ?? Environment.dev
         const tokenId = Cypress.env('token');
-        const url = DevEntryPointEnum.API_ENTRY_POINT + '/order/' + orderId;
+        const url = this.getApiEntryPoint(environment) + '/order/' + orderId;
         return cy.request({
             method: 'GET',
             url: url,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': this.getTenantId(environment),
             },
             auth: {
                 bearer: tokenId
@@ -192,9 +190,5 @@ export class OrderApi {
         OrderApi.getOrderIds().then(orderIds => {
             OrderApi.deleteOrdersWithAssert(orderIds);
         });
-    }
-
-    private static getToken(): Cypress.Chainable<string> {
-        return AuthApi.getToken();
     }
 }

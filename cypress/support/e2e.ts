@@ -27,12 +27,13 @@ beforeEach('clear environment', (): void => {
     }
 });
 
-function deleteIndexDb() {
+function deleteIndexDb(): void {
     indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-order');
     indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-absence');
 }
 
-function clearAllData() {
+function clearAllData(): void {
+    deleteIndexDb()
     cy.clearAllCookies();
     cy.clearLocalStorage();
     cy.clearAllSessionStorage();

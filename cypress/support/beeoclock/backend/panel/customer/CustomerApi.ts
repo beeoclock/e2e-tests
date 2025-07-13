@@ -1,23 +1,23 @@
-import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
-import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {ICustomer} from "./create/ICustomer";
 import {ICustomerSearchCriteria} from "./queries/ICustomerSearchCriteria";
+import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiRequestHelper";
 
-export class CustomerApi {
+export class CustomerApi extends ApiRequestHelper {
 
-    public static createCustomerWithBuilder(customer: ICustomer, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
-        const token = givenToken || Cypress.env('token');
+    public static createCustomerWithBuilder(customer: ICustomer, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
+        this.getToken()
+        const tokenId = Cypress.env('token');
+        let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'POST',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer',
+            url: this.getApiEntryPoint(environment) + '/customer',
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'Authorization': `Bearer ${token}`
+                'X-Business-Tenant-Id': this.getTenantId(environment),
             },
             body: customer,
             auth: {
-                bearer: token
+                bearer: tokenId
             },
             ...options
         }).then(response => {
@@ -25,17 +25,19 @@ export class CustomerApi {
         })
     }
 
-    public static updateCustomerWithBuilder(customer: ICustomer, customerId: string, options: Partial<Cypress.RequestOptions>, givenToken?: string,): any {
-        const token = givenToken || Cypress.env('token');
+    public static updateCustomerWithBuilder(customer: ICustomer, customerId: string, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
+        this.getToken()
+        const tokenId = Cypress.env('token');
+        let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'PUT',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
+            url: this.getApiEntryPoint(environment) + '/customer/' + customerId,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': this.getTenantId(environment),
             },
             body: customer,
             auth: {
-                bearer: token
+                bearer: tokenId
             },
             ...options
         }).then(response => {
@@ -43,16 +45,18 @@ export class CustomerApi {
         })
     }
 
-    public static deleteCustomer(customerId: string, options: Partial<Cypress.RequestOptions>, givenToken?: string,): any {
-        const token = givenToken || Cypress.env('token');
+    public static deleteCustomer(customerId: string, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
+        this.getToken()
+        const tokenId = Cypress.env('token');
+        let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'DELETE',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
+            url: this.getApiEntryPoint(environment) + '/customer/' + customerId,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': this.getTenantId(environment),
             },
             auth: {
-                bearer: token
+                bearer: tokenId
             },
             ...options
         }).then(response => {
@@ -60,17 +64,19 @@ export class CustomerApi {
         })
     }
 
-    public static getCustomerPaged(query: ICustomerSearchCriteria, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
-        const token = givenToken || Cypress.env('token');
+    public static getCustomerPaged(query: ICustomerSearchCriteria, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
+        this.getToken()
+        const tokenId = Cypress.env('token');
+        let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'GET',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer/paged',
+            url:this.getApiEntryPoint(environment) + '/customer/paged',
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id
+                'X-Business-Tenant-Id': this.getTenantId(environment),
             },
             qs: query,
             auth: {
-                bearer: token
+                bearer: tokenId
             },
             ...options
         }).then(response => {
@@ -79,17 +85,19 @@ export class CustomerApi {
         })
     }
 
-    public static getCustomerById(customerId: string, givenToken?: string): any {
-        const token = givenToken || Cypress.env('token');
+    public static getCustomerById(customerId: string, env?: Environment): any {
+        this.getToken()
+        const tokenId = Cypress.env('token');
+        let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'GET',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/customer/' + customerId,
+            url: this.getApiEntryPoint(environment) + '/customer/' + customerId,
             headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
+                'X-Business-Tenant-Id': this.getTenantId(environment),
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
             },
             auth: {
-                bearer: token
+                bearer: tokenId
             }
         }).then(response => {
             expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
