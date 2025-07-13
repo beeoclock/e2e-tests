@@ -42,7 +42,7 @@ declare global {
 
 Cypress.Commands.add('loginOnPanel', () => {
     cy.log('visit')
-    cy.visit(ServiceEnum.CLIENT_PANEL, {
+    cy.visit(ServiceEnum.CLIENT_PANEL_dev, {
         failOnStatusCode: false,
         onBeforeLoad: (win) => {
             win.sessionStorage.clear();
@@ -85,7 +85,7 @@ Cypress.Commands.add('loginOnProductPanel', () => {
 
 Cypress.Commands.add('loginOnPublicPage', () => {
     cy.log('visit')
-    cy.visit(ServiceEnum.PUBLIC_PANEL).then(() => {
+    cy.visit(ServiceEnum.PUBLIC_PANEL_DEV).then(() => {
         cy.get('h1').contains('Haircut&Barber').should('be.visible')
         cy.contains('a', 'Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300')
         cy.document().its('readyState').should('eq', 'complete');

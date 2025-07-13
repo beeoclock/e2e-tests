@@ -1,13 +1,13 @@
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
-import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
+import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiRequestHelper";
 
-export class TariffsQueriesApi {
-    private static BASE_URL: string = DevEntryPointEnum.TARIFFS_ENTRY_POINT;
+export class TariffsQueriesApi extends ApiRequestHelper {
+    private static BASE_URL: string = this.getTariffsEntryPoint(Environment.dev)
 
     static getTariffsPaged(expectedCode: HTTPStatusCodeType, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');
-        const url = `${this.BASE_URL}/paged`;
+        const url: string = `${this.BASE_URL}/paged`;
 
         return cy.request({
             method: 'GET',
@@ -30,7 +30,7 @@ export class TariffsQueriesApi {
 
     static getTariffsByIds(id: string, expectedCode: HTTPStatusCodeType, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
         const token = givenToken || Cypress.env('token');
-        const url = `${this.BASE_URL}/${id}`;
+        const url: string = `${this.BASE_URL}/${id}`;
 
         return cy.request({
             method: 'GET',

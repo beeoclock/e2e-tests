@@ -7,6 +7,7 @@ import {StateEnum} from "./enum/StateEnum";
 import {OrderServiceStatusEnum} from "./enum/OrderServiceStatusEnum";
 
 export class OrderApi {
+
     public static getOrderIds(): any {
         this.getToken()
         const tokenId = Cypress.env('token');

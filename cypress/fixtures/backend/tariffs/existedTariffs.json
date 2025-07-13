@@ -2,13 +2,13 @@
   "items": [
     {
       "_id": "66916aa0c5875b0caba6c438",
-      "createdAt": "2025-04-01T19:18:30.140Z",
-      "updatedAt": "2025-04-01T19:18:30.140Z",
+      "createdAt": "2025-07-01T19:15:09.413Z",
+      "updatedAt": "2025-07-01T19:15:09.413Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-04-01T19:18:29.645Z"
+          "setAt": "2025-07-01T19:15:09.345Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -54,8 +54,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.112Z",
-          "updatedAt": "2025-04-01T19:18:30.112Z"
+          "createdAt": "2025-07-01T19:15:09.411Z",
+          "updatedAt": "2025-07-01T19:15:09.411Z"
         },
         {
           "region": "EU",
@@ -96,8 +96,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.122Z",
-          "updatedAt": "2025-04-01T19:18:30.122Z"
+          "createdAt": "2025-07-01T19:15:09.412Z",
+          "updatedAt": "2025-07-01T19:15:09.412Z"
         },
         {
           "region": "WORLD",
@@ -138,8 +138,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.139Z",
-          "updatedAt": "2025-04-01T19:18:30.139Z"
+          "createdAt": "2025-07-01T19:15:09.412Z",
+          "updatedAt": "2025-07-01T19:15:09.412Z"
         }
       ],
       "isPerSpecialist": false,
@@ -148,14 +148,14 @@
         "includeAll": false,
         "excludeAll": false,
         "includeList": [
-          "emailNotification",
-          "reminderNotification"
+          "reminderNotification",
+          "emailNotification"
         ],
         "excludeList": [
           "assistantAI"
         ],
-        "createdAt": "2025-04-01T19:18:30.096Z",
-        "updatedAt": "2025-04-01T19:18:30.096Z"
+        "createdAt": "2025-07-01T19:15:09.410Z",
+        "updatedAt": "2025-07-01T19:15:09.410Z"
       },
       "features": [
         "emailNotification",
@@ -167,13 +167,13 @@
     },
     {
       "_id": "66916aa0c5875b0caba6c439",
-      "createdAt": "2025-04-01T19:18:30.439Z",
-      "updatedAt": "2025-04-01T19:18:30.439Z",
+      "createdAt": "2025-07-01T19:15:09.467Z",
+      "updatedAt": "2025-07-01T19:15:09.467Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-04-01T19:18:30.314Z"
+          "setAt": "2025-07-01T19:15:09.446Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -219,8 +219,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.412Z",
-          "updatedAt": "2025-04-01T19:18:30.412Z"
+          "createdAt": "2025-07-01T19:15:09.467Z",
+          "updatedAt": "2025-07-01T19:15:09.467Z"
         },
         {
           "region": "EU",
@@ -261,8 +261,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.412Z",
-          "updatedAt": "2025-04-01T19:18:30.412Z"
+          "createdAt": "2025-07-01T19:15:09.467Z",
+          "updatedAt": "2025-07-01T19:15:09.467Z"
         },
         {
           "region": "WORLD",
@@ -303,8 +303,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.412Z",
-          "updatedAt": "2025-04-01T19:18:30.412Z"
+          "createdAt": "2025-07-01T19:15:09.467Z",
+          "updatedAt": "2025-07-01T19:15:09.467Z"
         }
       ],
       "isPerSpecialist": false,
@@ -315,14 +315,15 @@
         "includeList": [
           "emailNotification",
           "smsNotification",
-          "chat",
-          "reminderNotification"
+          "reminderNotification",
+          "paymentStripe",
+          "chat"
         ],
         "excludeList": [
           "assistantAI"
         ],
-        "createdAt": "2025-04-01T19:18:30.412Z",
-        "updatedAt": "2025-04-01T19:18:30.412Z"
+        "createdAt": "2025-07-01T19:15:09.466Z",
+        "updatedAt": "2025-07-01T19:15:09.466Z"
       },
       "features": [
         "unlimitedPlugins",
@@ -336,20 +337,20 @@
       ],
       "trialInfo": {
         "days": 14,
-        "isAvailable": true,
-        "createdAt": "2025-04-01T19:18:30.412Z",
-        "updatedAt": "2025-04-01T19:18:30.412Z"
+        "isAvailable": false,
+        "createdAt": "2025-07-01T19:15:09.467Z",
+        "updatedAt": "2025-07-01T19:15:09.467Z"
       }
     },
     {
       "_id": "66916aa0c5875b0caba6c440",
-      "createdAt": "2025-04-01T19:18:30.858Z",
-      "updatedAt": "2025-04-01T19:18:30.858Z",
+      "createdAt": "2025-07-01T19:15:09.517Z",
+      "updatedAt": "2025-07-01T19:15:09.517Z",
       "state": "active",
       "stateHistory": [
         {
           "state": "active",
-          "setAt": "2025-04-01T19:18:30.595Z"
+          "setAt": "2025-07-01T19:15:09.505Z"
         }
       ],
       "object": "TariffPlanDto",
@@ -395,8 +396,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.857Z",
-          "updatedAt": "2025-04-01T19:18:30.857Z"
+          "createdAt": "2025-07-01T19:15:09.516Z",
+          "updatedAt": "2025-07-01T19:15:09.516Z"
         },
         {
           "region": "EU",
@@ -437,8 +438,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.857Z",
-          "updatedAt": "2025-04-01T19:18:30.857Z"
+          "createdAt": "2025-07-01T19:15:09.516Z",
+          "updatedAt": "2025-07-01T19:15:09.516Z"
         },
         {
           "region": "WORLD",
@@ -479,8 +480,8 @@
               "language": "da"
             }
           ],
-          "createdAt": "2025-04-01T19:18:30.857Z",
-          "updatedAt": "2025-04-01T19:18:30.857Z"
+          "createdAt": "2025-07-01T19:15:09.516Z",
+          "updatedAt": "2025-07-01T19:15:09.516Z"
         }
       ],
       "isPerSpecialist": false,
@@ -490,8 +491,8 @@
         "excludeAll": false,
         "includeList": [],
         "excludeList": [],
-        "createdAt": "2025-04-01T19:18:30.856Z",
-        "updatedAt": "2025-04-01T19:18:30.856Z"
+        "createdAt": "2025-07-01T19:15:09.516Z",
+        "updatedAt": "2025-07-01T19:15:09.516Z"
       },
       "features": [
         "unlimitedPlugins",
@@ -507,9 +508,9 @@
       ],
       "trialInfo": {
         "days": 14,
-        "isAvailable": true,
-        "createdAt": "2025-04-01T19:18:30.857Z",
-        "updatedAt": "2025-04-01T19:18:30.857Z"
+        "isAvailable": false,
+        "createdAt": "2025-07-01T19:15:09.516Z",
+        "updatedAt": "2025-07-01T19:15:09.516Z"
       }
     }
   ],

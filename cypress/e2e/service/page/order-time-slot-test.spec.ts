@@ -109,7 +109,7 @@ describe('order time slot test', () => {
 
         const expectedSlots: string[] = assertFirstFreeSlotForHairDyeing();
 
-        expectedSlots.forEach(slot => {
+        expectedSlots.forEach((slot: string): void => {
             ServicesPages.SelectTimePage.assertSpecificTime(slot);
         });
     });
@@ -171,7 +171,7 @@ describe('order time slot test', () => {
     })
 
     beforeEach('login', (): void => {
-        cy.visit(ServiceEnum.PUBLIC_PANEL)
+        cy.visit(ServiceEnum.PUBLIC_PANEL_DEV)
     })
 
     function assertFirstFreeSlotForHairDyeing(): string[] {
