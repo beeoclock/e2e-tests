@@ -2,6 +2,9 @@ export enum BackendCommonEnum {
     //OLD
     X_Business_Tenant_Id = '662a4637a4b376d20c065b1d',
 
+    X_Business_Tenant_Id_Prod = '6714ec77354a8d568ed83b54',
+    X_Business_Tenant_Id_pre_Prod = '6714ec77354a8d568ed83b54',
+
     DEMO_TENANT_ID = '66f9378141ed7954254c40c8',
     //NEW
     // X_Business_Tenant_Id = '6714ec77354a8d568ed83b54'

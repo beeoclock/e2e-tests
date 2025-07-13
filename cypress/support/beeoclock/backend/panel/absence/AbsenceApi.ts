@@ -6,10 +6,11 @@ import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiReq
 
 export class AbsenceApi extends ApiRequestHelper {
 
-    public static getAllAbsenceIds(): any {
+    public static getAllAbsenceIds(env?: Environment): any {
         this.getToken()
+        let environment: Environment = env ?? Environment.dev
         const tokenId = Cypress.env('token');
-        const url: string = this.getApiEntryPoint(Environment.dev) + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
+        const url: string = this.getApiEntryPoint(environment) + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
         return cy.request({
             method: 'GET',
             url: url,
@@ -41,11 +42,12 @@ export class AbsenceApi extends ApiRequestHelper {
         });
     }
 
-    public static deleteAbsenceWithGivenId(id: string): any {
+    public static deleteAbsenceWithGivenId(id: string, env?: Environment): any {
         const tokenId = Cypress.env('token');
+        let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'DELETE',
-            url: this.getApiEntryPoint(Environment.dev) + '/absence/' + id,
+            url: this.getApiEntryPoint(environment) + '/absence/' + id,
             headers: {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
@@ -70,9 +72,5 @@ export class AbsenceApi extends ApiRequestHelper {
                 cy.log('No absences found');
             }
         });
-    }
-
-    private static getToken(): Cypress.Chainable<string> {
-        return AuthApi.getToken();
     }
 }
