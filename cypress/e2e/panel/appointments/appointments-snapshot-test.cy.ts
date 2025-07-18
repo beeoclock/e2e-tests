@@ -1,10 +1,12 @@
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import {AppointmentsFilterHtmlElement} from "../../../support/beeoclock/page-element/configuration/tab/appointments/enum/AppointmentsFilterHtmlElement";
+import {
+    AppointmentsFilterHtmlElement
+} from "../../../support/beeoclock/page-element/configuration/tab/appointments/enum/AppointmentsFilterHtmlElement";
 
 describe('panel snapshot test', (): void => {
     let htmlElement: AppointmentsFilterHtmlElement = new AppointmentsFilterHtmlElement()
 
-    beforeEach('setup', () => {
+    beforeEach('setup', (): void => {
         cy.loginOnPanel()
         LeftMenuPage.clickOnVisitsTab()
         LeftMenuPage.assertIsSynchronized()

@@ -19,7 +19,7 @@ export class OrderActionTable {
         OrderActionTableElement.OrderGivenActionButton.getElement(orderId, action).scrollIntoView()
             .click({force: true})
         if (action == OrderActionsEnum.DELETE) {
-            cy.wait('@' + deleteAction).then((interception) => {
+            cy.wait('@' + deleteAction).then((interception): void => {
                 expect(interception.request.body.state).to.equal(StateEnum.deleted)
             })
         }
@@ -41,7 +41,7 @@ export class OrderActionTable {
     public selectGivenStatusIfNotSelected(status: string): OrderActionTable {
         const checkbox = OrderActionTableElement.StatusSelectorComponent.getGivenStatusCheckbox(status);
 
-        checkbox.invoke('attr', 'aria-checked').then((isChecked) => {
+        checkbox.invoke('attr', 'aria-checked').then((isChecked): void => {
             if (isChecked !== 'true') {
                 checkbox.click({force: true});
             }

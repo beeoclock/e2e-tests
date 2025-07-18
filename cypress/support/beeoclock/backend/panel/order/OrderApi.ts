@@ -6,10 +6,10 @@ export class OrderApi extends ApiRequestHelper {
     public static getOrderIds(env?: Environment): any {
         let environment: Environment = env ?? Environment.dev
 
-        return this.getToken().then(() => {
-            const tokenId = Cypress.env('token');
-            const start = DateUtils.getStartOfPreviousDays(5);
-            const end = DateUtils.getEndOfGivenDayUTC(3);
+        return this.getToken().then((): any => {
+            const tokenId: string = Cypress.env('token');
+            const start: string = DateUtils.getStartOfPreviousDays(5);
+            const end: string = DateUtils.getEndOfGivenDayUTC(3);
 
             const url: string = this.getApiEntryPoint(environment) + '/order/paged'
                 + `?start=${start}&end=${end}`
@@ -23,7 +23,7 @@ export class OrderApi extends ApiRequestHelper {
                     'X-Business-Tenant-Id': this.getTenantId(environment),
                 },
                 auth: {bearer: tokenId}
-            }).then(({status, body}) => {
+            }).then(({status, body}): any => {
                 expect(status).to.equal(200);
                 const {items} = body;
 
@@ -156,7 +156,7 @@ export class OrderApi extends ApiRequestHelper {
             cy.log("Latest state history entry: " + JSON.stringify(latestState));
 
             const services = response.body.services;
-            services.forEach((service: any, index: number) => {
+            services.forEach((service: any, index: number): void => {
                 cy.log(`Checking service ${index + 1} with ID: ${service._id}`);
                 expect(service.state).to.equal('deleted');
 

@@ -5,7 +5,7 @@ export class AbsenceFilterPage {
 
     public searchAbsence(value: string): AbsenceFilterPage {
         this.AbsenceInputElement.getSearchInput()
-            .type(value).then(() => {
+            .type(value).then((): void => {
             this.AbsenceInputElement.getSearchButton().click()
         })
         return this;

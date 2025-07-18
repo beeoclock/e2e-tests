@@ -29,14 +29,14 @@ export class ClientTabActionPage {
 
     public clickDeleteClient(): ClientTabActionPage {
         const deletion = ClientsApiInterceptionHelper.deleteCustomer()
-        cy.on('window:confirm', (text) => {
+        cy.on('window:confirm', (text): boolean => {
             expect(text).to.contain('Czy na pewno chcesz usunąć klienta?');
             return true;
         });
 
         ClientTabActionPageElement.GivenActionButton.getElement(AbsenceActionEnum.DELETE)
             .click()
-            .then(() => {
+            .then((): void => {
                 ApiInterceptionHelper.waitForAlias(deletion)
 
                 //TEMP! BUG! - after deletion, the toast should not be visible

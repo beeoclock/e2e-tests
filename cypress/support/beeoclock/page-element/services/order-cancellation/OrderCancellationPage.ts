@@ -9,7 +9,7 @@ export class OrderCancellationPage {
     }
 
     public verifyCancelledOrderSummaryValue(tdKey: string, expectValue: string): OrderCancellationPage {
-        OrderCancellationPageElement.CancelledOrderSummaryElement.getElement(tdKey).invoke('prop', 'innerText').then(innerText => {
+        OrderCancellationPageElement.CancelledOrderSummaryElement.getElement(tdKey).invoke('prop', 'innerText').then((innerText: string): void => {
             expect(innerText.trim()).to.contain(expectValue.trim())
         })
         return this;
@@ -21,7 +21,7 @@ export class OrderCancellationPage {
     }
 
     public verifyCancelledOrderDetails(tdKey: string, expectValue: string): OrderCancellationPage {
-        OrderCancellationPageElement.CancellationOrderDetailsElement.getElement(tdKey).invoke('prop', 'innerText').then(innerText => {
+        OrderCancellationPageElement.CancellationOrderDetailsElement.getElement(tdKey).invoke('prop', 'innerText').then((innerText: string): void => {
             expect(innerText).to.contain(expectValue)
         })
         return this;

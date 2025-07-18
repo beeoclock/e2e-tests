@@ -15,7 +15,7 @@ export class AbsencePage {
     public assertCurrentTimeMatches(): AbsencePage {
         AbsencePageElement.AbsenceFromTime.getElement()
             .invoke('prop', 'textContent')
-            .then((textContent) => {
+            .then((textContent: string): void => {
                 const actualTime = textContent.trim();
 
                 const currentTime = dayjs();

@@ -16,7 +16,7 @@ export class LandingBizFaqPage {
     }
 
     public clickExpandButton(index: number): LandingBizFaqPage {
-        this.element.getFaqItem(index).click().then(() => {
+        this.element.getFaqItem(index).click().then((): void => {
             this.element.getRollUpButton(index).should('be.visible');
         })
         return this;

@@ -8,7 +8,7 @@ export class BookingClientDataPage {
         this.verifyFirstNameLabel()
         BookingClientDataPageElement.FirstNameInput.getElement()
             .clear()
-            .type(firstName).then(() => {
+            .type(firstName).then((): void => {
             BookingClientDataPageElement.FirstNameInput.getElement().invoke('prop', 'value').then(value => {
                 expect(value).to.equals(firstName)
             })
@@ -20,7 +20,7 @@ export class BookingClientDataPage {
         this.verifyEmailLabel()
         BookingClientDataPageElement.EmailInput.getElement()
             .clear()
-            .type(email).then(() => {
+            .type(email).then((): void => {
             BookingClientDataPageElement.EmailInput.getElement().invoke('prop', 'value').then(value => {
                 expect(value).to.equals(email)
             })
@@ -32,7 +32,7 @@ export class BookingClientDataPage {
         this.verifyPhonePrefix("Poland +48")
         BookingClientDataPageElement.PhoneInput.getElement()
             .clear()
-            .type(phoneNumber).then(() => {
+            .type(phoneNumber).then((): void => {
             BookingClientDataPageElement.PhoneInput.getElement().invoke('prop', 'value').then(value => {
                 const trimmedValue = value.replace(/\D/g, '');
                 const trimmedPhoneNumber = phoneNumber.replace(/\D/g, '');
@@ -46,7 +46,7 @@ export class BookingClientDataPage {
         if (comment) {
             BookingClientDataPageElement.CommentInput.getElement()
                 .clear()
-                .type(comment).then(() => {
+                .type(comment).then((): void => {
                 BookingClientDataPageElement.CommentInput.getElement().invoke('prop', 'value').then(value => {
                     expect(value).to.equals(comment)
                 })
@@ -64,7 +64,7 @@ export class BookingClientDataPage {
     public verifySelectedService(service: string): BookingClientDataPage {
         BookingClientDataPageElement.SelectedService.getSelectedServiceName(service)
             .invoke('text')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedValue = service.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedValue);
@@ -75,7 +75,7 @@ export class BookingClientDataPage {
     public verifySelectedServiceOnSummary(service: string): BookingClientDataPage {
         BookingClientDataPageElement.SelectedService.getSelectedServiceName(service)
             .invoke('text')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedValue = service.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedValue);
@@ -86,7 +86,7 @@ export class BookingClientDataPage {
     public verifySelectedServicePrice(price: string): BookingClientDataPage {
         BookingClientDataPageElement.SelectedService.getSelectedServicePrice(price)
             .invoke('prop', 'outerText')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = price.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
@@ -97,7 +97,7 @@ export class BookingClientDataPage {
     public verifySelectedServiceTime(time: string): BookingClientDataPage {
         BookingClientDataPageElement.SelectedService.getSelectedServiceTime(time)
             .invoke('prop', 'outerText')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = time.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
@@ -108,7 +108,7 @@ export class BookingClientDataPage {
     public verifyServiceSpecialist(specialist: string): BookingClientDataPage {
         BookingClientDataPageElement.ServiceSpecialist.getElement(specialist)
             .invoke('prop', 'outerText')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = specialist.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
@@ -119,7 +119,7 @@ export class BookingClientDataPage {
     public verifySummaryPriceValue(value: string): BookingClientDataPage {
         BookingClientDataPageElement.SummaryPriceValue.getElement()
             .invoke('text')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedValue = value.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedValue);
@@ -130,7 +130,7 @@ export class BookingClientDataPage {
     public verifyPhonePrefix(prefix: string): BookingClientDataPage {
         const element = BookingClientDataPageElement.PhonePrefixElement
         // if (!element.getElement().contains('+1')) {
-        element.getElement().click().then(() => {
+        element.getElement().click().then((): void => {
             cy.get('[placeholder="Search"]').type('Poland')
             cy.contains('li', 'Poland').click()
         })

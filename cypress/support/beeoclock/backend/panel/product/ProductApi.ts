@@ -2,8 +2,9 @@ import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum"
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {EnvEnum} from "../../../common/enum/EnvEnum";
+import {ApiRequestHelper} from "../../../common/Interception/ApiRequestHelper";
 
-export class ProductApi {
+export class ProductApi extends ApiRequestHelper {
 
     public static createProductTag(tag: any, token: string): any {
         return cy.request({
@@ -89,8 +90,8 @@ export class ProductApi {
                 cy.log("No tags to delete");
                 return;
             }
-            cy.wrap(null).then(() => {
-                return tags.reduce((prev, tagId) => {
+            cy.wrap(null).then((): void => {
+                return tags.reduce((prev, tagId): void => {
                     return prev.then(() => this.deleteProductTag(tagId, token));
                 }, Cypress.Promise.resolve());
             });

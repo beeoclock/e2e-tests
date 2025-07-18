@@ -1,6 +1,10 @@
 import {CustomerApi} from "../../../../support/beeoclock/backend/panel/customer/CustomerApi";
-import {ICustomerSearchCriteria} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
-import {CustomerSearchCriteriaBuilder} from "support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
+import {
+    ICustomerSearchCriteria
+} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
+import {
+    CustomerSearchCriteriaBuilder
+} from "support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
 import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {CustomerFactory} from "support/beeoclock/backend/panel/customer/factory/CustomerFactory";
 import {ICustomer} from "support/beeoclock/backend/panel/customer/create/ICustomer";
@@ -9,21 +13,21 @@ import {HTTPStatusCodeType} from "../../../../support/beeoclock/backend/enum/HTT
 import {faker} from "@faker-js/faker";
 import {StateEnum} from "support/beeoclock/backend/panel/order/enum/StateEnum";
 
-describe('customer api test', () => {
+describe('customer api test', (): void => {
     let customerData: ICustomer
 
-    beforeEach('get test data', () => {
+    beforeEach('get test data', (): void => {
         customerData = CustomerFactory.createCustomer();
     })
 
-    afterEach('delete customer after each test', () => {
+    afterEach('delete customer after each test', (): void => {
         CustomerApi.deleteCustomer(customerData._id, {})
             .then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
             })
     })
 
-    it('should create customer with default properties and assert its properties', () => {
+    it('should create customer with default properties and assert its properties', (): void => {
         const customer: ICustomer = new CustomerBuilder()
             .setId(customerData._id)
             .setFirstName(customerData.firstName)
@@ -67,7 +71,7 @@ describe('customer api test', () => {
             });
     })
 
-    it('should create customer with maximal properties and assert its properties', () => {
+    it('should create customer with maximal properties and assert its properties', (): void => {
         let note: string = faker.finance.account(70)
 
         const customer: ICustomer = new CustomerBuilder()
@@ -105,7 +109,7 @@ describe('customer api test', () => {
             });
     })
 
-    it('should get bad request when no contact data', () => {
+    it('should get bad request when no contact data', (): void => {
         const customer: ICustomer = new CustomerBuilder()
             .setFirstName(customerData.firstName)
             .setLastName(customerData.lastName)
@@ -124,7 +128,7 @@ describe('customer api test', () => {
             })
     });
 
-    it.skip('should get bad request when no names data, TODO BUG', () => {
+    it.skip('should get bad request when no names data, TODO BUG', (): void => {
         const customer: ICustomer = new CustomerBuilder()
             .setFirstName(null)
             .setLastName(null)
@@ -143,7 +147,7 @@ describe('customer api test', () => {
             })
     });
 
-    it('should get bad request when incorrect phone number', () => {
+    it('should get bad request when incorrect phone number', (): void => {
         const customer: ICustomer = new CustomerBuilder()
             .setFirstName(customerData.firstName)
             .setLastName(customerData.lastName)
@@ -162,7 +166,7 @@ describe('customer api test', () => {
             })
     });
 
-    it('should get bad request when incorrect email value', () => {
+    it('should get bad request when incorrect email value', (): void => {
         const customer: ICustomer = new CustomerBuilder()
             .setFirstName(customerData.firstName)
             .setLastName(customerData.lastName)

@@ -4,7 +4,7 @@ export class IndexDbHandler {
      * Otwiera bazę IndexedDB i zwraca jej instancję.
      */
     public static openDatabase(dbName: string,): Promise<IDBDatabase> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject): void => {
             const request = indexedDB.open(dbName);
 
             request.onsuccess = () => resolve(request.result);
@@ -23,12 +23,12 @@ export class IndexDbHandler {
      * Znajduje obiekt z najświeższą wartością `createdAt` w danym store.
      */
     public static getLatestCreatedAtObject(db: IDBDatabase, storeName: string): Promise<any | null> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject): void => {
             const store = this.getDBObjectStore(db, storeName);
             const request = store.openCursor();
             let latestObject: any = null;
 
-            request.onsuccess = (event: Event) => {
+            request.onsuccess = (event: Event): void => {
                 const cursor = (event.target as IDBRequest).result;
                 if (cursor) {
                     const currentObject = cursor.value;
@@ -49,7 +49,7 @@ export class IndexDbHandler {
      * Pobiera obiekt na podstawie ID.
      */
     public static getObjectById(db: IDBDatabase, id: string): Promise<any | null> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject): void => {
             const store = this.getDBObjectStore(db, "items", "readonly");
             const request = store.get(id);
 
@@ -62,14 +62,14 @@ export class IndexDbHandler {
      * Pobiera ostatni element na podstawie indeksu `createdAt`.
      */
     public static getLastElementByCreatedAt(db: IDBDatabase, storeName: string, indexName: string): Promise<any | null> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject): void => {
             const store = this.getDBObjectStore(db, storeName, "readonly");
 
             const index = store.index(indexName);
             const request = index.openCursor();
             let lastObject: any | null = null;
 
-            request.onsuccess = (event) => {
+            request.onsuccess = (event): void => {
                 const cursor = (event.target as IDBRequest).result;
 
                 if (cursor) {

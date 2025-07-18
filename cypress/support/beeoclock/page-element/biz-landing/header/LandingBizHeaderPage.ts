@@ -22,7 +22,7 @@ export class LandingBizHeaderPage {
     }
 
     public assertHtml(): LandingBizHeaderPage {
-        this.element.getElement().invoke('prop', 'outerHTML').then((html) => {
+        this.element.getElement().invoke('prop', 'outerHTML').then((html): void => {
             expect(html).to.equal(this.outerHtml.getHeaderOuterHTML())
         })
         return this
@@ -30,7 +30,7 @@ export class LandingBizHeaderPage {
 
     public clickOnServiceLink(): LandingBizHeaderPage {
         this.element.getGivenHeaderLink(this.links.services)
-            .click().then(() => {
+            .click().then((): void => {
             QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/pl/#services')
         })
         return this
@@ -38,7 +38,7 @@ export class LandingBizHeaderPage {
 
     public clickOnTariffsLink(): LandingBizHeaderPage {
         this.element.getGivenHeaderLink(this.links.tariffs)
-            .click().then(() => {
+            .click().then((): void => {
             QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/pl/#tariffs')
         })
         return this
@@ -46,7 +46,7 @@ export class LandingBizHeaderPage {
 
     public clickOnFaqLink(): LandingBizHeaderPage {
         this.element.getGivenHeaderLink(this.links.faq)
-            .click().then(() => {
+            .click().then((): void => {
             QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/pl/#faq')
         })
         return this
@@ -54,7 +54,7 @@ export class LandingBizHeaderPage {
 
     public clickOnContactLink(): LandingBizHeaderPage {
         this.element.getGivenHeaderLink(this.links.contact)
-            .click().then(() => {
+            .click().then((): void => {
             QueryAssertion.verifyCorrectUrl('https://biz.dev.beeoclock.com/pl/#contact')
         })
         return this

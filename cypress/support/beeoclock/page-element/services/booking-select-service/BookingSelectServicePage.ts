@@ -8,7 +8,7 @@ export class BookingSelectServicePage {
         this.verifyCorrectForm()
         cy.wait(1000)// TODO temp wait for re-render app
         this.selectComponent.getAddButton(order)
-            .click().then(() => {
+            .click().then((): void => {
             this.selectComponent.getMinusButton(order)
             if (count) {
                 this.selectComponent.getElement(order).should('have.prop', 'innerText').and('include', count)
@@ -42,7 +42,7 @@ export class BookingSelectServicePage {
 
     public verifyHrefAddress(): BookingSelectServicePage {
         cy.get('.self-stretch.text-xl')
-            .should(($el) => {
+            .should(($el): void => {
                 const actualText = $el.prop('textContent').replace(/\s+/g, ' ').replace(/&nbsp;/g, ' ').trim();
                 const expectedText = 'Haircut&Barber';
 
@@ -57,7 +57,7 @@ export class BookingSelectServicePage {
 
     public verifyGivenHrefAddress(address: string): BookingSelectServicePage {
         cy.get('.brake-all.w-full.text-sm.font-medium.leading-normal')
-            .should(($el) => {
+            .should(($el): void => {
                 const actualText = $el.prop('textContent').replace(/\s+/g, ' ').replace(/&nbsp;/g, ' ').trim();
                 const expectedText = address;
 

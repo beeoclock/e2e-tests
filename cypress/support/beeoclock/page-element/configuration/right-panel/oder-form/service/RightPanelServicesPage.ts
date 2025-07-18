@@ -101,7 +101,7 @@ export class RightPanelServicesPage {
 
     public typeOrderDate(date: string): RightPanelServicesPage {
         const input = RightPanelServicesPageElement.OrderDateInput.getElement()
-            .click().then(() => {
+            .click().then((): void => {
                 input.type(date, {force: true})
             })
         return this;
@@ -122,8 +122,8 @@ export class RightPanelServicesPage {
     public typePrice(price: string, sendEmail: boolean = false): RightPanelServicesPage {
         RightPanelServicesPageElement.OrderPriceInput.getElement()
             .clear()
-            .type(price).then(() => {
-            cy.contains('button', 'Potwierdź').click().then(() => {
+            .type(price).then((): void => {
+            cy.contains('button', 'Potwierdź').click().then((): void => {
                 if (sendEmail) {
                     NotificationsPage.handleEmailNotificationsToggle(sendEmail)
                 }
@@ -137,8 +137,8 @@ export class RightPanelServicesPage {
         cy.wait(500)
         cy.document().its('readyState').should('equal', 'complete')
         RightPanelServicesPageElement.SelectCustomerOption.getElement()
-            .click().then(() => {
-            cy.get('.ion-padding').then((visible) => {
+            .click().then((): void => {
+            cy.get('.ion-padding').then((visible): void => {
                 if (!visible) {
                     cy.log('again')
                     RightPanelServicesPageElement.SelectCustomerOption.getElement().click();

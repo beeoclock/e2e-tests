@@ -1,8 +1,12 @@
 import {ICustomer} from "../../../../support/beeoclock/backend/panel/customer/create/ICustomer";
 import {CustomerFactory} from "../../../../support/beeoclock/backend/panel/customer/factory/CustomerFactory";
 import {CustomerApi} from "../../../../support/beeoclock/backend/panel/customer/CustomerApi";
-import {ICustomerSearchCriteria} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
-import {CustomerSearchCriteriaBuilder} from "../../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
+import {
+    ICustomerSearchCriteria
+} from "../../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
+import {
+    CustomerSearchCriteriaBuilder
+} from "../../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
 import {BackendCommonEnum} from "../../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {CustomerStateEnum} from "../../../../support/beeoclock/backend/panel/customer/enum/CustomerStateEnum";
 /*
@@ -10,15 +14,15 @@ endpoints:
 - GET /customer/paged
 - GET /customer/{customerId}
  */
-describe('customer queries api test', () => {
+describe('customer queries api test', (): void => {
     let customerData: ICustomer;
 
-    beforeEach('create customer to edit', () => {
+    beforeEach('create customer to edit', (): void => {
         customerData = CustomerFactory.createCustomer()
         CustomerApi.createCustomerWithBuilder(customerData, {})
     })
 
-    it('get paged customer with given pageSize and assert', () => {
+    it('get paged customer with given pageSize and assert', (): void => {
         let pageSize: string[];
         pageSize = ['1', '2', '15', '20', '30', '33', '78', '94'];
 
@@ -38,7 +42,7 @@ describe('customer queries api test', () => {
         })
     });
 
-    it('get paged customer with given page and assert', () => {
+    it('get paged customer with given page and assert', (): void => {
         let pageSize: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
         let allEmails = new Set<string>();
         let allPhoneNumbers = new Set<string>();
@@ -85,7 +89,7 @@ describe('customer queries api test', () => {
         });
     });
 
-    it('get paged customer with given state and assert', () => {
+    it('get paged customer with given state and assert', (): void => {
         Object.values(CustomerStateEnum).forEach(state => {
             cy.log('state:', state);
             const criteria: ICustomerSearchCriteria = new CustomerSearchCriteriaBuilder()

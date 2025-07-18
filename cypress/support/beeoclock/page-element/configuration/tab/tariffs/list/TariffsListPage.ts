@@ -11,7 +11,7 @@ export class TariffsListPage {
     public verifyTariffsPrize(name: string, prize: string): TariffsListPage {
         this.tariffsComponent.getTariffsPrice(name)
             .invoke('prop', 'textContent')
-            .then((textContent) => {
+            .then((textContent): void => {
                 const cleanedText = textContent.replace(/&nbsp;/g, '').replace(/\s+/g, ' ').trim();
                 const cleanedPrize = prize.replace(/\s+/g, ' ').trim();
                 expect(cleanedText).to.eq(cleanedPrize);

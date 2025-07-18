@@ -4,11 +4,11 @@ import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/e
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
-describe('order next service', () => {
+describe('order next service', (): void => {
 
     const address: string = CompanyEnum.COMPANY_ADDRESS
 
-    beforeEach(function () {
+    beforeEach(function (): void {
         cy.fixture('order-next-service-test-data.json').as('orderNextServiceCreation');
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage()
@@ -16,7 +16,7 @@ describe('order next service', () => {
 
     });
 
-    before('clear environment', () => {
+    before('clear environment', (): void => {
         OrderApi.deleteAllCurrentOrdersWithAssertion()
         AbsenceApi.deleteAllAbsences()
     })
@@ -24,7 +24,7 @@ describe('order next service', () => {
     it('order next service form test', function (): void {
         cy.loginOnPublicPage()
 
-        cy.document().then((doc) => {
+        cy.document().then((doc): void => {
             doc.documentElement.lang = 'pl';
         });
 

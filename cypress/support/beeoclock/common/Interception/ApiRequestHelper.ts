@@ -1,4 +1,3 @@
-import {AuthApi} from "../../backend/auth/AuthApi";
 import {BackendCommonEnum} from "../../backend/enum/BackendCommonEnum";
 
 export enum Environment {

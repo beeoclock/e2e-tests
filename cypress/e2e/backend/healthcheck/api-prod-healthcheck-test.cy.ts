@@ -1,14 +1,18 @@
 import {CustomerApi} from "../../../support/beeoclock/backend/panel/customer/CustomerApi";
 import {ICustomer} from "../../../support/beeoclock/backend/panel/customer/create/ICustomer";
 import {CustomerFactory} from "../../../support/beeoclock/backend/panel/customer/factory/CustomerFactory";
-import {ICustomerSearchCriteria} from "../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
-import {CustomerSearchCriteriaBuilder} from "../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
+import {
+    ICustomerSearchCriteria
+} from "../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
+import {
+    CustomerSearchCriteriaBuilder
+} from "../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
 import {Environment} from "../../../support/beeoclock/common/Interception/ApiRequestHelper";
 
 describe('api prod healthcheck', function() {
     let customerData: ICustomer;
 
-    beforeEach('create customer to edit', () => {
+    beforeEach('create customer to edit', (): void => {
         customerData = CustomerFactory.createCustomer()
         CustomerApi.createCustomerWithBuilder(customerData, {})
     })

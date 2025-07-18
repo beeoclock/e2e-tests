@@ -9,7 +9,7 @@
     "order-cleanup": "npx cypress run --spec cypress/e2e/backend/delete-order-api-test.spec.ts",
     "client-app-test": "npx cypress run --spec cypress/e2e/service/page --browser edge",
     "client-app-health-check": "npx cypress run --spec cypress/e2e/service/healtcheck/client-app-health-check-test-spec.ts --browser edge",
-    "panel-app-api-health-check": "npx cypress run --spec cypress/e2e/backend/healthcheck",
+    "panel-app-api-health-check": "npx cypress run --spec cypress/e2e/backend/healthcheck/api-healthcheck-test.spec.ts",
     "panel-app-api-test": "npx cypress run --spec cypress/e2e/backend",
     "panel-app-client-test": "npx cypress run --spec cypress/e2e/panel/client --browser edge",
     "biz-landing-test": "npx cypress run --spec cypress/e2e/biz-landing --browser edge",

@@ -40,11 +40,11 @@ declare global {
     }
 }
 
-Cypress.Commands.add('loginOnPanel', () => {
+Cypress.Commands.add('loginOnPanel', (): void => {
     cy.log('visit')
     cy.visit(ServiceEnum.CLIENT_PANEL, {
         failOnStatusCode: false,
-        onBeforeLoad: (win) => {
+        onBeforeLoad: (win): void => {
             win.sessionStorage.clear();
             win.localStorage.clear();
             win.sessionStorage.clear();
@@ -62,11 +62,11 @@ Cypress.Commands.add('loginOnPanel', () => {
     cy.document().its('readyState').should('eq', 'complete');
 });
 
-Cypress.Commands.add('loginOnProductPanel', () => {
+Cypress.Commands.add('loginOnProductPanel', (): void => {
     cy.log('visit')
     cy.visit(ServiceEnum.PRODUCT_CLIENT_PANEL, {
         failOnStatusCode: false,
-        onBeforeLoad: (win) => {
+        onBeforeLoad: (win): void => {
             win.sessionStorage.clear();
             win.localStorage.clear();
             win.sessionStorage.clear();
@@ -83,20 +83,20 @@ Cypress.Commands.add('loginOnProductPanel', () => {
     cy.document().its('readyState').should('eq', 'complete');
 });
 
-Cypress.Commands.add('loginOnPublicPage', () => {
+Cypress.Commands.add('loginOnPublicPage', (): void => {
     cy.log('visit')
-    cy.visit(ServiceEnum.PUBLIC_PANEL_DEV).then(() => {
+    cy.visit(ServiceEnum.PUBLIC_PANEL_DEV).then((): void => {
         cy.get('h1').contains('Haircut&Barber').should('be.visible')
         cy.contains('a', 'Juliusza Słowackiego 80, Piotrków trybunalski, Polska, 97-300')
         cy.document().its('readyState').should('eq', 'complete');
     })
 });
 
-Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
+Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum): void => {
     const methods: string[] = ['GET', 'POST', 'PUT', 'DELETE'];
 
     if (speed === ThrottleEnum.NO_THROTTLING) {
-        methods.forEach((method: string) => {
+        methods.forEach((method: string): void => {
             cy.intercept({
                 method: method,
                 url: '**/api/**',
@@ -108,7 +108,7 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
         return;
     }
 
-    methods.forEach((method: string) => {
+    methods.forEach((method: string): void => {
         switch (speed) {
             case ThrottleEnum['2G']:
                 cy.intercept({
@@ -145,21 +145,21 @@ Cypress.Commands.add('setNetworkThrottle', (speed: ThrottleEnum) => {
     });
 });
 
-Cypress.Commands.add('assertProperties', {prevSubject: true}, (subject, properties, expectedProperties) => {
+Cypress.Commands.add('assertProperties', {prevSubject: true}, (subject, properties, expectedProperties): void => {
     cy.wrap(subject).should('have.prop', properties).and('include', expectedProperties);
 });
 
-Cypress.Commands.add('assertOuterHtmlProperties', {prevSubject: true}, (subject: any, expectedHtml: string) => {
+Cypress.Commands.add('assertOuterHtmlProperties', {prevSubject: true}, (subject: any, expectedHtml: string): void => {
     cy.wrap(subject).should('have.prop', 'outerHTML').and('include', expectedHtml);
 });
 
 Cypress.Commands.add(
     'assertElementTextNormalized',
     {prevSubject: true},
-    (subject: any, expectedValue: string) => {
+    (subject: any, expectedValue: string): void => {
         cy.wrap(subject)
             .invoke('text')
-            .then((text: string) => {
+            .then((text: string): void => {
                 const normalized = text.replace(/\s+/g, ' ').trim();
                 expect(normalized).to.eq(expectedValue);
             });
@@ -169,10 +169,10 @@ Cypress.Commands.add(
 Cypress.Commands.add(
     'assertElementText',
     {prevSubject: true},
-    (subject: any, expectedValue: string) => {
+    (subject: any, expectedValue: string): void => {
         cy.wrap(subject)
             .invoke('text')
-            .then((text: string) => {
+            .then((text: string): void => {
                 expect(text).to.eq(expectedValue);
             });
     }
@@ -181,13 +181,13 @@ Cypress.Commands.add(
 Cypress.Commands.add('assertTrimmedProperties', {prevSubject: true}, function (subject, properties, expectedProperties) {
     cy.wrap(subject)
         .should('have.prop', properties)
-        .then((actualProp: any) => {
+        .then((actualProp: any): void => {
             const clean = (s: string) => s.replace(/\u00A0/g, ' ').trim();
             expect(clean(actualProp)).to.include(clean(expectedProperties));
         });
 });
 
-Cypress.Commands.add('isNotInViewport', {prevSubject: true}, (subject) => {
+Cypress.Commands.add('isNotInViewport', {prevSubject: true}, (subject): void => {
     const bounding = subject[0].getBoundingClientRect();
     const windowHeight = Cypress.config('viewportHeight');
     const windowWidth = Cypress.config('viewportWidth');
@@ -201,7 +201,7 @@ Cypress.Commands.add('isNotInViewport', {prevSubject: true}, (subject) => {
     expect(completelyOutOfView).to.be.true;
 });
 
-Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject) => {
+Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject): void => {
     const bounding = subject[0].getBoundingClientRect();
     const windowHeight = Cypress.config('viewportHeight');
     const windowWidth = Cypress.config('viewportWidth');

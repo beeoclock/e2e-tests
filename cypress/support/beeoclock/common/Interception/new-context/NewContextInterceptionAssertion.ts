@@ -21,7 +21,7 @@ export class NewContextInterceptionAssertion {
             if (expectedBody.schedules) {
                 expect(requestBody.schedules).to.have.length(expectedBody.schedules.length);
 
-                expectedBody.schedules.forEach((expectedSchedule, index) => {
+                expectedBody.schedules.forEach((expectedSchedule, index): void => {
                     const actualSchedule = requestBody.schedules[index];
                     expect(actualSchedule.workDays).to.deep.equal(expectedSchedule.workDays);
                     expect(actualSchedule.startInSeconds).to.equal(expectedSchedule.startInSeconds);
@@ -32,7 +32,7 @@ export class NewContextInterceptionAssertion {
             if (expectedBody.addresses) {
                 expect(requestBody.addresses).to.have.length(expectedBody.addresses.length);
 
-                expectedBody.addresses.forEach((expectedAddress, index) => {
+                expectedBody.addresses.forEach((expectedAddress, index): void => {
                     const actualAddress = requestBody.addresses[index];
                     expect(actualAddress.object).to.equal(expectedAddress.object);
                     expect(actualAddress.country).to.equal(expectedAddress.country);

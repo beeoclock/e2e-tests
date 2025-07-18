@@ -14,7 +14,7 @@ export class ClientFormPage {
             CustomerInput.getElement(label)
                 .click()
                 .type(value)
-                .then(() => {
+                .then((): void => {
                     this.verifyGivenCustomerInput(label, value)
                 })
         }
@@ -34,7 +34,7 @@ export class ClientFormPage {
         if (description) {
             ClientDescriptionInput.getElement()
                 .click()
-                .type(description).then(() => {
+                .type(description).then((): void => {
                 this.verifyClientDescription(description)
             })
         }

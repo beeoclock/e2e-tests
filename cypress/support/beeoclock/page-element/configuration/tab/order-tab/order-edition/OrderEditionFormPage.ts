@@ -21,7 +21,7 @@ export class OrderEditionFormPage {
     public clickSelectSpecialist(specialist: SpecialistNameEnum, sendEmail?: boolean): OrderEditionFormPage {
         OrderEditionFormPageElement.SelectGivenSpecialist
             .getElement(specialist)
-            .click().then(() => {
+            .click().then((): void => {
             // NotificationsPage.handleEmailNotificationsToggle(sendEmail)
         })
         return this;
@@ -51,7 +51,7 @@ export class OrderEditionFormPage {
 
     public assertPrice(orderId: string, price: string): OrderEditionFormPage {
         OrderEditionFormPageElement.OrderPriceComponent.getElement(orderId)
-            .invoke('prop', 'innerText').then((innerText) => {
+            .invoke('prop', 'innerText').then((innerText): void => {
             const normalizedText = innerText.replace(/\s/g, '');
             const normalizedPrice = price.replace(/\s/g, '');
             expect(normalizedText).to.include(normalizedPrice);

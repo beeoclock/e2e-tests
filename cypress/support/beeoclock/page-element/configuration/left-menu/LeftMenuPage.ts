@@ -123,7 +123,7 @@ export class LeftMenuPage {
     }
 
     public static synchronizeWithInterception(): LeftMenuPage {
-        cy.wrap(null).then(() => {
+        cy.wrap(null).then((): void => {
             cy.log('wait until synchronization is done');
             this.assertIsSynchronized(true)
         }).then((): void => {
@@ -138,7 +138,7 @@ export class LeftMenuPage {
             const getTariffs: string = TariffsApiInterceptionHelper.getTariffs()
             const getTenantTariffs: string = TariffsApiInterceptionHelper.getTenantTariffs()
 
-            LeftMenuPageElement.SynchronizingComponent.getElement().click().then(() => {
+            LeftMenuPageElement.SynchronizingComponent.getElement().click().then((): void => {
                 cy.log('Waiting for synchronization requests to complete...');
                 ApiInterceptionHelper.waitForAliases([getAbsence, getMember, getOrder, getServices,
                     getPayment, getBusinessProfile, getCustomer, getTariffs, getTenantTariffs]);

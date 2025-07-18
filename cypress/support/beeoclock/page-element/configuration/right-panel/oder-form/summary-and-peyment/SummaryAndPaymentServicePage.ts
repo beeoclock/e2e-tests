@@ -7,7 +7,7 @@ export class SummaryAndPaymentServicePage {
     public verifyOrderPrice(price: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummaryPriceElement.getElement()
             .invoke('prop', 'outerText')
-            .then((text) => {
+            .then((text: string): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = price.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
@@ -18,7 +18,7 @@ export class SummaryAndPaymentServicePage {
     public verifyOrderTime(price: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummaryTimeElement.getElement()
             .invoke('prop', 'outerText')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = price.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
@@ -44,7 +44,7 @@ export class SummaryAndPaymentServicePage {
 
     public verifyOrderService(service: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummarySelectedServiceElement.getElement()
-            .invoke('prop', 'innerText').then(innerText => {
+            .invoke('prop', 'innerText').then((innerText: string): void => {
             const cleanedText = innerText.replace(/\s+/g, ' ').trim();
             const cleanedService = service.replace(/\s+/g, ' ').trim();
             expect(cleanedText).to.include(cleanedService);
@@ -55,7 +55,7 @@ export class SummaryAndPaymentServicePage {
     public verifyOrderSpecialist(specialist: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderSummarySpecialistElement.getElement()
             .invoke('prop', 'textContent')
-            .then((text) => {
+            .then((text): void => {
                 expect(text).to.include(specialist);
             });
         return this;
@@ -64,7 +64,7 @@ export class SummaryAndPaymentServicePage {
     public verifyOrderCustomer(customer: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.OrderCustomerSummaryElement.getElement()
             .invoke('prop', 'textContent')
-            .then((text) => {
+            .then((text: string): void => {
                 expect(text).to.include(customer);
             });
         return this;
@@ -72,7 +72,7 @@ export class SummaryAndPaymentServicePage {
 
     public selectPaymentMethod(method: string): SummaryAndPaymentServicePage {
         SummaryAndPaymentServicePageElement.PaymentMethodSelector.getElement()
-            .click().then(() => {
+            .click().then((): void => {
             SummaryAndPaymentServicePageElement.SelectPaymentMethodElement.getElement(method)
                 .click()
         })
@@ -100,13 +100,13 @@ export class SummaryAndPaymentServicePage {
         LeftMenuPage.assertIsSynchronized(true)
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
-            .then(() => {
+            .then((): void => {
                 cy.wait(100)
-                cy.wait('@' + createOrder, {timeout: 5000}).then((interception) => {
+                cy.wait('@' + createOrder, {timeout: 5000}).then((interception): void => {
                     cy.wrap(interception.request.body._id).as('orderId');
                 })
 
-                cy.wait('@' + createServicePayment, {timeout: 5000}).then((interception) => {
+                cy.wait('@' + createServicePayment, {timeout: 5000}).then((interception): void => {
                     const sendPaymentStatus = interception.request.body.status;
                     expect(sendPaymentStatus).to.equal(paymentStatus);
                 })
@@ -123,7 +123,7 @@ export class SummaryAndPaymentServicePage {
         const btn = icon.parent('button')
         btn.scrollIntoView().should('be.visible')
 
-        btn.click().then(() => {
+        btn.click().then((): void => {
             cy.get('.alert-wrapper')
         })
         return this;

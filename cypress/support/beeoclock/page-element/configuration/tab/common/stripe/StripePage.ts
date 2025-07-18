@@ -5,7 +5,7 @@ export class StripePage {
 
     public assertInputElement(): StripePage {
         this.inputs.getStripeEmailInput()
-            .invoke('prop', 'innerText').then(innerText => {
+            .invoke('prop', 'innerText').then((innerText: string): void => {
             expect(innerText).to.include("Email\ne2e.testing@dev.beeoclock.com")
         })
         return this;
@@ -14,7 +14,7 @@ export class StripePage {
     public assertOrderSummary(tariffName: string): StripePage {
         cy.get('[data-testid="product-summary-name"]').should('have.text', 'Subscribe to ' + tariffName)
         cy.get('.ProductSummary-amountsContainer.false')
-            .invoke('prop', 'innerText').then(innerText => {
+            .invoke('prop', 'innerText').then((innerText: string): void => {
             if (tariffName === 'Basic') {
                 expect(innerText.trim().replace(/\s+/g, ' '))
                     .to.contain('PLN 59.00 per month Basic plan for small teams (PL).');

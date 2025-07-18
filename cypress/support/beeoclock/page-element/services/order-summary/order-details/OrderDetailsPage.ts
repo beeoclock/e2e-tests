@@ -3,7 +3,7 @@ import {OrderDetailsPageElement} from "./OrderDetailsPageElement";
 export class OrderDetailsPage {
 
     public verifyOrderDetails(tdKey: string, expectValue: string): OrderDetailsPage {
-        OrderDetailsPageElement.OrderDetailsElement.getElement(tdKey).invoke('prop', 'innerText').then(innerText => {
+        OrderDetailsPageElement.OrderDetailsElement.getElement(tdKey).invoke('prop', 'innerText').then((innerText: string): void => {
             expect(innerText).to.contain(expectValue)
         })
         return this;

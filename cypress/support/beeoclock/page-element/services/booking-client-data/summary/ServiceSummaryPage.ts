@@ -6,7 +6,7 @@ export class ServiceSummaryPage {
     public verifySelectedServiceOnSummary(service: string): ServiceSummaryPage {
         this.SelectedServiceElement.getSelectedServiceName(service)
             .invoke('text')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedValue = service.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedValue);
@@ -17,7 +17,7 @@ export class ServiceSummaryPage {
     public verifySelectedServicePrice(price: string): ServiceSummaryPage {
         this.SelectedServiceElement.getSelectedServicePrice(price)
             .invoke('prop', 'outerText')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = price.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
@@ -28,7 +28,7 @@ export class ServiceSummaryPage {
     public verifySelectedServiceTime(time: string): ServiceSummaryPage {
         this.SelectedServiceElement.getSelectedServiceTime(time)
             .invoke('prop', 'outerText')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = time.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);
@@ -39,7 +39,7 @@ export class ServiceSummaryPage {
     public verifyServiceSpecialist(specialist: string): ServiceSummaryPage {
         this.SelectedServiceElement.getSpecialistElement(specialist)
             .invoke('prop', 'outerText')
-            .then((text) => {
+            .then((text): void => {
                 const normalizedText = text.replace(/\s/g, '');
                 const normalizedPrice = specialist.replace(/\s/g, '');
                 expect(normalizedText).to.include(normalizedPrice);

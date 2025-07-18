@@ -31,7 +31,7 @@ export class BusinessProfileApi {
 
         const url: string = DevEntryPointEnum.API_ENTRY_POINT + `/business-profile`;
 
-        return cy.then(() => {
+        return cy.then((): any => {
             const token: string = Cypress.env('token');
 
             return cy.request({

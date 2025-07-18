@@ -1,15 +1,21 @@
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {TableCommonPage} from "../../../support/beeoclock/page-element/configuration/tab/common/table/TableCommonPage";
-import {ClientTableCellEnum} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
+import {
+    ClientTableCellEnum
+} from "../../../support/beeoclock/page-element/configuration/tab/client/enum/ClientTableCellEnum";
 import {CustomerApi} from "../../../support/beeoclock/backend/panel/customer/CustomerApi";
-import {CustomerSearchCriteriaBuilder} from "../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
+import {
+    CustomerSearchCriteriaBuilder
+} from "../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
 import {BackendCommonEnum} from "../../../support/beeoclock/backend/enum/BackendCommonEnum";
 import {CustomerStateEnum} from "../../../support/beeoclock/backend/panel/customer/enum/CustomerStateEnum";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
-import {ICustomerSearchCriteria} from "../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
+import {
+    ICustomerSearchCriteria
+} from "../../../support/beeoclock/backend/panel/customer/queries/ICustomerSearchCriteria";
 
-describe('client filter test', () => {
+describe('client filter test', (): void => {
     let testData: any
     let createdAt: string
     let updatedAt: string

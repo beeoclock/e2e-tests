@@ -1,6 +1,6 @@
-describe('assertFirstFreeSlotForHairDyeing', function () {
+describe('assertFirstFreeSlotForHairDyeing', function (): void {
 
-    it('check assertFirstFreeSlotForHairDyeing', function () {
+    it('check assertFirstFreeSlotForHairDyeing', function (): void {
         cy.log("TEST: " + assertFirstFreeSlotForHairDyeing())
     })
 
