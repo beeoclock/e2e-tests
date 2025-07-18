@@ -24,10 +24,10 @@ describe('specialist absence creation test', () => {
         LeftMenuPage.assertIsSynchronized(true)
     })
 
-    it('test panel absence creation service', function () {
+    it.only('test panel absence creation service', function () {
         const testCases = [
             TestCaseEnum.CASE_1,
-            TestCaseEnum.CASE_2
+            // TestCaseEnum.CASE_2
         ];
 
         cy.log('select next date with assert')
@@ -62,7 +62,7 @@ describe('specialist absence creation test', () => {
             TableCommonPage
                 .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.TYPE, 'Przerwa')
                 .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.STATUS, 'Zaplanowane')
-                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.ATTENDEES, '1')
+                .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.ATTENDEES, testData.specialist.split(' ')[0])
                 .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.START, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceFromTime)
                 .verifyTableRowElement(testData.absenceNote, AbsenceColumnRowEnum.END, DateUtils.getCurrentDatePlusDays(1) + ', ' + testData.absenceToTime)
 

@@ -30,7 +30,7 @@ export class ApiRequestHelper {
     }
 
     protected static getToken(): Cypress.Chainable<string> {
-        return AuthApi.getToken()
+        return cy.token()
     }
 
     protected static getTenantId(env: Environment): BackendCommonEnum {
