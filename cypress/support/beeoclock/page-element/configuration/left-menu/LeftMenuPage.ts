@@ -15,10 +15,6 @@ export class LeftMenuPage {
     public static clickOnGivenTab(tab: string, waitForSynchronize: boolean = true): LeftMenuPage {
         LeftMenuPageElement.TabElement.getElement(tab)
             .click()
-        if (tab == TabNameEnum.ORDER) {
-        }
-        if (tab == TabNameEnum.CALENDAR) {
-        }
         if (tab == TabNameEnum.ABSENCE) {
             cy.get('absence-desktop-layout-list-component')
             cy.get('app-absence-filter-component')
@@ -44,10 +40,8 @@ export class LeftMenuPage {
     }
 
     public static clickClientTab(): LeftMenuPage {
-        // const getCustomers: string = ClientsApiInterceptionHelper.getCustomers()
         LeftMenuPageElement.TabElement.getElement(TabNameEnum.CLIENTS)
             .click()
-        // ApiInterceptionHelper.waitForQueryAliasWithAssert(getCustomers)//offline first
         cy.get('customer-desktop-layout-list-component').should('be.visible')
         cy.get('customer-table-list-component').should('be.visible')
         return this;
