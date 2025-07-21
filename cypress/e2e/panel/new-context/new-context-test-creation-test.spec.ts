@@ -3,15 +3,10 @@ import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/con
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {EnvEnum} from "../../../support/beeoclock/common/enum/EnvEnum";
 import {NewContextPages} from "support/beeoclock/page-element/configuration/new-context/NewContextPages";
-import {
-    Address,
-    UpdateBusinessProfileBuilder
-} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
+import {UpdateBusinessProfileBuilder} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {
-    BusinessSettingsPages
-} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
+import {BusinessSettingsPages} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
 
 describe('new context test creation', (): void => {
     let schedulePage: any
@@ -145,7 +140,7 @@ describe('new context test creation', (): void => {
     })
 
     function login(): void {
-        cy.visit(ServiceEnum.PUBLIC_PANEL_DEV, {
+        cy.visit(ServiceEnum.CLIENT_PANEL, {
             failOnStatusCode: false,
             onBeforeLoad: (win): void => {
                 win.sessionStorage.clear();
