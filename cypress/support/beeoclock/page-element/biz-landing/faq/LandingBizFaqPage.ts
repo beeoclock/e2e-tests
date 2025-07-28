@@ -42,10 +42,6 @@ export class LandingBizFaqPage {
         return this;
     }
 
-
-    //expected
-    // 'register on the platform, add basic information about your business and services, and the system will be ready to go. You have the option to use the free plan (Free) with basic functionality, which will allow you to immediately test the key features of Bee o’clock without any costs.'
-    // 'Register on the platform, add basic information about your business and services, and the system will be ready to go. You have the option to use the free plan (Free) with basic functionality, which will allow you to immediately test the key features of Bee o’clock without any costs.
     public assertFaqItemLiText(index: number, liIndex: number, expectedValue: string): LandingBizFaqPage {
         Assertions.assertProperties(this.element.getFaqItemLi(index, liIndex), 'innerText', expectedValue)
         return this;

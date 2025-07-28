@@ -2,7 +2,8 @@ export class TableComponent {
 
     public getActionButton(keyValue: string): any {
         return cy.get('datatable-body-row').contains(keyValue)
-            .parents('datatable-body-row').first()
+            .parents('datatable-body-row')
+            .find('utility-table-column-action')
             .find('button')
             .scrollIntoView().should('be.visible')
     }

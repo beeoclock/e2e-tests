@@ -42,7 +42,7 @@ declare global {
 
 Cypress.Commands.add('loginOnPanel', (): void => {
     cy.log('visit')
-    cy.visit(ServiceEnum.PUBLIC_PANEL_DEV, {
+    cy.visit(ServiceEnum.CLIENT_PANEL, {
         failOnStatusCode: false,
         onBeforeLoad: (win): void => {
             win.sessionStorage.clear();

@@ -12,7 +12,7 @@ export class ApiRequestHelper {
         return `https://api${env}beeoclock.com`;
     }
 
-    protected static getApiEntryPoint(env: Environment): string {
+    protected static getApiEntryPoint(env: Environment = Environment.dev): string {
         return `${this.getBase(env)}/panel/api/v1`
     }
 

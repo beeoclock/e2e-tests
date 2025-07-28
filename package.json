@@ -22,13 +22,13 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "14.4.0",
-    "cypress-file-upload": "5.0.8",
+    "cypress-file-upload": "^5.0.8",
     "dayjs": "1.11.13",
+    "dotenv": "16.4.7",
     "globals": "16.0.0",
     "luxon": "3.6.1",
     "moment-timezone": "0.5.47",
-    "typescript": "5.4.5",
-    "dotenv": "16.4.7"
+    "typescript": "5.4.5"
   },
   "dependencies": {
     "@faker-js/faker": "8.4.1",

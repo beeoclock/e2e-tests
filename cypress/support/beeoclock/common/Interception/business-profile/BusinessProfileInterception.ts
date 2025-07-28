@@ -1,7 +1,8 @@
 import {DateUtils} from "../../../backend/Utils/DateUtils";
 import {DevEntryPointEnum} from "../DevEntryPointEnum";
+import {ApiRequestHelper} from "../ApiRequestHelper";
 
-export class BusinessProfileInterception {
+export class BusinessProfileInterception extends ApiRequestHelper {
 
     public static getBusinessProfile(): string {
         const getBusinessProfile = 'getBusinessProfile' + DateUtils.getCurrentTime();
@@ -19,5 +20,11 @@ export class BusinessProfileInterception {
         const getIdentityProfile = 'getIdentityProfile' + DateUtils.getCurrentTime();
         cy.intercept('GET', DevEntryPointEnum.IDENTITY_API_ENTRY_POINT + '/member-context/related?orderBy=createdAt&orderDir=asc&page=1&pageSize=20').as(getIdentityProfile);
         return getIdentityProfile
+    }
+
+    public static PatchWhenUpdatePhoto(): string {
+        const PatchWhenUpdatePhoto: string = 'PatchWhenUpdatePhoto' + DateUtils.getCurrentTime();
+        cy.intercept('PATCH', this.getApiEntryPoint() + '/business-profile-media/logo').as(PatchWhenUpdatePhoto);
+        return PatchWhenUpdatePhoto
     }
 }
