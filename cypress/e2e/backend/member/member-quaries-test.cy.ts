@@ -2,19 +2,20 @@ import {MemberApi} from "../../../support/beeoclock/backend/panel/member/MemberA
 
 describe('Members queries', function () {
     let ownerId: string
+    let member: any
 
     it('get members', function () {
         MemberApi.getMembers().then((res) => {
             const items = res.items;
 
-            const owner = items.find((item) => item.role === 'OWNER');
-            expect(owner, 'Owner member should exist').to.not.be.undefined;
-            const Id = owner._id;
+            member = items.find((item) => item.role === 'OWNER');
+            expect(member, 'Owner member should exist').to.not.be.undefined;
+            const Id = member._id;
             ownerId = Id.toString();
         })
     })
 
     it('update members', function () {
-
+        MemberApi.updateMembers(ownerId, JSON.stringify(member))
     })
 })

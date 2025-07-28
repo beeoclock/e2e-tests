@@ -1,6 +1,7 @@
 import {ApiRequestHelper} from "../../../common/Interception/ApiRequestHelper";
 import {CustomerSearchCriteriaBuilder} from "../customer/queries/CustomerSearchCriteriaBuilder";
 import {HttpMethodEnum} from "../../../common/enum/HttpMethodEnum";
+import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 
 export class MemberApi extends ApiRequestHelper {
 
@@ -14,13 +15,12 @@ export class MemberApi extends ApiRequestHelper {
         return this.handleApiQueryRequest('/member/paged', qs)
     }
 
-    public static updateMembers(memberId: string): any {
-        const qs = new CustomerSearchCriteriaBuilder()
-            .withOrderBy('name')
-            .withOrderDir('asc')
-            .withPage(1)
-            .withPageSize(10)
-            .build()
-        return this.handleApiRequest(HttpMethodEnum.PUT, '/member/paged')
+    public static updateMembers(memberId: string, member: any): any {
+        const updatedMember = {
+            ...member,
+            phone: '123122133'
+        };
+
+        return this.handleApiRequest(HttpMethodEnum.PUT, `/member/${memberId}`, HTTPStatusCodeType.OK_200, updatedMember)
     }
 }
