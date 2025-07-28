@@ -13,6 +13,8 @@ describe('member update api test', function () {
             member = items.find((item) => item.role === 'OWNER');
             expect(member, 'Owner member should exist').to.not.be.undefined;
             const Id = member._id;
+            expect(Id).not.to.be.undefined;
+            expect(Id).to.match(/^[a-f\d]{24}$/i);
             ownerId = Id.toString();
         })
     })
@@ -21,8 +23,8 @@ describe('member update api test', function () {
         const updatedMember = MemberAPIHelper.createPutPayload(member, {
             phone: faker.phone.number('501######')
         });
-        cy.log('updatedMember', JSON.stringify(updatedMember))
 
+        cy.log('Updated member', JSON.stringify(updatedMember));
         MemberApi.updateMember(ownerId, updatedMember)
     })
 })

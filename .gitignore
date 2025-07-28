@@ -4,4 +4,4 @@
 
 .env
 
-token.json
+cypress/token.json
