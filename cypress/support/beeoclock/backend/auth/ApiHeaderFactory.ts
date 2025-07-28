@@ -7,10 +7,6 @@ export class ApiHeaderFactory {
             return {
                 'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
                 Authorization: `Bearer ${Cypress.env('token')}`,
-                orderBy: 'updatedAt',
-                orderDir: 'desc',
-                page: 1,
-                pageSize: 20,
             };
         });
     }

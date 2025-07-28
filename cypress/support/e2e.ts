@@ -1,4 +1,3 @@
-import {AuthApi} from "./beeoclock/backend/auth/AuthApi";
 import './commands';
 import 'cypress-file-upload';
 import {BackendCommonEnum} from "./beeoclock/backend/enum/BackendCommonEnum";
@@ -15,9 +14,6 @@ before((): void => {
 
     if (!Cypress.env('skipClear')) {
         clearAllData()
-        AuthApi.getToken().then((token: string): any => {
-            Cypress.env('token', token);
-        })
     }
 });
 

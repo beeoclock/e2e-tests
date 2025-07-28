@@ -1,4 +1,8 @@
 import {BackendCommonEnum} from "../../backend/enum/BackendCommonEnum";
+import {HttpMethodEnum} from "../enum/HttpMethodEnum";
+import {HTTPStatusCodeType} from "../../backend/enum/HTTPStatusCodeType";
+import {ApiHeaderFactory} from "../../backend/auth/ApiHeaderFactory";
+import {DevEntryPointEnum} from "./DevEntryPointEnum";
 
 export enum Environment {
     dev = '-dev.',
@@ -46,5 +50,33 @@ export class ApiRequestHelper {
         }
 
         return tenantId;
+    }
+
+    protected static handleApiRequest(method: HttpMethodEnum, url: string, response = HTTPStatusCodeType.OK_200, body?: any): Cypress.Chainable<any> {
+        return ApiHeaderFactory.getHeaders().then((headers) => {
+            return cy.request({
+                method: method,
+                url: DevEntryPointEnum.API_ENTRY_POINT + url,
+                body: body ?? null,
+                headers: headers,
+            }).then(function (resp) {
+                expect(resp.status).to.equal(response);
+                return resp.body;
+            });
+        });
+    }
+
+    public static handleApiQueryRequest(path: string, qs: any): Cypress.Chainable<any> {
+        return ApiHeaderFactory.getHeaders().then((headers) => {
+            return cy.request({
+                method: 'GET',
+                url: DevEntryPointEnum.API_ENTRY_POINT + path,
+                headers: headers,
+                qs: qs
+            }).then(response => {
+                expect(response.status).to.equal(200);
+                return response.body;
+            });
+        })
     }
 }

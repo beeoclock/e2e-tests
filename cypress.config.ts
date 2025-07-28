@@ -1,5 +1,6 @@
 import {defineConfig} from "cypress";
 import dotenv from 'dotenv';
+import {getTokenData, saveTokenData} from "./cypress/support/beeoclock/backend/auth/TokenManager";
 
 dotenv.config();
 
@@ -17,8 +18,17 @@ export default defineConfig({
 
     e2e: {
         setupNodeEvents(on, config) {
-            on('task', {});
+            on('task', {
+                readToken() {
+                    return getTokenData();
+                },
+                saveToken({token, tokenValidTo}) {
+                    saveTokenData(token, tokenValidTo);
+                    return null;
+                },
+            });
             return config;
+
         },
         retries: {
             runMode: 2

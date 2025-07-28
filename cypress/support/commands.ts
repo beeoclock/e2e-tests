@@ -201,40 +201,32 @@ Cypress.Commands.add('isNotInViewport', {prevSubject: true}, (subject): void => 
     expect(completelyOutOfView).to.be.true;
 });
 
-Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject): void => {
-    const bounding = subject[0].getBoundingClientRect();
-    const windowHeight = Cypress.config('viewportHeight');
-    const windowWidth = Cypress.config('viewportWidth');
+Cypress.Commands.add('token', () => {
+    const bufferTime = 60000;
+    const now = Date.now();
 
-    const partiallyVisible =
-        bounding.top < windowHeight &&
-        bounding.bottom > 0 &&
-        bounding.left < windowWidth &&
-        bounding.right > 0;
+    return cy.task('readToken').then((data: any) => {
+        const isValid =
+            data &&
+            data.token &&
+            data.tokenValidTo &&
+            now < new Date(data.tokenValidTo).getTime() - bufferTime;
 
-    expect(partiallyVisible).to.be.true;
-});
+        if (isValid) {
+            Cypress.env('token', data.token);
+            Cypress.env('tokenValidTo', data.tokenValidTo);
+            return cy.wrap(null); // zakończ poprawnie
+        }
 
-Cypress.Commands.add('token', (): any => {
-    const currentTime: number = Date.now();
-    const storedToken: string = Cypress.env('token');
-    const tokenValidTo: string = Cypress.env('tokenValidTo');
-    const bufferTime: number = 60000;
+        return AuthApi.getAuth().then((resp) => {
+            const token = resp.idToken;
+            const expiresInMs = Number(resp.expiresIn) * 1000;
+            const tokenValidTo = new Date(now + expiresInMs).toISOString();
 
-    if (storedToken && tokenValidTo && currentTime < new Date(tokenValidTo).getTime() - bufferTime) {
-        Cypress.env('token', storedToken);
-    } else {
-        AuthApi.getAuth().then(function (resp) {
-            const token: string = resp.idToken;
-            const expiresIn: number = Number(resp.expiresIn) * 1000;
-            const tokenValidTo: string = new Date(Date.now() + expiresIn).toISOString();
-            Cypress.log({
-                name: 'Token',
-                message: `Token valid until: ${tokenValidTo}, expires in: ${expiresIn} ms`
-            });
-            Cypress.env('tokenValidTo', tokenValidTo);
             Cypress.env('token', token);
-        })
-    }
-});
+            Cypress.env('tokenValidTo', tokenValidTo);
 
+            return cy.task('saveToken', {token, tokenValidTo});
+        });
+    });
+});
