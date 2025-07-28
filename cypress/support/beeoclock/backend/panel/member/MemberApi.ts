@@ -15,7 +15,7 @@ export class MemberApi extends ApiRequestHelper {
         return this.handleApiQueryRequest('/member/paged', qs)
     }
 
-    public static updateMembers(memberId: string, member: any): any {
+    public static updateMember(memberId: string, member: any): any {
         const updatedMember = {
             ...member,
             phone: '123122133'

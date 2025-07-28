@@ -1,6 +1,8 @@
 import {MemberApi} from "../../../support/beeoclock/backend/panel/member/MemberApi";
+import {MemberAPIHelper} from "../../../support/beeoclock/backend/panel/member/helper/MemberAPIHelper";
+import {faker} from "@faker-js/faker";
 
-describe('Members queries', function () {
+describe('member update api test', function () {
     let ownerId: string
     let member: any
 
@@ -15,7 +17,12 @@ describe('Members queries', function () {
         })
     })
 
-    it('update members', function () {
-        MemberApi.updateMembers(ownerId, JSON.stringify(member))
+    it('update owner member', function () {
+        const updatedMember = MemberAPIHelper.createPutPayload(member, {
+            phone: faker.phone.number('501######')
+        });
+        cy.log('updatedMember', JSON.stringify(updatedMember))
+
+        MemberApi.updateMember(ownerId, updatedMember)
     })
 })
