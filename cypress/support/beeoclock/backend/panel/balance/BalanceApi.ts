@@ -9,7 +9,7 @@ export class BalanceApi {
             return cy.request({
                 method: 'GET',
                 url: DevEntryPointEnum.API_ENTRY_POINT + '/balance/paged',
-                headers,
+                headers: headers,
                 qs: ApiHeaderFactory.getDefaultQueryParams()
             }).then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK_200);

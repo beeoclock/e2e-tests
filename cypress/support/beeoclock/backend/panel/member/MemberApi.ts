@@ -18,7 +18,6 @@ export class MemberApi extends ApiRequestHelper {
     public static updateMember(memberId: string, member: any): any {
         const updatedMember = {
             ...member,
-            phone: '123122133'
         };
 
         return this.handleApiRequest(HttpMethodEnum.PUT, `/member/${memberId}`, HTTPStatusCodeType.OK_200, updatedMember)

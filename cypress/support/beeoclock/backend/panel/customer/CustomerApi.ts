@@ -6,8 +6,6 @@ import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiReq
 export class CustomerApi extends ApiRequestHelper {
 
     public static createCustomerWithBuilder(customer: ICustomer, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
-        this.getToken()
-        const tokenId = Cypress.env('token');
         let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'POST',
@@ -17,7 +15,7 @@ export class CustomerApi extends ApiRequestHelper {
             },
             body: customer,
             auth: {
-                bearer: tokenId
+                bearer: Cypress.env('token')
             },
             ...options
         }).then(response => {
@@ -26,8 +24,6 @@ export class CustomerApi extends ApiRequestHelper {
     }
 
     public static updateCustomerWithBuilder(customer: ICustomer, customerId: string, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
-        this.getToken()
-        const tokenId = Cypress.env('token');
         let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'PUT',
@@ -37,7 +33,7 @@ export class CustomerApi extends ApiRequestHelper {
             },
             body: customer,
             auth: {
-                bearer: tokenId
+                bearer: Cypress.env('token')
             },
             ...options
         }).then(response => {
@@ -46,8 +42,6 @@ export class CustomerApi extends ApiRequestHelper {
     }
 
     public static deleteCustomer(customerId: string, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
-        this.getToken()
-        const tokenId = Cypress.env('token');
         let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'DELETE',
@@ -56,7 +50,7 @@ export class CustomerApi extends ApiRequestHelper {
                 'X-Business-Tenant-Id': this.getTenantId(environment),
             },
             auth: {
-                bearer: tokenId
+                bearer: Cypress.env('token')
             },
             ...options
         }).then(response => {
@@ -65,8 +59,6 @@ export class CustomerApi extends ApiRequestHelper {
     }
 
     public static getCustomerPaged(query: ICustomerSearchCriteria, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
-        this.getToken()
-        const tokenId = Cypress.env('token');
         let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'GET',
@@ -76,7 +68,7 @@ export class CustomerApi extends ApiRequestHelper {
             },
             qs: query,
             auth: {
-                bearer: tokenId
+                bearer: Cypress.env('token')
             },
             ...options
         }).then(response => {
@@ -86,8 +78,6 @@ export class CustomerApi extends ApiRequestHelper {
     }
 
     public static getCustomerById(customerId: string, env?: Environment): any {
-        this.getToken()
-        const tokenId = Cypress.env('token');
         let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'GET',
@@ -97,7 +87,7 @@ export class CustomerApi extends ApiRequestHelper {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
             },
             auth: {
-                bearer: tokenId
+                bearer: Cypress.env('token')
             }
         }).then(response => {
             expect(response.status).to.equal(HTTPStatusCodeType.OK_200);

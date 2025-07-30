@@ -6,7 +6,6 @@ import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiReq
 export class AbsenceApi extends ApiRequestHelper {
 
     public static getAllAbsenceIds(env?: Environment): any {
-        this.getToken()
         let environment: Environment = env ?? Environment.dev
         const tokenId = Cypress.env('token');
         const url: string = this.getApiEntryPoint(environment) + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';

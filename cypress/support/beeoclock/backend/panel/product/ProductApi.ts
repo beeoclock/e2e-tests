@@ -97,6 +97,4 @@ export class ProductApi extends ApiRequestHelper {
             });
         });
     }
-
-
 }
