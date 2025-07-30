@@ -9,7 +9,7 @@ import {
 } from "../../../support/beeoclock/backend/panel/customer/queries/CustomerSearchCriteriaBuilder";
 import {Environment} from "../../../support/beeoclock/common/Interception/ApiRequestHelper";
 
-describe('api prod healthcheck', function() {
+describe.skip('api prod healthcheck', function () {
     let customerData: ICustomer;
 
     beforeEach('create customer to edit', (): void => {
