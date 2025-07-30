@@ -201,6 +201,20 @@ Cypress.Commands.add('isNotInViewport', {prevSubject: true}, (subject): void => 
     expect(completelyOutOfView).to.be.true;
 });
 
+Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject): void => {
+    const bounding = subject[0].getBoundingClientRect();
+    const windowHeight = Cypress.config('viewportHeight');
+    const windowWidth = Cypress.config('viewportWidth');
+
+    const inView =
+        bounding.bottom > 0 &&
+        bounding.top < windowHeight &&
+        bounding.right > 0 &&
+        bounding.left < windowWidth;
+
+    expect(inView).to.be.true;
+});
+
 Cypress.Commands.add('token', () => {
     const bufferTime = 60000;
     const now = Date.now();
