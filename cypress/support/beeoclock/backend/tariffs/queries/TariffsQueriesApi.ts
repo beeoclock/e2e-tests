@@ -6,7 +6,7 @@ export class TariffsQueriesApi extends ApiRequestHelper {
     private static BASE_URL: string = this.getTariffsEntryPoint(Environment.dev)
 
     static getTariffsPaged(expectedCode: HTTPStatusCodeType, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
-        const token = givenToken || Cypress.env('token');
+        const token = Cypress.env('token');
         const url: string = `${this.BASE_URL}/paged`;
 
         return cy.request({
@@ -29,7 +29,7 @@ export class TariffsQueriesApi extends ApiRequestHelper {
     }
 
     static getTariffsByIds(id: string, expectedCode: HTTPStatusCodeType, options: Partial<Cypress.RequestOptions>, givenToken?: string): any {
-        const token = givenToken || Cypress.env('token');
+        const token = Cypress.env('token');
         const url: string = `${this.BASE_URL}/${id}`;
 
         return cy.request({

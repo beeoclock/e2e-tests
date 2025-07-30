@@ -229,7 +229,7 @@ Cypress.Commands.add('token', () => {
         if (isValid) {
             Cypress.env('token', data.token);
             Cypress.env('tokenValidTo', data.tokenValidTo);
-            return cy.wrap(null); // zakończ poprawnie
+            return cy.wrap(null);
         }
 
         return AuthApi.getAuth().then((resp) => {

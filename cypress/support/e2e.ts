@@ -15,6 +15,7 @@ before((): void => {
     if (!Cypress.env('skipClear')) {
         clearAllData()
     }
+    getToken()
 });
 
 beforeEach('clear environment', (): void => {
@@ -22,6 +23,10 @@ beforeEach('clear environment', (): void => {
         clearAllData();
     }
 });
+
+function getToken(): Cypress.Chainable<string> {
+    return cy.token()
+}
 
 function deleteIndexDb(): void {
     indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-order');
