@@ -21,7 +21,7 @@ export class CustomerFactory {
             firstName: firstName,
             lastName: lastName,
             phone: "48" + NumericUtils.generateRandomValueWithoutZeroPrefix(9),
-            email: `${firstName}.${lastName}@example.com`,
+            email: `${firstName.replace("'", "")}.${lastName.replace("'", "")}@example.com`,
             note: null,
             customerType: CustomerTypeEnum.REGULAR
         };
@@ -40,7 +40,7 @@ export class CustomerFactory {
             firstName: firstName,
             lastName: lastName,
             phone: faker.phone.number(),
-            email: `${firstName}.${lastName}@example.com`,
+            email: `${firstName.replace("'", "")}.${lastName.replace("'", "")}@example.com`,
             note: "",
             customerType: CustomerTypeEnum.NEW
         }
