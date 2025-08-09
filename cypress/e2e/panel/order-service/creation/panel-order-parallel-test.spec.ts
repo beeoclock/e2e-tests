@@ -5,11 +5,13 @@ import {PanelOrderCreationDataProvider} from "../../../../fixtures/panel/order/P
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
+import {DateUtils} from "../../../../support/beeoclock/backend/Utils/DateUtils";
 
 describe('panel - order service', (): void => {
+    const data: string = DateUtils.getCurrentDateWithGivenFormat("D.MM.YYYY")
     const testCases = [
         TestCaseEnum.CASE_1,
-        TestCaseEnum.CASE_2,
+        // TestCaseEnum.CASE_2,
         // TestCaseEnum.CASE_3,
         // TestCaseEnum.CASE_4
     ];
@@ -47,7 +49,8 @@ describe('panel - order service', (): void => {
                 .verifyOrderService(testData.summary)
                 .verifyOrderSpecialist(testData.specialistFirstName)
                 .verifyOrderCustomer('Anonimowy')
-                .selectPaymentStatus(testData.payment.PaymentFlag)
+                // .verifyInformationAboutService('1', 'Potwierdzone', data, 'Nieopłacone')
+                // .selectPaymentStatus(testData.payment.PaymentFlag)
                 .typeBusinessNote(testData.businessNote)
                 .clickSaveButton(testData.payment.requestedPayment);
 

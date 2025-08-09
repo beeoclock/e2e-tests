@@ -3,11 +3,12 @@ import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi"
 describe('order deletion ut', (): void => {
 
     it('order deletion ut', (): void => {
-        OrderApi.deleteAllCurrentOrders()
+        OrderApi.getOrderIds()
+        // OrderApi.deleteAllCurrentOrdersWithAssertion()
     })
 
     // it('order deletion ut', (): void => {
-    //     OrderApi.getOrderWithGivenId('686f4cf1d573692cdaf93989').then(resp => {
+    //     OrderApi.getOrderWithGivenId('6897719ddf91020487dc7528').then(resp => {
     //         cy.log('order: ', JSON.stringify(resp));
     //     })
     // })

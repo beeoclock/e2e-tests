@@ -4,10 +4,11 @@ import {CalendarTableTimeEnum} from "../../../support/beeoclock/page-element/con
 import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {TestCaseEnum} from "../../enum/TestCaseEnum";
 import {PaymentOptionEnum} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/summary-and-peyment/enum/PaymentOptionEnum";
+import {OderStatusEnum} from "../../../support/beeoclock/page-element/common/enum/OderStatusEnum";
 
 export class PanelOrderCreationDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {
-        let Data: string = DateUtils.getCurrentDateWithGivenFormat("D.MM.YYYY")
+        const data: string = DateUtils.getCurrentDateWithGivenFormat("D.MM.YYYY")
 
         switch (caseEnum) {
             case TestCaseEnum.CASE_1:
@@ -25,7 +26,8 @@ export class PanelOrderCreationDataProvider {
                     price: '30',
                     priceAssert: '40,00 zł',
                     updatedPrice: '40',
-                    summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + ", 18:00\n⏳" + " 30min " + SpecialistNameEnum.ZALEWSKI_FIRST_NAME + "\n" + "40,00 zł" + "\n👤 Anonimowy",
+                    // summary: ServiceNameEnum.BREAD_TRIM + `\nPL\n${OderStatusEnum.ACCEPTED}\n⏰ ${Data} 18:00\n⏳ 30min SpecialistNameEnum.ZALEWSKI_FIRST_NAME\n 40,00 zł\n👤 Anonimowy`,
+                    summary: `${ServiceNameEnum.BREAD_TRIM} PL ${OderStatusEnum.ACCEPTED} ⏰ ${data}, 18:00 ⏳ 28min ${SpecialistNameEnum.ZALEWSKI_FIRST_NAME} 40,00 zł 👤 Anonimowy Dotknij danych, aby je edytować.`,
                     paymentMethod: PaymentOptionEnum.CARD,
                     payment: {
                         PaymentFlag: true,
@@ -33,7 +35,7 @@ export class PanelOrderCreationDataProvider {
                         PaymentStatus: 'Nieopłacone'
                     },
                     summaryTime: '30min',
-                    dataAssert: Data + ', 18:00',
+                    dataAssert: data + ', 18:00',
                     publicNote: 'usuń mnie',
                     businessNote: 'USUŃ MNIE - wartość do wyszukania na ekranie usług',
                     assertTime: 'Anonimowy Strzyżenie Brody 18:00-18:30',
@@ -53,14 +55,14 @@ export class PanelOrderCreationDataProvider {
                     price: '40',
                     priceAssert: '50,00 zł',
                     updatedPrice: '50',
-                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + "\nPL\n⏰ " + Data + ", 07:00\n ⏳ 2min Tomasz 50,00 zł 👤 Anonimowy",
+                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + `\nPL\n${OderStatusEnum.ACCEPTED}\n⏰ ` + data + ", 07:00\n ⏳ 2min Tomasz 50,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CASH,
                     payment: {
                         PaymentFlag: true,
                         requestedPayment: 'pending',
                         PaymentStatus: 'Nieopłacone'
                     },
-                    dataAssert: Data + ', 07:00',
+                    dataAssert: data + ', 07:00',
                     summaryTime: '2min',
                     publicNote: 'test note',
                     businessNote: 'TEST - do usunięcia',
@@ -80,14 +82,14 @@ export class PanelOrderCreationDataProvider {
                     price: '30',
                     updatedPrice: '150 zł',
                     priceAssert: '150,00 zł',
-                    summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + Data + ", 12:00\n⏳" + " 15min " + "e2e 150,00 zł 👤 Anonimowy",
+                    summary: ServiceNameEnum.BREAD_TRIM + "\nPL\n⏰ " + data + ", 12:00\n⏳" + " 15min " + "e2e 150,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CARD,
                     payment: {
                         PaymentFlag: false,
                         requestedPayment: 'succeeded',
                         PaymentStatus: 'Zapłacone'
                     },
-                    dataAssert: Data + ', 12:00',
+                    dataAssert: data + ', 12:00',
                     summaryTime: '15min',
                     publicNote: 'sample note AAAAAAAAAAAA',
                     businessNote: 'SAMPLE - do usunięcia',
@@ -107,7 +109,7 @@ export class PanelOrderCreationDataProvider {
                     price: '40',
                     priceAssert: '475,00 zł',
                     updatedPrice: '475',
-                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + " PL ⏰ " + Data + ", 15:00 ⏳ 2g, 2min e2e 475,00 zł 👤 Anonimowy",
+                    summary: ServiceNameEnum.E2E_HAIRCUT.toLowerCase() + " PL ⏰ " + data + ", 15:00 ⏳ 2g, 2min e2e 475,00 zł 👤 Anonimowy",
                     paymentMethod: PaymentOptionEnum.CASH,
                     payment: {
                         PaymentFlag: false,
@@ -115,7 +117,7 @@ export class PanelOrderCreationDataProvider {
                         PaymentStatus: 'Zapłacone'
                     },
                     summaryTime: ' 2g, 2min',
-                    dataAssert: Data + ', 15:00',
+                    dataAssert: data + ', 15:00',
                     publicNote: 'coloring note',
                     businessNote: 'COLORING - do usunięcia',
                     assertTime: 'Anonimowye2e-strzyżenie15:00 - 17:02'

@@ -11,6 +11,7 @@ import {SelectPaymentStatusElement} from "./payment/SelectPaymentStatusElement";
 import {BusinessNoteInputElement} from "./payment/BusinessNoteInputElement";
 import {SaveButton} from "./navigation/SaveButton";
 import {PaymentStatusElement} from "./payment/PaymentStatusElement";
+import {OrderDetailElement} from "./order-details/element/OrderDetailElement";
 
 export class SummaryAndPaymentServicePageElement {
 
@@ -27,4 +28,5 @@ export class SummaryAndPaymentServicePageElement {
     public static BusinessNoteInputElement: BusinessNoteInputElement = new BusinessNoteInputElement()
     public static SaveButton: SaveButton = new SaveButton()
     public static PaymentStatusElement: PaymentStatusElement = new PaymentStatusElement()
+    public static OrderDetailElement: OrderDetailElement = new OrderDetailElement()
 }

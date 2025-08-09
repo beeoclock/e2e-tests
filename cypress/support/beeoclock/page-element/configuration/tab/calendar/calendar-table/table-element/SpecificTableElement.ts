@@ -1,10 +1,10 @@
 export class SpecificTableElement {
+
     public getComponent(specialist: string): any {
         return cy.get('app-calendar-with-specialists-widget-component')
-            .find('.flex.flex-col.flex-1.border-r').contains(specialist)
-            .parents('.flex.flex-col.flex-1.border-r').first()
+            .find('[data-column="true"]').contains(specialist)
+            .parents('[data-column="true"]').first()
             .scrollIntoView()
-
     }
 
     public getElement(specialist: string, index: number): any {
