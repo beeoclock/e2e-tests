@@ -74,7 +74,7 @@ export class ApiRequestHelper {
                 headers: headers,
                 qs: qs
             }).then(response => {
-                expect(response.status).to.equal(200);
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
                 return response.body;
             });
         })

@@ -220,16 +220,14 @@ Cypress.Commands.add('token', () => {
     const now = Date.now();
 
     return cy.task('readToken').then((data: any) => {
-        const isValid =
-            data &&
+        const isValid: boolean =
             data.token &&
             data.tokenValidTo &&
             now < new Date(data.tokenValidTo).getTime() - bufferTime;
 
         if (isValid) {
             Cypress.env('token', data.token);
-            Cypress.env('tokenValidTo', data.tokenValidTo);
-            return cy.wrap(null);
+            return cy.log("token in file 'token.json' is valid");
         }
 
         return AuthApi.getAuth().then((resp) => {
@@ -238,8 +236,6 @@ Cypress.Commands.add('token', () => {
             const tokenValidTo = new Date(now + expiresInMs).toISOString();
 
             Cypress.env('token', token);
-            Cypress.env('tokenValidTo', tokenValidTo);
-
             return cy.task('saveToken', {token, tokenValidTo});
         });
     });
