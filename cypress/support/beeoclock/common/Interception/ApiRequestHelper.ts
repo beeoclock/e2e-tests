@@ -12,6 +12,20 @@ export enum Environment {
 
 export class ApiRequestHelper {
 
+    public static handleApiQueryRequest(path: string, qs: any): Cypress.Chainable<any> {
+        return ApiHeaderFactory.getHeaders().then((headers) => {
+            return cy.request({
+                method: 'GET',
+                url: DevEntryPointEnum.API_ENTRY_POINT + path,
+                headers: headers,
+                qs: qs
+            }).then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
+                return response.body;
+            });
+        })
+    }
+
     protected static getBase(env: Environment): string {
         return `https://api${env}beeoclock.com`;
     }
@@ -33,7 +47,9 @@ export class ApiRequestHelper {
     }
 
     protected static getToken(): Cypress.Chainable<string> {
-        return cy.token()
+        return cy.token().then(() => {
+            return Cypress.env('token');
+        })
     }
 
     protected static getTenantId(env: Environment): BackendCommonEnum {
@@ -64,19 +80,5 @@ export class ApiRequestHelper {
                 return resp.body;
             });
         });
-    }
-
-    public static handleApiQueryRequest(path: string, qs: any): Cypress.Chainable<any> {
-        return ApiHeaderFactory.getHeaders().then((headers) => {
-            return cy.request({
-                method: 'GET',
-                url: DevEntryPointEnum.API_ENTRY_POINT + path,
-                headers: headers,
-                qs: qs
-            }).then(response => {
-                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
-                return response.body;
-            });
-        })
     }
 }

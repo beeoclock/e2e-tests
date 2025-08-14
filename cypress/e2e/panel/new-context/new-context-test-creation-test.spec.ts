@@ -3,10 +3,14 @@ import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/con
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {EnvEnum} from "../../../support/beeoclock/common/enum/EnvEnum";
 import {NewContextPages} from "support/beeoclock/page-element/configuration/new-context/NewContextPages";
-import {UpdateBusinessProfileBuilder} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
+import {
+    UpdateBusinessProfileBuilder
+} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {BusinessSettingsPages} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
+import {
+    BusinessSettingsPages
+} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
 
 describe('new context test creation', (): void => {
     let schedulePage: any
@@ -116,16 +120,54 @@ describe('new context test creation', (): void => {
                 "name": "companyName",
                 "facilities": [],
                 "socialNetworkLinks": [],
-                "bookingSettings": {"autoActionSettings": {"isEnabled": false, "actionType": "NONE", "delayInSeconds": 0}, "latestBooking": 1209600, "earliestBooking": 86400, "slotSettings": {"slotIntervalInSeconds": 1800, "slotBuildingStrategy": "ByInterval", "slotRetrievingStrategy": "IncludeRequested"}, "autoBookOrder": true, "mandatoryAttendeeProperties": ["phone"]},
-                "businessSettings": {"timeZone": "Europe/Warsaw", "currencies": ["PLN"], "baseCurrency": "PLN", "availableLanguages": ["pl", "en"], "baseLanguage": "pl", "emailLanguage": "en"},
+            "bookingSettings": {
+                "autoActionSettings": {"isEnabled": false, "actionType": "NONE", "delayInSeconds": 0},
+                "latestBooking": 1209600,
+                "earliestBooking": 86400,
+                "slotSettings": {
+                    "slotIntervalInSeconds": 1800,
+                    "slotBuildingStrategy": "ByInterval",
+                    "slotRetrievingStrategy": "IncludeRequested"
+                },
+                "autoBookOrder": true,
+                "mandatoryAttendeeProperties": ["phone"]
+            },
+            "businessSettings": {
+                "timeZone": "Europe/Warsaw",
+                "currencies": ["PLN"],
+                "baseCurrency": "PLN",
+                "availableLanguages": ["pl", "en"],
+                "baseLanguage": "pl",
+                "emailLanguage": "en"
+            },
                 "panelSettings": {"orderServiceColorMode": "byService"},
                 "publicPageSettings": {"primaryColor": "#000000"},
                 "paymentSettings": null,
                 "notificationSettings": {
-                    "reminderSettings": {"sendNotificationConditionType": "allow", "reminders": [{"reminderTimeInMinutes": 60, "actionType": "confirm", "priority": "high"}, {"reminderTimeInMinutes": 1440, "actionType": "confirm", "priority": "high"}], "escalationContact": ""},
-                    "smsNotificationSettings": {"sendNotificationConditionType": "allow", "activeProviderName": "twilio", "allowedSmsTypes": {"allowAll": true, "specificTypes": []}, "providers": []},
-                    "emailNotificationSettings": {"sendNotificationConditionType": "allow", "emailLanguage": "en", "allowedEmailTypes": {"allowAll": true, "specificTypes": []}},
-                    "pushNotificationSettings": {"sendNotificationConditionType": "allow", "allowedPushTypes": {"allowAll": true, "specificTypes": []}}
+                    "reminderSettings": {
+                        "sendNotificationConditionType": "allow",
+                        "reminders": [{
+                            "reminderTimeInMinutes": 60,
+                            "actionType": "confirm",
+                            "priority": "high"
+                        }, {"reminderTimeInMinutes": 1440, "actionType": "confirm", "priority": "high"}],
+                        "escalationContact": ""
+                    },
+                    "smsNotificationSettings": {
+                        "sendNotificationConditionType": "allow",
+                        "activeProviderName": "twilio",
+                        "allowedSmsTypes": {"allowAll": true, "specificTypes": []},
+                        "providers": []
+                    },
+                    "emailNotificationSettings": {
+                        "sendNotificationConditionType": "allow",
+                        "emailLanguage": "en",
+                        "allowedEmailTypes": {"allowAll": true, "specificTypes": []}
+                    },
+                    "pushNotificationSettings": {
+                        "sendNotificationConditionType": "allow",
+                        "allowedPushTypes": {"allowAll": true, "specificTypes": []}
+                    }
                 },
                 "addresses": null,
                 "schedules": [{"workDays": [2, 3, 4, 5, 7], "startInSeconds": 39600, "endInSeconds": 72000}],
@@ -136,7 +178,19 @@ describe('new context test creation', (): void => {
                 "banners": [],
                 "_version": "1"
             }
-        ).to.deep.include({"schedules": [{"workDays": [2, 3, 4, 5, 7], "startInSeconds": 39600, "endInSeconds": 72000}], "published": 1, "addresses": [{"object": "Address", "country": "PL", "city": "Warszawa", "zipCode": "10-100", "streetAddressLineOne": "Krakowskie przedmieście 178/12A", "streetAddressLineTwo": "Argentyńska 270B/490", "customLink": null}]})
+        ).to.deep.include({
+            "schedules": [{"workDays": [2, 3, 4, 5, 7], "startInSeconds": 39600, "endInSeconds": 72000}],
+            "published": 1,
+            "addresses": [{
+                "object": "Address",
+                "country": "PL",
+                "city": "Warszawa",
+                "zipCode": "10-100",
+                "streetAddressLineOne": "Krakowskie przedmieście 178/12A",
+                "streetAddressLineTwo": "Argentyńska 270B/490",
+                "customLink": null
+            }]
+        })
     })
 
     function login(): void {

@@ -1,10 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
-const tokenPath = path.resolve('cypress/token.json');
+const tokenPath: string = path.resolve('cypress/token.json');
 
 export function getTokenData() {
-    if (!fs.existsSync(tokenPath)) return null;
+    if (!fs.existsSync(tokenPath)) {
+        return null;
+    }
 
     try {
         const content = fs.readFileSync(tokenPath, 'utf8');

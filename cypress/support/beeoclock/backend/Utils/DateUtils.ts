@@ -15,7 +15,12 @@ export class DateUtils {
     public static convertToUTC(hourEnumValue: number, plusDays?: number): string {
         const hour = Math.floor(hourEnumValue / 2);
 
-        let localTime = DateTime.local().set({hour, minute: 0, second: 0, millisecond: 0}).setZone("Europe/Warsaw", {keepLocalTime: true});
+        let localTime = DateTime.local().set({
+            hour,
+            minute: 0,
+            second: 0,
+            millisecond: 0
+        }).setZone("Europe/Warsaw", {keepLocalTime: true});
 
         if (plusDays !== undefined) {
             localTime = localTime.plus({days: plusDays});

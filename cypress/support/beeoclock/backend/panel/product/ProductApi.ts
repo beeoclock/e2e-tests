@@ -16,7 +16,7 @@ export class ProductApi extends ApiRequestHelper {
             },
             body: tag,
             auth: {
-                bearer: Cypress.env('token')
+                bearer: this.getToken()
             }
         }).then(response => {
             expect(response.status).to.equal(HTTPStatusCodeType.Created_201);

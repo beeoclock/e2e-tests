@@ -221,9 +221,9 @@ Cypress.Commands.add('token', () => {
 
     return cy.task('readToken').then((data: any) => {
         const isValid: boolean =
-            data.token &&
-            data.tokenValidTo &&
-            now < new Date(data.tokenValidTo).getTime() - bufferTime;
+            data?.token &&
+            data?.tokenValidTo &&
+            now < new Date(data?.tokenValidTo).getTime() - bufferTime;
 
         if (isValid) {
             Cypress.env('token', data.token);

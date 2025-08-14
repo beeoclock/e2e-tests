@@ -2,8 +2,12 @@ import {NewContextServiceElement} from "./element/NewContextServiceElement";
 import {Assertions} from "../../tab/common/assertions/Assertions";
 import {QueryAssertion} from "../../../../common/assertion/QueryAssertion";
 import {NewContextInterceptionHelper} from "../../../../common/Interception/new-context/NewContextInterceptionHelper";
-import {NewContextInterceptionAssertion} from "../../../../common/Interception/new-context/NewContextInterceptionAssertion";
-import {BusinessProfileInterception} from "../../../../common/Interception/business-profile/BusinessProfileInterception";
+import {
+    NewContextInterceptionAssertion
+} from "../../../../common/Interception/new-context/NewContextInterceptionAssertion";
+import {
+    BusinessProfileInterception
+} from "../../../../common/Interception/business-profile/BusinessProfileInterception";
 import {LeftMenuPage} from "../../left-menu/LeftMenuPage";
 
 export class NewContextServicePage {

@@ -2,7 +2,9 @@ import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuratio
 import {BalanceListPage} from "../../../support/beeoclock/page-element/configuration/tab/balance/list/BalanceListPage";
 import {CommonElementPage} from "../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
 import {InputHelper} from "../../../support/beeoclock/page-element/common/input/InputHelper";
-import {TariffsFormPages} from "../../../support/beeoclock/page-element/configuration/tab/tariffs/form/TariffsFormPages";
+import {
+    TariffsFormPages
+} from "../../../support/beeoclock/page-element/configuration/tab/tariffs/form/TariffsFormPages";
 import {BalanceApi} from "../../../support/beeoclock/backend/panel/balance/BalanceApi";
 
 describe('balance test', (): void => {
