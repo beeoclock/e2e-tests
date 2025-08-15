@@ -3,7 +3,7 @@ name: Panel App API Health Check Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 7 * * *'
 
 jobs:
   run-tests:
