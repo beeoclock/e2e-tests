@@ -130,7 +130,7 @@ describe('order next service', (): void => {
                 .verifySelectedServicePrice(item.nextPrice)
                 .verifySelectedServiceTime(item.nextServiceTime)
                 .verifyServiceSpecialist(item.Specialist)
-                .verifySummaryTotalPrice('70 zł')
+                .verifySummaryTotalPrice('70,00 zł')
 
             ServicesPages.OrderSummaryNavigationPage
                 .clickBackArrow()

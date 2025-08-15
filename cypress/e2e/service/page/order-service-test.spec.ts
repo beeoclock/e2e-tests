@@ -9,6 +9,8 @@ describe('order service', (): void => {
     const address: string = CompanyEnum.COMPANY_ADDRESS
 
     before('clear environment', (): void => {
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
         OrderApi.deleteAllCurrentOrdersWithAssertion()
         AbsenceApi.deleteAllAbsences()
     })
