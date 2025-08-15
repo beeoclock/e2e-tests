@@ -123,8 +123,9 @@ export class OrderApi extends ApiRequestHelper {
         }
 
         orderIds.forEach(orderId => {
-            this.deleteOrderWithGivenId(orderId);
-            this.assertSuccessfulDeletion(orderId)
+            this.deleteOrderWithGivenId(orderId).then(() => {
+                this.assertSuccessfulDeletion(orderId)
+            })
         });
     }
 
