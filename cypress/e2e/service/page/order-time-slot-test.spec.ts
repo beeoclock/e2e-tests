@@ -2,9 +2,7 @@ import {ServiceEnum} from "../../../support/ServiceEnum";
 import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages";
 import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {
-    TimeEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
+import {TimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
@@ -103,17 +101,18 @@ describe('order time slot test', (): void => {
     });
 
     it('test 4 - check that there is no current hour slot', (): void => {
+        const expectedSlots: string[] = assertFirstFreeSlotForHairDyeing();
+
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
-            .clickSelectSpecialistAndOrder()
+            .clickSelectSpecialistAndOrder(expectedSlots[0])
+
         ServicesPages.SelectTimePage
             .verifyGivenSlotByActualTime(currentHour)
 
-        const expectedSlots: string[] = assertFirstFreeSlotForHairDyeing();
-
-        expectedSlots.forEach((slot: string): void => {
+        for (const slot of expectedSlots) {
             ServicesPages.SelectTimePage.assertSpecificTime(slot);
-        });
+        }
     });
 
     it('test 5 - check all slot visibility in the next days for 1h service', (): void => {
@@ -134,7 +133,7 @@ describe('order time slot test', (): void => {
         ServicesPages.SelectTimePage.verifySlotLength(expectedHairDyeingHours.length);
     })
 
-    //it's stabilized because we assert date in next two days, so current hour is not important
+//it's stabilized because we assert date in next two days, so current hour is not important
     it('test 6 - check all slot visibility in the next days for 30m service', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.E2E_HAIRCUT.toLowerCase())
@@ -153,7 +152,7 @@ describe('order time slot test', (): void => {
         ServicesPages.SelectTimePage.verifySlotLength(expectedHaircutHours.length);
     })
 
-    //it's stabilized because we assert date in next two days, so current hour is not important
+//it's stabilized because we assert date in next two days, so current hour is not important
     it('test 7 - check all slot visibility in the next days for 15m service', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
@@ -178,20 +177,19 @@ describe('order time slot test', (): void => {
 
     function assertFirstFreeSlotForHairDyeing(): string[] {
         const now = new Date();
-        let hour: number = now.getHours();
-        const minute: number = now.getMinutes();
-
-        if (minute > 0) {
-            hour += 1;
-        }
-
         const result: string[] = [];
 
-        for (let h = hour; h <= 20; h++) {
-            if (h >= 0 && h <= 20) {
-                result.push(`${h.toString().padStart(2, '0')}:00`);
-            }
+        let startHour: number = now.getHours();
+        let startMinute: number = now.getMinutes() > 30 ? 0 : 30;
+
+        while (startHour < 20 || (startHour === 20 && startMinute === 0)) {
+            const slot = `${startHour.toString().padStart(2, '0')}:${startMinute.toString().padStart(2, '0')}`;
+            result.push(slot);
+
+            startHour += 1;
+            startMinute = 30;
         }
+
         return result;
     }
 

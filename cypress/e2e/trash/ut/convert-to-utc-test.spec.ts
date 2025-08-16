@@ -1,7 +1,5 @@
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
-import {
-    CalendarTableTimeEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
+import {CalendarTableTimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 
 describe('convert to UTC test', (): void => {
 

@@ -3,14 +3,10 @@ import {PanelLoginPageElement} from "../../../support/beeoclock/page-element/con
 import {PanelLoginPage} from "../../../support/beeoclock/page-element/configuration/login/page-element/PanelLoginPage";
 import {EnvEnum} from "../../../support/beeoclock/common/enum/EnvEnum";
 import {NewContextPages} from "support/beeoclock/page-element/configuration/new-context/NewContextPages";
-import {
-    UpdateBusinessProfileBuilder
-} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
+import {UpdateBusinessProfileBuilder} from "support/beeoclock/common/Interception/new-context/builder/UpdateBusinessProfileBuilder";
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {
-    BusinessSettingsPages
-} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
+import {BusinessSettingsPages} from "../../../support/beeoclock/page-element/configuration/tab/business-settings/BusinessSettingsPages";
 
 describe('new context test creation', (): void => {
     let schedulePage: any
@@ -120,26 +116,26 @@ describe('new context test creation', (): void => {
                 "name": "companyName",
                 "facilities": [],
                 "socialNetworkLinks": [],
-            "bookingSettings": {
-                "autoActionSettings": {"isEnabled": false, "actionType": "NONE", "delayInSeconds": 0},
-                "latestBooking": 1209600,
-                "earliestBooking": 86400,
-                "slotSettings": {
-                    "slotIntervalInSeconds": 1800,
-                    "slotBuildingStrategy": "ByInterval",
-                    "slotRetrievingStrategy": "IncludeRequested"
+                "bookingSettings": {
+                    "autoActionSettings": {"isEnabled": false, "actionType": "NONE", "delayInSeconds": 0},
+                    "latestBooking": 1209600,
+                    "earliestBooking": 86400,
+                    "slotSettings": {
+                        "slotIntervalInSeconds": 1800,
+                        "slotBuildingStrategy": "ByInterval",
+                        "slotRetrievingStrategy": "IncludeRequested"
+                    },
+                    "autoBookOrder": true,
+                    "mandatoryAttendeeProperties": ["phone"]
                 },
-                "autoBookOrder": true,
-                "mandatoryAttendeeProperties": ["phone"]
-            },
-            "businessSettings": {
-                "timeZone": "Europe/Warsaw",
-                "currencies": ["PLN"],
-                "baseCurrency": "PLN",
-                "availableLanguages": ["pl", "en"],
-                "baseLanguage": "pl",
-                "emailLanguage": "en"
-            },
+                "businessSettings": {
+                    "timeZone": "Europe/Warsaw",
+                    "currencies": ["PLN"],
+                    "baseCurrency": "PLN",
+                    "availableLanguages": ["pl", "en"],
+                    "baseLanguage": "pl",
+                    "emailLanguage": "en"
+                },
                 "panelSettings": {"orderServiceColorMode": "byService"},
                 "publicPageSettings": {"primaryColor": "#000000"},
                 "paymentSettings": null,

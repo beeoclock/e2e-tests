@@ -1,9 +1,7 @@
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {TariffsPages} from "support/beeoclock/page-element/configuration/tab/tariffs/TariffsPages";
-import {
-    TariffsNameEnum
-} from "../../../../support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
+import {TariffsNameEnum} from "../../../../support/beeoclock/page-element/configuration/tab/tariffs/enum/TariffsNameEnum";
 
 describe("tariffs visibility test", (): void => {
 

@@ -1,13 +1,9 @@
 import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
-import {
-    CalendarTableTimeEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
+import {CalendarTableTimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
 import {TestCaseEnum} from "../../enum/TestCaseEnum";
-import {
-    PaymentOptionEnum
-} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/summary-and-peyment/enum/PaymentOptionEnum";
+import {PaymentOptionEnum} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/summary-and-peyment/enum/PaymentOptionEnum";
 
 export class PanelOrderCreationDataProvider {
     static getTestData(caseEnum: TestCaseEnum) {

@@ -1,5 +1,7 @@
 import {BookingSelectServicePageElement} from "./BookingSelectServicePageElement";
 import {ApiInterceptionHelper} from "../../../common/Interception/ApiInterceptionHelper";
+import {ServicesPages} from "../ServicesPages";
+
 
 export class BookingSelectServicePage {
     private selectComponent = BookingSelectServicePageElement.OptionElement
@@ -17,11 +19,18 @@ export class BookingSelectServicePage {
         return this;
     }
 
-    public clickSelectSpecialistAndOrder(): BookingSelectServicePage {
+    public clickSelectSpecialistAndOrder(slot?: string): BookingSelectServicePage {
         const getSlot: string = ApiInterceptionHelper.getSlot()
         cy.get('service-list').contains('Wybierz specjalistę i datę')
             .click()
         ApiInterceptionHelper.waitForAlias(getSlot)
+        this.assertSelectTimeComponentVisibility()
+
+        // additionally assertions -> await to UI show list of available slots
+        if (slot) {
+            cy.log('slot', JSON.stringify(slot))
+            ServicesPages.SelectTimePage.assertSpecificTime(slot);
+        }
         return this;
     }
 
@@ -68,5 +77,14 @@ export class BookingSelectServicePage {
             })
             .should('be.visible');
         return this;
+    }
+
+    private assertSelectTimeComponentVisibility(): BookingSelectServicePage {
+        const selectors: string[] = ['time-slot-and-specialist-step', 'select-specialist-circle', 'event-select-slot-form-component', 'event-select-slot-date-form-component', 'event-select-slot-time-form-component']
+
+        for (const selector of selectors) {
+            cy.get(selector).should('be.visible')
+        }
+        return this
     }
 }

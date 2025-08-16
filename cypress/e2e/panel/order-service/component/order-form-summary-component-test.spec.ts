@@ -5,9 +5,7 @@ import {RightPanelPages} from "../../../../support/beeoclock/page-element/config
 import {TestCaseEnum} from "../../../../fixtures/enum/TestCaseEnum";
 import {OrderSummaryTestData} from "../../../../fixtures/panel/order/OrderSummaryTestData";
 import {SpecialistNameEnum} from "../../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {
-    CalendarTableTimeEnum
-} from "../../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
+import {CalendarTableTimeEnum} from "../../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 
 describe('Order form summary component test', (): void => {
 

@@ -52,5 +52,4 @@ export class Assertions {
 
         check()
     }
-
 }

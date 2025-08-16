@@ -3,19 +3,13 @@ import {RightPanelPages} from "../../../support/beeoclock/page-element/configura
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 import {AbsencePages} from "../../../support/beeoclock/page-element/configuration/tab/absence/AbsencePages";
-import {
-    AbsenceActionEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/absence/absence-action/enum/AbsenceActionEnum";
+import {AbsenceActionEnum} from "../../../support/beeoclock/page-element/configuration/tab/absence/absence-action/enum/AbsenceActionEnum";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {PanelAbsenceCreationDataProvider} from "../../../fixtures/panel/absence/PanelAbsenceCreationDataProvider";
-import {
-    AbsenceColumnRowEnum
-} from "../../../support/beeoclock/page-element/configuration/tab/absence/table-verifier/enum/AbsenceColumnRowEnum";
+import {AbsenceColumnRowEnum} from "../../../support/beeoclock/page-element/configuration/tab/absence/table-verifier/enum/AbsenceColumnRowEnum";
 import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {
-    CalendarTableTimeEnum
-} from "support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
+import {CalendarTableTimeEnum} from "support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/CalendarTableTimeEnum";
 import {AbsenceApi} from "support/beeoclock/backend/panel/absence/AbsenceApi";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {TableCommonPage} from "../../../support/beeoclock/page-element/configuration/tab/common/table/TableCommonPage";

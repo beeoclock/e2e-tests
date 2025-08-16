@@ -1,11 +1,7 @@
 import {LeftMenuPage} from "../../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
-import {
-    TableCommonPage
-} from "../../../../support/beeoclock/page-element/configuration/tab/common/table/TableCommonPage";
+import {TableCommonPage} from "../../../../support/beeoclock/page-element/configuration/tab/common/table/TableCommonPage";
 import {SpecialistNameEnum} from "../../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {
-    MemberTableCellEnum
-} from "../../../../support/beeoclock/page-element/configuration/tab/members/enum/MemberTableCellEnum";
+import {MemberTableCellEnum} from "../../../../support/beeoclock/page-element/configuration/tab/members/enum/MemberTableCellEnum";
 import {CommonElementPage} from "../../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
 import {RightPanelPages} from "../../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {faker} from "@faker-js/faker";

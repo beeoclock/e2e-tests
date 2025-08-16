@@ -4,9 +4,7 @@ import {OrderApi} from "support/beeoclock/backend/panel/order/OrderApi";
 import {ModuleAssertionPage} from "support/beeoclock/common/assertion/ModuleAssertionPage";
 import {SpecialistNameEnum} from "support/beeoclock/page-element/common/enum/SpecialistNameEnum";
 import {RightPanelPages} from "support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
-import {
-    CustomerTypeEnum
-} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
+import {CustomerTypeEnum} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 
 describe("Panel new customer order service", (): void => {

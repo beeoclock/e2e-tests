@@ -1,8 +1,6 @@
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
-import {
-    BusinessProfilePages
-} from "../../../support/beeoclock/page-element/configuration/business-profile/BusinessProfilePages";
+import {BusinessProfilePages} from "../../../support/beeoclock/page-element/configuration/business-profile/BusinessProfilePages";
 import {PhotoResourceHelper, PhotoResourceName} from "../../../fixtures/photo/PhotoResourceHelper";
 
 describe("Test name", function () {
