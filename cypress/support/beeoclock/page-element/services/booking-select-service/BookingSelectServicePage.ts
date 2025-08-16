@@ -42,7 +42,6 @@ export class BookingSelectServicePage {
     }
 
     public verifyCorrectForm(): BookingSelectServicePage {
-
         cy.get('tab-menu').contains('li', 'Usługi').should('be.visible').and('have.class', 'active');
         cy.get('tab-menu').contains('li', 'Produkty').scrollIntoView().should('be.visible').and('not.have.class', 'active');
         cy.get('tab-menu').contains('li', 'O nas').scrollIntoView().should('be.visible').and('not.have.class', 'active');

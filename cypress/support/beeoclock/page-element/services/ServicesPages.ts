@@ -10,7 +10,8 @@ import {OrderSummaryNavigationPage} from "./order-summary/navigation/OrderSummar
 import {OrderDetailsPage} from "./order-summary/order-details/OrderDetailsPage";
 import {OrderSummaryPage} from "./order-summary/order-summary/OrderSummaryPage";
 import {ServiceSummaryPage} from "./booking-client-data/summary/ServiceSummaryPage";
-
+import {ProductPage} from "./products/ProductPage";
+import {NavigationPage} from "./navigation/NavigationPage";
 
 export class ServicesPages {
 
@@ -26,4 +27,6 @@ export class ServicesPages {
     public static OrderSummaryNavigationPage: OrderSummaryNavigationPage = new OrderSummaryNavigationPage();
     public static OrderCancellationPage: OrderCancellationPage = new OrderCancellationPage();
     public static ServiceSummaryPage: ServiceSummaryPage = new ServiceSummaryPage();
+    public static ProductPage: ProductPage = new ProductPage();
+    public static NavigationPage: NavigationPage = new NavigationPage();
 }
