@@ -5,7 +5,7 @@ import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/e
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
-describe('order service', (): void => {
+describe('order service test', (): void => {
     const address: string = CompanyEnum.COMPANY_ADDRESS
 
     before('clear environment', (): void => {
