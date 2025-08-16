@@ -12,11 +12,6 @@ describe("Client app health check test", (): void => {
 
     const emptyDomain = 'https://dev.beeoclock.com'
 
-    before('clear', (): void => {
-        cy.clearAllLocalStorage()
-        cy.clearAllSessionStorage()
-    })
-
     it('test 1 assert corrected danish page', function (): void {
         cy.visit(danishAddress)
 
@@ -24,6 +19,7 @@ describe("Client app health check test", (): void => {
             const langAttribute = doc.documentElement.getAttribute('lang');
             expect(langAttribute).to.equal('da');
         });
+
         ServicesPages.BookingSelectServicePage
             .verifyGivenHrefAddress('Sankt Mathias Gade, 72, Viborg, Danmark, 8800')
         assertLogo()
@@ -33,8 +29,7 @@ describe("Client app health check test", (): void => {
     });
 
     it('test 2 assert corrected english page', function (): void {
-        cy.visit(englishAddress);
-        assertApiResponse()
+        visitEnglishAddress()
 
         cy.document().then((doc): void => {
             const langAttribute = doc.documentElement.getAttribute('lang');
@@ -102,9 +97,10 @@ describe("Client app health check test", (): void => {
         detailsTab.should('contain.text', tabName);
     }
 
-    function assertApiResponse(): void {
+    function visitEnglishAddress(): void {
         const getGivenClient: string = 'getGivenClient' + DateUtils.getCurrentTime()
         cy.intercept('GET', 'https://api.beeoclock.com/client/api/v1/client/barbershop_brooklyn?*').as(getGivenClient);
+        cy.visit(englishAddress);
         cy.wait('@' + getGivenClient);
     }
 });

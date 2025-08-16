@@ -230,10 +230,10 @@ Cypress.Commands.add('token', () => {
             return cy.log("token in file 'token.json' is valid");
         }
 
-        return AuthApi.getAuth().then((resp) => {
+        return AuthApi.getAuthWithRetry().then((resp) => {
             const token = resp.idToken;
-            const expiresInMs = Number(resp.expiresIn) * 1000;
-            const tokenValidTo = new Date(now + expiresInMs).toISOString();
+            const expiresInMs: number = Number(resp.expiresIn) * 1000;
+            const tokenValidTo: string = new Date(now + expiresInMs).toISOString();
 
             Cypress.env('token', token);
             return cy.task('saveToken', {token, tokenValidTo});
