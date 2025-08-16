@@ -7,7 +7,6 @@ import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
 import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
-
 describe('order time slot test', (): void => {
     let currentHour: string = DateUtils.getCurrentHourWithMinutes()
 
@@ -101,7 +100,7 @@ describe('order time slot test', (): void => {
     });
 
     it('test 4 - check that there is no current hour slot', (): void => {
-        const expectedSlots: string[] = assertFirstFreeSlotForHairDyeing();
+        const expectedSlots: string[] = getNextHairDyeingSlots();
 
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
@@ -175,19 +174,27 @@ describe('order time slot test', (): void => {
         cy.visit(ServiceEnum.PUBLIC_PANEL_DEV)
     })
 
-    function assertFirstFreeSlotForHairDyeing(): string[] {
+    function getNextHairDyeingSlots(): string[] {
         const now = new Date();
+        let hour = now.getHours();
+        const minute = now.getMinutes();
         const result: string[] = [];
+        let isHalfHour: boolean;
 
-        let startHour: number = now.getHours();
-        let startMinute: number = now.getMinutes() > 30 ? 0 : 30;
+        if (minute < 30) {
+            isHalfHour = true;
+        } else {
+            isHalfHour = false;
+            hour += 1;
+        }
 
-        while (startHour < 20 || (startHour === 20 && startMinute === 0)) {
-            const slot = `${startHour.toString().padStart(2, '0')}:${startMinute.toString().padStart(2, '0')}`;
+        while (true) {
+            const slot = `${hour.toString().padStart(2, '0')}:${isHalfHour ? '30' : '00'}`;
             result.push(slot);
 
-            startHour += 1;
-            startMinute = 30;
+            if ((isHalfHour && hour === 19) || (!isHalfHour && hour === 20)) break;
+
+            hour += 1;
         }
 
         return result;
