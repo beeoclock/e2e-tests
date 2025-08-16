@@ -1,5 +1,5 @@
 {
-  "name": "client-app-e2e",
+  "name": "beeoclock-e2e-tests",
   "version": "1.0.0",
   "description": "bee O'clock e2e tests",
   "main": "index.js",
@@ -21,8 +21,8 @@
   "author": "Jan Zadumiński",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "14.4.0",
-    "cypress-file-upload": "^5.0.8",
+    "cypress": "14.5.4",
+    "cypress-file-upload": "5.0.8",
     "dayjs": "1.11.13",
     "dotenv": "16.4.7",
     "globals": "16.0.0",
