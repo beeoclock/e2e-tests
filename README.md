@@ -23,12 +23,14 @@ npm install
 ---
 
 ## Open runner
-in project source root after install dependencies (npm install | npm ci) 
+1. in case to run locally it's demand to get '.env' file in source repository root.
+(contact with QA for it)
+2. install dependencies (npm install | npm ci) 
 ```bash
 npx cypress open
 ```
 1. select E2E-testing
-2. select browser (edge recommended to have, but electorn is acceptable)
+2. select browser (edge recommended to have, but electron is acceptable)
 3. click start E2E testing button
 
 ---
