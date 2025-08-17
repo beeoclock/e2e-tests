@@ -11,5 +11,11 @@ export const productProperties = {
         tag: 'delicate',
         prize: '50,00 zł',
         description: 'odżywcza Maska do włosów'
+    },
+    shampoo: {
+        name: 'Szampon',
+        tag: 'delicate',
+        prize: '40,00 zł',
+        description: 'Pielęgnacja'
     }
 }
