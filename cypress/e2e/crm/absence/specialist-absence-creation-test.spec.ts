@@ -24,7 +24,7 @@ describe('specialist absence creation test', (): void => {
         LeftMenuPage.assertIsSynchronized(true)
     })
 
-    it('test panel absence creation service', function (): void {
+    it('test crm absence creation client-app', function (): void {
         const testCases = [
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2

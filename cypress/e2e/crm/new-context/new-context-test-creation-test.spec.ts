@@ -86,11 +86,11 @@ describe('new context test creation', (): void => {
         NewContextPages.NewContextServicePage
             .assertState()
             .clickAddServiceButton()
-            .typeServiceTitle('New service')
-            .typeServiceDescription('description of the service')
+            .typeServiceTitle('New client-app')
+            .typeServiceDescription('description of the client-app')
             .typeServicePrice('200')
             .clickSaveButton()
-            .assertCreatedService('New service', '200 zł', '45min')
+            .assertCreatedService('New client-app', '200 zł', '45min')
 
         const expectedBody: any = buildBusinessUpdate();
         NewContextPages.NewContextServicePage

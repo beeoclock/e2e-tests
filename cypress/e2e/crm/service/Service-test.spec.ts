@@ -2,7 +2,7 @@ import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {CommonElementPage} from "../../../support/beeoclock/page-element/common/common-element/CommonElementPage";
 
-describe('service test', (): void => {
+describe('client-app test', (): void => {
 
     it('form summary component test', function (): void {
         const testCases = [

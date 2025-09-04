@@ -9,7 +9,7 @@ import {NumericUtils} from "../../../support/beeoclock/backend/Utils/NumericUtil
 import {faker} from "@faker-js/faker";
 import {IProductTags} from "../../../support/beeoclock/backend/panel/product/tag/IProductTags";
 
-describe("panel api healthcheck", (): void => {
+describe("crm api healthcheck", (): void => {
     let token: string = Cypress.env('token');
 
     it('get business profile and assert unauthorized response', function (): void {

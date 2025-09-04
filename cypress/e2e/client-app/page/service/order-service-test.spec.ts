@@ -1,11 +1,11 @@
-import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages"
-import {CompanyEnum} from "../../../support/beeoclock/page-element/services/enum/CompanyEnum";
-import {ServiceEnum} from "../../../support/ServiceEnum";
-import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
-import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
-import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
+import {ServicesPages} from "../../../../support/beeoclock/page-element/services/ServicesPages"
+import {CompanyEnum} from "../../../../support/beeoclock/page-element/services/enum/CompanyEnum";
+import {ServiceEnum} from "../../../../support/ServiceEnum";
+import {BusinessNameEnum} from "../../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
+import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
+import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
-describe('order service test', (): void => {
+describe('order client-app test', (): void => {
     const address: string = CompanyEnum.COMPANY_ADDRESS
 
     before('clear environment', (): void => {
@@ -16,10 +16,10 @@ describe('order service test', (): void => {
     })
 
     beforeEach(function (): void {
-        cy.fixture('order-service-test-data.json').as('orderServiceCreation');
+        cy.fixture('order-client-app-test-data.json').as('orderServiceCreation');
     });
 
-    it('order service form test', function (): void {
+    it('order client-app form test', function (): void {
         cy.visit(ServiceEnum.PUBLIC_PANEL_DEV)
 
         cy.document().then((doc): void => {

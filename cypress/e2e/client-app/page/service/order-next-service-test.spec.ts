@@ -1,15 +1,15 @@
-import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages"
-import {CompanyEnum} from "../../../support/beeoclock/page-element/services/enum/CompanyEnum";
-import {BusinessNameEnum} from "../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
-import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
-import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
+import {ServicesPages} from "../../../../support/beeoclock/page-element/services/ServicesPages"
+import {CompanyEnum} from "../../../../support/beeoclock/page-element/services/enum/CompanyEnum";
+import {BusinessNameEnum} from "../../../../support/beeoclock/page-element/common/enum/BusinessNameEnum";
+import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
+import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
-describe('order next service test', (): void => {
+describe('order next client-app test', (): void => {
 
     const address: string = CompanyEnum.COMPANY_ADDRESS
 
     beforeEach(function (): void {
-        cy.fixture('order-next-service-test-data.json').as('orderNextServiceCreation');
+        cy.fixture('order-next-client-app-test-data.json').as('orderNextServiceCreation');
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage()
         cy.clearAllCookies()
@@ -21,7 +21,7 @@ describe('order next service test', (): void => {
         AbsenceApi.deleteAllAbsences()
     })
 
-    it('order next service form test', function (): void {
+    it('order next client-app form test', function (): void {
         cy.loginOnPublicPage()
 
         cy.document().then((doc): void => {
@@ -57,7 +57,7 @@ describe('order next service test', (): void => {
                 .verifySelectedServiceTime(item.serviceTime)
                 .verifyServiceSpecialist(item.Specialist)
 
-            cy.log('select next service');
+            cy.log('select next client-app');
             ServicesPages.BookingClientNavigationFormPage
                 .clickAddNextService();
             ServicesPages.BookingSelectServicePage
@@ -75,14 +75,14 @@ describe('order next service test', (): void => {
             ServicesPages.BookingClientDataPage
                 .verifySummaryPriceValue(item.nextSummaryPrice);
 
-            cy.log('verify first service')
+            cy.log('verify first client-app')
             ServicesPages.BookingClientDataPage
                 .verifySelectedService(item.Service)
                 .verifySelectedServicePrice(item.price)
                 .verifySelectedServiceTime(item.serviceTime)
                 .verifyServiceSpecialist(item.Specialist)
 
-            cy.log('verify next service')
+            cy.log('verify next client-app')
             ServicesPages.BookingClientDataPage
                 .verifySelectServicesHeader()
                 .verifySelectedService(item.nextService)

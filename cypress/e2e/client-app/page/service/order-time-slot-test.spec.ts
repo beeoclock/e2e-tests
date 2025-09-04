@@ -1,11 +1,11 @@
-import {ServiceEnum} from "../../../support/ServiceEnum";
-import {ServicesPages} from "../../../support/beeoclock/page-element/services/ServicesPages";
-import {ServiceNameEnum} from "../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
-import {SpecialistNameEnum} from "../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
-import {TimeEnum} from "../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
-import {DateUtils} from "../../../support/beeoclock/backend/Utils/DateUtils";
-import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi";
-import {AbsenceApi} from "../../../support/beeoclock/backend/panel/absence/AbsenceApi";
+import {ServiceEnum} from "../../../../support/ServiceEnum";
+import {ServicesPages} from "../../../../support/beeoclock/page-element/services/ServicesPages";
+import {ServiceNameEnum} from "../../../../support/beeoclock/page-element/common/enum/ServiceNameEnum";
+import {SpecialistNameEnum} from "../../../../support/beeoclock/page-element/common/enum/SpecialistNameEnum";
+import {TimeEnum} from "../../../../support/beeoclock/page-element/configuration/tab/calendar/calendar-table/enum/TimeEnum";
+import {DateUtils} from "../../../../support/beeoclock/backend/Utils/DateUtils";
+import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
+import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
 describe('order time slot test', (): void => {
     let currentHour: string = DateUtils.getCurrentHourWithMinutes()
@@ -15,7 +15,7 @@ describe('order time slot test', (): void => {
         AbsenceApi.deleteAllAbsences()
     })
 
-    it('test 1 - check last free slot visibility for 30 min service last service is on 20:30', (): void => {
+    it('test 1 - check last free slot visibility for 30 min client-app last client-app is on 20:30', (): void => {
         ServicesPages.BookingSelectServicePage
             .verifyCorrectForm()
 
@@ -45,7 +45,7 @@ describe('order time slot test', (): void => {
             .clickBackByButton()
     })
 
-    it('test 2 - check last free slot visibility for 1h service last service is on 20:00', (): void => {
+    it('test 2 - check last free slot visibility for 1h client-app last client-app is on 20:00', (): void => {
         // //TODO: discuss with dev (when the time is 15:28 the first slot is 15:30 ..-> 19:30 so test will fail
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
@@ -69,7 +69,7 @@ describe('order time slot test', (): void => {
             .clickBackByButton()
     })
 
-    it('test 3 - check last free slot visibility for 15m service last service is on 20:45', (): void => {
+    it('test 3 - check last free slot visibility for 15m client-app last client-app is on 20:45', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
             .clickSelectSpecialistAndOrder()
@@ -114,7 +114,7 @@ describe('order time slot test', (): void => {
         }
     });
 
-    it('test 5 - check all slot visibility in the next days for 1h service', (): void => {
+    it('test 5 - check all slot visibility in the next days for 1h client-app', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.HAIR_DYEING)
             .clickSelectSpecialistAndOrder()
@@ -133,7 +133,7 @@ describe('order time slot test', (): void => {
     })
 
 //it's stabilized because we assert date in next two days, so current hour is not important
-    it('test 6 - check all slot visibility in the next days for 30m service', (): void => {
+    it('test 6 - check all slot visibility in the next days for 30m client-app', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.E2E_HAIRCUT.toLowerCase())
             .clickSelectSpecialistAndOrder()
@@ -152,7 +152,7 @@ describe('order time slot test', (): void => {
     })
 
 //it's stabilized because we assert date in next two days, so current hour is not important
-    it('test 7 - check all slot visibility in the next days for 15m service', (): void => {
+    it('test 7 - check all slot visibility in the next days for 15m client-app', (): void => {
         ServicesPages.BookingSelectServicePage
             .selectSpecificOrder(ServiceNameEnum.BREAD_TRIM)
             .clickSelectSpecialistAndOrder()

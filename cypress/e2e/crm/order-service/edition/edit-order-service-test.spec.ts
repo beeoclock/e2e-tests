@@ -7,12 +7,12 @@ import {RightPanelPages} from "support/beeoclock/page-element/configuration/righ
 import {CustomerTypeEnum} from "support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {CalendarPages} from "support/beeoclock/page-element/configuration/tab/calendar/CalendarPages";
 
-describe("Panel new customer order service", (): void => {
+describe("Panel new customer order client-app", (): void => {
     const testCases = [TestCaseEnum.CASE_1];
     let orderID: string;
     let email: string;
 
-    it("Test edition of the service on the order module", function (): void {
+    it("Test edition of the client-app on the order module", function (): void {
         cy.loginOnPanel();
 
         cy.log("Get token");

@@ -1,13 +1,13 @@
 import {LeftMenuPage} from "../../../support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {TabNameEnum} from "../../../support/beeoclock/page-element/configuration/left-menu/enum/TabNameEnum";
 
-describe('panel navigation test', (): void => {
+describe('crm navigation test', (): void => {
 
     beforeEach('setup', (): void => {
         cy.loginOnPanel()
     })
 
-    it('panel navigation test', function (): void {
+    it('crm navigation test', function (): void {
         LeftMenuPage.clickServiceTab()
         LeftMenuPage.clickMembersTab()
         LeftMenuPage.clickOnCalendarTab()

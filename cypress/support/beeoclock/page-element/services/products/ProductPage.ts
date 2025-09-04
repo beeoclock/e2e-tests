@@ -3,7 +3,8 @@ import {ProductSummaryComponent} from "./page-element/ProductSummaryComponent";
 import {Assertions} from "../../configuration/tab/common/assertions/Assertions";
 import {ProductSelectorStore} from "./store/ProductSelectorStore";
 import {AssertionsHelper} from "../../../common/assertion/AssertionsHelper";
-import {productProperties} from "./enum/productProperties";
+import {productProperties} from "../../../../../fixtures/service/product/productProperties";
+import {CommonButton} from "../../common/button/CommonButton";
 
 export class ProductPage {
     private productComponent: GivenProductComponent = new GivenProductComponent()
@@ -39,7 +40,6 @@ export class ProductPage {
         return this;
     }
 
-
     public verifyProductProperties(): ProductPage {
 
         return this
@@ -62,5 +62,10 @@ export class ProductPage {
         const element = this.productComponent.getGivenProductElement(productProperties.hairMask.name)
         AssertionsHelper.assertOuterHtmlSnapshot(element, this.store.getHairMaskOuterHtml())
         return this;
+    }
+
+    public clickGoToCheckoutButton(): ProductPage {
+        CommonButton.clickOnButtonByPhrase('Przejdź do kasy')
+        return this
     }
 }

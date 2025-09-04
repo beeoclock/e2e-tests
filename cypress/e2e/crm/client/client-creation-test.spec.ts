@@ -12,7 +12,7 @@ import {TableCommonPage} from "../../../support/beeoclock/page-element/configura
 
 describe('customer creation test', (): void => {
 
-    it('test panel custer creation service', function (): void {
+    it('test crm custer creation client-app', function (): void {
         const testCases = [
             TestCaseEnum.CASE_1,
             TestCaseEnum.CASE_2,

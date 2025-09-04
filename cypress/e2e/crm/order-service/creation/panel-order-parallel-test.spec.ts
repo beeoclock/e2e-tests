@@ -6,7 +6,7 @@ import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-me
 import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
 
-describe('panel - order service', (): void => {
+describe('crm - order client-app', (): void => {
     const testCases = [
         TestCaseEnum.CASE_1,
         TestCaseEnum.CASE_2,
@@ -32,7 +32,7 @@ describe('panel - order service', (): void => {
             CalendarPages.CalendarTablePage
                 .clickOnGivenAndHour(testData.specialist, testData.time);
 
-            cy.log('Add service');
+            cy.log('Add client-app');
             RightPanelPages.RightPanelServicesPage
                 .selectSpecificService(testData.service)
                 .verifySelectedService('1', testData.price, testData.duration)

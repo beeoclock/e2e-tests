@@ -16,7 +16,7 @@ describe('email test', (): void => {
         CalendarPages.CalendarTablePage
             .clickOnGivenAndHour(testData.specialist, testData.time);
 
-        cy.log('Add service');
+        cy.log('Add client-app');
         RightPanelPages.RightPanelServicesPage
             .selectSpecificService(testData.service)
             .verifySelectedService('1', testData.price, testData.duration)

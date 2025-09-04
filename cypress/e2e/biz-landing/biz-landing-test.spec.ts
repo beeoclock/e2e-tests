@@ -16,7 +16,7 @@ describe('biz landing test presentation & header navigation tests', (): void => 
             .assertTariffsIsNotVisible()
     })
 
-    it('assert service header link works properly', (): void => {
+    it('assert client-app header link works properly', (): void => {
         BizLandingPages.LandingBizHeaderPage
             .assertHtml()
             .assertLogo()

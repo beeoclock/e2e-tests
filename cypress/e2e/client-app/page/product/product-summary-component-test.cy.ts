@@ -1,7 +1,7 @@
 import {ServiceEnum} from "../../../../support/ServiceEnum";
 import {NavigationPage} from "../../../../support/beeoclock/page-element/services/navigation/NavigationPage";
 import {ServicesPages} from "../../../../support/beeoclock/page-element/services/ServicesPages";
-import {productProperties} from "../../../../support/beeoclock/page-element/services/products/enum/productProperties";
+import {productProperties} from "../../../../fixtures/service/product/productProperties";
 
 describe('product summary component test', function () {
     const properties = productProperties
