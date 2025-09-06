@@ -31,9 +31,9 @@ export class OrderApi extends ApiRequestHelper {
                 const activeCurrent = items.filter(
                     ({state, status}) => state === 'active' && ['requested', 'confirmed'].includes(status)
                 );
-                cy.log(`Active & current orders found: ${items.length}`);
+                cy.log(`Active & current orders found: ${activeCurrent.length}`);
 
-                const orderIds = items.map(({_id}) => _id);
+                const orderIds = activeCurrent.map(({_id}) => _id);
                 cy.log(`Order IDs: ${orderIds.join(', ')}`);
 
                 return cy.wrap(orderIds);
