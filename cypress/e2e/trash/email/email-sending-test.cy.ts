@@ -2,9 +2,7 @@ import {CalendarPages} from "../../../support/beeoclock/page-element/configurati
 import {RightPanelPages} from "../../../support/beeoclock/page-element/configuration/right-panel/RightPanelPages";
 import {PanelEmailTest} from "../../../fixtures/panel/order/PanelEmailTest";
 import {TestCaseEnum} from "../../../fixtures/enum/TestCaseEnum";
-import {
-    CustomerTypeEnum
-} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
+import {CustomerTypeEnum} from "../../../support/beeoclock/page-element/configuration/right-panel/oder-form/service/enum/CustomerTypeEnum";
 import {NotificationsPage} from "../../../support/beeoclock/page-element/configuration/notiifcations/NotificationsPage";
 import {MiroHostHelper} from "../../../support/beeoclock/notifications/mirohost/MiroHostHelper";
 
@@ -18,7 +16,7 @@ describe('email test', (): void => {
         CalendarPages.CalendarTablePage
             .clickOnGivenAndHour(testData.specialist, testData.time);
 
-        cy.log('Add service');
+        cy.log('Add client-app');
         RightPanelPages.RightPanelServicesPage
             .selectSpecificService(testData.service)
             .verifySelectedService('1', testData.price, testData.duration)

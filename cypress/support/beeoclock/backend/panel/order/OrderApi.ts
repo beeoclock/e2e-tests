@@ -1,16 +1,14 @@
 import {DateUtils} from "../../Utils/DateUtils";
 import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiRequestHelper";
-import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 
 export class OrderApi extends ApiRequestHelper {
 
     public static getOrderIds(env?: Environment): any {
         let environment: Environment = env ?? Environment.dev
 
-        return cy.token().then((): any => {
-            const tokenId: string = Cypress.env('token');
-            const start: string = DateUtils.getStartOfPreviousDays(1);
-            const end: string = DateUtils.getEndOfGivenDayUTC(2);
+        const tokenId: string = Cypress.env('token');
+        const start: string = DateUtils.getStartOfPreviousDays(5);
+        const end: string = DateUtils.getEndOfGivenDayUTC(3);
 
             const url: string = this.getApiEntryPoint(environment) + '/order/paged'
                 + `?start=${start}&end=${end}`
@@ -25,19 +23,19 @@ export class OrderApi extends ApiRequestHelper {
                 },
                 auth: {bearer: tokenId}
             }).then(({status, body}): any => {
-                expect(status).to.equal(HTTPStatusCodeType.OK_200);
+                expect(status).to.equal(200);
                 const {items} = body;
 
                 const activeCurrent = items.filter(
-                    ({state, status}) => state === 'active' && ['requested', 'confirmed'].includes(status)
+                    ({state, status}) => state === 'active' && status === 'requested'
                 );
+
                 cy.log(`Active & current orders found: ${activeCurrent.length}`);
 
-                const orderIds = activeCurrent.map(({_id}) => _id);
-                cy.log(`Order IDs: ${orderIds.join(', ')}`);
+            const orderIds = activeCurrent.map(({_id}) => _id);
+            cy.log(`Order IDs: ${orderIds.join(', ')}`);
 
-                return cy.wrap(orderIds);
-            });
+            return cy.wrap(orderIds);
         });
     }
 

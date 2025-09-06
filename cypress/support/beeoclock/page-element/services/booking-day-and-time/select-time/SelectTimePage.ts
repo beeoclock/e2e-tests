@@ -16,8 +16,8 @@ export class SelectTimePage {
         if (currentHour < 10) {
             cy.log('Current time is before 10:00 – forcing slot to 12:00');
             SelectTimePageElement.SelectSpecificTime.getElement('12:00');
-        } else if (currentHour < 20 && currentMinute > 0) {
-            cy.log('Time is before 20:00 and minutes > 0 – forcing 20:00 slot');
+        } else if (currentHour > 20 && currentMinute > 0) {
+            cy.log('Time is after 20:00 and minutes > 0 – forcing 20:00 slot');
             SelectTimePageElement.SelectSpecificTime.getElement('20:00');
         } else {
             SelectTimePageElement.SelectSpecificTime.getElement(time);

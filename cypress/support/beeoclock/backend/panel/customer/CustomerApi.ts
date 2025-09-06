@@ -62,7 +62,7 @@ export class CustomerApi extends ApiRequestHelper {
         let environment: Environment = env ?? Environment.dev
         return cy.request({
             method: 'GET',
-            url:this.getApiEntryPoint(environment) + '/customer/paged',
+            url: this.getApiEntryPoint(environment) + '/customer/paged',
             headers: {
                 'X-Business-Tenant-Id': this.getTenantId(environment),
             },

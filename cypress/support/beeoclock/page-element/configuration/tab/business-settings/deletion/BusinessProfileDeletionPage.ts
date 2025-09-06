@@ -1,7 +1,5 @@
 import {BusinessDeletionComponent} from "./element/BusinessDeletionComponent";
-import {
-    BusinessProfileInterception
-} from "../../../../../common/Interception/business-profile/BusinessProfileInterception";
+import {BusinessProfileInterception} from "../../../../../common/Interception/business-profile/BusinessProfileInterception";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 
 export class BusinessProfileDeletionPage {

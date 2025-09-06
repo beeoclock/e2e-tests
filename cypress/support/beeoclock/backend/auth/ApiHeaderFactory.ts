@@ -19,13 +19,4 @@ export class ApiHeaderFactory {
             pageSize: 20,
         };
     }
-
-    public static getHeaderWithInvalidToken(): Cypress.Chainable<any> {
-        return cy.token().then((): any => {
-            return {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'Authorization': `Bearer ${Cypress.env('INVALID_TOKEN')}`
-            };
-        });
-    }
 }

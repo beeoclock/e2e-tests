@@ -26,6 +26,6 @@ export class SelectedServiceElement {
     }
 
     public getSummaryTotalPrice(): any {
-        return cy.contains('Cena całkowita').next('div')
+        return cy.contains('Całkowita kwota').next('div')
     }
 }

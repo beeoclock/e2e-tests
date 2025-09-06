@@ -7,17 +7,10 @@ import {ProductApi} from "../../../support/beeoclock/backend/panel/product/Produ
 import {ProductTagBuilder} from "../../../support/beeoclock/backend/panel/product/tag/ProductTagBuilder";
 import {NumericUtils} from "../../../support/beeoclock/backend/Utils/NumericUtils";
 import {faker} from "@faker-js/faker";
-import {AuthApi} from "../../../support/beeoclock/backend/auth/AuthApi";
 import {IProductTags} from "../../../support/beeoclock/backend/panel/product/tag/IProductTags";
 
-describe("panel api healthcheck", (): void => {
-    let token: string
-
-    before('get token', (): void => {
-        AuthApi.getToken().then(bearer => {
-            token = bearer
-        })
-    })
+describe("crm api healthcheck", (): void => {
+    let token: string = Cypress.env('token');
 
     it('get business profile and assert unauthorized response', function (): void {
         BusinessProfileApi.getBusinessProfileDetails(HTTPStatusCodeType.Unauthorized, BackendCommonEnum.INVALID_TOKEN, {
@@ -26,7 +19,7 @@ describe("panel api healthcheck", (): void => {
     });
 
     it('get identity profile and assert expected response', function (): void {
-        IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK_200, token, {}).then((response: Record<string, any>): void => {
+        IdentityApi.getBusinessIdentity(HTTPStatusCodeType.OK_200, {}).then((response: Record<string, any>): void => {
             expect(response).to.have.property('items').that.is.an('array');
             expect(response.items).to.have.length(IdentityData.DATA.items.length);
 
@@ -48,8 +41,8 @@ describe("panel api healthcheck", (): void => {
     it('create product tag and delete', function (): void {
         let id: string = NumericUtils.generateObjectId()
         const tag: IProductTags = new ProductTagBuilder().setId(id).setName('TAG NO ' + faker.finance.pin(6)).build();
-        ProductApi.createProductTag(tag, token).then((): void => {
-            ProductApi.deleteProductTag(id, token).then((): void => {
+        ProductApi.createProductTag(tag).then((): void => {
+            ProductApi.deleteProductTag(id).then((): void => {
                 cy.log('product tag deleted');
             })
         })

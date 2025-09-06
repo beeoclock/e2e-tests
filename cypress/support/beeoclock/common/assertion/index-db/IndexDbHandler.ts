@@ -1,3 +1,5 @@
+import {BackendCommonEnum} from "../../../backend/enum/BackendCommonEnum";
+
 export class IndexDbHandler {
 
     /**
@@ -84,5 +86,8 @@ export class IndexDbHandler {
         });
     }
 
-
+    public static deleteGivenIndexedDB(): void {
+        indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-order');
+        indexedDB.deleteDatabase(BackendCommonEnum.X_Business_Tenant_Id + '-absence');
+    }
 }

@@ -6,7 +6,7 @@ import {ApiRequestHelper} from "../../../common/Interception/ApiRequestHelper";
 
 export class ProductApi extends ApiRequestHelper {
 
-    public static createProductTag(tag: any, token: string): any {
+    public static createProductTag(tag: any): any {
         return cy.request({
             method: 'POST',
             url: DevEntryPointEnum.API_ENTRY_POINT + '/product-tag',
@@ -16,7 +16,7 @@ export class ProductApi extends ApiRequestHelper {
             },
             body: tag,
             auth: {
-                bearer: token
+                bearer: Cypress.env('token')
             }
         }).then(response => {
             expect(response.status).to.equal(HTTPStatusCodeType.Created_201);
@@ -24,25 +24,7 @@ export class ProductApi extends ApiRequestHelper {
         })
     }
 
-    public static requestTestHeader(tag: any, token: string): any {
-        return cy.request({
-            method: 'POST',
-            url: 'https://jolly-fireman-58.webhook.cool',
-            headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'x-github-action': EnvEnum.X_GITHUB_ACTION
-            },
-            body: tag,
-            auth: {
-                bearer: token
-            }
-        }).then(response => {
-            expect(response.status).to.equal(HTTPStatusCodeType.Created_201);
-            return response.body;
-        })
-    }
-
-    public static deleteProductTag(id: string, token: string): any {
+    public static deleteProductTag(id: string): any {
         return cy.request({
             method: 'DELETE',
             url: DevEntryPointEnum.API_ENTRY_POINT + '/product-tag/' + id,
@@ -51,7 +33,7 @@ export class ProductApi extends ApiRequestHelper {
                 'x-github-action': EnvEnum.X_GITHUB_ACTION
             },
             auth: {
-                bearer: token
+                bearer: Cypress.env('token')
             }
         }).then(response => {
             expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
@@ -59,7 +41,7 @@ export class ProductApi extends ApiRequestHelper {
         })
     }
 
-    public static getProductTag(token: string): any {
+    public static getProductTag(): any {
         return cy.request({
             method: 'GET',
             url: DevEntryPointEnum.API_ENTRY_POINT +
@@ -69,7 +51,7 @@ export class ProductApi extends ApiRequestHelper {
                 'x-github-action': EnvEnum.X_GITHUB_ACTION
             },
             auth: {
-                bearer: token
+                bearer: Cypress.env('token')
             }
         }).then(response => {
             expect(response.status).to.equal(200);
@@ -84,15 +66,15 @@ export class ProductApi extends ApiRequestHelper {
         });
     }
 
-    public static deleteAllTags(token: string): void {
-        this.getProductTag(token).then(tags => {
+    public static deleteAllTags(): void {
+        this.getProductTag().then(tags => {
             if (tags.length === 0) {
                 cy.log("No tags to delete");
                 return;
             }
             cy.wrap(null).then((): void => {
                 return tags.reduce((prev, tagId): void => {
-                    return prev.then(() => this.deleteProductTag(tagId, token));
+                    return prev.then(() => this.deleteProductTag(tagId));
                 }, Cypress.Promise.resolve());
             });
         });

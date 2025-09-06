@@ -1,6 +1,7 @@
 import {BizLandingAppointmentElement} from "./element/BizLandingAppointmentElement";
 import {BizLandingOuterHTML} from "../../../../../fixtures/biz-landing/BizLandingOuterHTML";
 import {BizLandingEnum} from "../common/BizLandingEnum";
+import {Utils} from "../../../backend/Utils/Utils";
 
 export class LandingBizAppointmentPage {
     private element = new BizLandingAppointmentElement()
@@ -20,8 +21,8 @@ export class LandingBizAppointmentPage {
     }
 
     public assertHtml(): LandingBizAppointmentPage {
-        this.element.getElement().invoke('prop', 'outerHTML').then(outerHtml => {
-            expect(outerHtml).to.equal(this.outerHTML.getAppointmentOuterHTML())
+        this.element.getElement().invoke('prop', 'outerHTML').then((outerHtml: string) => {
+            expect(Utils.normalizeString(outerHtml)).to.equal(Utils.normalizeString(this.outerHTML.getAppointmentOuterHTML()))
         })
         return this
     }

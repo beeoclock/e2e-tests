@@ -1,7 +1,7 @@
 import {BizLandingDemoSectionElement} from "./element/BizLandingDemoSectionElement";
 import {BizLandingOuterHTML} from "../../../../../fixtures/biz-landing/BizLandingOuterHTML";
-import {AssertionsHelper} from "../../../common/assertion/AssertionsHelper";
 import {PanelLoginPageElement} from "../../configuration/login/PanelLoginPageElement";
+import {Utils} from "../../../backend/Utils/Utils";
 
 export class LandingBizDemoSection {
     private element: BizLandingDemoSectionElement = new BizLandingDemoSectionElement()
@@ -9,7 +9,7 @@ export class LandingBizDemoSection {
 
     public verifyOuterHtmlElement(): LandingBizDemoSection {
         this.element.getMainElement().invoke('prop', 'outerHTML').then((outerHtml: string): void => {
-            expect(AssertionsHelper.normalizeText(outerHtml)).to.equal(AssertionsHelper.normalizeText(this.outerHTML.getDemoSectionOuterHtml()))
+            expect(Utils.normalizeString(outerHtml)).to.equal(Utils.normalizeString(this.outerHTML.getDemoSectionOuterHtml()))
         })
         return this
     }

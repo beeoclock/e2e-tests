@@ -16,8 +16,8 @@ describe("tariffs queries api test", (): void => {
             expect(expectedTariffs).to.exist;
 
             TariffsQueriesApi.getTariffsPaged(HTTPStatusCodeType.OK_200, {}).then((response): void => {
-                //when change do only line before test, and get output into backend/tariffs/existedTariffs.json
-                // cy.log('TEST', JSON.stringify(response))
+                    //when change do only line before test, and get output into backend/tariffs/existedTariffs.json
+                    // cy.log('TEST', JSON.stringify(response))
 
                     expect(response.totalSize).to.equal(expectedTariffs.totalSize);
 

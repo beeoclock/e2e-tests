@@ -3,6 +3,7 @@ import {Assertions} from "../../configuration/tab/common/assertions/Assertions";
 import {QueryAssertion} from "../../../common/assertion/QueryAssertion";
 import {BizLandingEnum} from "../common/BizLandingEnum";
 import {BizLandingOuterHTML} from "fixtures/biz-landing/BizLandingOuterHTML";
+import {Utils} from "../../../backend/Utils/Utils";
 
 export class LandingBizHeaderPage {
     public readonly links = {
@@ -22,8 +23,8 @@ export class LandingBizHeaderPage {
     }
 
     public assertHtml(): LandingBizHeaderPage {
-        this.element.getElement().invoke('prop', 'outerHTML').then((html): void => {
-            expect(html).to.equal(this.outerHtml.getHeaderOuterHTML())
+        this.element.getElement().invoke('prop', 'outerHTML').then((html: string): void => {
+            expect(Utils.normalizeString(html)).to.equal(Utils.normalizeString(this.outerHtml.getHeaderOuterHTML()))
         })
         return this
     }

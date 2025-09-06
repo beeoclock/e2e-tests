@@ -1,5 +1,5 @@
 {
-  "name": "client-app-e2e",
+  "name": "beeoclock-e2e-tests",
   "version": "1.0.0",
   "description": "bee O'clock e2e tests",
   "main": "index.js",
@@ -21,8 +21,8 @@
   "author": "Jan Zadumiński",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "14.4.0",
-    "cypress-file-upload": "^5.0.8",
+    "cypress": "14.5.4",
+    "cypress-file-upload": "5.0.8",
     "dayjs": "1.11.13",
     "dotenv": "16.4.7",
     "globals": "16.0.0",
@@ -34,10 +34,11 @@
     "@faker-js/faker": "8.4.1",
     "@types/imap-simple": "4.2.9",
     "@types/mailparser": "3.4.5",
+    "@typescript/native-preview": "7.0.0-dev.20250816.1",
     "cypress-wait-until": "3.0.2",
     "http-status-codes": "2.3.0",
     "imap-simple": "5.1.0",
-    "mailparser": "3.7.2",
+    "mailparser": "3.7.2",pus
     "moment": "2.30.1"
   }
 }

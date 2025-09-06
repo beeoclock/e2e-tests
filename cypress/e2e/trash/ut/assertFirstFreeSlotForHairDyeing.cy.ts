@@ -1,25 +1,32 @@
 describe('assertFirstFreeSlotForHairDyeing', function (): void {
 
     it('check assertFirstFreeSlotForHairDyeing', function (): void {
-        cy.log("TEST: " + assertFirstFreeSlotForHairDyeing())
+        cy.log("TEST: " + getNextHairDyeingSlots())
     })
 
-    function assertFirstFreeSlotForHairDyeing(): string[] {
-        // const now = new Date();
-        let hour: number = 17 //now.getHours();
-        const minute: number = 19 //now.getMinutes();
+    function getNextHairDyeingSlots(): string[] {
+        let hour = 11;
+        const minute = 12;
+        let result: string[] = [];
 
-        if (minute > 0) {
+        let isHalfHour: boolean;
+
+        if (minute < 30) {
+            isHalfHour = true;
+        } else {
+            isHalfHour = false;
             hour += 1;
         }
 
-        const result: string[] = [];
+        while (true) {
+            const slot = `${hour.toString().padStart(2, '0')}:${isHalfHour ? '30' : '00'}`;
+            result.push(slot);
 
-        for (let h = hour; h <= 20; h++) {
-            if (h >= 0 && h <= 20) {
-                result.push(`${h.toString().padStart(2, '0')}:00`);
-            }
+            if ((isHalfHour && hour === 19) || (!isHalfHour && hour === 20)) break;
+
+            hour += 1;
         }
+
         return result;
     }
 })
