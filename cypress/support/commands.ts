@@ -8,6 +8,7 @@ import {BusinessNameEnum} from "./beeoclock/page-element/common/enum/BusinessNam
 import {ThrottleEnum} from "./beeoclock/common/enum/ThrottleEnum";
 import 'cypress-wait-until';
 import {AuthApi} from "./beeoclock/backend/auth/AuthApi";
+import {Environment} from "./beeoclock/common/Interception/ApiRequestHelper";
 
 declare global {
     namespace Cypress {
@@ -33,7 +34,7 @@ declare global {
 
             isInViewport(): Chainable<JQuery>;
 
-            token();
+            token(env: Environment);
 
             assertOuterHtmlProperties(subject: any, expectedHtml: string);
         }
@@ -215,11 +216,11 @@ Cypress.Commands.add('isInViewport', {prevSubject: true}, (subject): void => {
     expect(inView).to.be.true;
 });
 
-Cypress.Commands.add('token', () => {
+Cypress.Commands.add('token', (env: Environment) => {
     const bufferTime = 60000;
     const now = Date.now();
 
-    return cy.task('readToken').then((data: any) => {
+    return cy.task('readToken', env).then((data: any) => {
         const isValid: boolean =
             data?.token &&
             data?.tokenValidTo &&
@@ -227,16 +228,17 @@ Cypress.Commands.add('token', () => {
 
         if (isValid) {
             Cypress.env('token', data.token);
-            return cy.log("token in file 'token.json' is valid");
+            Cypress.env(`${env}_token`, data.token);
+            return cy.log(`token for ${env} in file 'token.json' is valid`);
         }
 
-        return AuthApi.getAuthWithRetry().then((resp) => {
+        return AuthApi.getAuthWithRetry(env).then((resp) => {
             const token = resp.idToken;
             const expiresInMs: number = Number(resp.expiresIn) * 1000;
             const tokenValidTo: string = new Date(now + expiresInMs).toISOString();
 
-            Cypress.env('token', token);
-            return cy.task('saveToken', {token, tokenValidTo});
+            Cypress.env(`${env}_token`, token);
+            return cy.task('saveToken', { env, token, tokenValidTo });
         });
     });
 });

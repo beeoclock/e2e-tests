@@ -1,10 +1,11 @@
 import {EnvEnum} from "../../common/enum/EnvEnum";
 import {HTTPStatusCodeType} from "../enum/HTTPStatusCodeType";
+import {Environment} from "../../common/Interception/ApiRequestHelper";
 
 export class AuthApi {
 
-    public static getToken(): Cypress.Chainable<string> {
-        const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${EnvEnum.API_KEY}`;
+    public static getToken(env: string = EnvEnum.API_KEY): Cypress.Chainable<string> {
+        const url: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${env}`;
         return cy.request({
             method: 'POST',
             url: url,
@@ -39,8 +40,15 @@ export class AuthApi {
         });
     }
 
-    public static getAuthWithRetry(attempt = 0): Cypress.Chainable<any> {
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${Cypress.env("API_KEY")}`;
+    public static getAuthWithRetry(env: Environment, attempt = 0): Cypress.Chainable<any> {
+        let url: string;
+
+        if (env === Environment.dev) {
+            url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${EnvEnum.API_KEY}`;
+        }
+        if (env === Environment.prod) {
+            url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${EnvEnum.PROD_API_KEY}`;
+        }
 
         return cy.wrap(null).then(() => {
             cy.log(`Auth attempt #${attempt + 1}`);
@@ -61,7 +69,7 @@ export class AuthApi {
                 }
                 if (attempt < 4) {
                     cy.wait(5000);
-                    return AuthApi.getAuthWithRetry(attempt + 1);
+                    return AuthApi.getAuthWithRetry(env, attempt + 1);
                 }
                 throw new Error(`Auth API failed after ${attempt + 1} attempts, last status ${resp.status}`);
             });

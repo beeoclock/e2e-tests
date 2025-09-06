@@ -1,84 +1,97 @@
-import {BackendCommonEnum} from "../../backend/enum/BackendCommonEnum";
-import {HttpMethodEnum} from "../enum/HttpMethodEnum";
-import {HTTPStatusCodeType} from "../../backend/enum/HTTPStatusCodeType";
-import {ApiHeaderFactory} from "../../backend/auth/ApiHeaderFactory";
-import {DevEntryPointEnum} from "./DevEntryPointEnum";
+import { BackendCommonEnum } from "../../backend/enum/BackendCommonEnum";
+import { HttpMethodEnum } from "../enum/HttpMethodEnum";
+import { HTTPStatusCodeType } from "../../backend/enum/HTTPStatusCodeType";
+import { ApiHeaderFactory } from "../../backend/auth/ApiHeaderFactory";
 
 export enum Environment {
-    dev = '-dev.',
-    pre_prod = '-pre-prod.',
-    prod = '.'
+    dev = 'dev',
+    pre_prod = 'pre_prod',
+    prod = 'prod'
 }
 
 export class ApiRequestHelper {
 
-    public static handleApiQueryRequest(path: string, qs: any): Cypress.Chainable<any> {
-        return ApiHeaderFactory.getHeaders().then((headers) => {
+    public static handleApiQueryRequest(env: Environment, path: string, qs: any): Cypress.Chainable<any> {
+        return ApiHeaderFactory.getHeaders(env).then((headers) => {
             return cy.request({
                 method: 'GET',
-                url: DevEntryPointEnum.API_ENTRY_POINT + path,
+                url: this.getApiEntryPoint(env) + path,
                 headers: headers,
                 qs: qs
             }).then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
                 return response.body;
             });
-        })
+        });
     }
 
     protected static getBase(env: Environment): string {
-        return `https://api${env}beeoclock.com`;
+        const hostMap: Record<Environment, string> = {
+            [Environment.dev]: "https://api-dev.beeoclock.com",
+            [Environment.pre_prod]: "https://api-pre-prod.beeoclock.com",
+            [Environment.prod]: "https://api.beeoclock.com"
+        };
+
+        return hostMap[env];
     }
 
     protected static getApiEntryPoint(env: Environment = Environment.dev): string {
-        return `${this.getBase(env)}/panel/api/v1`
+        return `${this.getBase(env)}/panel/api/v1`;
     }
 
     protected static getIdentityEntryPoint(env: Environment): string {
-        return `${this.getBase(env)}/identity/api/v1`
+        return `${this.getBase(env)}/identity/api/v1`;
     }
 
     protected static getTariffsEntryPoint(env: Environment): string {
-        return `${this.getBase(env)}/tariff-plan/api/v1`
+        return `${this.getBase(env)}/tariff-plan/api/v1`;
     }
 
     protected static getPublicPageEntryPoint(env: Environment): string {
-        return `${this.getBase(env)}/client/api/v1/client/*/`
+        return `${this.getBase(env)}/client/api/v1/client/*/`;
     }
 
-    protected static getToken(): Cypress.Chainable<string> {
-        return cy.token().then(() => {
-            return Cypress.env('token');
-        })
+    protected static getToken(env: Environment = Environment.dev): string {
+        return Cypress.env(`${env}_token`);
     }
 
     protected static getTenantId(env: Environment): BackendCommonEnum {
         const tenantMap: Record<Environment, BackendCommonEnum> = {
             [Environment.dev]: BackendCommonEnum.X_Business_Tenant_Id,
-            [Environment.prod]: BackendCommonEnum.X_Business_Tenant_Id_Prod,
             [Environment.pre_prod]: BackendCommonEnum.X_Business_Tenant_Id_pre_Prod,
+            [Environment.prod]: BackendCommonEnum.X_Business_Tenant_Id_Prod,
         };
 
-        const tenantId = tenantMap[env];
-
-        if (!tenantId) {
+        return tenantMap[env] ?? (() => {
             throw new Error(`Unsupported environment: ${env}`);
-        }
-
-        return tenantId;
+        })();
     }
 
-    protected static handleApiRequest(method: HttpMethodEnum, url: string, response = HTTPStatusCodeType.OK_200, body?: any): Cypress.Chainable<any> {
-        return ApiHeaderFactory.getHeaders().then((headers) => {
+    protected static handleApiRequest(env: Environment, method: HttpMethodEnum, url: string, body?: any): Cypress.Chainable<any> {
+        return ApiHeaderFactory.getHeaders(env).then((headers) => {
             return cy.request({
                 method: method,
-                url: DevEntryPointEnum.API_ENTRY_POINT + url,
+                url: this.getApiEntryPoint(env) + url,
                 body: body ?? null,
                 headers: headers,
-            }).then(function (resp) {
-                expect(resp.status).to.equal(response);
+            }).then((resp) => {
+                expect(resp.status).to.equal(HTTPStatusCodeType.OK_200);
                 return resp.body;
             });
+        });
+    }
+
+    protected static getHeaders(env: Environment = Environment.dev): Cypress.Chainable<Record<string, any>> {
+        return cy.wrap(null).then(() => {
+            const token = Cypress.env(`${env}_token`);
+            if (!token) {
+                throw new Error(`No token found for ${env}, did you run cy.token(${env})?`);
+            }
+
+            return {
+                'X-Business-Tenant-Id': this.getTenantId(env),
+                'Authorization': `Bearer ${token}`,
+            };
         });
     }
 }

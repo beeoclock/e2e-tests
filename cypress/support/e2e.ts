@@ -2,6 +2,7 @@ import './commands';
 import 'cypress-file-upload';
 import {BackendCommonEnum} from "./beeoclock/backend/enum/BackendCommonEnum";
 import 'cypress-wait-until';
+import {Environment} from "./beeoclock/common/Interception/ApiRequestHelper";
 
 /**
  * clear all storage and assign to global env valid token before any test
@@ -12,7 +13,8 @@ before((): void => {
         return false;
     });
 
-    cy.token()
+    return cy.token(Environment.prod)
+        .then(() => cy.token(Environment.dev));
 });
 
 beforeEach('clear environment', (): void => {

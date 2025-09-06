@@ -3,42 +3,16 @@ import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {EnvEnum} from "../../../common/enum/EnvEnum";
 import {ApiRequestHelper} from "../../../common/Interception/ApiRequestHelper";
+import {HttpMethodEnum} from "../../../common/enum/HttpMethodEnum";
 
 export class ProductApi extends ApiRequestHelper {
 
     public static createProductTag(tag: any): any {
-        return cy.request({
-            method: 'POST',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/product-tag',
-            headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'x-github-action': EnvEnum.X_GITHUB_ACTION
-            },
-            body: tag,
-            auth: {
-                bearer: Cypress.env('token')
-            }
-        }).then(response => {
-            expect(response.status).to.equal(HTTPStatusCodeType.Created_201);
-            return response.body;
-        })
+        return this.handleApiRequest(HttpMethodEnum.POST, '/product-tag', tag)
     }
 
     public static deleteProductTag(id: string): any {
-        return cy.request({
-            method: 'DELETE',
-            url: DevEntryPointEnum.API_ENTRY_POINT + '/product-tag/' + id,
-            headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'x-github-action': EnvEnum.X_GITHUB_ACTION
-            },
-            auth: {
-                bearer: Cypress.env('token')
-            }
-        }).then(response => {
-            expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
-            return response.body;
-        })
+        return this.handleApiRequest(HttpMethodEnum.DELETE, `/product-tag/${id}`)
     }
 
     public static getProductTag(): any {
