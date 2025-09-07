@@ -20,19 +20,16 @@ export class CustomerApi extends ApiRequestHelper {
 
     public static updateCustomerWithBuilder(customer: ICustomer, customerId: string, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
         let environment: Environment = env ?? Environment.dev
-        return cy.request({
-            method: 'PUT',
-            url: this.getApiEntryPoint(environment) + '/customer/' + customerId,
-            headers: {
-                'X-Business-Tenant-Id': this.getTenantId(environment),
-            },
-            body: customer,
-            auth: {
-                bearer: Cypress.env('token')
-            },
-            ...options
-        }).then(response => {
-            return response;
+        return this.getHeaders(env).then(headers => {
+            return cy.request({
+                method: 'PUT',
+                url: this.getApiEntryPoint(environment) + '/customer/' + customerId,
+                headers: headers,
+                body: customer,
+                ...options
+            }).then(response => {
+                return response;
+            })
         })
     }
 
@@ -55,20 +52,17 @@ export class CustomerApi extends ApiRequestHelper {
 
     public static getCustomerPaged(query: ICustomerSearchCriteria, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
         let environment: Environment = env ?? Environment.dev
-        return cy.request({
-            method: 'GET',
-            url: this.getApiEntryPoint(environment) + '/customer/paged',
-            headers: {
-                'X-Business-Tenant-Id': this.getTenantId(environment),
-            },
-            qs: query,
-            auth: {
-                bearer: this.getToken(environment)
-            },
-            ...options
-        }).then(response => {
-            expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
-            return response.body;
+        return this.getHeaders(env).then(headers => {
+            return cy.request({
+                method: 'GET',
+                url: this.getApiEntryPoint(environment) + '/customer/paged',
+                headers: headers,
+                qs: query,
+                ...options
+            }).then(response => {
+                expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
+                return response.body;
+            })
         })
     }
 

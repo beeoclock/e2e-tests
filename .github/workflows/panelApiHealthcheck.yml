@@ -10,6 +10,7 @@ jobs:
       LOGIN: ${{ secrets.LOGIN }}
       PASSWORD: ${{ secrets.PASSWORD }}
       API_KEY: ${{ secrets.KEY }}
+      PROD_API_KEY: ${{ secrets.PROD_KEY }}
       X_GITHUB_ACTION: ${{ secrets.X_GITHUB_ACTION }}
 
     steps:
@@ -27,7 +28,7 @@ jobs:
       - name: Run panel app healthcheck
         id: run_healthcheck
         run: |
-          npm run panel-app-api-health-check || EXIT_CODE=$?
+          npm run panel-app-prod-api-health-check || EXIT_CODE=$?
           echo "EXIT_CODE=$EXIT_CODE" >> $GITHUB_ENV
           if [ "$EXIT_CODE" -ne 0 ]; then exit 1; fi
 

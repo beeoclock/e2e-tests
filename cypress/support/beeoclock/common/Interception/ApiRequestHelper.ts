@@ -87,7 +87,6 @@ export class ApiRequestHelper {
             if (!token) {
                 throw new Error(`No token found for ${env}, did you run cy.token(${env})?`);
             }
-
             return {
                 'X-Business-Tenant-Id': this.getTenantId(env),
                 'Authorization': `Bearer ${token}`,
