@@ -12,6 +12,7 @@ jobs:
       LOGIN: ${{ secrets.LOGIN }}
       PASSWORD: ${{ secrets.PASSWORD }}
       API_KEY: ${{ secrets.KEY }}
+      PROD_API_KEY: ${{ secrets.PROD_KEY }}
 
     steps:
       - name: Checkout code
