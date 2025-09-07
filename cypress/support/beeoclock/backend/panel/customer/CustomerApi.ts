@@ -6,21 +6,16 @@ import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiReq
 export class CustomerApi extends ApiRequestHelper {
 
     public static createCustomerWithBuilder(customer: ICustomer, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
-        let environment: Environment = env ?? Environment.dev
-        return cy.request({
-            method: 'POST',
-            url: this.getApiEntryPoint(environment) + '/customer',
-            headers: {
-                'X-Business-Tenant-Id': this.getTenantId(environment),
-            },
-            body: customer,
-            auth: {
-                bearer: Cypress.env('token')
-            },
-            ...options
-        }).then(response => {
-            return response;
-        })
+        const environment: Environment = env ?? Environment.dev;
+        return this.getHeaders(env).then(headers => {
+            return cy.request({
+                method: 'POST',
+                url: this.getApiEntryPoint(environment) + '/customer',
+                headers: headers,
+                body: customer,
+                ...options
+            });
+        });
     }
 
     public static updateCustomerWithBuilder(customer: ICustomer, customerId: string, options: Partial<Cypress.RequestOptions>, env?: Environment): any {
@@ -68,7 +63,7 @@ export class CustomerApi extends ApiRequestHelper {
             },
             qs: query,
             auth: {
-                bearer: Cypress.env('token')
+                bearer: this.getToken(environment)
             },
             ...options
         }).then(response => {

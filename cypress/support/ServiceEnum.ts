@@ -7,6 +7,6 @@ export enum ServiceEnum {
 
     //PR
     // PUBLIC_PANEL = 'https://public-dev-beeoclock--pr141-boc-331-client-app-f-qkoob47x.web.app/e2e',
-    CLIENT_PANEL = 'https://business-panel-dev-beeoclock--pr627-develop-rul2e1y1.web.app/',
+    CLIENT_PANEL = 'https://business-panel-dev-beeoclock--pr632-calendar-v3-42d1qk5p.web.app/662a4637a4b376d20c065b1d/event/calendar-with-specialists',
     //https://beeoclock--pr120-develop-j2tplmgj.web.app/pl/e2e/order/form
 }

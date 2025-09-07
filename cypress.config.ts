@@ -1,6 +1,7 @@
 import {defineConfig} from "cypress";
 import dotenv from 'dotenv';
 import {getTokenData, saveTokenData} from "./cypress/support/beeoclock/backend/auth/TokenManager";
+import { Environment } from "support/beeoclock/common/Interception/ApiRequestHelper";
 
 dotenv.config();
 
@@ -13,17 +14,18 @@ export default defineConfig({
         MAIL_PASSWORD: process.env.MAIL_PASSWORD,
         MAIL_LOGIN: process.env.MAIL_LOGIN,
         API_KEY: process.env.API_KEY,
+        PROD_API_KEY: process.env.PROD_API_KEY,
         X_GITHUB_ACTION: process.env.X_GITHUB_ACTION,
     },
 
     e2e: {
         setupNodeEvents(on, config) {
             on('task', {
-                readToken() {
-                    return getTokenData();
+                readToken(env: Environment) {
+                    return getTokenData(env);
                 },
-                saveToken({token, tokenValidTo}) {
-                    saveTokenData(token, tokenValidTo);
+                saveToken({env, token, tokenValidTo}) {
+                    saveTokenData(env, token, tokenValidTo);
                     return null;
                 },
             });

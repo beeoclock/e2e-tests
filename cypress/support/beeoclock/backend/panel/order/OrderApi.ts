@@ -10,29 +10,27 @@ export class OrderApi extends ApiRequestHelper {
         const start: string = DateUtils.getStartOfPreviousDays(5);
         const end: string = DateUtils.getEndOfGivenDayUTC(3);
 
-        const url: string = this.getApiEntryPoint(environment) + '/order/paged'
-            + `?start=${start}&end=${end}`
-            + `&page=1&pageSize=100`
-            + `&orderBy=updatedScience&orderDir=desc`;
+            const url: string = this.getApiEntryPoint(environment) + '/order/paged'
+                + `?start=${start}&end=${end}`
+                + `&page=1&pageSize=100`
+                + `&orderBy=updatedScience&orderDir=desc`;
 
-        return cy.request({
-            method: 'GET',
-            url,
-            headers: {
-                'X-Business-Tenant-Id': this.getTenantId(environment),
-            },
-            auth: {bearer: tokenId}
-        }).then(({status, body}): any => {
-            expect(status).to.equal(200);
-            const {items} = body;
+            return cy.request({
+                method: 'GET',
+                url,
+                headers: {
+                    'X-Business-Tenant-Id': this.getTenantId(environment),
+                },
+                auth: {bearer: tokenId}
+            }).then(({status, body}): any => {
+                expect(status).to.equal(200);
+                const {items} = body;
 
-            const activeCurrent = items.filter(
-                ({state, status}) =>
-                    state === 'active' &&
-                    status !== 'deleted'
-            );
+                const activeCurrent = items.filter(
+                    ({state, status}) => state === 'active' && status === 'requested'
+                );
 
-            cy.log(`Active & current orders found: ${activeCurrent.length}`);
+                cy.log(`Active & current orders found: ${activeCurrent.length}`);
 
             const orderIds = activeCurrent.map(({_id}) => _id);
             cy.log(`Order IDs: ${orderIds.join(', ')}`);
@@ -43,6 +41,7 @@ export class OrderApi extends ApiRequestHelper {
 
     public static getAllOrderIds(env?: Environment): any {
         let environment: Environment = env ?? Environment.dev
+        this.getToken()
         const tokenId = Cypress.env('token');
         const url: string = this.getApiEntryPoint(environment) + '/order/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
         return cy.request({
@@ -70,6 +69,7 @@ export class OrderApi extends ApiRequestHelper {
     public static deleteOrderWithGivenId(id: string, env?: Environment): any {
         let environment: Environment = env ?? Environment.dev
 
+        this.getToken()
         const tokenId = Cypress.env('token');
         return cy.request({
             method: 'DELETE',
@@ -123,9 +123,8 @@ export class OrderApi extends ApiRequestHelper {
         }
 
         orderIds.forEach(orderId => {
-            this.deleteOrderWithGivenId(orderId).then(() => {
-                this.assertSuccessfulDeletion(orderId)
-            })
+            this.deleteOrderWithGivenId(orderId);
+            this.assertSuccessfulDeletion(orderId)
         });
     }
 

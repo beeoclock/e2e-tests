@@ -5,6 +5,7 @@ import {PanelOrderCreationDataProvider} from "../../../../fixtures/panel/order/P
 import {LeftMenuPage} from "support/beeoclock/page-element/configuration/left-menu/LeftMenuPage";
 import {OrderApi} from "../../../../support/beeoclock/backend/panel/order/OrderApi";
 import {AbsenceApi} from "../../../../support/beeoclock/backend/panel/absence/AbsenceApi";
+import {DateUtils} from "../../../../support/beeoclock/backend/Utils/DateUtils";
 
 describe('crm - order client-app', (): void => {
     const testCases = [
@@ -32,7 +33,7 @@ describe('crm - order client-app', (): void => {
             CalendarPages.CalendarTablePage
                 .clickOnGivenAndHour(testData.specialist, testData.time);
 
-            cy.log('Add client-app');
+            cy.log('Add service');
             RightPanelPages.RightPanelServicesPage
                 .selectSpecificService(testData.service)
                 .verifySelectedService('1', testData.price, testData.duration)

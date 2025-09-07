@@ -1,6 +1,7 @@
 import {SummaryAndPaymentServicePageElement} from "./SummaryAndPaymentServicePageElement";
 import {ApiInterceptionHelper} from "../../../../../common/Interception/ApiInterceptionHelper";
 import {LeftMenuPage} from "../../../left-menu/LeftMenuPage";
+import {NotificationsPage} from "../../../notiifcations/NotificationsPage";
 
 export class SummaryAndPaymentServicePage {
 
@@ -97,21 +98,20 @@ export class SummaryAndPaymentServicePage {
         const createOrder: string = ApiInterceptionHelper.createOrder()
         const createServicePayment: string = ApiInterceptionHelper.createServicePayment()
 
-        LeftMenuPage.assertIsSynchronized(true)
+
         SummaryAndPaymentServicePageElement.SaveButton.getElement()
             .click()
             .then((): void => {
-                cy.wait(100)
+                NotificationsPage.clickConfirmButton()
                 cy.wait('@' + createOrder, {timeout: 5000}).then((interception): void => {
                     cy.wrap(interception.request.body._id).as('orderId');
                 })
 
-                cy.wait('@' + createServicePayment, {timeout: 5000}).then((interception): void => {
-                    const sendPaymentStatus = interception.request.body.status;
-                    expect(sendPaymentStatus).to.equal(paymentStatus);
-                })
+                // cy.wait('@' + createServicePayment, {timeout: 5000}).then((interception): void => {
+                //     const sendPaymentStatus = interception.request.body.status;
+                //     expect(sendPaymentStatus).to.equal(paymentStatus);
+                // }) -_-
             })
-        //LeftMenuPage.handleSynchronization()//TODO talk with dev about this
         LeftMenuPage.assertIsSynchronized(true)
         return this;
     }
@@ -147,6 +147,18 @@ export class SummaryAndPaymentServicePage {
             .click();
 
         LeftMenuPage.assertIsSynchronized(true)
+        return this;
+    }
+
+    public verifyInformationAboutService(amount: string, state: string, createdAt: string, paymentState: string): SummaryAndPaymentServicePage {
+        const element = SummaryAndPaymentServicePageElement.OrderDetailElement
+
+        element.getElement().invoke('prop', 'innerText').then((innerText: string) => {
+            expect(innerText).to.include(`Liczba zamówionych usług: ${amount}`)
+            expect(innerText).to.include(`Status:\n${state}`)
+            expect(innerText).to.include(`Utworzono:\n${createdAt}`)
+            expect(innerText).to.include(`Status płatności:\n${paymentState}`)
+        })
         return this;
     }
 

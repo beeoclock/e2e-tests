@@ -20,6 +20,6 @@ export class MemberApi extends ApiRequestHelper {
             ...member,
         };
 
-        return this.handleApiRequest(HttpMethodEnum.PUT, `/member/${memberId}`, HTTPStatusCodeType.OK_200, updatedMember)
+        return this.handleApiRequest(HttpMethodEnum.PUT, `/member/${memberId}`, updatedMember)
     }
 }

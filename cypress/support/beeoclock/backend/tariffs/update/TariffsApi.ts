@@ -1,4 +1,3 @@
-import {AuthApi} from "../../auth/AuthApi";
 import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 
 export class TariffsApi {
@@ -22,9 +21,5 @@ export class TariffsApi {
             expect(response.status).to.equal(200);
             return response.body
         });
-    }
-
-    private static getToken(): Cypress.Chainable<string> {
-        return AuthApi.getToken();
     }
 }
