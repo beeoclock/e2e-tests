@@ -2,6 +2,8 @@ import { BackendCommonEnum } from "../../backend/enum/BackendCommonEnum";
 import { HttpMethodEnum } from "../enum/HttpMethodEnum";
 import { HTTPStatusCodeType } from "../../backend/enum/HTTPStatusCodeType";
 import { ApiHeaderFactory } from "../../backend/auth/ApiHeaderFactory";
+import { IQueryParams } from "support/beeoclock/backend/common/query-string-params/IQueryParams";
+import { QueryObjectFactory } from "support/beeoclock/backend/common/query-string-params/QueryObjectFactory";
 
 export enum Environment {
     dev = 'dev',
@@ -11,13 +13,19 @@ export enum Environment {
 
 export class ApiRequestHelper {
 
-    public static handleApiQueryRequest(env: Environment, path: string, qs: any): Cypress.Chainable<any> {
-        return ApiHeaderFactory.getHeaders(env).then((headers) => {
+    public static handleApiQueryRequest(env: Environment, path: string, qs?: any): Cypress.Chainable<any> {
+
+        const finalQs: IQueryParams = {
+            ...QueryObjectFactory.getDefaultQueryStringParams(),
+            ...qs
+        };
+
+        return this.getHeaders(env).then((headers) => {
             return cy.request({
                 method: 'GET',
                 url: this.getApiEntryPoint(env) + path,
                 headers: headers,
-                qs: qs
+                qs: finalQs
             }).then(response => {
                 expect(response.status).to.equal(HTTPStatusCodeType.OK_200);
                 return response.body;
@@ -68,7 +76,7 @@ export class ApiRequestHelper {
     }
 
     protected static handleApiRequest(env: Environment, method: HttpMethodEnum, url: string, body?: any): Cypress.Chainable<any> {
-        return ApiHeaderFactory.getHeaders(env).then((headers) => {
+        return this.getHeaders(env).then((headers) => {
             return cy.request({
                 method: method,
                 url: this.getApiEntryPoint(env) + url,
@@ -87,7 +95,6 @@ export class ApiRequestHelper {
             if (!token) {
                 throw new Error(`No token found for ${env}, did you run cy.token(${env})?`);
             }
-
             return {
                 'X-Business-Tenant-Id': this.getTenantId(env),
                 'Authorization': `Bearer ${token}`,

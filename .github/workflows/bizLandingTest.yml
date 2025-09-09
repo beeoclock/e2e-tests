@@ -11,6 +11,7 @@ jobs:
     env:
       LOGIN: ${{ secrets.LOGIN }}
       PASSWORD: ${{ secrets.PASSWORD }}
+      PROD_API_KEY: ${{ secrets.PROD_KEY }}
       API_KEY: ${{ secrets.KEY }}
 
     steps:

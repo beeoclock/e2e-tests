@@ -13,6 +13,12 @@ before((): void => {
         return false;
     });
 
+    //skip biz - no need token's
+    if (Cypress.spec.relative.includes('cypress/e2e/biz-landing')) {
+        cy.log('Skipping token setup for biz-landing tests');
+        return;
+    }
+
     return cy.token(Environment.prod)
         .then(() => cy.token(Environment.dev));
 });
