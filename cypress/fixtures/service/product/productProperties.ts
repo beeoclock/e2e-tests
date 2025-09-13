@@ -4,6 +4,7 @@ export const productProperties = {
         name: 'Odżywka',
         tag: 'antea',
         prize: '200,00 zł',
+        trimmedPrize: '200 zł',
         description: null
     },
     hairMask: {

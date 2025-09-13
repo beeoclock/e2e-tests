@@ -1,6 +1,5 @@
 import {BasketOrderedDataElement} from "./element/BasketOrderedDataElement";
 import {Assertions} from "../../../../../configuration/tab/common/assertions/Assertions";
-import {CommonPropertiesEnum} from "../../../../../common/enum/CommonPropertiesEnum";
 
 export class OrderedProductPage {
     private element: BasketOrderedDataElement = new BasketOrderedDataElement()
@@ -16,13 +15,14 @@ export class OrderedProductPage {
     }
 
     public verifyTag(name: string, tagName: string): OrderedProductPage {
-        this.element.getTag(name).should('have.text', tagName)
+        const element = this.element.getTag(name)
+        Assertions.assertProperties(element, 'innerText', tagName)
         return this
     }
 
     public verifyTotalPrize(prize: string): OrderedProductPage {
         const element = this.element.getTotalPrizeElement()
-        Assertions.assertProperties(element, 'textContent', `Całkowita kwota ${prize} zł`)
+        Assertions.assertTrimmedProperties(element, 'innerText', `Całkowita kwota\n${prize}`)
         return this
     }
 }

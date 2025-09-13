@@ -18,6 +18,9 @@ describe('product oder e2e', function (){
 
         ProductsPages.OrderedProductPage
             .verifyAmountOfOrderedProducts(1)
+            .clickExpandGivenProduct(properties.conditioner.name)
+            .verifyTag(properties.conditioner.name, properties.conditioner.tag)
+            .verifyTotalPrize(properties.conditioner.trimmedPrize)
 
         ServicesPages.BookingClientDataPage
             .typeFirstName("Mark")

@@ -29,7 +29,7 @@ export class BookingClientDataPage {
     }
 
     public typePhoneNumber(phoneNumber: string): BookingClientDataPage {
-        this.verifyPhonePrefix("Poland +48")
+        this.verifyPhonePrefix("+48")
         BookingClientDataPageElement.PhoneInput.getElement()
             .clear()
             .type(phoneNumber).then((): void => {
@@ -63,16 +63,16 @@ export class BookingClientDataPage {
     }
 
     private assertAgreementsHref(): BookingClientDataPage {
-        const termsOfUse: Cypress.Chainable<JQuery<HTMLAnchorElement>> = cy.contains('a', 'Warunki korzystania')
-        const privacyPolicy: Cypress.Chainable<JQuery<HTMLAnchorElement>> = cy.contains('a', 'Politykę prywatności')
+        const termsOfUse = 'Warunki korzystania'
+        const privacyPolicy = 'Politykę prywatności'
 
-        termsOfUse.should('be.visible')
-        termsOfUse.should('have.attr', 'href')
+        cy.contains('a', termsOfUse).should('be.visible')
+        cy.contains('a', termsOfUse).should('have.attr', 'href')
             .and('include', 'https://bee-o-clock.gitbook.io/home')
 
-        privacyPolicy.should('be.visible')
-        privacyPolicy.should('have.attr', 'href')
-            .and('include', 'https://bee-o-clock.gitbook.io/home')
+        cy.contains('a', privacyPolicy).should('be.visible')
+        cy.contains('a', privacyPolicy).should('have.attr', 'href')
+            .and('include', 'https://bee-o-clock.gitbook.io/home/privacy-policy')
         return this;
     }
 
