@@ -56,8 +56,23 @@ export class BookingClientDataPage {
     }
 
     public checkAgreement(): BookingClientDataPage {
+        this.assertAgreementsHref()
         BookingClientDataPageElement.Agreement0InputElement.getElement().check({force: true})
             .should('be.checked');
+        return this;
+    }
+
+    private assertAgreementsHref(): BookingClientDataPage {
+        const termsOfUse: Cypress.Chainable<JQuery<HTMLAnchorElement>> = cy.contains('a', 'Warunki korzystania')
+        const privacyPolicy: Cypress.Chainable<JQuery<HTMLAnchorElement>> = cy.contains('a', 'Politykę prywatności')
+
+        termsOfUse.should('be.visible')
+        termsOfUse.should('have.attr', 'href')
+            .and('include', 'https://bee-o-clock.gitbook.io/home')
+
+        privacyPolicy.should('be.visible')
+        privacyPolicy.should('have.attr', 'href')
+            .and('include', 'https://bee-o-clock.gitbook.io/home')
         return this;
     }
 

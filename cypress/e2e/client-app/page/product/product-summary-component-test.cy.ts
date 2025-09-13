@@ -2,6 +2,7 @@ import {ServiceEnum} from "../../../../support/ServiceEnum";
 import {NavigationPage} from "../../../../support/beeoclock/page-element/services/navigation/NavigationPage";
 import {ServicesPages} from "../../../../support/beeoclock/page-element/services/ServicesPages";
 import {productProperties} from "../../../../fixtures/service/product/productProperties";
+import {ProductsPages} from "../../../../support/beeoclock/page-element/services/products/productsPages";
 
 describe('product summary component test', function () {
     const properties = productProperties
@@ -41,13 +42,13 @@ describe('product summary component test', function () {
     })
 
     function addGivenProduct(product: string, amount: string): void {
-        ServicesPages.ProductPage
+        ProductsPages.ProductPage
             .clickAddGivenProduct(product)
             .verifyAmountOfSelectedProduct(product, amount)
     }
 
     function subtractGivenProduct(product: string, amount: string): void {
-        ServicesPages.ProductPage
+        ProductsPages.ProductPage
             .clickSubtractGivenProduct(product)
             .verifyAmountOfSelectedProduct(product, amount)
     }

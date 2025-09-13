@@ -1,5 +1,6 @@
 import {ServicesPages} from "../../../../support/beeoclock/page-element/services/ServicesPages";
 import {productProperties} from "../../../../fixtures/service/product/productProperties";
+import {ProductsPages} from "../../../../support/beeoclock/page-element/services/products/productsPages";
 
 describe('product oder e2e', function (){
     const properties = productProperties
@@ -10,8 +11,20 @@ describe('product oder e2e', function (){
     })
 
     it('should order one product correctly', function (){
-        ServicesPages.ProductPage
-            .clickAddGivenProduct(properties.shampoo.name)
-            .verifyAmountOfSelectedProduct(properties.shampoo.name, '1')
+        ProductsPages.ProductPage
+            .clickAddGivenProduct(properties.conditioner.name)
+            .verifyAmountOfSelectedProduct(properties.conditioner.name, '1')
+            .clickGoToCheckoutButton()
+
+        ProductsPages.OrderedProductPage
+            .verifyAmountOfOrderedProducts(1)
+
+        ServicesPages.BookingClientDataPage
+            .typeFirstName("Mark")
+            .typeEmail("mark@example.eu")
+            .typePhoneNumber("555-555-123")
+            .typeComment("Please for fabric describe of product")
+            .checkAgreement()
+
     })
 });
