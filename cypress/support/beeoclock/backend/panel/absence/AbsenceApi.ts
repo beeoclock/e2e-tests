@@ -9,30 +9,29 @@ export class AbsenceApi extends ApiRequestHelper {
         let environment: Environment = env ?? Environment.dev
         const tokenId = Cypress.env('token');
         const url: string = this.getApiEntryPoint(environment) + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
-        return cy.request({
-            method: 'GET',
-            url: url,
-            headers: {
-                'X-Business-Tenant-Id': BackendCommonEnum.X_Business_Tenant_Id,
-                'Authorization': `Bearer ${tokenId}`
-            },
-            qs: {
-                start: DateUtils.getStartOfPreviousDays(1),
-                end: DateUtils.getEndOfGivenDayUTC(3)
-            },
-            auth: {
-                bearer: tokenId
-            }
+        return this.getHeaders(env).then(headers => {
+            return cy.request({
+                method: 'GET',
+                url: url,
+                headers: headers,
+                qs: {
+                    start: DateUtils.getStartOfPreviousDays(1),
+                    end: DateUtils.getEndOfGivenDayUTC(3)
+                },
+                auth: {
+                    bearer: tokenId
+                }
+            })
         }).then(response => {
             expect(response.status).to.equal(200);
-            const absenceids = response.body.items
+            const absenceIds = response.body.items
                 .filter(({state}) => state !== StateEnum.deleted)
                 .map((absence: any) => absence._id);
 
             if (Array.isArray(response.body.items) && response.body.items.length > 0) {
-                absenceids.map((absence: any) => absence._id);
-                cy.log('absence Ids:', absenceids.join(', '));
-                return cy.wrap(absenceids);
+                absenceIds.map((absence: any) => absence._id);
+                cy.log('absence Ids:', absenceIds.join(', '));
+                return cy.wrap(absenceIds);
             } else {
                 cy.log('No absence found');
                 return cy.wrap([]);
@@ -59,9 +58,9 @@ export class AbsenceApi extends ApiRequestHelper {
     }
 
     public static deleteAllAbsences(): void {
-        this.getAllAbsenceIds().then((absenceids: string[]): void => {
-            if (absenceids.length > 0) {
-                cy.wrap(absenceids).each((id: string): void => {
+        this.getAllAbsenceIds().then((absenceIds: string[]): void => {
+            if (absenceIds.length > 0) {
+                cy.wrap(absenceIds).each((id: string): void => {
                     this.deleteAbsenceWithGivenId(id);
                 }).then((): void => {
                     cy.reload();
