@@ -7,7 +7,6 @@ export class AbsenceApi extends ApiRequestHelper {
 
     public static getAllAbsenceIds(env?: Environment): any {
         let environment: Environment = env ?? Environment.dev
-        const tokenId = Cypress.env('token');
         const url: string = this.getApiEntryPoint(environment) + '/absence/paged?orderBy=createdAt&orderDir=desc&page=1&pageSize=2000';
         return this.getHeaders(env).then(headers => {
             return cy.request({
@@ -18,9 +17,6 @@ export class AbsenceApi extends ApiRequestHelper {
                     start: DateUtils.getStartOfPreviousDays(1),
                     end: DateUtils.getEndOfGivenDayUTC(3)
                 },
-                auth: {
-                    bearer: tokenId
-                }
             })
         }).then(response => {
             expect(response.status).to.equal(200);

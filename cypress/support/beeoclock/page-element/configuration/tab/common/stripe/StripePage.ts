@@ -1,9 +1,9 @@
 import {StripePageElement} from "./StripePageElement";
 
 export class StripePage {
-    private inputs = StripePageElement.StripeInputComponent;
+    private static inputs = StripePageElement.StripeInputComponent;
 
-    public assertInputElement(): StripePage {
+    public static assertInputElement(): StripePage {
         this.inputs.getStripeEmailInput()
             .invoke('prop', 'innerText').then((innerText: string): void => {
             expect(innerText).to.include("Email\ne2e.testing@dev.beeoclock.com")
@@ -11,7 +11,7 @@ export class StripePage {
         return this;
     }
 
-    public assertOrderSummary(tariffName: string): StripePage {
+    public static assertOrderSummary(tariffName: string): StripePage {
         cy.get('[data-testid="product-summary-name"]').should('have.text', 'Subscribe to ' + tariffName)
         cy.get('.ProductSummary-amountsContainer.false')
             .invoke('prop', 'innerText').then((innerText: string): void => {
@@ -23,27 +23,27 @@ export class StripePage {
         return this
     }
 
-    public typeCardValue(cardValue: string): StripePage {
+    public static typeCardValue(cardValue: string): StripePage {
         this.inputs.getCardNumberInput().type(cardValue)
         return this
     }
 
-    public typeCardExpiration(expiration: string): StripePage {
+    public static typeCardExpiration(expiration: string): StripePage {
         this.inputs.getCardExpiration().type(expiration)
         return this
     }
 
-    public typeCardCVV(cvv: string): StripePage {
+    public static typeCardCVV(cvv: string): StripePage {
         this.inputs.getCardCVV().type(cvv)
         return this
     }
 
-    public typeCardBillingName(billingName: string): StripePage {
+    public static typeCardBillingName(billingName: string): StripePage {
         this.inputs.getCardBillingName().type(billingName)
         return this
     }
 
-    public clickSubmitButton(): StripePage {
+    public static clickSubmitButton(): StripePage {
         StripePageElement.SubmitButton.getElement()
             .click();
         return this;

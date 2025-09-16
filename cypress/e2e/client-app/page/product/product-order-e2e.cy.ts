@@ -1,6 +1,7 @@
 import {ServicesPages} from "../../../../support/beeoclock/page-element/services/ServicesPages";
 import {productProperties} from "../../../../fixtures/service/product/productProperties";
 import {ProductsPages} from "../../../../support/beeoclock/page-element/services/products/productsPages";
+import {StripePage} from "../../../../support/beeoclock/page-element/configuration/tab/common/stripe/StripePage";
 
 describe('product oder e2e', function (){
     const properties = productProperties
@@ -21,6 +22,7 @@ describe('product oder e2e', function (){
             .clickExpandGivenProduct(properties.conditioner.name)
             .verifyTag(properties.conditioner.name, properties.conditioner.tag)
             .verifyTotalPrize(properties.conditioner.trimmedPrize)
+            .clickRollUpGivenProduct(properties.conditioner.name)
 
         ServicesPages.BookingClientDataPage
             .typeFirstName("Mark")
@@ -29,5 +31,9 @@ describe('product oder e2e', function (){
             .typeComment("Please for fabric describe of product")
             .checkAgreement()
 
+        ProductsPages.OrderedProductPage
+            .clickPayNowButton()
+
+        StripePage.typeCardValue("4242")
     })
 });

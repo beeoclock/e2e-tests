@@ -20,6 +20,10 @@ export class BasketOrderedDataElement {
         return this.getGivenDetailElement(name).find('.bi-chevron-down')
     }
 
+    public getRollUpArrow(name: string): Cypress.Chainable<JQuery> {
+        return this.getGivenDetailElement(name).find('.bi-chevron-up')
+    }
+
     public getTag(orderName: string): Cypress.Chainable<JQuery> {
         return this.getGivenDetailElement(orderName).find('span.rounded-full.bg-neutral-200')
     }

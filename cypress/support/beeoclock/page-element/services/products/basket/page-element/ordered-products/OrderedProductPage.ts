@@ -14,6 +14,11 @@ export class OrderedProductPage {
         return this;
     }
 
+    public clickRollUpGivenProduct(name: string): OrderedProductPage {
+        this.element.getRollUpArrow(name).click()
+        return this;
+    }
+
     public verifyTag(name: string, tagName: string): OrderedProductPage {
         const element = this.element.getTag(name)
         Assertions.assertProperties(element, 'innerText', tagName)
@@ -23,6 +28,12 @@ export class OrderedProductPage {
     public verifyTotalPrize(prize: string): OrderedProductPage {
         const element = this.element.getTotalPrizeElement()
         Assertions.assertTrimmedProperties(element, 'innerText', `Całkowita kwota\n${prize}`)
+        return this
+    }
+
+    public clickPayNowButton(): OrderedProductPage {
+        const btn = cy.contains('button','Zapłać teraz').scrollIntoView()
+        btn.should('not.be.disabled').click()
         return this
     }
 }
