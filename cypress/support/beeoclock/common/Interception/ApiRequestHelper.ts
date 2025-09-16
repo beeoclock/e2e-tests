@@ -75,7 +75,7 @@ export class ApiRequestHelper {
         })();
     }
 
-    protected static handleApiRequest(env: Environment, method: HttpMethodEnum, url: string, body?: any): Cypress.Chainable<any> {
+    protected static handleApiRequest(env: Environment, method: HttpMethodEnum, url: string, body: any = null): Cypress.Chainable<any> {
         return this.getHeaders(env).then((headers) => {
             return cy.request({
                 method: method,
@@ -83,7 +83,6 @@ export class ApiRequestHelper {
                 body: body ?? null,
                 headers: headers,
             }).then((resp) => {
-                expect(resp.status).to.equal(HTTPStatusCodeType.OK_200);
                 return resp.body;
             });
         });

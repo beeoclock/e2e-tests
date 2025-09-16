@@ -1,11 +1,12 @@
 import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 import {ApiHeaderFactory} from "../../auth/ApiHeaderFactory";
 import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
+import {ApiRequestHelper} from "../../../common/Interception/ApiRequestHelper";
 
-export class BalanceApi {
+export class BalanceApi extends ApiRequestHelper{
 
     public static getBalancePaged(): Cypress.Chainable<any> {
-        return ApiHeaderFactory.getHeaders().then(headers => {
+        return this.getHeaders().then(headers => {
             return cy.request({
                 method: 'GET',
                 url: DevEntryPointEnum.API_ENTRY_POINT + '/balance/paged',

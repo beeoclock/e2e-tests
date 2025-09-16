@@ -25,8 +25,7 @@ export class BusinessProfileApi {
         });
     }
 
-    public static getBusinessProfile(): Cypress.Chainable<object> {
-        cy.token();
+    public static getBusinessProfile(): Cypress.Chainable<any> {
         const url: string = DevEntryPointEnum.API_ENTRY_POINT + `/business-profile`;
         return cy.then((): any => {
             const token: string = Cypress.env('token');

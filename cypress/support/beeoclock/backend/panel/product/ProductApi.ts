@@ -1,18 +1,17 @@
 import {DevEntryPointEnum} from "../../../common/Interception/DevEntryPointEnum";
 import {BackendCommonEnum} from "../../enum/BackendCommonEnum";
-import {HTTPStatusCodeType} from "../../enum/HTTPStatusCodeType";
 import {EnvEnum} from "../../../common/enum/EnvEnum";
-import {ApiRequestHelper} from "../../../common/Interception/ApiRequestHelper";
+import {ApiRequestHelper, Environment} from "../../../common/Interception/ApiRequestHelper";
 import {HttpMethodEnum} from "../../../common/enum/HttpMethodEnum";
 
 export class ProductApi extends ApiRequestHelper {
 
-    public static createProductTag(tag: any): any {
-        return this.handleApiRequest(HttpMethodEnum.POST, '/product-tag', tag)
+    public static createProductTag(env: Environment, tag: any): any {
+        return this.handleApiRequest(env, HttpMethodEnum.POST, '/product-tag', tag)
     }
 
-    public static deleteProductTag(id: string): any {
-        return this.handleApiRequest(HttpMethodEnum.DELETE, `/product-tag/${id}`)
+    public static deleteProductTag(env: Environment, id: string): any {
+        return this.handleApiRequest(env, HttpMethodEnum.DELETE, `/product-tag/${id}`)
     }
 
     public static getProductTag(): any {
@@ -37,20 +36,6 @@ export class ProductApi extends ApiRequestHelper {
                 cy.log('No tags found');
                 return cy.wrap([]);
             }
-        });
-    }
-
-    public static deleteAllTags(): void {
-        this.getProductTag().then(tags => {
-            if (tags.length === 0) {
-                cy.log("No tags to delete");
-                return;
-            }
-            cy.wrap(null).then((): void => {
-                return tags.reduce((prev, tagId): void => {
-                    return prev.then(() => this.deleteProductTag(tagId));
-                }, Cypress.Promise.resolve());
-            });
         });
     }
 }

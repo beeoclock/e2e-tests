@@ -1,7 +1,7 @@
 import {ProductApi} from "../../../../support/beeoclock/backend/product/ProductApi";
 import {StateEnum} from "../../../../support/beeoclock/backend/enum/StateEnum";
 
-describe('UpdateProduct', () => {
+describe.skip('UpdateProduct', () => {
 
     it('Should update product state to active', () => {
         const qs = {

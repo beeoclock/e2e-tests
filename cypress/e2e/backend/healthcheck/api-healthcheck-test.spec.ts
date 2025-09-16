@@ -8,6 +8,7 @@ import {ProductTagBuilder} from "../../../support/beeoclock/backend/panel/produc
 import {NumericUtils} from "../../../support/beeoclock/backend/Utils/NumericUtils";
 import {faker} from "@faker-js/faker";
 import {IProductTags} from "../../../support/beeoclock/backend/panel/product/tag/IProductTags";
+import {Environment} from "../../../support/beeoclock/common/Interception/ApiRequestHelper";
 
 describe("crm api healthcheck", (): void => {
     let token: string = Cypress.env('token');
@@ -41,8 +42,8 @@ describe("crm api healthcheck", (): void => {
     it.only('create product tag and delete', function (): void {
         let id: string = NumericUtils.generateObjectId()
         const tag: IProductTags = new ProductTagBuilder().setId(id).setName('TAG NO ' + faker.finance.pin(6)).build();
-        ProductApi.createProductTag(tag).then((): void => {
-            ProductApi.deleteProductTag(id).then((): void => {
+        ProductApi.createProductTag(Environment.dev, tag).then((): void => {
+            ProductApi.deleteProductTag(Environment.dev, id).then((): void => {
                 cy.log('product tag deleted');
             })
         })
