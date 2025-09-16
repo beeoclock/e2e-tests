@@ -16,7 +16,7 @@ describe('order client-app test', (): void => {
     })
 
     beforeEach(function (): void {
-        cy.fixture('order-client-app-test-data.json').as('orderServiceCreation');
+        cy.fixture('order-service-test-data.json').as('orderServiceCreation');
     });
 
     it('order client-app form test', function (): void {

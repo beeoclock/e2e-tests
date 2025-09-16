@@ -2,12 +2,12 @@ import {OrderApi} from "../../../support/beeoclock/backend/panel/order/OrderApi"
 
 describe('test of deletion function', (): void => {
 
-    it('deletion function', (): void => {
-        OrderApi.getOrderIds()
+    it.only('deletion function', (): void => {
+        OrderApi.deleteAllCurrentOrders()
     })
 
     it('get given order', (): void => {
-        OrderApi.getOrderWithGivenId('689f5f430276d9c93d2b4585').then((resp: any) => {
+        OrderApi.getOrderWithGivenId('68c9c00ae32d92a3bc7c0e5e').then((resp: any) => {
             cy.log('order', JSON.stringify(resp));
         })
     })
