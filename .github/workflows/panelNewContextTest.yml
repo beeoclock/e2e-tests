@@ -2,8 +2,6 @@ name: Panel App new context test
 
 on:
   workflow_dispatch:
-    schedule:
-      - cron: '0 4 * * *'
 
 jobs:
   client-app-test:
